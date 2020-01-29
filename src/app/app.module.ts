@@ -16,6 +16,8 @@ import { EjecucionRespuestaComponent } from './views/gestion-riesgo/opcion5/ejec
 import { PreparacionRecuperacionComponent } from './views/gestion-riesgo/opcion6/preparacion-recuperacion/preparacion-recuperacion.component';
 import { IdentificacionInstitucionComponent } from './views/conocimiento-institucional/opcion1/identificacion-institucion/identificacion-institucion.component';
 import { IdentificacionSedeComponent } from './views/conocimiento-institucional/opcion1/identificacion-sede/identificacion-sede.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { IdentificacionSedeComponent } from './views/conocimiento-institucional/
     EjecucionRespuestaComponent,
     PreparacionRecuperacionComponent,
     IdentificacionInstitucionComponent,
-    IdentificacionSedeComponent
+    IdentificacionSedeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
