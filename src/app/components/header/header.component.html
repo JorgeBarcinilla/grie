@@ -1,8 +1,13 @@
-<div class="container-fluid">
+<header >
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-md menu-nivel2">
-        <div class="container-fluid ">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSecondSupportedContent"
+            <p-megaMenu [model]="items">
+                <button pButton label="Logout" icon="fa fa-sign-out"></button>
+            </p-megaMenu>
+
+            
+
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSecondSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="...">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,86 +37,10 @@
                         <a class="nav-link link-menu-nivel2" id="opcion7" href="#">Preparación para la recuperación</a>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </div> -->
     </nav>
-</div>
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white menu-nivel3">
-        <div class="container-fluid ">
-            <div class="row justify-content-around navbar-collapse" id="navbarSecondSupportedContent">
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items" id="opcion1Links">
-                    
-                    <!--
-                    
-                    
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links3" href="{{ url('/conocimientoEntidad') }}">Conocimiento de la institución</a>
-                    </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links1" [routerLink]="['/identificacionInstitucion']" routerLinkActive="router-link-active" >Identificación de la institución</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links2" [routerLink]="['/identificacionSede']" routerLinkActive="router-link-active">Informacion de la sede</a>
-                    </li>
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links4" href="{{ url('/vision') }}">Vision</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links5" href="{{ url('/objInstitucionales') }}">Objetivos institucionales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links6" href="{{ url('/valInstitucionales') }}">Valores institucionales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion1Links7" href="{{ url('/procesosInstitucionales') }}">Procesos institucionales</a>
-                    </li>-->
-                </ul>
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items " id="opcion2Links">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion2Links1" [routerLink]="['/lineamientosPolitica']" routerLinkActive="router-link-active">Lineamientos de la politica</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items disabled-element" id="opcion3Links">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion3Links1" [routerLink]="['/caracterizacionContexto']" routerLinkActive="router-link-active">Caracterizacion del contexto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion3Links2" [routerLink]="['/identificacionRiesgo']" routerLinkActive="router-link-active">Identificacion del riesgo</a>
-                    </li>
-                    
-                </ul>
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items " id="opcion4Links">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion4Links1" [routerLink]="['/analisisRiesgo']" routerLinkActive="router-link-active">Análisis de riesgos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion4Links2" [routerLink]="['/evaluacionRiesgos']" routerLinkActive="router-link-active">Evaluación de riesgos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion4Links2" [routerLink]="['/reporteTratamientoRiesgo']" routerLinkActive="router-link-active">Reporte del plan de tratamiento de riesgos</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items " id="opcion5Links">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion5Links1" [routerLink]="['/preparacionRespuestaEmergencia']" routerLinkActive="router-link-active">Ver sección</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items " id="opcion6Links">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion6Links1" [routerLink]="['/ejecucionRespuesta']" routerLinkActive="router-link-active">Ver sección</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav text-center justify-content-around menu-nivel3-items" id="opcion7Links">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel3" id="opcion7Links1" [routerLink]="['/preparacionRecuperacion']" routerLinkActive="router-link-active">Ver sección</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
+</header>
+
 
 
 
