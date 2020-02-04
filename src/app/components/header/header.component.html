@@ -1,5 +1,5 @@
-<header >
-    <mat-toolbar color="primary">
+<header>
+    <mat-toolbar class="toolbar-above"  color="primary">
         <mat-toolbar-row>
             <div class="container-fluid">
              
@@ -30,7 +30,7 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item>
-                            <mat-icon>exit</mat-icon>
+                            <mat-icon>exit_to_app</mat-icon>
                             <span>Salir</span>
                         </button>
                     </mat-menu>
@@ -39,11 +39,11 @@
         </div>
         </mat-toolbar-row>
     </mat-toolbar>
-    <div class="container-fluid">
+    <div class="container-fluid"  class="container-toolbar-under">
         <div class="row justify-content-center">
             <div class="col-5">
-                <mat-toolbar color="primary">
-                    <mat-toolbar-row>
+                <mat-toolbar  color="primary" class="toolbar-under">
+                    <mat-toolbar-row >
                         <div class="container-fluid">
                             <div class="row justify-content-around">
                                 <button mat-button [routerLink]="['/ejecucionRespuesta']" routerLinkActive="router-link-active">Ejecucion de la respuesta</button>
