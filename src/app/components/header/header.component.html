@@ -1,9 +1,66 @@
 <header >
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-md menu-nivel2">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <div class="container-fluid">
+             
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <span>GRIE</span>
+                </div>
+                <div class="col-auto">
+                    <div class="row justify-content-around">
+                        <button mat-button [routerLink]="['/lineamientosPolitica']" routerLinkActive="router-link-active" >Politica de administracion de riesgos</button>
+                        <button mat-button [matMenuTriggerFor]="identificacionRiesgo">Identificacion del riesgo</button>
+                        <mat-menu #identificacionRiesgo="matMenu" xPosition="after">
+                            <button mat-menu-item [routerLink]="['/caracterizacionContexto']" routerLinkActive="router-link-active">Caracterizacion del contexto</button>
+                            <button mat-menu-item [routerLink]="['/identificacionRiesgo']" routerLinkActive="router-link-active">Identificaacion del  riesgo</button>
+                        </mat-menu>
+                        <button mat-button [matMenuTriggerFor]="valoracionRiesgos">Valoracion de riesgos</button>
+                        <mat-menu #valoracionRiesgos="matMenu" xPosition="after">
+                            <button mat-menu-item [routerLink]="['/analisisRiesgo']" routerLinkActive="router-link-active">Analisis de riesgos</button>
+                            <button mat-menu-item [routerLink]="['/evaluacionRiesgos']" routerLinkActive="router-link-active">Evaluacion de riesgos</button>
+                            <button mat-menu-item [routerLink]="['/reporteTratamientoRiesgo']" routerLinkActive="router-link-active">Reporte del plaan de tratamiento de riesgos</button>
+                        </mat-menu>
+                        <button mat-button [routerLink]="['/preparacionRespuestaEmergencia']" routerLinkActive="router-link-active">Preparacion para la respuesta a emergencias</button>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opciones">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>exit</mat-icon>
+                            <span>Salir</span>
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <mat-toolbar color="primary">
+                    <mat-toolbar-row>
+                        <div class="container-fluid">
+                            <div class="row justify-content-around">
+                                <button mat-button [routerLink]="['/ejecucionRespuesta']" routerLinkActive="router-link-active">Ejecucion de la respuesta</button>
+                                <button mat-button [routerLink]="['/preparacionRecuperacion']" routerLinkActive="router-link-active">Preparación para la recuperación</button>
+                            </div>
+                        </div>
+                    </mat-toolbar-row>
+                </mat-toolbar>
+            </div>
+        </div>
+    </div>
+    
+    
+    <nav class="">
 
-            <p-megaMenu [model]="items">
-                <button pButton label="Logout" icon="fa fa-sign-out"></button>
-            </p-megaMenu>
+
+           
 
             
 

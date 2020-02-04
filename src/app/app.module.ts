@@ -18,7 +18,7 @@ import { IdentificacionInstitucionComponent } from './views/conocimiento-institu
 import { IdentificacionSedeComponent } from './views/conocimiento-institucional/opcion1/identificacion-sede/identificacion-sede.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { PrimengModule } from './primeng/primeng.module';
+import { AppMeterialModule } from './angular-material.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { PrimengModule } from './primeng/primeng.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    PrimengModule
+    AppMeterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

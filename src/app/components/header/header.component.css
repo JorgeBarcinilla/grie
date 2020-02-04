@@ -1,4 +1,6 @@
-html{
+
+
+/* html{
     height: 100%;
 }
 
@@ -75,7 +77,7 @@ html{
 }
 
 /*MENU SUPERIOR*/
-.menu-nivel1{
+/*.menu-nivel1{
     background:-webkit-linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255),rgb(255, 255, 255));
     border-radius: 4px;
     border-bottom: 2px solid rgb(255, 71, 71);
@@ -83,7 +85,7 @@ html{
 }
 
 /*MENU INTERMEDIO*/
-.menu-nivel2{
+/*.menu-nivel2{
     background: -webkit-linear-gradient(rgb(255, 71, 71),rgb(255, 70, 70),rgb(255, 71, 71));
     margin-top: -2px;
     border-radius: 4px;
@@ -116,7 +118,7 @@ html{
 }
 
 /*MENU INFERIOR*/
-.menu-nivel3 {
+/*.menu-nivel3 {
     background-color: white;          
     border-right: 2px solid rgb(255, 71, 71);
     border-left: 2px solid rgb(255, 71, 71);
@@ -144,7 +146,7 @@ html{
 
 /*MENU DENTRO DEL MAIN*/
 
-.menu-nivel4 {
+/*.menu-nivel4 {
     background-color: white;          
     width: 100%;
     border-radius: 6px;
@@ -182,7 +184,7 @@ html{
 }
 
 /*MAIN*/
-.main{
+/*.main{
     background-color: white;
     margin-top: -2px;
     border: 2px solid rgb(255, 71, 71);
@@ -226,7 +228,7 @@ html{
 
 /* INPUT ESTILO GOOGLE */
 
-.group-file .label-file-lg {
+/*.group-file .label-file-lg {
     color: #999;
     font-weight: normal;
     position: absolute;
@@ -453,7 +455,7 @@ html{
 }
 
 /* active state */
-.textField-xl:focus,
+/*.textField-xl:focus,
 .textField-xl:valid,
 .textField-lg:focus,
 .textField-lg:valid,
@@ -479,4 +481,4 @@ textarea{
 .img-main{
     width: 100%;
     height: 100%;
-}
+} */
