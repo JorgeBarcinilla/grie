@@ -18,7 +18,8 @@ import { IdentificacionInstitucionComponent } from './views/conocimiento-institu
 import { IdentificacionSedeComponent } from './views/conocimiento-institucional/opcion1/identificacion-sede/identificacion-sede.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AppMeterialModule } from './angular-material.module';
+import { AppMeterialModule } from './shared/angular-material.module';
+import { InfoVistaComponent } from './components/info-vista/info-vista.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AppMeterialModule } from './angular-material.module';
     IdentificacionInstitucionComponent,
     IdentificacionSedeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    InfoVistaComponent
   ],
   imports: [
     BrowserModule,
