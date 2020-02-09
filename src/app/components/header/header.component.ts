@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import {
   MenuItem
@@ -11,17 +12,24 @@ import {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  
 
    title: string;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
+    this.title = localStorage.getItem('title');
+  }
+
+  ngOnDestroy(){
     
   }
 
   changeTitle(titleButton: string){
+    localStorage.setItem('title',titleButton);
     this.title = titleButton;
   }
 

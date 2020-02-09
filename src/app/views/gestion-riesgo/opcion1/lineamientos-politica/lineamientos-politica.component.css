@@ -1,0 +1,13 @@
+textarea{
+    width: 100% !important;
+    height: 100px;
+}
+
+table{
+    width: 100%;
+}
+
+#tableCorrupcion{
+    max-height: 450px;
+    overflow-y: auto;
+}

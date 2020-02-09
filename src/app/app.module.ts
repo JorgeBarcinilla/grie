@@ -20,6 +20,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AppMeterialModule } from './shared/angular-material.module';
 import { InfoVistaComponent } from './components/info-vista/info-vista.component';
+import { CardTitleComponent } from './components/card-title/card-title.component';
+import { SliderRangeComponent } from './components/utils/slider-range/slider-range.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,13 +41,18 @@ import { InfoVistaComponent } from './components/info-vista/info-vista.component
     IdentificacionSedeComponent,
     HeaderComponent,
     FooterComponent,
-    InfoVistaComponent
+    InfoVistaComponent,
+    CardTitleComponent,
+    SliderRangeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppMeterialModule
+    AppMeterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

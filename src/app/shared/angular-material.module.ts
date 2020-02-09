@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { Ng5SliderModule } from 'ng5-slider';
 import { MatInputModule, MatButtonModule,
         MatChipsModule, 
          MatBadgeModule,
@@ -30,11 +31,12 @@ import { MatInputModule, MatButtonModule,
          MatCardModule,
         MatStepperModule,MatProgressBarModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
-//import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [],
   imports: [
+    Ng5SliderModule,
     ReactiveFormsModule,
     MatTooltipModule,
     MatSnackBarModule,
@@ -68,9 +70,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatStepperModule,
     MatChipsModule,
     MatProgressBarModule,
-    //NgxMatSelectSearchModule
+    NgxMatSelectSearchModule
   ],exports:[
-    
+    Ng5SliderModule,
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -102,7 +104,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatStepperModule,
     MatChipsModule,
     MatProgressBarModule,
-    //NgxMatSelectSearchModule
+    NgxMatSelectSearchModule
   ],
   providers:[
     MatIconRegistry
