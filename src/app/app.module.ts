@@ -24,6 +24,7 @@ import { CardTitleComponent } from './components/card-title/card-title.component
 import { SliderRangeComponent } from './components/utils/slider-range/slider-range.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './components/utils/card/card.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     InfoVistaComponent,
     CardTitleComponent,
-    SliderRangeComponent
+    SliderRangeComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

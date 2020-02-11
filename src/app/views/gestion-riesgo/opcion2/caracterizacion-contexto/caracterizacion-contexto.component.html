@@ -1,1 +1,202 @@
-<p>caracterizacion-contexto works!</p>
+<div class="container-fluid" >
+    <app-info-vista
+      [info]="'Aquí se definen los parámetros internos y externos, de proceso e identificación de activos que se han de tomar en cuenta para la administración del riesgo'">
+    </app-info-vista>
+    <div class="row justify-content-center mt-2">
+      <div class="col-11">
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Contexto externo">
+            <ng-template matTabContent>
+
+              <form [formGroup]="formularioContextoExterno">
+
+              <div class="container-fluid">
+                
+                <div class="row justify-content-around mt-2">
+                  <div class="col-md-6">
+                    <mat-card class="h-100">
+                      <mat-card-header>
+                        <mat-card-title>Politico</mat-card-title>
+                        <mat-card-subtitle>Por ejemplo: cambios de gobierno, políticas educativas, políticas públicas, decretos</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row justify-content-center">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <textarea formControlName="contextoPolitico" matInput
+                                placeholder="Aqui el contexto politico"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-card class="h-100">
+                      <mat-card-header>
+                        <mat-card-title>Economico y financiero</mat-card-title>
+                        <mat-card-subtitle>Por ejemplo: desempleo, competencia, estrato socioeconómico de la población</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row justify-content-center">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <textarea formControlName="contextoEconomicoFinanciero" matInput
+                                placeholder="Aqui el contexto politico"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center mt-2">
+                  <div class="col-md-6">
+                    <mat-card class=" h-100">
+                      <mat-card-header>
+                        <mat-card-title>Social y cultural</mat-card-title>
+                        <mat-card-subtitle>Disponibilidad y acceso a servicios públicos:</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <mat-label>Servicios publicos</mat-label>
+                              <mat-select formControlName="contextoSocialCultural" multiple>
+                                <mat-option *ngFor="let servicio of serviciosPublicos" [value]="servicio">{{servicio}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12">
+                            <div class="row justify-content-center">
+                              <mat-chip-list >
+                                <mat-chip *ngFor="let chip of formularioContextoExterno.value.contextoSocialCultural" selected [color]="primary">
+                                  {{chip}}
+                                </mat-chip>
+                              </mat-chip-list>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </mat-card>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-card class=" h-100">
+                      <mat-card-header>
+                        <mat-card-title>Ambiental</mat-card-title>
+                        <mat-card-subtitle>Identifique si los diferentes ecosistemas identificados en el entorno escolar pueden resultar ser afectados por los fenómenos amenazantes de origen natural:</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <mat-label>Fenomenos ambientales</mat-label>
+                              <mat-select formControlName="contextoAmbiental" multiple>
+                                <mat-optgroup *ngFor="let fenomeno of fenomenosAmbientales" [label]="fenomeno.categoria">
+                                  <mat-option *ngFor="let item of fenomeno.items" [value]="item">
+                                    {{item}}
+                                  </mat-option>
+                                </mat-optgroup>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12">
+                            <div class="row justify-content-around">
+                              <mat-chip-list>
+                                <mat-chip *ngFor="let chip of formularioContextoExterno.value.contextoAmbiental" selected [color]="primary">
+                                  {{chip}}
+                                </mat-chip>
+                              </mat-chip-list>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                            
+                    </mat-card>
+                  </div>
+                </div>
+
+                <div class="row justify-content-around mt-2 mb-2">
+                  <div class="col-md-4">
+                    <mat-card class=" h-100">
+                      <mat-card-header>
+                        <mat-card-title>Tecnologico</mat-card-title>
+                        <mat-card-subtitle>Por ejemplo: avances en tecnología, acceso a sistemas de información externos, gobierno en línea</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row justify-content-center">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <textarea formControlName="contextoTecnologico" matInput
+                                placeholder="Aqui el contexto tecnologico"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-card class=" h-100">
+                      <mat-card-header>
+                        <mat-card-title>Legal y reglamentario</mat-card-title>
+                        <mat-card-subtitle>Por ejemplo: Normatividad externa (leyes, decretos, ordenanzas y acuerdos)</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row justify-content-center">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <textarea formControlName="contextoLegalReglamentario" matInput
+                                placeholder="Aqui el contexto legal y reglamentario"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-card class=" h-100">
+                      <mat-card-header>
+                        <mat-card-title>Otro</mat-card-title>
+                        <mat-card-subtitle>Existe otro tipo de contexto, especifique cual</mat-card-subtitle>
+                      </mat-card-header>
+                      <div class="container-fluid">
+                        <div class="row justify-content-center">
+                          <div class="col-12">
+                            <mat-form-field class="w-100">
+                              <textarea formControlName="contextoOtro" matInput
+                                placeholder="Otro contexto"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+              
+              </div>
+
+            </form>
+
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Contexto interno">
+            <ng-template matTabContent>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Contexto del proceso">
+            <ng-template matTabContent>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Identificacion de activos de seguridad digital">
+            <ng-template matTabContent>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-2 mb-3">
+      <button class="color-success" mat-raised-button (click)="guardarCaracterizacionContexto()">Guardar</button>
+    </div>
+</div>
