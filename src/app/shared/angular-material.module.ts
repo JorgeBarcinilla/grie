@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Ng5SliderModule } from 'ng5-slider';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatInputModule, MatButtonModule,
         MatChipsModule, 
          MatBadgeModule,
@@ -36,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [],
   imports: [
+    MaterialFileInputModule,
     Ng5SliderModule,
     ReactiveFormsModule,
     MatTooltipModule,
@@ -72,6 +74,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatProgressBarModule,
     NgxMatSelectSearchModule
   ],exports:[
+    MaterialFileInputModule,
     Ng5SliderModule,
     MatSnackBarModule,
     MatDatepickerModule,

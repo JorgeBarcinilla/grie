@@ -1,0 +1,402 @@
+<form [formGroup]="formularioContextoInterno">
+     
+    <div class="container-fluid mt-2">
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Estructura fisica</mat-card-title>
+                      <mat-card-subtitle>Estado fisico general de la institucion educativa. Puede escojer una o multiples estructuras con las que cuente la institucion y calificar su condicion</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid">
+                        <form [formGroup]="formParcialEstructuras" autocomplete="off">
+                            <div class="row justify-content-center">
+                                <div class="col-4">
+                                    <mat-form-field class="w-100" *ngIf="otraEstructura">
+                                        <mat-label>Otra estructura</mat-label>
+                                        <input formControlName="estructurasParcial" matInput placeholder="Escriba otra estructura">
+                                    </mat-form-field>
+                                    <mat-form-field class="w-100" *ngIf="!otraEstructura">
+                                        <mat-label>Estructuras fisicas</mat-label>
+                                        <mat-select formControlName="estructurasParcial" multiple>
+                                        <mat-option *ngFor="let estructura of estructurasFisicas" [value]="estructura">{{estructura}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-2">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Calificacion</mat-label>
+                                        <mat-select formControlName="calificacionParcial">
+                                        <mat-option value="Bueno">Bueno</mat-option>
+                                        <mat-option value="Regular">Regular</mat-option>
+                                        <mat-option value="Malo">Malo</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row justify-content-center mt-3">
+                                        <button color="accent" mat-stroked-button (click)="calificarEstructuras()" [disabled]="formParcialEstructuras.invalid">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center m-0 p-0">
+                                <mat-checkbox color="primary" (change)="cambiarCampo()">Otro</mat-checkbox>
+                            </div>
+                            <div class="row justify-content-center container-chips">
+                                <mat-chip-list >
+                                    <mat-chip class="bg-info" *ngFor="let chip of estructurasCalificadas" selected>
+                                        <mat-icon class="mr-2">{{chip.icon}}</mat-icon>
+                                        {{chip.nombre}} -> {{chip.calificacion}}
+                                        <button mat-icon-button (click)="eliminarEstructura(chip.nombre)">
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </div>
+                        </form>
+                    </div>
+                  </mat-card>
+            </div>
+        </div>
+
+        <div class="row justify-content-around m-2">
+            <div class="col-md-6">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Estructura organizacional (Organigrama)</mat-card-title>
+                      <mat-card-subtitle>En este aspecto se plasma el organigrama institucional</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid mt-5">
+                        <div class="row justify-content-center">
+                            <div class=" col-md-11 col-lg-9">
+                                <mat-form-field class="w-100">
+                                    <ngx-mat-file-input formControlName="estructuraOrganizacional" placeholder="Estructura organizacional (Solo PDF)" [accept]="'.pdf'"></ngx-mat-file-input>
+                                    <mat-icon matSuffix>folder</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-6">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Financieros</mat-card-title>
+                      <mat-card-subtitle>Este ítem está relacionado con todo el aspecto financiero de la I.E, especialmente relacionado con el presupuesto de funcionamiento y la existencia de rubros para mitigar los riesgos:</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid">
+                        <form [formGroup]="formParcialFinancieros" autocomplete="off">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Aspecto financiero</mat-label>
+                                        <mat-select formControlName="financieroParcial">
+                                        <mat-option *ngFor="let item of financieros" [value]="item">{{item}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Rubro</mat-label>
+                                        <input formControlName="rubroParcial" type="number" matInput placeholder="Escriba el rubro asignado">
+                                        <span matPrefix>$&nbsp;</span>
+                                        <span matSuffix>.00</span>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="row justify-content-center">
+                                        <div class="row justify-content-center mt-3">
+                                            <button color="accent" mat-stroked-button (click)="guardarFinanciero()" [disabled]="formParcialFinancieros.invalid">Agregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center container-chips">
+                                <mat-chip-list >
+                                    <mat-chip class="bg-info" *ngFor="let chip of financierosRubros" selected>
+                                        {{chip.nombre}} ->  <mat-icon class="mr-2">attach_money</mat-icon> {{chip.rubro}}
+                                        <button mat-icon-button (click)="eliminarFinanciero(chip.nombre)">
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </div>
+                        </form>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Comunidad educativa</mat-card-title>
+                      <mat-card-subtitle>Este aspecto está relacionado con la población que conforma a la I.E.</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid">
+                        <form [formGroup]="formParcialComunidadEducativa" autocomplete="off">
+                            <div class="row justify-content-around">
+                                <div class="col-lg-3">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Tipo de población</mat-label>
+                                        <mat-select formControlName="tipoPoblacion">
+                                        <mat-option *ngFor="let tipo of tipoPoblacion" [value]="tipo">{{tipo}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-2">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Cantidad de personas</mat-label>
+                                        <input formControlName="cantidad" type="number" matInput placeholder="Escriba el numero de personas de este tipo">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-2">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Con discapacidad</mat-label>
+                                        <input formControlName="cantidadDiscapacitados" type="number" matInput placeholder="Digite la caantidad de personas con alguna discapacidad">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-3">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Tipos de discapacidad</mat-label>
+                                        <mat-select formControlName="tiposDiscapacidad" multiple>
+                                            <mat-option  value="Sensorial">Sensorial</mat-option>
+                                            <mat-option  value="Cognitiva">Cognitiva</mat-option>
+                                            <mat-option  value="Fisica">Fisica</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="row justify-content-center">
+                                        <div class="row justify-content-center mt-3">
+                                            <button color="accent" mat-stroked-button (click)="guardarComunidadEducativa()" [disabled]="formParcialComunidadEducativa.invalid">Agregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-11">
+                                    <table mat-table [dataSource]="dataSourceComunidadEducativa" class="mat-elevation-z8 w-100">
+
+                                        <!--- Note that these columns can be defined in any order.
+                                              The actual rendered columns are set as a property on the row definition" -->
+                                      
+                                        <!-- Position Column -->
+                                        <ng-container matColumnDef="tipoPoblacion">
+                                          <th mat-header-cell *matHeaderCellDef> Tipo de poblacion </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.tipoPoblacion}} </td>
+                                        </ng-container>
+                                      
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="cantidad">
+                                          <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+                                        </ng-container>
+                                      
+                                        <!-- Weight Column -->
+                                        <ng-container matColumnDef="cantidadDiscapacitados">
+                                          <th mat-header-cell *matHeaderCellDef> Personas con discapacidad </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.cantidadDiscapacitados}} </td>
+                                        </ng-container>
+                                      
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="tiposDiscapacidad">
+                                          <th mat-header-cell *matHeaderCellDef> Tipos de discpacidad </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <mat-chip-list >
+                                                    <mat-chip class="bg-info" *ngFor="let chip of element.tiposDiscapacidad" selected>
+                                                        {{chip}}
+                                                    </mat-chip>
+                                                </mat-chip-list>
+                                            </td>
+                                        </ng-container>
+                                      
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsComunidadEducativa"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsComunidadEducativa;"></tr>
+                                      </table>
+                                      <mat-paginator [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons></mat-paginator>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-2">
+            <div class="col-12">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Factores educativos</mat-card-title>
+                      <mat-card-subtitle>Este aspecto está relacionado con la apropiación de la I.E con respecto a la administración del riesgo.</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid">
+                        <form [formGroup]="formParcialFactoresEducativos" autocomplete="off">
+                            <div class="row justify-content-around">
+                                <div class="col-11">
+                                    <table mat-table [dataSource]="dataSourceFactoresEducativos" class="mat-elevation-z8 w-100">
+
+                                        <!--- Note that these columns can be defined in any order.
+                                              The actual rendered columns are set as a property on the row definition" -->
+                                      
+                                        <!-- Position Column -->
+                                        <ng-container matColumnDef="pregunta">
+                                          <th mat-header-cell *matHeaderCellDef> Pregunta </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.pregunta}} </td>
+                                        </ng-container>
+                                      
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="respuesta">
+                                            <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+                                            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name"> 
+                                                <mat-form-field>
+                                                    <mat-label>Respuesta</mat-label>
+                                                    <mat-select formControlName="respuesta" >
+                                                      <mat-option value="Si" (click)="guardarFactoresEducativos()">
+                                                        Si
+                                                      </mat-option>
+                                                      <mat-option value="No" (click)="guardarFactoresEducativos()">
+                                                        No
+                                                      </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>
+                                        </ng-container>
+                                      
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsFactoresEducativos"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsFactoresEducativos;"></tr>
+                                      </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="row justify-content-around mt-2">
+            <div class="col-md-6">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Comité de Administración del Riesgo y Atención a Emergencias (CARAE)</mat-card-title>
+                      <mat-card-subtitle>Este aspecto está relacionado con la conformación y funcionamiento del CARAE.</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid">
+                        <form [formGroup]="formParcialCRAE" autocomplete="off">
+                            <div class="row justify-content-around">
+                                <div class="col-12">
+                                    <table mat-table [dataSource]="dataSourceCRAE" class="mat-elevation-z8 w-100">
+
+                                        <!--- Note that these columns can be defined in any order.
+                                              The actual rendered columns are set as a property on the row definition" -->
+                                      
+                                        <!-- Position Column -->
+                                        <ng-container matColumnDef="pregunta">
+                                          <th mat-header-cell *matHeaderCellDef> Pregunta </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.pregunta}} </td>
+                                        </ng-container>
+                                      
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="respuesta">
+                                            <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+                                            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name"> 
+                                                <mat-form-field>
+                                                    <mat-label>Respuesta</mat-label>
+                                                    <mat-select formControlName="respuesta" >
+                                                      <mat-option value="Si" (click)="guardarCRAE()">
+                                                        Si
+                                                      </mat-option>
+                                                      <mat-option value="No" (click)="guardarCRAE()">
+                                                        No
+                                                      </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>
+                                        </ng-container>
+                                      
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsCRAE"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsCRAE;"></tr>
+                                      </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-6">
+                <mat-card class="h-100">
+                    <mat-card-header>
+                      <mat-card-title>Comunicacion interna</mat-card-title>
+                      <mat-card-subtitle>Este aspecto está relacionado con los canales de comunicación que utiliza la I.E y su efectividad para que el flujo de información circule por todos los procesos y miembros de la comunidad educativa.</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="container-fluid">
+                        <form [formGroup]="formParcialOtraComunicacionInterna" autocomplete="off">
+                        <div class="row justify-content-around">
+                            <div class="col-sm-9 col-md-7">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Otra comunicacion</mat-label>
+                                    <input formControlName="otraComunicacion" matInput placeholder="Escriba otra medio de comunicacion">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-2 col-md-4">
+                                <div class="row justify-content-start mt-2">
+                                    <button color="accent" mat-stroked-button (click)="crearOtraComunicacion()" [disabled]="formParcialOtraComunicacionInterna.invalid">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                        <form [formGroup]="formParcialComunicacionInterna" autocomplete="off">
+                            <div class="row justify-content-around">
+                                <div class="col-12">
+                                    <table mat-table [dataSource]="dataSourceComunicacionInterna" class="mat-elevation-z8 w-100">
+
+                                        <!--- Note that these columns can be defined in any order.
+                                              The actual rendered columns are set as a property on the row definition" -->
+                                      
+                                        <!-- Position Column -->
+                                        <ng-container matColumnDef="pregunta">
+                                          <th mat-header-cell *matHeaderCellDef> Canal de comunicacion </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.pregunta}} </td>
+                                        </ng-container>
+                                      
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="respuesta">
+                                            <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+                                            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name"> 
+                                                <mat-form-field>
+                                                    <mat-label>Respuesta</mat-label>
+                                                    <mat-select formControlName="respuesta" >
+                                                      <mat-option value="Si" (click)="guardarComunicacionInterna()">
+                                                        Si
+                                                      </mat-option>
+                                                      <mat-option value="No" (click)="guardarComunicacionInterna()">
+                                                        No
+                                                      </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>
+                                        </ng-container>
+                                      
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsComunicacionInterna"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsComunicacionInterna;"></tr>
+                                      </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                
+            </div>
+        </div>
+
+    </div>
+
+</form>
+

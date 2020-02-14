@@ -25,6 +25,10 @@ import { SliderRangeComponent } from './components/utils/slider-range/slider-ran
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './components/utils/card/card.component';
+import { ContextoInternoComponent } from './views/gestion-riesgo/opcion2/caracterizacion-contexto/contexto-interno/contexto-interno.component';
+import { ContextoExternoComponent } from './views/gestion-riesgo/opcion2/caracterizacion-contexto/contexto-externo/contexto-externo.component';
+import { ContextoProcesoComponent } from './views/gestion-riesgo/opcion2/caracterizacion-contexto/contexto-proceso/contexto-proceso.component';
+import { IdentificacionActivosSeguridadComponent } from './views/gestion-riesgo/opcion2/caracterizacion-contexto/identificacion-activos-seguridad/identificacion-activos-seguridad.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { CardComponent } from './components/utils/card/card.component';
     InfoVistaComponent,
     CardTitleComponent,
     SliderRangeComponent,
-    CardComponent
+    CardComponent,
+    ContextoInternoComponent,
+    ContextoExternoComponent,
+    ContextoProcesoComponent,
+    IdentificacionActivosSeguridadComponent
   ],
   imports: [
     BrowserModule,

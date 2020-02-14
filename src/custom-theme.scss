@@ -13,10 +13,10 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $grie-primary: mat-palette($mat-red, A200, A100, A400);
-$grie-accent: mat-palette($mat-red, 500);
+$grie-accent: mat-palette($mat-green, 700, A200, A100);
 
 // The warn palette is optional (defaults to red).
-$grie-warn: mat-palette($mat-yellow, 500);
+$grie-warn: mat-palette($mat-red, A700);
 
 
 // Create the theme object (a Sass map containing all of the palettes).

@@ -165,50 +165,17 @@ export class LineamientosPoliticaComponent implements OnInit {
 
   //Este metodo construye un grupo de array de formularios
   buildForm(formGroup:FormGroup, dataTable: any){
-    //formGroup = this.fb.group({});
-    //formGroup.addControl('filas', this.fb.array([]));
     dataTable.forEach(row => {
-      //console.log(row)
       let controls = {};
       row.formGroup.formControls.forEach(control => {
         controls[control] = new FormControl('', Validators.required);
       });
 
-
       formGroup.addControl(row.formGroup.name,this.fb.group(controls));
-      //const filas = formGroup.controls.filas as FormArray;
-      //const group = this.fb.group(controls);
-
-      //filas.push(group)
       
     });
   }
 
-  //este metodo obtiene el formGroup de la fila
-  getFormGroup(formGroupParent: FormGroup, formControl: string) : FormGroup{
-    console.log(formGroupParent)
-    console.log(formControl)
-
-    return <FormGroup>formGroupParent.get(formControl);
-  }
-
-  //Este metodo obtiene un formArray determinado
-  getFormArray(nameFormGroup: string): FormArray {
-    return this.formularioNivelesCalificarProbabilidad.get(nameFormGroup) as FormArray;
-  }
-
-  //Este metodo añade unos formControls establecidos
-  addFormControls(formArray :FormArray) {
-    const formGroup = this.fb.group({
-      cantidad: new FormControl('', Validators.required),
-      numeroVeces: new FormControl('', Validators.required),
-      ocurrencia: new FormControl('', Validators.required)
-    });
-    
-    formArray.push(formGroup);
-  }
-
-  
 
   viewTablaRiesgo(riesgo){
     switch (riesgo) {

@@ -8,37 +8,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class CaracterizacionContextoComponent implements OnInit {
 
-  fenomenosAmbientales = [
-    {
-      categoria:'ATMOSFERICOS',
-      items:['Huracanes','Vendavales','Heladas','Sequias','Tornados','Incendios forestales']
-    },
-    {
-      categoria:'HIDROLOGICOS',
-      items:['Desbordamientos','Inundaciones','Avenidas torrenciales']
-    },
-    {
-      categoria:'GEOLOGICOS',
-      items:['Sismos','Vulcanismo','Movimientos en masa']
-    },
-    {
-      categoria:'OTROS',
-      items:['Tsunamis','Lahares']
-    }
-  ];
+  
 
-  serviciosPublicos : string[] = ['Acueducto y alcantarillado',
-    'Linea telefonica e internet',
-    'Recoleccion de residuos solidos',
-    'Gas natural',
-    'Energia electrica',
-    'Transportes',
-    'Recreacion y deporte',
-    'Servicios de salud',
-    'Estacion de policia',
-    'Estacion de bomberos'];
-
-
+    //CONTEXTO EXTERNO
     formularioContextoExterno = new FormGroup({
       contextoPolitico: new FormControl(''),
       contextoEconomicoFinanciero: new FormControl(''),
@@ -49,6 +21,18 @@ export class CaracterizacionContextoComponent implements OnInit {
       contextoAmbiental: new FormControl('')
     });
 
+    //CONTEXTO EXTERNO
+    
+    formularioContextoInterno = new FormGroup({
+      estructuraFisica: new FormControl(''),
+      estructuraOrganizacional: new FormControl(''),
+      financieros: new FormControl(''),
+      comunidadEducativa: new FormControl(''),
+      factoresEducativos: new FormControl(''),
+      CRAE: new FormControl(''),
+      comunicacionInterna: new FormControl('')
+    });
+
 
   constructor() { }
 
@@ -56,7 +40,7 @@ export class CaracterizacionContextoComponent implements OnInit {
   }
 
   guardarCaracterizacionContexto(){
-    console.log(this.formularioContextoExterno.value)
+    console.log(this.formularioContextoInterno.value)
   }
 
 }
