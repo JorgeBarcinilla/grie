@@ -45,18 +45,10 @@ export class ContextoProcesoComponent implements OnInit {
     this.procesosContextualizados.push(proceso);
     this.dataSourceContextoProceso.data = this.procesosContextualizados;
     this.formularioContextoProceso.get('contextosProcesos').setValue(this.procesosContextualizados);
-    this.formParcialContextoProceso.get('proceso').setValue('');
-    this.formParcialContextoProceso.get('responsable').setValue('');
-    this.formParcialContextoProceso.get('objetivo').setValue('');
-    this.formParcialContextoProceso.get('alcance').setValue('');
-    this.formParcialContextoProceso.get('entradaProceso').setValue('');
-    this.formParcialContextoProceso.get('actividadesClaves').setValue('');
-    this.formParcialContextoProceso.get('salidaProceso').setValue('');
-    this.formParcialContextoProceso.get('clientesProceso').setValue('');
-    this.formParcialContextoProceso.get('recursos').setValue('');
-    this.formParcialContextoProceso.get('requisitos').setValue('');
-    this.formParcialContextoProceso.get('documentosInstitucionales').setValue('');
-    this.formParcialContextoProceso.get('indicadores').setValue('');
+    this.displayedContextoProceso.forEach(element => {
+      this.formParcialContextoProceso.get(element).setValue('');
+    });
+    
      
   }
 

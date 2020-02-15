@@ -8,10 +8,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class CaracterizacionContextoComponent implements OnInit {
 
-  
+    formularioCaracterizacionContexto = new FormGroup({
 
-    //CONTEXTO EXTERNO
-    formularioContextoExterno = new FormGroup({
+      //CONTEXTO EXTERNO
+    contextoExterno : new FormGroup({
       contextoPolitico: new FormControl(''),
       contextoEconomicoFinanciero: new FormControl(''),
       contextoTecnologico: new FormControl(''),
@@ -19,11 +19,11 @@ export class CaracterizacionContextoComponent implements OnInit {
       contextoOtro: new FormControl(''),
       contextoSocialCultural: new FormControl(''),
       contextoAmbiental: new FormControl('')
-    });
+    }),
 
     //CONTEXTO INTERNO
     
-    formularioContextoInterno = new FormGroup({
+    contextoInterno : new FormGroup({
       estructuraFisica: new FormControl(''),
       estructuraOrganizacional: new FormControl(''),
       financieros: new FormControl(''),
@@ -31,19 +31,23 @@ export class CaracterizacionContextoComponent implements OnInit {
       factoresEducativos: new FormControl(''),
       CRAE: new FormControl(''),
       comunicacionInterna: new FormControl('')
-    });
+    }),
 
     //CONTEXTO DEL PROCESO
     
-    formularioContextoProceso = new FormGroup({
+    contextoProceso : new FormGroup({
       contextosProcesos: new FormControl(''),
-    });
+    }),
 
     //CONTEXTO DEL PROCESO
     
-    formularioIdentificionActivos = new FormGroup({
+    identificacionActivos : new FormGroup({
       activos: new FormControl(''),
+    })
+
     });
+
+    
 
 
   constructor() { }
@@ -52,7 +56,7 @@ export class CaracterizacionContextoComponent implements OnInit {
   }
 
   guardarCaracterizacionContexto(){
-    console.log(this.formularioContextoProceso.value)
+    console.log(this.formularioCaracterizacionContexto.value)
   }
 
 }

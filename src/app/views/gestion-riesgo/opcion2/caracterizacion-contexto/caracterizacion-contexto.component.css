@@ -1,0 +1,10 @@
+/* :host ::ng-deep .mat-tab-header {
+    position: fixed !important;
+    background: white;
+
+    z-index:100000;
+}
+
+.mat-tab-body-content {
+    height: 100%;
+} */

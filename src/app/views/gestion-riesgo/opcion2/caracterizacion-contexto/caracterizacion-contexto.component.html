@@ -4,30 +4,31 @@
     </app-info-vista>
     <div class="row justify-content-center mt-2">
       <div class="col-11">
-        <mat-tab-group mat-align-tabs="center">
+        <mat-tab-group mat-align-tabs="center"> 
           <mat-tab label="Contexto externo">
             <ng-template matTabContent>
 
-              <app-contexto-externo [formularioContextoExterno]="formularioContextoExterno"></app-contexto-externo>
+              <app-contexto-externo [formularioContextoExterno]="formularioCaracterizacionContexto.controls.contextoExterno"></app-contexto-externo>
 
             </ng-template>
           </mat-tab>
           <mat-tab label="Contexto interno">
             <ng-template matTabContent>
 
-              <app-contexto-interno [formularioContextoInterno]="formularioContextoInterno"></app-contexto-interno>
+              <app-contexto-interno [formularioContextoInterno]="formularioCaracterizacionContexto.controls.contextoInterno"></app-contexto-interno>
               
             </ng-template>
           </mat-tab>
           <mat-tab label="Contexto del proceso">
             <ng-template matTabContent>
 
-              <app-contexto-proceso [formularioContextoProceso]="formularioContextoProceso"></app-contexto-proceso>
+              <app-contexto-proceso [formularioContextoProceso]="formularioCaracterizacionContexto.controls.contextoProceso"></app-contexto-proceso>
 
             </ng-template>
           </mat-tab>
           <mat-tab label="Identificacion de activos de seguridad digital">
             <ng-template matTabContent>
+              <app-identificacion-activos-seguridad [formularioIdentificacionActivos]="formularioCaracterizacionContexto.controls.identificacionActivos"></app-identificacion-activos-seguridad>
             </ng-template>
           </mat-tab>
         </mat-tab-group>

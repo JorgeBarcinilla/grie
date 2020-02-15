@@ -190,10 +190,9 @@ export class ContextoInternoComponent implements OnInit {
     this.tipoPoblacionGuardada.push(this.formParcialComunidadEducativa.value);
     this.dataSourceComunidadEducativa.data = this.tipoPoblacionGuardada;
     this.formularioContextoInterno.get('comunidadEducativa').setValue(this.tipoPoblacionGuardada);
-    this.formParcialComunidadEducativa.get('tipoPoblacion').setValue('');
-    this.formParcialComunidadEducativa.get('cantidad').setValue('');
-    this.formParcialComunidadEducativa.get('cantidadDiscapacitados').setValue('');
-    this.formParcialComunidadEducativa.get('tiposDiscapacidad').setValue('');
+    this.displayedColumnsComunidadEducativa.forEach(element => {
+      this.formParcialComunidadEducativa.get(element).setValue('');
+    });
   }
 
   guardarFactoresEducativos(){
