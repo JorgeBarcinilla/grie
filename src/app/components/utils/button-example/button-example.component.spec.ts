@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SliderRangeComponent } from './slider-range.component';
+import { ButtonExampleComponent } from './button-example.component';
 
-describe('SliderRangeComponent', () => {
-  let component: SliderRangeComponent;
-  let fixture: ComponentFixture<SliderRangeComponent>;
+describe('ButtonExampleComponent', () => {
+  let component: ButtonExampleComponent;
+  let fixture: ComponentFixture<ButtonExampleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderRangeComponent ]
+      declarations: [ ButtonExampleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SliderRangeComponent);
+    fixture = TestBed.createComponent(ButtonExampleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

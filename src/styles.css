@@ -59,3 +59,20 @@ button:focus {
   background: rgb(36, 147, 190) !important;
   color: white !important;
 }
+
+/* COLORES PARA ICONOS */
+.icon-color-success{
+  color: rgb(52, 158, 49) !important;
+}
+
+.icon-color-danger{
+  color: rgb(199, 42, 42) !important;
+}
+
+.icon-color-warn{
+  color: rgb(197, 158, 31) !important;
+}
+
+.icon-color-info{
+  color: rgb(36, 147, 190) !important;
+}
