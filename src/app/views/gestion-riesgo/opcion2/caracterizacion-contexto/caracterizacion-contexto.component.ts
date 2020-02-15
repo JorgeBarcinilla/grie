@@ -21,7 +21,7 @@ export class CaracterizacionContextoComponent implements OnInit {
       contextoAmbiental: new FormControl('')
     });
 
-    //CONTEXTO EXTERNO
+    //CONTEXTO INTERNO
     
     formularioContextoInterno = new FormGroup({
       estructuraFisica: new FormControl(''),
@@ -33,6 +33,18 @@ export class CaracterizacionContextoComponent implements OnInit {
       comunicacionInterna: new FormControl('')
     });
 
+    //CONTEXTO DEL PROCESO
+    
+    formularioContextoProceso = new FormGroup({
+      contextosProcesos: new FormControl(''),
+    });
+
+    //CONTEXTO DEL PROCESO
+    
+    formularioIdentificionActivos = new FormGroup({
+      activos: new FormControl(''),
+    });
+
 
   constructor() { }
 
@@ -40,7 +52,7 @@ export class CaracterizacionContextoComponent implements OnInit {
   }
 
   guardarCaracterizacionContexto(){
-    console.log(this.formularioContextoInterno.value)
+    console.log(this.formularioContextoProceso.value)
   }
 
 }
