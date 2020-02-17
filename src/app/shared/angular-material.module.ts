@@ -113,4 +113,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconRegistry
   ]
 })
-export class AppMeterialModule { }
+export class AppMaterialModule { }

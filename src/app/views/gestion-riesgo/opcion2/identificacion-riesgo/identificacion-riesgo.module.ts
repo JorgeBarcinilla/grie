@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardTitleModule } from 'src/app/components/utils/card-title/card-title.module';
 
 import { ButtonExampleModule } from 'src/app/components/utils/button-example/button-example.module';
-import { AppMeterialModule } from 'src/app/shared/angular-material.module';
+import { AppMaterialModule } from 'src/app/shared/angular-material.module';
 import { IdentificacionRiesgoRoutingModule } from './identificacion-riesgo-routing.module';
 import { IdentificacionRiesgoComponent } from './identificacion-riesgo.component';
 
@@ -15,7 +15,7 @@ import { IdentificacionRiesgoComponent } from './identificacion-riesgo.component
   imports: [
     CommonModule,
     IdentificacionRiesgoRoutingModule,
-    AppMeterialModule,
+    AppMaterialModule,
     ReactiveFormsModule,
     FormsModule,
     CardTitleModule,

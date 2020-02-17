@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ImageExampleComponent } from './components/utils/image-example/image-example.component';
-import { AppMeterialModule } from './shared/angular-material.module';
+import { AppMaterialModule } from './shared/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { AppMeterialModule } from './shared/angular-material.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppMeterialModule,
+    AppMaterialModule,
     HttpClientModule,
   ],
   providers: [],
