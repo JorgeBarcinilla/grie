@@ -21,7 +21,7 @@
                             <button mat-menu-item [routerLink]="['/gestionRiesgo/evaluacionRiesgos']" routerLinkActive="router-link-active" (click)="changeTitle('Evaluacion de riesgos')">Evaluacion de riesgos</button>
                             <button mat-menu-item [routerLink]="['/gestionRiesgo/reporteTratamientoRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Reporte del plaan de tratamiento de riesgos')">Reporte del plaan de tratamiento de riesgos</button>
                         </mat-menu>
-                        <button mat-button [routerLink]="['/preparacionRespuestaEmergencia']" routerLinkActive="router-link-active" (click)="changeTitle('Preparacion para la respuesta a emergencias')">Preparacion para la respuesta a emergencias</button>
+                        <button mat-button [routerLink]="['/gestionRiesgo/preparacionRespuestaEmergencia']" routerLinkActive="router-link-active" (click)="changeTitle('Preparacion para la respuesta a emergencias')">Preparacion para la respuesta a emergencias</button>
                     </div>
                 </div>
                 <div class="col-auto">
@@ -41,8 +41,8 @@
     </mat-toolbar>
     <div class="container-fluid"  class="container-toolbar-under">
         <div class="row justify-content-around ">
-            <div class="col-3 text-center mt-2">
-                <h5>{{title}}</h5>
+            <div class="col-3 text-center mt-2 p-0">
+                <h6 class="font-weight-bold">{{title}}</h6>
             </div>
             <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
                 <mat-toolbar  color="primary" class="toolbar-under mat-elevation-z5">
@@ -61,47 +61,6 @@
             </div>
         </div>
     </div>
-    
-    
-    <nav class="">
-
-
-           
-
-            
-
-            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSecondSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="...">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="row justify-content-center collapse navbar-collapse" id="navbarSecondSupportedContent">
-                <ul class="navbar-nav text-center justify-content-around">
-                    <li class="nav-item ">
-                        <a class="nav-link link-menu-nivel2 pb-2 pt-2" id="opcion1" href="#">Presentación institucional</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel2" id="opcion2" href="#">Politica de administración del riesgo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel2" id="opcion3" href="#">Identificación del riesgo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel2" id="opcion4" href="#"  title="En este paso de la metodología se realiza el análisis de los riesgos y su evaluación, de tal forma que se determine la probabilidad de ocurrencia de riesgo y su nivel de consecuencia o impacto, con el fin de determinar el riesgo inherente (zona de riesgo inicial), para luego confrontar los resultados de dicho análisis frente a los controles establecidos por la Institución, con el fin de determinar el riesgo residual (zona de riesgo final).">Valoración de riesgos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel2" id="opcion5" href="#">Preparación para la respuesta a
-                            emergencias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel2" id="opcion6" href="#">Ejecución de la respuesta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu-nivel2" id="opcion7" href="#">Preparación para la recuperación</a>
-                    </li>
-                </ul>
-            </div> -->
-    </nav>
 </header>
 
 

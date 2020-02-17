@@ -1,6 +1,7 @@
 .container-info-vista{
     border: 3px solid rgb(230, 78, 78);
     border-top: none;
+    height: 40px;
 }
 
 .container-sub-info{

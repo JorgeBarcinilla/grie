@@ -8,16 +8,21 @@ import { InfoVistaComponent } from 'src/app/components/info-vista/info-vista.com
 import { ButtonExampleComponent } from 'src/app/components/utils/button-example/button-example.component';
 import { AppMeterialModule } from 'src/app/shared/angular-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ButtonExampleModule } from 'src/app/components/utils/button-example/button-example.module';
+import { CardTitleModule } from 'src/app/components/utils/card-title/card-title.module';
 
 
 @NgModule({
-  declarations: [EjecucionRespuestaComponent, CardTitleComponent,InfoVistaComponent,ButtonExampleComponent],
+  declarations: [EjecucionRespuestaComponent],
   imports: [
     CommonModule,
     EjecucionRespuestaRoutingModule,
     AppMeterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FormsModule,
+    CardTitleModule,
+    ButtonExampleModule
   ]
 })
 export class EjecucionRespuestaModule { }
