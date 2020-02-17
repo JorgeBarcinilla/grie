@@ -1,63 +1,29 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { IdentificacionInstitucionComponent } from './views/conocimiento-institucional/opcion1/identificacion-institucion/identificacion-institucion.component';
-import { IdentificacionSedeComponent } from './views/conocimiento-institucional/opcion1/identificacion-sede/identificacion-sede.component';
-import { LineamientosPoliticaComponent } from './views/gestion-riesgo/opcion1/lineamientos-politica/lineamientos-politica.component';
-import { CaracterizacionContextoComponent } from './views/gestion-riesgo/opcion2/caracterizacion-contexto/caracterizacion-contexto.component';
-import { IdentificacionRiesgoComponent } from './views/gestion-riesgo/opcion2/identificacion-riesgo/identificacion-riesgo.component';
-import { AnalisisRiesgoComponent } from './views/gestion-riesgo/opcion3/analisis-riesgo/analisis-riesgo.component';
-import { EvaluacionRiesgoComponent } from './views/gestion-riesgo/opcion3/evaluacion-riesgo/evaluacion-riesgo.component';
-import { ReporteTratamientoRiesgoComponent } from './views/gestion-riesgo/opcion3/reporte-tratamiento-riesgo/reporte-tratamiento-riesgo.component';
-import { PrepracionRespuestaEmergenciaComponent } from './views/gestion-riesgo/opcion4/prepracion-respuesta-emergencia/prepracion-respuesta-emergencia.component';
-import { EjecucionRespuestaComponent } from './views/gestion-riesgo/opcion5/ejecucion-respuesta/ejecucion-respuesta.component';
-import { PreparacionRecuperacionComponent } from './views/gestion-riesgo/opcion6/preparacion-recuperacion/preparacion-recuperacion.component';
+import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
   {
-    path : 'identificacionInstitucion',
-    component : IdentificacionInstitucionComponent
+    path : '',
+    loadChildren : () => import(`./views/home/home.module`).then(m => m.HomeModule)
   },
   {
-    path : 'identificacionSede',
-    component : IdentificacionSedeComponent
+    path : 'login',
+    loadChildren : () => import(`./views/login/login.module`).then(m => m.LoginModule)
   },
   {
-    path : 'lineamientosPolitica',
-    component : LineamientosPoliticaComponent
+    path : 'gestionRiesgo',
+    loadChildren : () => import(`./views/gestion-riesgo/gestion-riesgo.module`).then(m => m.GestionRiesgoModule)
   },
   {
-    path : 'caracterizacionContexto',
-    component : CaracterizacionContextoComponent
+    path : 'conocimientoInstitucional',
+    loadChildren : () => import(`./views/conocimiento-institucional/conocimiento-institucional.module`).then(m => m.ConocimientoInstitucionalModule)
   },
   {
-    path : 'identificacionRiesgo',
-    component : IdentificacionRiesgoComponent
+    path : '**',
+    redirectTo: ''
   },
-  {
-    path : 'analisisRiesgo',
-    component : AnalisisRiesgoComponent
-  },
-  {
-    path : 'evaluacionRiesgos',
-    component : EvaluacionRiesgoComponent
-  },
-  {
-    path : 'reporteTratamientoRiesgo',
-    component : ReporteTratamientoRiesgoComponent
-  },
-  {
-    path : 'preparacionRespuestaEmergencia',
-    component : PrepracionRespuestaEmergenciaComponent
-  },
-  {
-    path : 'ejecucionRespuesta',
-    component : EjecucionRespuestaComponent
-  },
-  {
-    path : 'preparacionRecuperacion',
-    component : PreparacionRecuperacionComponent
-  }
+  
 ];
 
 @NgModule({

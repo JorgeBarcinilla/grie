@@ -9,17 +9,17 @@
                 </div>
                 <div class="col-auto">
                     <div class="row justify-content-around">
-                        <button mat-button [routerLink]="['/lineamientosPolitica']" routerLinkActive="router-link-active" (click)="changeTitle('Politica de administracion de riesgos')" >Politica de administracion de riesgos</button>
+                        <button mat-button [routerLink]="['/gestionRiesgo/lineamientosPolitica']" routerLinkActive="router-link-active" (click)="changeTitle('Politica de administracion de riesgos')" >Politica de administracion de riesgos</button>
                         <button mat-button [matMenuTriggerFor]="identificacionRiesgo" >Identificacion del riesgo</button>
                         <mat-menu #identificacionRiesgo="matMenu" xPosition="after">
-                            <button mat-menu-item [routerLink]="['/caracterizacionContexto']" routerLinkActive="router-link-active" (click)="changeTitle('Caracterizacion del contexto')">Caracterizacion del contexto</button>
-                            <button mat-menu-item [routerLink]="['/identificacionRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Identificacion del  riesgo')">Identificacion del  riesgo</button>
+                            <button mat-menu-item [routerLink]="['/gestionRiesgo/caracterizacionContexto']" routerLinkActive="router-link-active" (click)="changeTitle('Caracterizacion del contexto')">Caracterizacion del contexto</button>
+                            <button mat-menu-item [routerLink]="['/gestionRiesgo/identificacionRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Identificacion del  riesgo')">Identificacion del  riesgo</button>
                         </mat-menu>
                         <button mat-button [matMenuTriggerFor]="valoracionRiesgos">Valoracion de riesgos</button>
                         <mat-menu #valoracionRiesgos="matMenu" xPosition="after">
-                            <button mat-menu-item [routerLink]="['/analisisRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Analisis de riesgos')">Analisis de riesgos</button>
-                            <button mat-menu-item [routerLink]="['/evaluacionRiesgos']" routerLinkActive="router-link-active" (click)="changeTitle('Evaluacion de riesgos')">Evaluacion de riesgos</button>
-                            <button mat-menu-item [routerLink]="['/reporteTratamientoRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Reporte del plaan de tratamiento de riesgos')">Reporte del plaan de tratamiento de riesgos</button>
+                            <button mat-menu-item [routerLink]="['/gestionRiesgo/analisisRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Analisis de riesgos')">Analisis de riesgos</button>
+                            <button mat-menu-item [routerLink]="['/gestionRiesgo/evaluacionRiesgos']" routerLinkActive="router-link-active" (click)="changeTitle('Evaluacion de riesgos')">Evaluacion de riesgos</button>
+                            <button mat-menu-item [routerLink]="['/gestionRiesgo/reporteTratamientoRiesgo']" routerLinkActive="router-link-active" (click)="changeTitle('Reporte del plaan de tratamiento de riesgos')">Reporte del plaan de tratamiento de riesgos</button>
                         </mat-menu>
                         <button mat-button [routerLink]="['/preparacionRespuestaEmergencia']" routerLinkActive="router-link-active" (click)="changeTitle('Preparacion para la respuesta a emergencias')">Preparacion para la respuesta a emergencias</button>
                     </div>
@@ -49,8 +49,8 @@
                     <mat-toolbar-row >
                         <div class="container-fluid">
                             <div class="row justify-content-around">
-                                <button mat-button [routerLink]="['/ejecucionRespuesta']" routerLinkActive="router-link-active" (click)="changeTitle('Ejecucion de la respuesta')">Ejecucion de la respuesta</button>
-                                <button mat-button [routerLink]="['/preparacionRecuperacion']" routerLinkActive="router-link-active" (click)="changeTitle('Preparación para la recuperación')">Preparación para la recuperación</button>
+                                <button mat-button [routerLink]="['/gestionRiesgo/ejecucionRespuesta']" routerLinkActive="router-link-active" (click)="changeTitle('Ejecucion de la respuesta')">Ejecucion de la respuesta</button>
+                                <button mat-button [routerLink]="['/gestionRiesgo/preparacionRecuperacion']" routerLinkActive="router-link-active" (click)="changeTitle('Preparación para la recuperación')">Preparación para la recuperación</button>
                             </div>
                         </div>
                     </mat-toolbar-row>
