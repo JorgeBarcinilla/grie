@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ImageExampleComponent } from './components/utils/image-example/image-example.component';
 import { AppMaterialModule } from './shared/angular-material.module';
+import { HeaderHomeComponent } from './components/headers/header-home/header-home.component';
+import { HeaderConocimientoInstitucionalComponent } from './components/headers/header-conocimiento-institucional/header-conocimiento-institucional.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImageExampleComponent,
+    ImageExampleComponent
   ],
   imports: [
     BrowserModule,

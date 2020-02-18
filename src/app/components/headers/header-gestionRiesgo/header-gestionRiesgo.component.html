@@ -1,0 +1,79 @@
+<header>
+  <mat-toolbar class="toolbar-above mat-elevation-z5" color="primary">
+    <mat-toolbar-row>
+      <div class="container-fluid">
+
+        <div class="row justify-content-between">
+          <div class="col-auto">
+            <span>GRIE</span>
+          </div>
+          <div class="col-auto">
+            <div class="row justify-content-around">
+              <button mat-button [routerLink]="['/gestionRiesgo/lineamientosPolitica']"
+                routerLinkActive="router-link-active">Politica de administracion de
+                riesgos</button>
+              <button mat-button [matMenuTriggerFor]="identificacionRiesgo">Identificacion del riesgo</button>
+              <mat-menu #identificacionRiesgo="matMenu" xPosition="after">
+                <button mat-menu-item [routerLink]="['/gestionRiesgo/caracterizacionContexto']"
+                  routerLinkActive="router-link-active">Caracterizacion del contexto</button>
+                <button mat-menu-item [routerLink]="['/gestionRiesgo/identificacionRiesgo']"
+                  routerLinkActive="router-link-active">Identificacion del riesgo</button>
+              </mat-menu>
+              <button mat-button [matMenuTriggerFor]="valoracionRiesgos">Valoracion de riesgos</button>
+              <mat-menu #valoracionRiesgos="matMenu" xPosition="after">
+                <button mat-menu-item [routerLink]="['/gestionRiesgo/analisisRiesgo']"
+                  routerLinkActive="router-link-active">Analisis de
+                  riesgos</button>
+                <button mat-menu-item [routerLink]="['/gestionRiesgo/evaluacionRiesgos']"
+                  routerLinkActive="router-link-active">Evaluacion de
+                  riesgos</button>
+                <button mat-menu-item [routerLink]="['/gestionRiesgo/reporteTratamientoRiesgo']"
+                  routerLinkActive="router-link-active">Reporte del plaan de tratamiento
+                  de riesgos</button>
+              </mat-menu>
+              <button mat-button [routerLink]="['/gestionRiesgo/preparacionRespuestaEmergencia']"
+                routerLinkActive="router-link-active">Preparacion para la respuesta a
+                emergencias</button>
+            </div>
+          </div>
+          <div class="col-auto">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opciones">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Salir</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="container-fluid" class="container-toolbar-under">
+    <div class="row justify-content-around ">
+      <div class="col-3 text-center mt-2 p-0">
+        <h6 class="font-weight-bold">{{title}}</h6>
+      </div>
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <mat-toolbar color="primary" class="toolbar-under mat-elevation-z5">
+          <mat-toolbar-row>
+            <div class="container-fluid">
+              <div class="row justify-content-around">
+                <button mat-button [routerLink]="['/gestionRiesgo/ejecucionRespuesta']"
+                  routerLinkActive="router-link-active">Ejecucion de
+                  la respuesta</button>
+                <button mat-button [routerLink]="['/gestionRiesgo/preparacionRecuperacion']"
+                  routerLinkActive="router-link-active">Preparación para la recuperación</button>
+              </div>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+      <div class="col-3  mt-2">
+
+      </div>
+    </div>
+  </div>
+</header>
