@@ -56,6 +56,7 @@ export class CaracterizacionContextoComponent implements OnInit {
   }
 
   guardarCaracterizacionContexto(){
+    console.log("Esto es lo que guarda la vista Caracterizacion del contexto")
     console.log(this.formularioCaracterizacionContexto.value)
   }
 

@@ -218,10 +218,11 @@ export class LineamientosPoliticaComponent implements OnInit {
   }
 
   guardarLinemientosPolitica(){
-    console.log(this.formularioNivelesCalificarProbabilidad.value);
-    console.log(this.formularioNivelesCalificarImpactoCorrupcion.value);
-    console.log(this.formularioNivelesCalificarImpactoFisico.value);
-    console.log(this.formularioNivelesCalificarImpactoGestion.value);
+    let formLineamientosPolitica = Object.assign(this.formularioNivelesCalificarProbabilidad.value,this.formularioNivelesCalificarImpactoGestion.value,
+      this.formularioNivelesCalificarImpactoCorrupcion.value, this.formularioNivelesCalificarImpactoFisico.value)
+    
+    console.log("Esto es lo que guarda lineamientos de politica")
+    console.log(formLineamientosPolitica)
   }
 
 }

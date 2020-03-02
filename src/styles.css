@@ -1,6 +1,3 @@
-@import '~primeicons/primeicons.css';
-@import '~primeng/resources/themes/nova-light/theme.css';
-@import '~primeng/resources/primeng.min.css';
 
 html, body { height: 100%; overflow-x: hidden; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -75,4 +72,37 @@ button:focus {
 
 .icon-color-info{
   color: rgb(36, 147, 190) !important;
+}
+
+
+/*TOPIC CONTAINER*/
+.label-title-div {
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  top: -13px;
+  color: rgb(78, 78, 78);
+  padding-right: 3px;
+  padding-left: 3px;
+  width: auto;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  background-color: white;
+  font-size: bold;
+}
+.div-list {
+  border: 2px solid rgb(78, 78, 78);
+  border-radius: 5px;
+  border-color: rgb(78, 78, 78);
+  transition: 0.5s  ease all;
+  -moz-transition: 0.5s ease all;
+  -webkit-transition: 0.5s  ease all;
+}
+
+.container-chips{
+  height: 120px; 
+  max-height: 120px; 
+  overflow-y: auto;
 }

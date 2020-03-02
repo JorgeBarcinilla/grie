@@ -3,7 +3,7 @@
   <div class="container-fluid mt-2">
     <div class="row justify-content-end">
       <app-button-example tooltip="Ver ejemplo de identificacion de activos"
-        src="../../../../../../assets/img/pasos_procesos.png" label="Pasos para identificar un activo">
+        src="./../assets/img/pasos_procesos.png" label="Pasos para identificar un activo">
       </app-button-example>
     </div>
     <div class="row justify-content-around">
@@ -33,7 +33,7 @@
           </div>
           <div class="col-2 p-0 mt-3">
             <app-button-example tooltip="Ver ejemplo de tipos de activos"
-              src="../../../../../../assets/img/info_tipo_activos.png" label="Ejemplo tipos de activos">
+              src="./../assets/img/info_tipo_activos.png" label="Ejemplo tipos de activos">
             </app-button-example>
           </div>
         </div>
@@ -73,7 +73,7 @@
 
           <div class="col-2 p-0 mt-3">
             <app-button-example tooltip="Ver ejemplo de criticidad de confidencialidad"
-              src="../../../../../../assets/img/info_criticidad_confidencialidad.png"
+              src="./../assets/img/info_criticidad_confidencialidad.png"
               label="Ejemplo tipos de criticidad de confidencialidad">
             </app-button-example>
           </div>
@@ -92,7 +92,7 @@
 
           <div class="col-2 p-0 mt-3">
             <app-button-example tooltip="Ver ejemplo de criticidad de integridad"
-              src="../../../../../../assets/img/info_criticidad_integridad.png" label="Criticidad de integridad">
+              src="./../assets/img/info_criticidad_integridad.png" label="Criticidad de integridad">
             </app-button-example>
           </div>
         </div>
@@ -110,7 +110,7 @@
 
           <div class="col-2 p-0 mt-3">
             <app-button-example tooltip="Ver ejemplo de criticidad de disponibilidad"
-              src="../../../../../../assets/img/info_criticidad_disponibilidad.png"
+              src="./../assets/img/info_criticidad_disponibilidad.png"
               label="Criticidad de disponibilidad">
             </app-button-example>
           </div>
@@ -121,14 +121,14 @@
           <div class="col-10 p-0">
             <mat-form-field class="w-100">
               <mat-label>Nivel de criticidad</mat-label>
-              <mat-select formControlName="nivelCriticidad">
+              <mat-select formControlName="nivelCriticidad" disabled>
                 <mat-option *ngFor="let crit of listaNivelCriticidad" [value]="crit">{{crit}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="col-2 p-0 mt-3">
             <app-button-example tooltip="Ver ejemplo de niveles de criticidad"
-              src="../../../../../../assets/img/info_nivel_criticidad.png"
+              src="./../assets/img/info_nivel_criticidad.png"
               label="Ejemplo tipos de niveles de criticidad">
             </app-button-example>
           </div>
