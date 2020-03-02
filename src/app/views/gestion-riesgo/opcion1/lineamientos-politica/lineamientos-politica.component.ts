@@ -81,8 +81,9 @@ const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
   {numero: '14', pregunta: '¿Dar lugar a procesos penales?', formGroup:{name: 'pregunta14', formControls:['respuesta']}},
   {numero: '15', pregunta: '¿Generar pérdida de credibilidad del sector?', formGroup:{name: 'pregunta15', formControls:['respuesta']}},
   {numero: '16', pregunta: '¿Ocasionar lesiones físicas o pérdida de vidas humanas?', formGroup:{name: 'pregunta16', formControls:['respuesta']}},
-  {numero: '17', pregunta: '¿Afectar la imagen regional?', formGroup:{name: 'pregunta17', formControls:['respuesta']}}
-  
+  {numero: '17', pregunta: '¿Afectar la imagen regional?', formGroup:{name: 'pregunta17', formControls:['respuesta']}},
+  {numero: '18', pregunta: '¿Afectar la imagen nacional?', formGroup:{name: 'pregunta18', formControls:['respuesta']}},
+  {numero: '19', pregunta: '¿Genera daño ambiental?', formGroup:{name: 'pregunta19', formControls:['respuesta']}}
 ];
 
 @Component({
@@ -92,6 +93,9 @@ const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
 })
 export class LineamientosPoliticaComponent implements OnInit {
   
+  nivelImpactoCorrupcion : string;
+  preguntasTerminadasCorrupccion : boolean;
+
   tiposRiesgos = ['Corrupción', 'Fisicos', 'Gestión', 'Seguridad digital'];
   isCorrupcion: boolean;
   isGestion: boolean;
@@ -215,6 +219,43 @@ export class LineamientosPoliticaComponent implements OnInit {
         this.isGestion = false;
         break;
     }
+  }
+
+  calcularImpactoCorrupcion(){
+    let respuestas = this.formularioNivelesCalificarImpactoCorrupcion.value;
+    let flagDone = true;
+    let respuestasAfirmativas = 0;
+    
+    
+    for (let i in respuestas) {
+      const respuesta = respuestas[i];
+      console.log(respuesta)
+      if (respuesta.respuesta == "") {
+        flagDone = false;
+        this.preguntasTerminadasCorrupccion = false;
+        break;
+      }else if(respuesta.respuesta == "si"){
+        console.log("se suma 1")
+        respuestasAfirmativas += 1
+      }
+      
+    }
+
+    console.log("estado: "+flagDone)
+    console.log("puntaje: "+respuestasAfirmativas)
+
+    if (flagDone) {
+      this.preguntasTerminadasCorrupccion = true
+      if(respuestasAfirmativas > 11){
+        this.nivelImpactoCorrupcion = "Catastrofico"
+      }else if(respuestasAfirmativas > 5){
+        this.nivelImpactoCorrupcion = "Mayor"
+      }else{
+        this.nivelImpactoCorrupcion = "Moderado"
+      }
+    }
+
+    
   }
 
   guardarLinemientosPolitica(){

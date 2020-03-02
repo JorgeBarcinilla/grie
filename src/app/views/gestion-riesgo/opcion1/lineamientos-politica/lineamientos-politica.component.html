@@ -306,7 +306,7 @@
           <th mat-header-cell *matHeaderCellDef> Respuesta </th>
           <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <mat-form-field>
-                <mat-select formControlName="respuesta">
+                <mat-select formControlName="respuesta" (selectionChange)="calcularImpactoCorrupcion()">
                   <mat-option value="si">
                     Si
                   </mat-option>
@@ -335,7 +335,8 @@
           </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="text-center">
-          <h3 class="font-weight-bold">Catastrofico</h3>
+          <h3 class="font-weight-bold" *ngIf="preguntasTerminadasCorrupccion">{{nivelImpactoCorrupcion}}</h3>
+          <small *ngIf="!preguntasTerminadasCorrupccion">Esperando que todas las preguntas sean contestadas...</small>
         </mat-card-content>
       </mat-card>
     </div>
