@@ -195,6 +195,61 @@
         </mat-card>
       </div>
     </div>
+    <form [formGroup]="formularioNivelesCalificarImpactoCorrupcion">
+      <div class="row justify-content-center mt-3 mb-3" *ngIf="tipoRiesgoActivate.Corrupcion">
+        <div class="col-md-11 col-lg-9 col-xl-8 mat-elevation-z4" id="tableCorrupcion">
+          <table mat-table [dataSource]="riesgosCorrupcion">
+    
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef> N° </th>
+              <td class="font-weight-bold" mat-cell *matCellDef="let element"> {{element.numero}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="pregunta">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> Pregunta: Si el riesgo de corrupción se materializa podría… </th>
+              <td mat-cell *matCellDef="let element"> {{element.pregunta}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="respuesta" class="w-25">
+              <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+              <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+                  <mat-form-field>
+                    <mat-select formControlName="respuesta" (selectionChange)="calcularImpactoCorrupcion()">
+                      <mat-option value="si">
+                        Si
+                      </mat-option>
+                      <mat-option value="no">
+                        No
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCorrupcion; sticky: true "></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCorrupcion;"></tr>
+          </table>
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 align-self-center">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Nivel de impacto</mat-card-title>
+              <mat-card-subtitle>
+                <small>
+                  Responder afirmativamente de UNA a CINCO preguntas genera un impacto moderado.
+                  Responder afirmativamente de SEIS a ONCE preguntas genera un impacto mayor.
+                  Responder afirmativamente de DOCE a DIECINUEVE preguntas genera un impacto catastrófico.
+                </small>
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="text-center">
+              <h3 class="font-weight-bold" *ngIf="preguntasTerminadasCorrupccion">{{nivelImpactoCorrupcion}}</h3>
+              <small *ngIf="!preguntasTerminadasCorrupccion">Esperando que todas las preguntas sean contestadas...</small>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </form>
     <div class="row justify-content-center mt-2">
       <button color="accent" mat-stroked-button (click)="guardarRiesgo()" [disabled]="formParcialIdentificacionRiesgo.invalid" >Agregar</button>
     </div>

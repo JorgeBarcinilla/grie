@@ -2,7 +2,34 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ImageExampleComponent } from 'src/app/components/utils/image-example/image-example.component';
 import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import { MostrarEjemplosService } from 'src/app/helpers/mostrar-ejemplos.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+export interface DataElementRiesgosCorrupcion {
+  numero: string;
+  pregunta: string;
+  formGroup:{name: string, formControls:['respuesta']}
+}
+const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
+  {numero: '1', pregunta: '¿Afectar al grupo de funcionarios del proceso?', formGroup:{name: 'pregunta1', formControls:['respuesta']}},
+  {numero: '2', pregunta: '¿Afectar el cumplimiento de metas y objetivos de la dependencia?', formGroup:{name: 'pregunta2', formControls:['respuesta']}},
+  {numero: '3', pregunta: '¿Afectar el cumplimiento de misión de la entidad?', formGroup:{name: 'pregunta3', formControls:['respuesta']}},
+  {numero: '4', pregunta: '¿Afectar el cumplimiento de la misión del sector al que pertenece la entidad?', formGroup:{name: 'pregunta4', formControls:['respuesta']}},
+  {numero: '5', pregunta: '¿Generar pérdida de confianza de la entidad, afectando su reputación?', formGroup:{name: 'pregunta5', formControls:['respuesta']}},
+  {numero: '6', pregunta: '¿Generar pérdida de recursos económicos?', formGroup:{name: 'pregunta6', formControls:['respuesta']}},
+  {numero: '7', pregunta: '¿Afectar la generación de los productos o la prestación de servicios?', formGroup:{name: 'pregunta7', formControls:['respuesta']}},
+  {numero: '8', pregunta: '¿Dar lugar al detrimento de calidad de vida de la comunidad por la pérdida del bien, servicios o recursos públicos?', formGroup:{name: 'pregunta8', formControls:['respuesta']}},
+  {numero: '9', pregunta: '¿Generar pérdida de información de la entidad?', formGroup:{name: 'pregunta9', formControls:['respuesta']}},
+  {numero: '10', pregunta: '¿Generar intervención de los órganos de control, de la Fiscalía u otro ente?', formGroup:{name: 'pregunta10', formControls:['respuesta']}},
+  {numero: '11', pregunta: '¿Dar lugar a procesos sancionatorios?', formGroup:{name: 'pregunta11', formControls:['respuesta']}},
+  {numero: '12', pregunta: '¿Dar lugar a procesos disciplinarios?', formGroup:{name: 'pregunta12', formControls:['respuesta']}},
+  {numero: '13', pregunta: '¿Dar lugar a procesos fiscales?', formGroup:{name: 'pregunta13', formControls:['respuesta']}},
+  {numero: '14', pregunta: '¿Dar lugar a procesos penales?', formGroup:{name: 'pregunta14', formControls:['respuesta']}},
+  {numero: '15', pregunta: '¿Generar pérdida de credibilidad del sector?', formGroup:{name: 'pregunta15', formControls:['respuesta']}},
+  {numero: '16', pregunta: '¿Ocasionar lesiones físicas o pérdida de vidas humanas?', formGroup:{name: 'pregunta16', formControls:['respuesta']}},
+  {numero: '17', pregunta: '¿Afectar la imagen regional?', formGroup:{name: 'pregunta17', formControls:['respuesta']}},
+  {numero: '18', pregunta: '¿Afectar la imagen nacional?', formGroup:{name: 'pregunta18', formControls:['respuesta']}},
+  {numero: '19', pregunta: '¿Genera daño ambiental?', formGroup:{name: 'pregunta19', formControls:['respuesta']}}
+];
 
 @Component({
   selector: 'app-identificacion-riesgo',
@@ -80,10 +107,31 @@ export class IdentificacionRiesgoComponent implements OnInit {
     consecuencia : new FormControl('',Validators.required)
   })
 
-  constructor() {}
+  formularioNivelesCalificarImpactoCorrupcion = new FormGroup({});
+  riesgosCorrupcion = ELEMENT_DATA_CORRUPCION;
+  displayedColumnsCorrupcion: string[] = ['numero', 'pregunta', 'respuesta'];
+  nivelImpactoCorrupcion : string = "";
+  preguntasTerminadasCorrupccion : boolean;
+
+  constructor(private fb: FormBuilder) {
+    this.buildForm(this.formularioNivelesCalificarImpactoCorrupcion, ELEMENT_DATA_CORRUPCION);
+  }
 
   ngOnInit() {
     this.dataSourceRiesgos.paginator = this.paginator;
+    
+  }
+
+  buildForm(formGroup:FormGroup, dataTable: any){
+    dataTable.forEach(row => {
+      let controls = {};
+      row.formGroup.formControls.forEach(control => {
+        controls[control] = new FormControl('', Validators.required);
+      });
+
+      formGroup.addControl(row.formGroup.name,this.fb.group(controls));
+      
+    });
   }
 
   establecerTiposRiesgos(){
@@ -157,11 +205,13 @@ export class IdentificacionRiesgoComponent implements OnInit {
         this.formParcialIdentificacionRiesgo.get('amenaza').enable();
         this.formParcialIdentificacionRiesgo.get('activo').setValue('');
         this.formParcialIdentificacionRiesgo.get('amenaza').setValue('');
+        this.formParcialIdentificacionRiesgo.get('escenarioRiesgo').disable();
         break;
     
       case 'Fisico':
         this.formParcialIdentificacionRiesgo.get('escenarioRiesgo').enable();
-        this.formParcialIdentificacionRiesgo.get('escenarioRiesgo').setValue('');
+        this.formParcialIdentificacionRiesgo.get('activo').disable();
+        this.formParcialIdentificacionRiesgo.get('amenaza').disable();
         break;
 
       default:
@@ -185,21 +235,67 @@ export class IdentificacionRiesgoComponent implements OnInit {
     this.listaCausasSeguridadDigital = this.causasPorActivo[activo];
   }
 
+  calcularImpactoCorrupcion(){
+    let respuestas = this.formularioNivelesCalificarImpactoCorrupcion.value;
+    let flagDone = true;
+    let respuestasAfirmativas = 0;
+    this.nivelImpactoCorrupcion = ""
+    
+    console.log(flagDone)
+    for (let i in respuestas) {
+      const respuesta = respuestas[i];
+      console.log(respuesta.respuesta)
+      if (respuesta.respuesta == "") {
+        console.log("Pasa a falso flagdone")
+        flagDone = false;
+        this.preguntasTerminadasCorrupccion = false;
+        break;
+      }else if(respuesta.respuesta == "si"){
+        respuestasAfirmativas += 1
+      }
+      console.log(flagDone)
+    }
+
+    console.log("Valor final de flagdone: "+flagDone)
+
+    if (flagDone) {
+      this.preguntasTerminadasCorrupccion = true
+      if(respuestasAfirmativas > 11){
+        this.nivelImpactoCorrupcion = "Catastrofico"
+      }else if(respuestasAfirmativas > 5){
+        this.nivelImpactoCorrupcion = "Mayor"
+      }else{
+        this.nivelImpactoCorrupcion = "Moderado"
+      }
+    }
+
+    
+  }
+
   guardarRiesgo(){
     let riesgo = this.formParcialIdentificacionRiesgo.value;
     riesgo.causas = this.listaCausas;
     riesgo.consecuencias = this.listaConsecuencias;
+    if(this.nivelImpactoCorrupcion != ""){
+      riesgo.nivelImpacto = {
+        preguntas: this.formularioNivelesCalificarImpactoCorrupcion.value,
+        resultado: this.nivelImpactoCorrupcion
+      }
+    }
     this.riesgosGuardados.push(riesgo);
     this.dataSourceRiesgos.data = this.riesgosGuardados;
     this.formParcialIdentificacionRiesgo.reset();
     this.formConsecuencia.reset();
     this.formCausa.reset();
+    this.formularioNivelesCalificarImpactoCorrupcion.reset();
     this.listaConsecuencias = [];
     this.listaCausas = [];
     this.listaCausasSeguridadDigital = [];
-
-
-    
+    this.nivelImpactoCorrupcion = "";
+    this.preguntasTerminadasCorrupccion = false;
+    for (let i in this.tipoRiesgoActivate){
+      this.tipoRiesgoActivate[i] = false
+    }
   }
 
   guardarRiesgos(){

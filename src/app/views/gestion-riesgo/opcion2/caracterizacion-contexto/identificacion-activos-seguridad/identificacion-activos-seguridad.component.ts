@@ -29,7 +29,7 @@ export class IdentificacionActivosSeguridadComponent implements OnInit {
   listaTiposActivos = ['Información', 'Software', 'Hardware', 'Componentes de red', 'Personas', 'Instalaciones']
   listaTiposInformacion = ['Pública', 'Pública clasificada', 'Pública reservada']
   listaTipoDato = ['Dato público', 'Dato semiprivado', 'Dato privado', 'Dato sensible']
-  listaCriticidadConfidencialidad = ['Información publica reservada (Alta)', 'Información publica clasifícada (Media)', 'Información pública (Baja)', 'No clasifícada']
+  listaCriticidadConfidencialidad = ['Alta', 'Media', 'Baja', 'No clasifícada']
   listaCriticidadIntegridad = ['Alta', 'Media', 'Baja', 'No clasifícada']
   listaCriticidadDisponibilidad = ['Alta', 'Media', 'Baja', 'No clasifícada']
   listaNivelCriticidad = ['Alta', 'Media', 'Baja']
@@ -43,6 +43,51 @@ export class IdentificacionActivosSeguridadComponent implements OnInit {
 
   ngOnInit() {
     this.dataSourceIdentificacionActivos.paginator = this.paginator;
+  }
+
+  calcularNivelCriticidad(){
+    let criticidades = [
+      this.formParcialIdentificacionActivos.get('criticidadRespectoConfidencialidad').value,
+      this.formParcialIdentificacionActivos.get('criticidadRespectoIntegridad').value,
+      this.formParcialIdentificacionActivos.get('criticidadRespectoDisponibilidad').value
+    ]
+
+    let flagDone = true;
+    let puntaje = 0;
+
+    for(let i in criticidades) {
+      const element = criticidades[i]
+      if (element == "") {
+        flagDone = false;
+        break;
+      }else{
+        switch (element) {
+          case "Alta":
+            puntaje += 10
+            break;
+          case "Media":
+            puntaje += 5
+            break;
+          case "Baja":
+            puntaje += 1
+            break;
+        
+          default:
+            break;
+        }
+      }
+    };
+
+    if (flagDone) {
+      if(puntaje > 19){
+        this.formParcialIdentificacionActivos.get('nivelCriticidad').setValue('Alta');
+      }else if(puntaje > 5){
+        this.formParcialIdentificacionActivos.get('nivelCriticidad').setValue('Media');
+      }else{
+        this.formParcialIdentificacionActivos.get('nivelCriticidad').setValue('Baja');
+      }
+    }
+    
   }
 
   guardarActivo(){

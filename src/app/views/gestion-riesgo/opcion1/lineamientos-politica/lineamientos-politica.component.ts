@@ -8,11 +8,11 @@ export interface DataElementNivelesProbabilidad {
   descripcion: string;
   formGroup:{name: string, formControls:['cantidad','numeroVeces','ocurrencia']}
 }
-export interface DataElementRiesgosCorrupcion {
+/*export interface DataElementRiesgosCorrupcion {
   numero: string;
   pregunta: string;
   formGroup:{name: string, formControls:['respuesta']}
-}
+}*/
 export interface DataElementRiesgosFisicos {
   impacto: string;
   descriptor: string;
@@ -64,7 +64,7 @@ const ELEMENT_DATA_SEGURIDAD_DIGITAL: DataElementRiesgosSeguridadDigital[] = [
   
 ];
 
-const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
+/*const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
   {numero: '1', pregunta: '¿Afectar al grupo de funcionarios del proceso?', formGroup:{name: 'pregunta1', formControls:['respuesta']}},
   {numero: '2', pregunta: '¿Afectar el cumplimiento de metas y objetivos de la dependencia?', formGroup:{name: 'pregunta2', formControls:['respuesta']}},
   {numero: '3', pregunta: '¿Afectar el cumplimiento de misión de la entidad?', formGroup:{name: 'pregunta3', formControls:['respuesta']}},
@@ -84,7 +84,7 @@ const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
   {numero: '17', pregunta: '¿Afectar la imagen regional?', formGroup:{name: 'pregunta17', formControls:['respuesta']}},
   {numero: '18', pregunta: '¿Afectar la imagen nacional?', formGroup:{name: 'pregunta18', formControls:['respuesta']}},
   {numero: '19', pregunta: '¿Genera daño ambiental?', formGroup:{name: 'pregunta19', formControls:['respuesta']}}
-];
+];*/
 
 @Component({
   selector: 'app-lineamientos-politica',
@@ -93,11 +93,11 @@ const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
 })
 export class LineamientosPoliticaComponent implements OnInit {
   
-  nivelImpactoCorrupcion : string;
-  preguntasTerminadasCorrupccion : boolean;
+  /*nivelImpactoCorrupcion : string;
+  preguntasTerminadasCorrupccion : boolean;*/
 
-  tiposRiesgos = ['Corrupción', 'Fisicos', 'Gestión', 'Seguridad digital'];
-  isCorrupcion: boolean;
+  tiposRiesgos = [/*'Corrupción',*/ 'Fisicos', 'Gestión', 'Seguridad digital'];
+  //isCorrupcion: boolean;
   isGestion: boolean;
   isFisico: boolean = false;
   isSeguridadDigital: boolean;
@@ -107,13 +107,13 @@ export class LineamientosPoliticaComponent implements OnInit {
   displayedColumnsProbabilidad: string[] = ['nivel', 'descriptor', 'descripcion', 'frecuencia'];
   displayedColumnsFisico: string[] = ['impacto', 'descriptor', 'porcentajeAfectacion'];
   displayedColumnsGestion: string[] = ['impacto', 'descriptor', 'tiempoInterrupcion'];
-  displayedColumnsCorrupcion: string[] = ['numero', 'pregunta', 'respuesta'];
+  //displayedColumnsCorrupcion: string[] = ['numero', 'pregunta', 'respuesta'];
   displayedColumnsSeguridadDigital: string[] = ['impacto', 'descriptor'];
 
   nivelesProbabilidad = ELEMENT_DATA;
   riesgosFisicos = ELEMENT_DATA_FISICOS;
   riesgosGestion = ELEMENT_DATA_GESTION;
-  riesgosCorrupcion = ELEMENT_DATA_CORRUPCION;
+  //riesgosCorrupcion = ELEMENT_DATA_CORRUPCION;
   riesgosSeguridadDigital = ELEMENT_DATA_SEGURIDAD_DIGITAL;
 
   formulario1 = new FormGroup({
@@ -132,18 +132,13 @@ export class LineamientosPoliticaComponent implements OnInit {
   formularioNivelesCalificarProbabilidad = new FormGroup({});
   formularioNivelesCalificarImpactoFisico = new FormGroup({});
   formularioNivelesCalificarImpactoGestion = new FormGroup({});
-  formularioNivelesCalificarImpactoCorrupcion = new FormGroup({});
+  //formularioNivelesCalificarImpactoCorrupcion = new FormGroup({});
 
   constructor(private fb: FormBuilder) {
     this.buildForm(this.formularioNivelesCalificarProbabilidad, ELEMENT_DATA);
     this.buildForm(this.formularioNivelesCalificarImpactoFisico, ELEMENT_DATA_FISICOS);
     this.buildForm(this.formularioNivelesCalificarImpactoGestion, ELEMENT_DATA_GESTION);
-    this.buildForm(this.formularioNivelesCalificarImpactoCorrupcion, ELEMENT_DATA_CORRUPCION);
-
-    console.log(this.formularioNivelesCalificarProbabilidad)
-    console.log(this.formularioNivelesCalificarImpactoCorrupcion)
-    console.log(this.formularioNivelesCalificarImpactoGestion)
-    console.log(this.formularioNivelesCalificarImpactoFisico)
+    //this.buildForm(this.formularioNivelesCalificarImpactoCorrupcion, ELEMENT_DATA_CORRUPCION);
   }
 
   ngOnInit() {
@@ -183,36 +178,36 @@ export class LineamientosPoliticaComponent implements OnInit {
 
   viewTablaRiesgo(riesgo){
     switch (riesgo) {
-      case 'Corrupción':
+      /*case 'Corrupción':
         this.isCorrupcion = true;
         this.isFisico = false;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = false;
-        break;
+        break;*/
       case 'Fisicos':
-        this.isCorrupcion = false;
+        //this.isCorrupcion = false;
         this.isFisico = true;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = false;
         break;
       case 'Gestión':
-        this.isCorrupcion = false;
+       // this.isCorrupcion = false;
         this.isFisico = false;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = true;
         break;
       case 'Seguridad digital':
-        this.isCorrupcion = false;
+        //this.isCorrupcion = false;
         this.isFisico = false;
         this.isNone = false;
         this.isSeguridadDigital = true;
         this.isGestion = false;
         break;
       default:
-        this.isCorrupcion = false;
+        //this.isCorrupcion = false;
         this.isFisico = false;
         this.isNone = true;
         this.isSeguridadDigital = false;
@@ -221,7 +216,7 @@ export class LineamientosPoliticaComponent implements OnInit {
     }
   }
 
-  calcularImpactoCorrupcion(){
+  /*calcularImpactoCorrupcion(){
     let respuestas = this.formularioNivelesCalificarImpactoCorrupcion.value;
     let flagDone = true;
     let respuestasAfirmativas = 0;
@@ -229,7 +224,6 @@ export class LineamientosPoliticaComponent implements OnInit {
     
     for (let i in respuestas) {
       const respuesta = respuestas[i];
-      console.log(respuesta)
       if (respuesta.respuesta == "") {
         flagDone = false;
         this.preguntasTerminadasCorrupccion = false;
@@ -256,11 +250,11 @@ export class LineamientosPoliticaComponent implements OnInit {
     }
 
     
-  }
+  }*/
 
   guardarLinemientosPolitica(){
     let formLineamientosPolitica = Object.assign(this.formularioNivelesCalificarProbabilidad.value,this.formularioNivelesCalificarImpactoGestion.value,
-      this.formularioNivelesCalificarImpactoCorrupcion.value, this.formularioNivelesCalificarImpactoFisico.value)
+      /*this.formularioNivelesCalificarImpactoCorrupcion.value,*/ this.formularioNivelesCalificarImpactoFisico.value)
     
     console.log("Esto es lo que guarda lineamientos de politica")
     console.log(formLineamientosPolitica)

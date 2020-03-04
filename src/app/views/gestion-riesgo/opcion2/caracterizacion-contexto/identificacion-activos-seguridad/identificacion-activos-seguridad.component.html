@@ -65,7 +65,7 @@
           <div class="col-10 p-0">
             <mat-form-field class="w-100">
               <mat-label>Criticidad respecto a la confidencialidad</mat-label>
-              <mat-select formControlName="criticidadRespectoConfidencialidad">
+              <mat-select formControlName="criticidadRespectoConfidencialidad" (selectionChange)="calcularNivelCriticidad()">
                 <mat-option *ngFor="let crit of listaCriticidadConfidencialidad" [value]="crit">{{crit}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -84,7 +84,7 @@
           <div class="col-10 p-0">
             <mat-form-field class="w-100">
               <mat-label>Criticidad respecto a la integridad</mat-label>
-              <mat-select formControlName="criticidadRespectoIntegridad">
+              <mat-select formControlName="criticidadRespectoIntegridad" (selectionChange)="calcularNivelCriticidad()">
                 <mat-option *ngFor="let crit of listaCriticidadIntegridad" [value]="crit">{{crit}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -102,7 +102,7 @@
           <div class="col-10 p-0">
             <mat-form-field class="w-100">
               <mat-label>Criticidad respecto a la disponibilidad</mat-label>
-              <mat-select formControlName="criticidadRespectoDisponibilidad">
+              <mat-select formControlName="criticidadRespectoDisponibilidad" (selectionChange)="calcularNivelCriticidad()">
                 <mat-option *ngFor="let crit of listaCriticidadDisponibilidad" [value]="crit">{{crit}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -119,9 +119,9 @@
       <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <div class="row justify-content-center">
           <div class="col-10 p-0">
-            <mat-form-field class="w-100">
+            <mat-form-field class="w-100 input-disabled">
               <mat-label>Nivel de criticidad</mat-label>
-              <mat-select formControlName="nivelCriticidad" disabled>
+              <mat-select formControlName="nivelCriticidad">
                 <mat-option *ngFor="let crit of listaNivelCriticidad" [value]="crit">{{crit}}</mat-option>
               </mat-select>
             </mat-form-field>

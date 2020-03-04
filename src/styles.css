@@ -106,3 +106,8 @@ button:focus {
   max-height: 120px; 
   overflow-y: auto;
 }
+
+.input-disabled{
+  pointer-events: none;
+  
+}
