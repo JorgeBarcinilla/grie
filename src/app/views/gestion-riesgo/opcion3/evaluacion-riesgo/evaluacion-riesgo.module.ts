@@ -8,10 +8,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardTitleModule } from 'src/app/components/utils/card-title/card-title.module';
 
 import { ButtonExampleModule } from 'src/app/components/utils/button-example/button-example.module';
+import { ValoracionControlesComponent } from './valoracion-controles/valoracion-controles.component';
+import { NivelRiesgoResidualComponent } from './nivel-riesgo-residual/nivel-riesgo-residual.component';
+import { TratamientoRiesgoComponent } from './tratamiento-riesgo/tratamiento-riesgo.component';
 
 
 @NgModule({
-  declarations: [EvaluacionRiesgoComponent],
+  declarations: [EvaluacionRiesgoComponent, ValoracionControlesComponent, NivelRiesgoResidualComponent, TratamientoRiesgoComponent],
   imports: [
     CommonModule,
     EvaluacionRiesgoRoutingModule,

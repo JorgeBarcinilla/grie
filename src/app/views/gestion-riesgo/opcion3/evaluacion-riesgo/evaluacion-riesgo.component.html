@@ -1,1 +1,30 @@
-<p>evaluacion-riesgo works!</p>
+<div class="container-fluid h-100">
+
+  <div class="row justify-content-center mb-1" style="height: 99%;">
+    <div class="col-11 mat-elevation-z4 h-100">
+      <mat-tab-group mat-align-tabs="center" class="h-100">
+        <mat-tab label="Valoracion de los controles" class="h-100">
+          <ng-template matTabContent>
+            <app-valoracion-controles [formularioValoracionControles]="formularioEvaluacionRiesgo.controls.valoracionControles"></app-valoracion-controles>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Nivel de riesgo residual" class="h-100">
+          <ng-template matTabContent>
+
+            <app-nivel-riesgo-residual [formularioNivelRiesgoResidual]="formularioEvaluacionRiesgo.controls.nivelRiesgoResidual"></app-nivel-riesgo-residual>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Tratamiento del riesgo" class="h-100">
+          <ng-template matTabContent>
+            <app-tratamiento-riesgo [formularioTratamientoRiesgo]="formularioEvaluacionRiesgo.controls.tratamientoRiesgo"></app-tratamiento-riesgo>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <!-- <div class="col-lg-1">
+        <div class="row justify-content-center mt-2 mb-3">
+          <button color="accent" mat-raised-button (click)="guardarCaracterizacionContexto()">Guardar</button>
+        </div>
+      </div> -->
+  </div>
+</div>

@@ -10,10 +10,12 @@ import { AppMaterialModule } from 'src/app/shared/angular-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ButtonExampleModule } from 'src/app/components/utils/button-example/button-example.module';
 import { CardTitleModule } from 'src/app/components/utils/card-title/card-title.module';
+import { ProcedimientoRespuestaEmergenciasComponent } from './procedimiento-respuesta-emergencias/procedimiento-respuesta-emergencias.component';
+import { ReporteDanosComponent } from './reporte-danos/reporte-danos.component';
 
 
 @NgModule({
-  declarations: [EjecucionRespuestaComponent],
+  declarations: [EjecucionRespuestaComponent, ProcedimientoRespuestaEmergenciasComponent, ReporteDanosComponent],
   imports: [
     CommonModule,
     EjecucionRespuestaRoutingModule,

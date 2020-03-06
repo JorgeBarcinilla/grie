@@ -1,0 +1,4 @@
+:host ::ng-deep .mat-tab-header {
+    box-shadow: 0px 5px 4px -3px rgba(68, 68, 68, 0.39); 
+    margin-bottom: 3px;
+}

@@ -7,11 +7,13 @@ import { ButtonExampleModule } from 'src/app/components/utils/button-example/but
 import { AppMaterialModule } from 'src/app/shared/angular-material.module';
 import { PreparacionRecuperacionRoutingModule } from './preparacion-recuperacion-routing.module';
 import { PreparacionRecuperacionComponent } from './preparacion-recuperacion.component';
+import { ValoracionSituacionComponent } from './valoracion-situacion/valoracion-situacion.component';
+import { EjecucionRecuperacionComponent } from './ejecucion-recuperacion/ejecucion-recuperacion.component';
 
 
 
 @NgModule({
-  declarations: [PreparacionRecuperacionComponent],
+  declarations: [PreparacionRecuperacionComponent, ValoracionSituacionComponent, EjecucionRecuperacionComponent],
   imports: [
     CommonModule,
     PreparacionRecuperacionRoutingModule,
