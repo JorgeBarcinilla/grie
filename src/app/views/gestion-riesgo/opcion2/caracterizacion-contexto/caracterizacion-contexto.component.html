@@ -1,6 +1,8 @@
 <div class="container-fluid h-100" >
-    
-    <div class="row justify-content-around mb-1 pl-2" style="height: 99%;">
+  <app-card-title title="CARACTERIZACIÓN DEL CONTEXTO" 
+  info="Aquí se definen los parámetros internos y externos, de proceso e identificación de activos que se han de tomar en cuenta para la administración del riesgo">
+  </app-card-title>    
+  <div class="row justify-content-around mb-1 pl-2" style="height: 99%;">
       <div class="col-lg-11 mat-elevation-z4 h-100 p-0 pb-2">
         <mat-tab-group mat-align-tabs="center" class="h-100"> 
           <mat-tab label="Contexto externo"  class="h-100">
@@ -12,7 +14,7 @@
           </mat-tab>
           <mat-tab label="Contexto interno" class="h-100">
             <ng-template matTabContent>
-
+              
               <app-contexto-interno [formularioContextoInterno]="formularioCaracterizacionContexto.controls.contextoInterno"></app-contexto-interno>
               
             </ng-template>

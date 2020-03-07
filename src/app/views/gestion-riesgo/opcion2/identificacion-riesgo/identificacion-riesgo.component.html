@@ -1,8 +1,15 @@
 <div class="container-fluid">
-  <div class="row justify-content-end">
-    <app-button-example tooltip="Ver ejemplo de tipos de riesgos"
+  <div class="row justify-content-between">
+    <div class="col-11">
+      <app-card-title title="IDENTIFICACIÓN DEL RIESGO" 
+      info="En esta sección se realiza la identificación del riesgo, a partir de las causas que contribuyen a su origen.Los tipos de riesgos que se manejarán serán los establecidos en la siguiente figura.">
+      </app-card-title>
+    </div>
+    <div class="col-1">
+      <app-button-example tooltip="Ver ejemplo de tipos de riesgos"
       src="./assets/img/guia_identificacion_riesgo.png" label="Tipos de riesgos">
     </app-button-example>
+    </div>
   </div>
   <form [formGroup]="formParcialIdentificacionRiesgo" autocomplete="off">
     <div class="row justify-content-center">

@@ -21,7 +21,8 @@ import { EstimarRiesgoInicialComponent } from './estimar-riesgo-inicial/estimar-
     ReactiveFormsModule,
     FormsModule,
     CardTitleModule,
-    ButtonExampleModule
+    ButtonExampleModule,
+    CardTitleModule
   ]
 })
 export class AnalisisRiesgoModule { }

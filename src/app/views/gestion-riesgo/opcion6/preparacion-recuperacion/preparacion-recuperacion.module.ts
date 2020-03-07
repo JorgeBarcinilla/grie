@@ -21,7 +21,7 @@ import { EjecucionRecuperacionComponent } from './ejecucion-recuperacion/ejecuci
     ReactiveFormsModule,
     FormsModule,
     CardTitleModule,
-    ButtonExampleModule
+    ButtonExampleModule,
   ]
 })
 export class PreparacionRecuperacionModule { }
