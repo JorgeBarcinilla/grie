@@ -13,12 +13,12 @@
               </ng-container>
           
               <!-- Name Column -->
-              <ng-container matColumnDef="frecuencia">
-                <th mat-header-cell *matHeaderCellDef>Frecuencia</th>
+              <ng-container matColumnDef="probabilidad">
+                <th mat-header-cell *matHeaderCellDef>Probabilidad</th>
                 <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name"> 
                   <mat-form-field>
-                    <mat-label>Frecuencia</mat-label>
-                    <mat-select formControlName="frecuencia" >
+                    <mat-label>Probabilidad</mat-label>
+                    <mat-select formControlName="probabilidad" >
                       <mat-option *ngFor="let frecuencia of listaFrecuencia" value="{{frecuencia}}" (click)="guardarProbabilidad()">
                         {{frecuencia}}
                       </mat-option>

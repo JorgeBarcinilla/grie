@@ -1,1 +1,196 @@
-<p>estimar-riesgo-inicial works!</p>
+<div class="container-fluid h-100">
+  <app-card-title
+    info="Se determina la probabilidad de ocurrencia del riesgo bajo los criterios de frecuencia o factibilidad, mostrados en la siguiente tabla. El riesgo se puede calificar según su nivel de impacto, clasificándose en alguno de los siguientes: insignificante, menor, moderado, mayor y catastrófico.">
+  </app-card-title>
+  
+  <div class="row justify-content-around mt-2">
+    <div class="col-11 mat-elevation-z3 text-center">
+      <h4 class="mt-2">Mapa de calor para los riesgos</h4>
+      <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4">
+          <div class="row justify-content-around">
+            <div class="col-auto">
+              <div class="row justify-content-around">
+                <div class="mini-circle bg-danger mt-1 mr-1"></div>
+                <small class="mt-1">Extremo</small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="row justify-content-around">
+                <div class="mini-circle mt-1 mr-1" style="background-color:  orangered;"></div>
+                <small class="mt-1">Alto</small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="row justify-content-around">
+                <div class="mini-circle bg-warning mt-1 mr-1"></div>
+                <small class="mt-1">Moderado</small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="row justify-content-around">
+                <div class="mini-circle bg-success mt-1 mr-1"></div>
+                <small class="mt-1">Bajo</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive mt-3 pr-4">
+        <table class="table table-borderless text-center">
+          <tbody>
+            <tr>
+              <th scope="row">Casi seguro</th>
+              <td style="background-color: orangered; border-top-left-radius: 8px;">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.casiseguro.insignificante">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td style="background-color: orangered">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.casiseguro.menor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.casiseguro.moderado">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.casiseguro.mayor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger"  style="border-top-right-radius: 8px;">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.casiseguro.catastrofico">{{riesgo}}</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Probable</th>
+              <td class="bg-warning">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.probable.insignificante">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td style="background-color: orangered">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.probable.menor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td style="background-color: orangered">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.probable.moderado">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.probable.mayor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.probable.catastrofico">{{riesgo}}</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Posible</th>
+              <td class="bg-success">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.posible.insignificante">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-warning">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.posible.menor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td style="background-color: orangered">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.posible.moderado">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.posible.mayor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.posible.catastrofico">{{riesgo}}</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Improbable</th>
+              <td class="bg-success">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.improbable.insignificante">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-success">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.improbable.menor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-warning">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.improbable.moderado">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td style="background-color: orangered">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.improbable.mayor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.improbable.catastrofico">{{riesgo}}</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Rara vez</th>
+              <td class="bg-success"  style="border-bottom-left-radius: 8px;">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.raravez.insignificante">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-success">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.raravez.menor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-warning">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.raravez.moderado">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td style="background-color: orangered">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.raravez.mayor">{{riesgo}}</li>
+                </ul>
+              </td>
+              <td class="bg-danger" style="border-bottom-right-radius: 8px;">
+                <ul>
+                  <li *ngFor="let riesgo of riesgosMapeados.raravez.catastrofico">{{riesgo}}</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Insignificante</th>
+              <th scope="col">Menor</th>
+              <th scope="col">Moderado</th>
+              <th scope="col">Mayor</th>
+              <th scope="col">Catastrofico</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

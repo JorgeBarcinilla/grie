@@ -4,14 +4,14 @@ import { OperacionesTablaService } from 'src/app/helpers/operaciones-tabla.servi
 
 export interface DataElementRiesgosFisicos {
   riesgo: string;
-  formGroup:{name: string, formControls:['frecuencia','impacto']}
+  formGroup:{name: string, formControls:['probabilidad','impacto']}
   //impacto:{name: string, formControls:['impacto']}
 }
 
 const ELEMENT_DATA_RIESGOS: DataElementRiesgosFisicos[] = [
-  {riesgo: 'Riesgo 1', formGroup: {name: 'riesgo1', formControls:['frecuencia','impacto']}},
-  {riesgo: 'Riesgo 2', formGroup: {name: 'riesgo2', formControls:['frecuencia','impacto']}},
-  {riesgo: 'Riesgo 3', formGroup: {name: 'riesgo3', formControls:['frecuencia','impacto']}}
+  {riesgo: 'Riesgo 1', formGroup: {name: 'riesgo1', formControls:['probabilidad','impacto']}},
+  {riesgo: 'Riesgo 2', formGroup: {name: 'riesgo2', formControls:['probabilidad','impacto']}},
+  {riesgo: 'Riesgo 3', formGroup: {name: 'riesgo3', formControls:['probabilidad','impacto']}}
 ];
 
 @Component({
@@ -24,7 +24,7 @@ export class DeterminarProbabilidadComponent implements OnInit {
   @Input() formularioDeterminarProbabilidad: FormControl; 
 
   listaRiesgos = ELEMENT_DATA_RIESGOS;
-  displayedColumnsRiesgos: string[] = ['riesgo', 'frecuencia', 'impacto'];
+  displayedColumnsRiesgos: string[] = ['riesgo', 'probabilidad', 'impacto'];
 
   listaFrecuencia = ['Casi seguro','Probable','Posible','Improbable','Rara vez'];
   listaImpacto = ['Catastrofico','Mayor','Moderado','Menor','Insignificante']
