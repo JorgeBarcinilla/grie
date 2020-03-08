@@ -1,5 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { OperacionesTablaService } from 'src/app/helpers/operaciones-tabla.service';
+
+export interface DataElementRiesgosFisicos {
+  riesgo: string;
+  formGroup:{name: string, formControls:['frecuencia','impacto']}
+  //impacto:{name: string, formControls:['impacto']}
+}
+
+const ELEMENT_DATA_RIESGOS: DataElementRiesgosFisicos[] = [
+  {riesgo: 'Riesgo 1', formGroup: {name: 'riesgo1', formControls:['frecuencia','impacto']}},
+  {riesgo: 'Riesgo 2', formGroup: {name: 'riesgo2', formControls:['frecuencia','impacto']}},
+  {riesgo: 'Riesgo 3', formGroup: {name: 'riesgo3', formControls:['frecuencia','impacto']}}
+];
 
 @Component({
   selector: 'app-determinar-probabilidad',
@@ -8,11 +21,28 @@ import { FormGroup } from '@angular/forms';
 })
 export class DeterminarProbabilidadComponent implements OnInit {
 
-  @Input() formularioDeterminarProbabilidad : FormGroup; 
+  @Input() formularioDeterminarProbabilidad: FormControl; 
 
-  constructor() { }
+  listaRiesgos = ELEMENT_DATA_RIESGOS;
+  displayedColumnsRiesgos: string[] = ['riesgo', 'frecuencia', 'impacto'];
+
+  listaFrecuencia = ['Casi seguro','Probable','Posible','Improbable','Rara vez'];
+  listaImpacto = ['Catastrofico','Mayor','Moderado','Menor','Insignificante']
+
+  formParcialDeterminarProbabilidad = new FormGroup({});
+
+  constructor(private _operacionesTabla: OperacionesTablaService) { 
+    console.log(this.formParcialDeterminarProbabilidad)
+    this._operacionesTabla.buildForm(this.formParcialDeterminarProbabilidad, ELEMENT_DATA_RIESGOS);
+    console.log(this.formParcialDeterminarProbabilidad.value)
+  }
 
   ngOnInit() {
   }
+
+  guardarProbabilidad(){
+    this.formularioDeterminarProbabilidad.setValue(this.formParcialDeterminarProbabilidad.value);
+  }
+  
 
 }

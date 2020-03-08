@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabelType, Options } from 'ng5-slider';
+import { OperacionesTablaService } from 'src/app/helpers/operaciones-tabla.service';
 
 export interface DataElementNivelesProbabilidad {
   descriptor: string;
@@ -134,15 +135,15 @@ export class LineamientosPoliticaComponent implements OnInit {
   formularioNivelesCalificarImpactoGestion = new FormGroup({});
   //formularioNivelesCalificarImpactoCorrupcion = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {
-    this.buildForm(this.formularioNivelesCalificarProbabilidad, ELEMENT_DATA);
-    this.buildForm(this.formularioNivelesCalificarImpactoFisico, ELEMENT_DATA_FISICOS);
-    this.buildForm(this.formularioNivelesCalificarImpactoGestion, ELEMENT_DATA_GESTION);
+  constructor(private _operacionesTabla: OperacionesTablaService) {
+    this._operacionesTabla.buildForm(this.formularioNivelesCalificarProbabilidad, ELEMENT_DATA);
+    this._operacionesTabla.buildForm(this.formularioNivelesCalificarImpactoFisico, ELEMENT_DATA_FISICOS);
+    this._operacionesTabla.buildForm(this.formularioNivelesCalificarImpactoGestion, ELEMENT_DATA_GESTION);
     //this.buildForm(this.formularioNivelesCalificarImpactoCorrupcion, ELEMENT_DATA_CORRUPCION);
   }
 
   ngOnInit() {
-
+    console.log(this.formularioNivelesCalificarImpactoFisico.value)
   }
 
   minValue: number = 0;
@@ -161,20 +162,6 @@ export class LineamientosPoliticaComponent implements OnInit {
       }
     }
   };
-
-  //Este metodo construye un grupo de array de formularios
-  buildForm(formGroup:FormGroup, dataTable: any){
-    dataTable.forEach(row => {
-      let controls = {};
-      row.formGroup.formControls.forEach(control => {
-        controls[control] = new FormControl('', Validators.required);
-      });
-
-      formGroup.addControl(row.formGroup.name,this.fb.group(controls));
-      
-    });
-  }
-
 
   viewTablaRiesgo(riesgo){
     switch (riesgo) {

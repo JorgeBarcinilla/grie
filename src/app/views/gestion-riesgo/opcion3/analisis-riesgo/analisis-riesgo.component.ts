@@ -11,9 +11,7 @@ export class AnalisisRiesgoComponent implements OnInit {
   formularioAnalisisRiesgo = new FormGroup({
 
     //DETERMINAR PROBABILIDAD
-    determinarProbabilidad : new FormGroup({
-      xxxx: new FormControl(''),
-    }),
+    determinarProbabilidad : new FormControl(''),
 
     //ESTIMAR RIESGO INICIAL
     estimarRiesgoInicial : new FormGroup({
@@ -25,6 +23,10 @@ export class AnalisisRiesgoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  guardarAnalisisRiesgo(){
+    console.log(this.formularioAnalisisRiesgo.value)
   }
 
 }
