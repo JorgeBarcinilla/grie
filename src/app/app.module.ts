@@ -1,30 +1,31 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { ImageExampleComponent } from './components/utils/image-example/image-example.component';
 import { AppMaterialModule } from './shared/angular-material.module';
-import { HeaderHomeComponent } from './components/headers/header-home/header-home.component';
-import { HeaderConocimientoInstitucionalComponent } from './components/headers/header-conocimiento-institucional/header-conocimiento-institucional.component';
+import { ModalAgregarEdificioComponent } from './views/conocimiento-institucional/opcion1/identificacion-sede/modal-agregar-edificio/modal-agregar-edificio.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImageExampleComponent
+    ImageExampleComponent,
+    ModalAgregarEdificioComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     AppMaterialModule,
     HttpClientModule,
   ],
   providers: [],
-  entryComponents: [ImageExampleComponent],
+  entryComponents: [ImageExampleComponent,ModalAgregarEdificioComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

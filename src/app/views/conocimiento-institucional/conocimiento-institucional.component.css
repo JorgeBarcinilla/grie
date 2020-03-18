@@ -6,3 +6,8 @@
     border-top: none;
     overflow-y: auto;
 }
+
+
+:host ::ng-deep .mat-tab-body-wrapper {
+    height: 90%;
+}

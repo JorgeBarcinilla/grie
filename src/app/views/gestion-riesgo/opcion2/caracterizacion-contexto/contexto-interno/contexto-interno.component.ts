@@ -159,8 +159,7 @@ export class ContextoInternoComponent implements OnInit {
     
 
     this.formularioContextoInterno.get('estructuraFisica').setValue(this.estructurasCalificadas);
-    this.formParcialEstructuras.get('estructurasParcial').setValue('');
-    this.formParcialEstructuras.get('calificacionParcial').setValue('');
+    this.formParcialEstructuras.reset()
   }
 
   eliminarEstructura(nombre : string){
