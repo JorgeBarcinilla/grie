@@ -1,68 +1,69 @@
 <h2 mat-dialog-title>AGREGAR EDIFICIO</h2>
 <mat-dialog-content class="mat-typography h-100">
-    <div class="container-fluid h-100">
-        <form [formGroup]="formEdificios" autocomplete="off">
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <mat-form-field class="w-100">
-                        <mat-label>Edificio #</mat-label>
-                        <input  cdkFocusInitial formControlName="numero" matInput placeholder="Escriba numero del edificio"
-                        type="number">
-                    </mat-form-field>
+  <div class="container-fluid h-100">
+    <form [formGroup]="formEdificios" autocomplete="off">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <mat-label>Edificio #</mat-label>
+            <input cdkFocusInitial formControlName="numero" matInput placeholder="Escriba numero del edificio"
+              type="number" min="1">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <mat-label>Cantidad de pisos</mat-label>
+            <input formControlName="pisos" matInput placeholder="Escriba la cantidad de pisos" type="number" min="1">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-2">
+        <div class="col-12 div-list">
+          <div class="label-title-div">Tipos de salón</div>
+          <div class="container-fluid p-2">
+            <form [formGroup]="formTipoSalon" autocomplete="off">
+              <div class="row justify-content-center mt-2">
+                <div class="col-sm-5 col-md-4 col-lg-2">
+                  <mat-form-field class="w-100">
+                    <mat-label>Cantidad</mat-label>
+                    <input formControlName="cantidad" matInput placeholder="Escriba la cantidad de salón" type="number"
+                      min="1">
+                  </mat-form-field>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <mat-form-field class="w-100">
-                        <mat-label>Cantidad de pisos</mat-label>
-                        <input formControlName="pisos" matInput placeholder="Escriba la cantidad de pisos"
-                        type="number">
-                    </mat-form-field>
+                <div class="col-sm-5 col-md-6 col-lg-8">
+                  <mat-form-field class="w-100">
+                    <mat-label>Tipo de salon</mat-label>
+                    <mat-select formControlName="tipoSalon">
+                      <mat-option *ngFor="let salon of listaTiposSalones" [value]="salon">{{salon}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-            </div>
-            <div class="row justify-content-center mt-2">
-                <div class="col-12 div-list">
-                    <div class="label-title-div">Tipos de salón</div>
-                    <div class="container-fluid p-2">
-                        <form [formGroup]="formTipoSalon" autocomplete="off">
-                            <div class="row justify-content-center mt-2">
-                                <div class="col-sm-5 col-md-4 col-lg-2">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Cantidad</mat-label>
-                                        <input formControlName="cantidad" matInput placeholder="Escriba la cantidad de salón"
-                                        type="number">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-5 col-md-6 col-lg-8">
-                                    <mat-form-field class="w-100">
-                                      <mat-label>Tipo de salon</mat-label>
-                                      <mat-select formControlName="tipoSalon">
-                                        <mat-option *ngFor="let salon of listaTiposSalones" [value]="salon">{{salon}}</mat-option>
-                                      </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="row justify-content-center mt-1">
-                                        <button color="accent" mat-raised-button (click)="agregarSalon()" [disabled]="formTipoSalon.invalid">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center container-chips">
-                                <mat-chip-list >
-                                    <mat-chip class="bg-info" *ngFor="let chip of listaSalones" selected>
-                                        {{chip.cantidad}} salones de {{chip.tipoSalon}}
-                                        <button mat-icon-button (click)="eliminarSalon(chip)">
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
-                                    </mat-chip>
-                                </mat-chip-list>
-                            </div>
-                        </form>
-                    </div>
+                <div class="col-sm-2">
+                  <div class="row justify-content-center mt-1">
+                    <button color="accent" mat-raised-button (click)="agregarSalon()"
+                      [disabled]="formTipoSalon.invalid">+</button>
+                  </div>
                 </div>
-            </div>
-        </form>
-    </div>
+              </div>
+              <div class="row justify-content-center container-chips">
+                <mat-chip-list>
+                  <mat-chip class="bg-info" *ngFor="let chip of listaSalones" selected>
+                    {{chip.cantidad}} salones de {{chip.tipoSalon}}
+                    <button mat-icon-button (click)="eliminarSalon(chip)">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button color="primary" mat-dialog-close>Cancelar</button>
-    <button mat-button color="accent" (click)="guardarEdificio()" [disabled]="formEdificios.invalid" mat-dialog-close>Guardar</button>
+  <button mat-button color="primary" mat-dialog-close>Cancelar</button>
+  <button mat-button color="accent" (click)="guardarEdificio()" [disabled]="formEdificios.invalid"
+    mat-dialog-close>Guardar</button>
 </mat-dialog-actions>
