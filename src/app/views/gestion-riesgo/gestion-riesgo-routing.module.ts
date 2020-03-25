@@ -1,58 +1,84 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { GestionRiesgoComponent } from './gestion-riesgo.component';
-
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { GestionRiesgoComponent } from "./gestion-riesgo.component";
 
 const routes: Routes = [
   {
-    path : '',
+    path: "/",
     component: GestionRiesgoComponent,
-    redirectTo: 'lineamientosPolitica'
+    redirectTo: "lineamientosPolitica"
   },
   {
-    path : 'lineamientosPolitica',
+    path: "lineamientosPolitica",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion1/lineamientos-politica/lineamientos-politica.module`).then(m => m.LineamientosPoliticaModule)
+    loadChildren: () =>
+      import(
+        `./opcion1/lineamientos-politica/lineamientos-politica.module`
+      ).then(m => m.LineamientosPoliticaModule)
   },
   {
-    path : 'caracterizacionContexto',
+    path: "caracterizacionContexto",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion2/caracterizacion-contexto/caracterizacion-contexto.module`).then(m => m.CaracterizacionContextoModule)
+    loadChildren: () =>
+      import(
+        `./opcion2/caracterizacion-contexto/caracterizacion-contexto.module`
+      ).then(m => m.CaracterizacionContextoModule)
   },
   {
-    path : 'identificacionRiesgo',
+    path: "identificacionRiesgo",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion2/identificacion-riesgo/identificacion-riesgo.module`).then(m => m.IdentificacionRiesgoModule)
+    loadChildren: () =>
+      import(
+        `./opcion2/identificacion-riesgo/identificacion-riesgo.module`
+      ).then(m => m.IdentificacionRiesgoModule)
   },
   {
-    path : 'analisisRiesgo',
+    path: "analisisRiesgo",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion3/analisis-riesgo/analisis-riesgo.module`).then(m => m.AnalisisRiesgoModule)
+    loadChildren: () =>
+      import(`./opcion3/analisis-riesgo/analisis-riesgo.module`).then(
+        m => m.AnalisisRiesgoModule
+      )
   },
   {
-    path : 'evaluacionRiesgos',
+    path: "evaluacionRiesgos",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion3/evaluacion-riesgo/evaluacion-riesgo.module`).then(m => m.EvaluacionRiesgoModule)
+    loadChildren: () =>
+      import(`./opcion3/evaluacion-riesgo/evaluacion-riesgo.module`).then(
+        m => m.EvaluacionRiesgoModule
+      )
   },
   {
-    path : 'reporteTratamientoRiesgo',
+    path: "reporteTratamientoRiesgo",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion3/reporte-tratamiento-riesgo/reporte-tratamiento-riesgo.module`).then(m => m.ReporteTratamientoRiesgoModule)
+    loadChildren: () =>
+      import(
+        `./opcion3/reporte-tratamiento-riesgo/reporte-tratamiento-riesgo.module`
+      ).then(m => m.ReporteTratamientoRiesgoModule)
   },
   {
-    path : 'preparacionRespuestaEmergencia',
+    path: "preparacionRespuestaEmergencia",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion4/preparacion-respuesta-emergencia/preparacion-respuesta-emergencia.module`).then(m => m.PreparacionRespuestaEmergenciaModule)
+    loadChildren: () =>
+      import(
+        `./opcion4/preparacion-respuesta-emergencia/preparacion-respuesta-emergencia.module`
+      ).then(m => m.PreparacionRespuestaEmergenciaModule)
   },
   {
-    path : 'ejecucionRespuesta',
+    path: "ejecucionRespuesta",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion5/ejecucion-respuesta/ejecucion-respuesta.module`).then(m => m.EjecucionRespuestaModule)
+    loadChildren: () =>
+      import(`./opcion5/ejecucion-respuesta/ejecucion-respuesta.module`).then(
+        m => m.EjecucionRespuestaModule
+      )
   },
   {
-    path : 'preparacionRecuperacion',
+    path: "preparacionRecuperacion",
     component: GestionRiesgoComponent,
-    loadChildren : () => import(`./opcion6/preparacion-recuperacion/preparacion-recuperacion.module`).then(m => m.PreparacionRecuperacionModule)
+    loadChildren: () =>
+      import(
+        `./opcion6/preparacion-recuperacion/preparacion-recuperacion.module`
+      ).then(m => m.PreparacionRecuperacionModule)
   }
 ];
 
@@ -60,4 +86,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class GestionRiesgoRoutingModule { }
+export class GestionRiesgoRoutingModule {}

@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Res } from "src/app/models/res.model";
 import { Sede } from "src/app/models/sede.model";
 import { SedeService } from "src/app/services/conocimiento-institucional/sede.service";
 import { InstitucionService } from "src/app/services/conocimiento-institucional/institucion.service";
 import { Institucion } from "src/app/models/institucion.model";
+import { Subscription } from "rxjs";
 
 let ID_INSTITUCION: string;
 
@@ -13,7 +14,7 @@ let ID_INSTITUCION: string;
   templateUrl: "./identificacion-institucion.component.html",
   styleUrls: ["./identificacion-institucion.component.css"]
 })
-export class IdentificacionInstitucionComponent implements OnInit {
+export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
   formIdentificacionInstitucional = new FormGroup({
     nombre: new FormControl("", Validators.required),
     codDane: new FormControl("", Validators.required),
@@ -38,18 +39,24 @@ export class IdentificacionInstitucionComponent implements OnInit {
 
   listaSedes: Sede[] = [];
 
+  subscribeInstitucion: Subscription;
+  subscribeSede: Subscription;
+  subscribeEliminarSede: Subscription;
+  subscribeGuardarSede: Subscription;
+  subscribeActualizarInstitucion: Subscription;
+
   constructor(
     private _sedeService: SedeService,
     private _institucionService: InstitucionService
   ) {}
 
   ngOnInit() {
-    this._institucionService
+    this.subscribeInstitucion = this._institucionService
       .obtenerInstitucion()
       .subscribe((institucion: Institucion) => {
         if (institucion._id) {
           ID_INSTITUCION = institucion._id;
-          this._sedeService
+          this.subscribeSede = this._sedeService
             .obtenerSedes(institucion._id)
             .subscribe((sedes: Sede[]) => {
               this.listaSedes = sedes;
@@ -64,30 +71,50 @@ export class IdentificacionInstitucionComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeInstitucion.unsubscribe();
+    this.subscribeSede.unsubscribe();
+    if (this.subscribeEliminarSede) {
+      this.subscribeEliminarSede.unsubscribe();
+    }
+    if (this.subscribeGuardarSede) {
+      this.subscribeGuardarSede.unsubscribe();
+    }
+    if (this.subscribeActualizarInstitucion) {
+      this.subscribeActualizarInstitucion.unsubscribe();
+    }
+  }
+
   agregarSede() {
     const data = Object.assign(this.formSede.value, {
       idSchool: ID_INSTITUCION
     });
-    this._sedeService.guardarSede(data).subscribe((res: Res) => {
-      console.log(res);
-      const sede = Object.assign(this.formSede.value, { id: res.data });
-      this.listaSedes.push(sede);
-      this.formSede.reset();
-    });
+    this.subscribeGuardarSede = this._sedeService
+      .guardarSede(data)
+      .subscribe((res: Res) => {
+        console.log(res);
+        const sede = Object.assign(this.formSede.value, { id: res.data });
+        this.listaSedes.push(sede);
+        this.formSede.reset();
+      });
   }
 
   eliminarSede(sede: Sede) {
-    this._sedeService.eliminarSede(sede).subscribe((res: Res) => {
-      console.log(res);
-      this.listaSedes = this.listaSedes.filter(element => {
-        return element != sede;
+    this.subscribeEliminarSede = this._sedeService
+      .eliminarSede(sede)
+      .subscribe((res: Res) => {
+        console.log(res);
+        this.listaSedes = this.listaSedes.filter(element => {
+          return element != sede;
+        });
       });
-    });
   }
 
   actualizarIdentificacionInstitucion() {
     const institucion = <Institucion>this.formIdentificacionInstitucional.value;
-    this._institucionService
+    this.subscribeActualizarInstitucion = this._institucionService
       .actualizarInstitucion(ID_INSTITUCION, institucion)
       .subscribe((res: Res) => {
         console.log(res);

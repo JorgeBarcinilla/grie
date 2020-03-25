@@ -1,12 +1,12 @@
-.container-main{
-    border: 3px solid rgb(230, 78, 78);
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    height: 87%;
-    border-top: none;
-    overflow-y: auto;
+.container-main {
+  border: 3px solid rgb(230, 78, 78);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  height: 86.4vh;
+  border-top: none;
+  overflow-y: auto;
 }
 
 :host ::ng-deep .mat-tab-body-wrapper {
-    height: 90%;
+  height: 90%;
 }
