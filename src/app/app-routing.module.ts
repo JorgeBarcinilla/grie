@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthserviceGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -13,11 +14,13 @@ const routes: Routes = [
   },
   {
     path : 'gestionRiesgo',
-    loadChildren : () => import(`./views/gestion-riesgo/gestion-riesgo.module`).then(m => m.GestionRiesgoModule)
+    loadChildren : () => import(`./views/gestion-riesgo/gestion-riesgo.module`).then(m => m.GestionRiesgoModule),
+    canActivate: [AuthserviceGuard]
   },
   {
     path : 'conocimientoInstitucional',
-    loadChildren : () => import(`./views/conocimiento-institucional/conocimiento-institucional.module`).then(m => m.ConocimientoInstitucionalModule)
+    loadChildren : () => import(`./views/conocimiento-institucional/conocimiento-institucional.module`).then(m => m.ConocimientoInstitucionalModule),
+    canActivate: [AuthserviceGuard]
   },
   {
     path : '**',

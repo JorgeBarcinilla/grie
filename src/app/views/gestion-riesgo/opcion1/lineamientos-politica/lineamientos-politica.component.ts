@@ -143,7 +143,6 @@ export class LineamientosPoliticaComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.formularioNivelesCalificarImpactoFisico.value)
   }
 
   minValue: number = 0;

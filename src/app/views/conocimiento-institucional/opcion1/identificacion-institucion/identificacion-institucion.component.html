@@ -39,7 +39,7 @@
                   <div class="col-4">
                     <div class="row justify-content-center mt-2">
                       <button color="accent" mat-stroked-button (click)="agregarSede()"
-                        [disabled]="formSede.invalid">Agregar</button>
+                        [disabled]="formSede.invalid" type="button">Agregar</button>
                     </div>
                   </div>
                 </div>
@@ -48,7 +48,7 @@
                 <mat-chip-list>
                   <mat-chip color="primary" *ngFor="let chip of listaSedes" selected>
                     {{chip.nombre}}
-                    <button mat-icon-button (click)="eliminarSede(chip)">
+                    <button mat-icon-button (click)="eliminarSede(chip)" type="button">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip>
@@ -205,7 +205,7 @@
       </div>
     </div>
     <div class="row justify-content-center mt-2 mb-2">
-      <button color="accent" mat-raised-button (click)="guardarIdentificacionInstitucion()">Guardar</button>
+      <button color="accent" mat-raised-button (click)="guardarIdentificacionInstitucion()" type="button">Guardar</button>
     </div>
   </form>
 </div>

@@ -7,7 +7,7 @@
         <mat-form-field class="w-100">
           <mat-label>Sede</mat-label>
           <mat-select [formControl]="nombreSede">
-            <mat-option *ngFor="let sede of listaSedes" [value]="sede.id">{{sede.nombre}}</mat-option>
+            <mat-option *ngFor="let sede of listaSedes" [value]="sede._id"  (click)="seleccionarSede(sede)">{{sede.nombre}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -354,8 +354,9 @@
       </div>
     </div>
     <div class="row justify-content-center mt-2 mb-2">
-      <button color="accent" class="mr-2 ml-2" mat-raised-button (click)="guardarIdentificacionSede()" type="button" [disabled]="formIdentificacionSede.invalid">Guardar</button>
-      <button class="color-info mr-2 ml-2" mat-raised-button [disabled]="formIdentificacionSede.invalid">Gestion del riesgo</button>
+      <button color="accent" class="mr-2 ml-2" mat-raised-button (click)="guardarIdentificacionSede()" type="button" >Actualizar</button>
+      <button color="warn" class="mr-2 ml-2" mat-raised-button [routerLink]="['/gestionRiesgo/lineamientosPolitica']"
+      routerLinkActive="router-link-active" [disabled]="formIdentificacionSede.invalid">Gestion del riesgo</button>
     </div>
   </form>
 </div>

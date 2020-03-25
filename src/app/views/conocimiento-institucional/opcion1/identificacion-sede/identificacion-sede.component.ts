@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatDialog, MatCheckboxChange } from '@angular/material';
 import { ModalAgregarEdificioComponent } from './modal-agregar-edificio/modal-agregar-edificio.component';
+import { SedeService } from 'src/app/services/conocimiento-institucional/sede.service';
+import { Sede } from 'src/app/models/sede.model';
+import { Res } from 'src/app/models/res.model';
 
 @Component({
   selector: 'app-identificacion-sede',
@@ -10,23 +13,22 @@ import { ModalAgregarEdificioComponent } from './modal-agregar-edificio/modal-ag
 })
 export class IdentificacionSedeComponent implements OnInit {
 
-  listaSedes = [{
-    id: 1,
-    nombre: "Sede ejemplo"
-  }]
-  
+  //backFormValues = {};
 
+  listaSedes: Sede[] = []
+  private idSedeSeleccionada: string
+  
   formIdentificacionSede = new FormGroup({
-    codDane : new FormControl(''),
-    coordinador : new FormControl(''),
-    cantEstudiantes : new FormControl(''),
-    cantDocentes : new FormControl(''),
+    codDane : new FormControl('',Validators.required),
+    coordinador : new FormControl('',Validators.required),
+    cantEstudiantes : new FormControl('',Validators.required),
+    cantDocentes : new FormControl('',Validators.required),
     datosNivelDirectivo : new FormControl(''),
-    municipio : new FormControl(''),
-    barrio : new FormControl(''),
-    direccion : new FormControl(''),
-    telefono : new FormControl(''),
-    correo : new FormControl(''),
+    municipio : new FormControl('',Validators.required),
+    barrio : new FormControl('',Validators.required),
+    direccion : new FormControl('',Validators.required),
+    telefono : new FormControl('',Validators.required),
+    correo : new FormControl('',Validators.required),
     limiteNorte : new FormControl(''),
     limiteEste : new FormControl(''),
     limiteOeste : new FormControl(''),
@@ -58,7 +60,7 @@ export class IdentificacionSedeComponent implements OnInit {
 
   listaJornadas = []
 
-  listaDeirectivos = []
+  listaDirectivos = []
   dataSourcesDirectivos = new MatTableDataSource<[]>();
   displayedColumnsDirectivos: string[] = ['nombre', 'cargo', 'telefono', 'correo'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -68,16 +70,54 @@ export class IdentificacionSedeComponent implements OnInit {
   displayedColumnsEdificios: string[] = ['numero', 'pisos', 'tiposSalon'];
   @ViewChild('paginatorEdificios', {static: true}) paginatorEdificios: MatPaginator;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private _sedeService: SedeService) { }
 
   ngOnInit() {
+    
     this.dataSourcesDirectivos.paginator = this.paginator;
+    this._sedeService.obtenerSedes().subscribe( (sedes: Sede[]) => {
+      this.listaSedes = sedes
+      if(this.listaSedes.length > 0){
+        this.seleccionarSede(this.listaSedes[0])
+        this.idSedeSeleccionada = this.listaSedes[0]._id;
+        this.nombreSede.setValue(this.listaSedes[0]._id)
+      }
+    });
+
+    //this.onFormChange()
+  }
+
+  /*onFormChange(): void{
+    
+    this.formIdentificacionSede.valueChanges.subscribe( value =>{
+      for(let key in value){
+        console.log(this.backFormValues[key] == value[key])
+      }
+      
+    })
+  }*/
+
+  seleccionarSede(sede: Sede){
+    if(sede){
+      console.log(sede)
+      this.idSedeSeleccionada = sede._id;
+      const form = this.formIdentificacionSede.value;
+      for(let key in form){
+        this.formIdentificacionSede.get(key).setValue(sede[key]);
+        //this.backFormValues[key] = sede[key];
+      }
+      this.listaJornadas = sede.jornadas;
+      this.listaDirectivos = sede.datosNivelDirectivo;
+      this.dataSourcesDirectivos.data = this.listaDirectivos;
+      this.listaEdificios = sede.edificios;
+      this.dataSourcesEdificios.data = this.listaEdificios;
+    }
   }
 
   agregarDirectivo(){
-    this.listaDeirectivos.unshift(this.formDatosNivelDirectivo.value)
-    this.dataSourcesDirectivos.data = this.listaDeirectivos;
-    this.formIdentificacionSede.get('datosNivelDirectivo').setValue(this.listaDeirectivos);
+    this.listaDirectivos.unshift(this.formDatosNivelDirectivo.value)
+    this.dataSourcesDirectivos.data = this.listaDirectivos;
+    this.formIdentificacionSede.get('datosNivelDirectivo').setValue(this.listaDirectivos);
     this.formDatosNivelDirectivo.reset()
   }
 
@@ -112,7 +152,11 @@ export class IdentificacionSedeComponent implements OnInit {
   }
 
   guardarIdentificacionSede(){
-    console.log(this.formIdentificacionSede.value)
-    this.formIdentificacionSede.reset();
+    
+    const sede = <Sede>this.formIdentificacionSede.value;
+    this._sedeService.actualizarSede(this.idSedeSeleccionada,sede).subscribe((res:Res)=>{
+      console.log(res)
+      
+    })
   }
 }

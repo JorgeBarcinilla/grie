@@ -16,7 +16,7 @@ $grie-primary: mat-palette($mat-red, A200, A100, A400);
 $grie-accent: mat-palette($mat-green, 700, A200, A100);
 
 // The warn palette is optional (defaults to red).
-$grie-warn: mat-palette($mat-red, A700);
+$grie-warn: mat-palette($mat-blue, 700, A200, A100);
 
 
 // Create the theme object (a Sass map containing all of the palettes).
