@@ -1,32 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
-  selector: 'app-analisis-riesgo',
-  templateUrl: './analisis-riesgo.component.html',
-  styleUrls: ['./analisis-riesgo.component.css']
+  selector: "app-analisis-riesgo",
+  templateUrl: "./analisis-riesgo.component.html",
+  styleUrls: ["./analisis-riesgo.component.css"]
 })
 export class AnalisisRiesgoComponent implements OnInit {
-
   formularioAnalisisRiesgo = new FormGroup({
-
     //DETERMINAR PROBABILIDAD
-    determinarProbabilidad : new FormControl(''),
+    determinarProbabilidad: new FormControl(""),
 
     //ESTIMAR RIESGO INICIAL
-    estimarRiesgoInicial : new FormGroup({
-      
-    }),
-
+    estimarRiesgoInicial: new FormGroup({})
   });
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  guardarAnalisisRiesgo(){
-    console.log(this.formularioAnalisisRiesgo.value)
-  }
-
+  guardarAnalisisRiesgo() {}
 }

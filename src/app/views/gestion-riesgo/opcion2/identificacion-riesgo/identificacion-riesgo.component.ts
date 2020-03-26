@@ -1,286 +1,423 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ImageExampleComponent } from 'src/app/components/utils/image-example/image-example.component';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
-import { MostrarEjemplosService } from 'src/app/helpers/mostrar-ejemplos.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ImageExampleComponent } from "src/app/components/utils/image-example/image-example.component";
+import { MatDialog, MatTableDataSource, MatPaginator } from "@angular/material";
+import { MostrarEjemplosService } from "src/app/helpers/mostrar-ejemplos.service";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
 
 export interface DataElementRiesgosCorrupcion {
   numero: string;
   pregunta: string;
-  formGroup:{name: string, formControls:['respuesta']}
+  formGroup: { name: string; formControls: ["respuesta"] };
 }
 const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
-  {numero: '1', pregunta: '¿Afectar al grupo de funcionarios del proceso?', formGroup:{name: 'pregunta1', formControls:['respuesta']}},
-  {numero: '2', pregunta: '¿Afectar el cumplimiento de metas y objetivos de la dependencia?', formGroup:{name: 'pregunta2', formControls:['respuesta']}},
-  {numero: '3', pregunta: '¿Afectar el cumplimiento de misión de la entidad?', formGroup:{name: 'pregunta3', formControls:['respuesta']}},
-  {numero: '4', pregunta: '¿Afectar el cumplimiento de la misión del sector al que pertenece la entidad?', formGroup:{name: 'pregunta4', formControls:['respuesta']}},
-  {numero: '5', pregunta: '¿Generar pérdida de confianza de la entidad, afectando su reputación?', formGroup:{name: 'pregunta5', formControls:['respuesta']}},
-  {numero: '6', pregunta: '¿Generar pérdida de recursos económicos?', formGroup:{name: 'pregunta6', formControls:['respuesta']}},
-  {numero: '7', pregunta: '¿Afectar la generación de los productos o la prestación de servicios?', formGroup:{name: 'pregunta7', formControls:['respuesta']}},
-  {numero: '8', pregunta: '¿Dar lugar al detrimento de calidad de vida de la comunidad por la pérdida del bien, servicios o recursos públicos?', formGroup:{name: 'pregunta8', formControls:['respuesta']}},
-  {numero: '9', pregunta: '¿Generar pérdida de información de la entidad?', formGroup:{name: 'pregunta9', formControls:['respuesta']}},
-  {numero: '10', pregunta: '¿Generar intervención de los órganos de control, de la Fiscalía u otro ente?', formGroup:{name: 'pregunta10', formControls:['respuesta']}},
-  {numero: '11', pregunta: '¿Dar lugar a procesos sancionatorios?', formGroup:{name: 'pregunta11', formControls:['respuesta']}},
-  {numero: '12', pregunta: '¿Dar lugar a procesos disciplinarios?', formGroup:{name: 'pregunta12', formControls:['respuesta']}},
-  {numero: '13', pregunta: '¿Dar lugar a procesos fiscales?', formGroup:{name: 'pregunta13', formControls:['respuesta']}},
-  {numero: '14', pregunta: '¿Dar lugar a procesos penales?', formGroup:{name: 'pregunta14', formControls:['respuesta']}},
-  {numero: '15', pregunta: '¿Generar pérdida de credibilidad del sector?', formGroup:{name: 'pregunta15', formControls:['respuesta']}},
-  {numero: '16', pregunta: '¿Ocasionar lesiones físicas o pérdida de vidas humanas?', formGroup:{name: 'pregunta16', formControls:['respuesta']}},
-  {numero: '17', pregunta: '¿Afectar la imagen regional?', formGroup:{name: 'pregunta17', formControls:['respuesta']}},
-  {numero: '18', pregunta: '¿Afectar la imagen nacional?', formGroup:{name: 'pregunta18', formControls:['respuesta']}},
-  {numero: '19', pregunta: '¿Genera daño ambiental?', formGroup:{name: 'pregunta19', formControls:['respuesta']}}
+  {
+    numero: "1",
+    pregunta: "¿Afectar al grupo de funcionarios del proceso?",
+    formGroup: { name: "pregunta1", formControls: ["respuesta"] }
+  },
+  {
+    numero: "2",
+    pregunta:
+      "¿Afectar el cumplimiento de metas y objetivos de la dependencia?",
+    formGroup: { name: "pregunta2", formControls: ["respuesta"] }
+  },
+  {
+    numero: "3",
+    pregunta: "¿Afectar el cumplimiento de misión de la entidad?",
+    formGroup: { name: "pregunta3", formControls: ["respuesta"] }
+  },
+  {
+    numero: "4",
+    pregunta:
+      "¿Afectar el cumplimiento de la misión del sector al que pertenece la entidad?",
+    formGroup: { name: "pregunta4", formControls: ["respuesta"] }
+  },
+  {
+    numero: "5",
+    pregunta:
+      "¿Generar pérdida de confianza de la entidad, afectando su reputación?",
+    formGroup: { name: "pregunta5", formControls: ["respuesta"] }
+  },
+  {
+    numero: "6",
+    pregunta: "¿Generar pérdida de recursos económicos?",
+    formGroup: { name: "pregunta6", formControls: ["respuesta"] }
+  },
+  {
+    numero: "7",
+    pregunta:
+      "¿Afectar la generación de los productos o la prestación de servicios?",
+    formGroup: { name: "pregunta7", formControls: ["respuesta"] }
+  },
+  {
+    numero: "8",
+    pregunta:
+      "¿Dar lugar al detrimento de calidad de vida de la comunidad por la pérdida del bien, servicios o recursos públicos?",
+    formGroup: { name: "pregunta8", formControls: ["respuesta"] }
+  },
+  {
+    numero: "9",
+    pregunta: "¿Generar pérdida de información de la entidad?",
+    formGroup: { name: "pregunta9", formControls: ["respuesta"] }
+  },
+  {
+    numero: "10",
+    pregunta:
+      "¿Generar intervención de los órganos de control, de la Fiscalía u otro ente?",
+    formGroup: { name: "pregunta10", formControls: ["respuesta"] }
+  },
+  {
+    numero: "11",
+    pregunta: "¿Dar lugar a procesos sancionatorios?",
+    formGroup: { name: "pregunta11", formControls: ["respuesta"] }
+  },
+  {
+    numero: "12",
+    pregunta: "¿Dar lugar a procesos disciplinarios?",
+    formGroup: { name: "pregunta12", formControls: ["respuesta"] }
+  },
+  {
+    numero: "13",
+    pregunta: "¿Dar lugar a procesos fiscales?",
+    formGroup: { name: "pregunta13", formControls: ["respuesta"] }
+  },
+  {
+    numero: "14",
+    pregunta: "¿Dar lugar a procesos penales?",
+    formGroup: { name: "pregunta14", formControls: ["respuesta"] }
+  },
+  {
+    numero: "15",
+    pregunta: "¿Generar pérdida de credibilidad del sector?",
+    formGroup: { name: "pregunta15", formControls: ["respuesta"] }
+  },
+  {
+    numero: "16",
+    pregunta: "¿Ocasionar lesiones físicas o pérdida de vidas humanas?",
+    formGroup: { name: "pregunta16", formControls: ["respuesta"] }
+  },
+  {
+    numero: "17",
+    pregunta: "¿Afectar la imagen regional?",
+    formGroup: { name: "pregunta17", formControls: ["respuesta"] }
+  },
+  {
+    numero: "18",
+    pregunta: "¿Afectar la imagen nacional?",
+    formGroup: { name: "pregunta18", formControls: ["respuesta"] }
+  },
+  {
+    numero: "19",
+    pregunta: "¿Genera daño ambiental?",
+    formGroup: { name: "pregunta19", formControls: ["respuesta"] }
+  }
 ];
 
 @Component({
-  selector: 'app-identificacion-riesgo',
-  templateUrl: './identificacion-riesgo.component.html',
-  styleUrls: ['./identificacion-riesgo.component.css']
+  selector: "app-identificacion-riesgo",
+  templateUrl: "./identificacion-riesgo.component.html",
+  styleUrls: ["./identificacion-riesgo.component.css"]
 })
 export class IdentificacionRiesgoComponent implements OnInit {
-
-  riesgosGuardados = []
+  riesgosGuardados = [];
   dataSourceRiesgos = new MatTableDataSource<[]>();
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  displayedColumnsRiesgos: string[] = ['riesgo', 'tipo', 'descripcion', 'causas', 'consecuencias', 'escenarioRiesgo'];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  displayedColumnsRiesgos: string[] = [
+    "riesgo",
+    "tipo",
+    "descripcion",
+    "causas",
+    "consecuencias",
+    "escenarioRiesgo"
+  ];
 
   tipoRiesgoActivate = {
     Corrupcion: false,
     Gestion: false,
     Seguridaddigital: false,
     Fisico: false
-  }
+  };
 
-  listaProcesos:string[] = [
-    'Direccionamiento estratégico y horizonte institucional',
-    'Gestión estratégica', 
-    'Gobierno escolar',
-    'Cultura institucional',
-    'Clima escolar',
-    'Relaciones con el entorno',
-    'Diseño pedagógico',
-    'Prácticas pedagógicas',
-    'Gestión de aula',
-    'Seguimiento académico',
-    'Apoyo a la gestión académica',
-    'Administración de planta física y recursos',
-    'Administración de servicios complementarios',
-    'Talento humano',
-    'Apoyo financiero y contable',
-    'Inclusión',
-    'Proyección a la comunidad',
-    'Participación y convivencia',
-    'Prevención de riesgos',
-  ]
-  listaTiposRiesgos:string[] = [];
-  listaCausas:string[] = [];
-  listaConsecuencias:string[] = [];
-  listaAmenazas:string[] = ['Fuego','Daño por agua','Fenomenos climaticos','Inundacion','Perdida de suministro de energia','Falla en el sistema de suministro de agua o aire acondicionado','Radiacion electromagnetica','Radiacion termica','Hurto de equipos, medios o documentos','Divulgacion','Manipulacion con software','Mal fincionamiento del equipo o del software','Saturacion del sistema de informacion','Uso no autorizado del equipo','Uso de software falso o copiado','Procesamiento ilegal de los datos','Error en el uso o abuso de derechos','Falcificacion de derechos'];
-  listaActivos:string[] = ['Información','Hardware','Software','Red','Personal','Instalaciones'];
+  listaProcesos: string[] = [
+    "Direccionamiento estratégico y horizonte institucional",
+    "Gestión estratégica",
+    "Gobierno escolar",
+    "Cultura institucional",
+    "Clima escolar",
+    "Relaciones con el entorno",
+    "Diseño pedagógico",
+    "Prácticas pedagógicas",
+    "Gestión de aula",
+    "Seguimiento académico",
+    "Apoyo a la gestión académica",
+    "Administración de planta física y recursos",
+    "Administración de servicios complementarios",
+    "Talento humano",
+    "Apoyo financiero y contable",
+    "Inclusión",
+    "Proyección a la comunidad",
+    "Participación y convivencia",
+    "Prevención de riesgos"
+  ];
+  listaTiposRiesgos: string[] = [];
+  listaCausas: string[] = [];
+  listaConsecuencias: string[] = [];
+  listaAmenazas: string[] = [
+    "Fuego",
+    "Daño por agua",
+    "Fenomenos climaticos",
+    "Inundacion",
+    "Perdida de suministro de energia",
+    "Falla en el sistema de suministro de agua o aire acondicionado",
+    "Radiacion electromagnetica",
+    "Radiacion termica",
+    "Hurto de equipos, medios o documentos",
+    "Divulgacion",
+    "Manipulacion con software",
+    "Mal fincionamiento del equipo o del software",
+    "Saturacion del sistema de informacion",
+    "Uso no autorizado del equipo",
+    "Uso de software falso o copiado",
+    "Procesamiento ilegal de los datos",
+    "Error en el uso o abuso de derechos",
+    "Falcificacion de derechos"
+  ];
+  listaActivos: string[] = [
+    "Información",
+    "Hardware",
+    "Software",
+    "Red",
+    "Personal",
+    "Instalaciones"
+  ];
   causasPorActivo = {
-    Información: ['Falta de controles de acceso a la informacion', 'Ausencia de soporte de remiciones de casos de estudiantes'],
-    Hardware: ['Susceptivilidad a las variaciones de voltaje','Almacenamiento sin protección','Ausencia de politica formal sobre la utiliizacion de compuutadores portatiles'],
-    Software: ['Ausencia de "terminacion de seción" cuando se abandona la estacion de trabajo','Interfaz de usuario compleja','Ausencia de mecanismos de identificación y autentificación, como la autenticacion de usuario', 'Contraseñas sin protección',  ],
-    Red: ['Conexión deficiente de los cables', 'Conexiones de red publica sin protección', ],
-    Personal: ['Uso incorrecto de software y hardware', 'Entrenamiento insuficiente y/o falta de conciencia acerca de la seguridad', 'Ausencia de politicas para el uso de los mediosde telecomunicaciones y mensajeria'],
-    Instalaciones: ['Ubicación en un area susceptible de inundación', 'Red energetica inestable', 'Ausencia de proteccion fisica de la edificación, puertas y ventanas']
-  }
-  listaCausasSeguridadDigital:string[] = [];
+    Información: [
+      "Falta de controles de acceso a la informacion",
+      "Ausencia de soporte de remiciones de casos de estudiantes"
+    ],
+    Hardware: [
+      "Susceptivilidad a las variaciones de voltaje",
+      "Almacenamiento sin protección",
+      "Ausencia de politica formal sobre la utiliizacion de compuutadores portatiles"
+    ],
+    Software: [
+      'Ausencia de "terminacion de seción" cuando se abandona la estacion de trabajo',
+      "Interfaz de usuario compleja",
+      "Ausencia de mecanismos de identificación y autentificación, como la autenticacion de usuario",
+      "Contraseñas sin protección"
+    ],
+    Red: [
+      "Conexión deficiente de los cables",
+      "Conexiones de red publica sin protección"
+    ],
+    Personal: [
+      "Uso incorrecto de software y hardware",
+      "Entrenamiento insuficiente y/o falta de conciencia acerca de la seguridad",
+      "Ausencia de politicas para el uso de los mediosde telecomunicaciones y mensajeria"
+    ],
+    Instalaciones: [
+      "Ubicación en un area susceptible de inundación",
+      "Red energetica inestable",
+      "Ausencia de proteccion fisica de la edificación, puertas y ventanas"
+    ]
+  };
+  listaCausasSeguridadDigital: string[] = [];
 
   formParcialIdentificacionRiesgo = new FormGroup({
-    proceso : new FormControl('',Validators.required),
-    riesgo : new FormControl('',Validators.required),
-    accionOmicion : new FormControl('',Validators.required),
-    usoPoder : new FormControl('',Validators.required),
-    desviarGestionPublico : new FormControl('',Validators.required),
-    beneficioPrivado : new FormControl('',Validators.required),
-    tipo : new FormControl('',Validators.required),
-    activo : new FormControl('',Validators.required),
-    amenaza : new FormControl('',Validators.required),
-    escenarioRiesgo : new FormControl(''),
-    descripcion : new FormControl('')
-  })
+    proceso: new FormControl("", Validators.required),
+    riesgo: new FormControl("", Validators.required),
+    accionOmicion: new FormControl("", Validators.required),
+    usoPoder: new FormControl("", Validators.required),
+    desviarGestionPublico: new FormControl("", Validators.required),
+    beneficioPrivado: new FormControl("", Validators.required),
+    tipo: new FormControl("", Validators.required),
+    activo: new FormControl("", Validators.required),
+    amenaza: new FormControl("", Validators.required),
+    escenarioRiesgo: new FormControl(""),
+    descripcion: new FormControl("")
+  });
 
   formCausa = new FormGroup({
-    causa : new FormControl('',Validators.required)
-  })
+    causa: new FormControl("", Validators.required)
+  });
   formConsecuencia = new FormGroup({
-    consecuencia : new FormControl('',Validators.required)
-  })
+    consecuencia: new FormControl("", Validators.required)
+  });
 
   formularioNivelesCalificarImpactoCorrupcion = new FormGroup({});
   riesgosCorrupcion = ELEMENT_DATA_CORRUPCION;
-  displayedColumnsCorrupcion: string[] = ['numero', 'pregunta', 'respuesta'];
-  nivelImpactoCorrupcion : string = "";
-  preguntasTerminadasCorrupccion : boolean;
+  displayedColumnsCorrupcion: string[] = ["numero", "pregunta", "respuesta"];
+  nivelImpactoCorrupcion: string = "";
+  preguntasTerminadasCorrupccion: boolean;
 
   constructor(private fb: FormBuilder) {
-    this.buildForm(this.formularioNivelesCalificarImpactoCorrupcion, ELEMENT_DATA_CORRUPCION);
+    this.buildForm(
+      this.formularioNivelesCalificarImpactoCorrupcion,
+      ELEMENT_DATA_CORRUPCION
+    );
   }
 
   ngOnInit() {
     this.dataSourceRiesgos.paginator = this.paginator;
-    
   }
 
-  buildForm(formGroup:FormGroup, dataTable: any){
+  buildForm(formGroup: FormGroup, dataTable: any) {
     dataTable.forEach(row => {
       let controls = {};
       row.formGroup.formControls.forEach(control => {
-        controls[control] = new FormControl('', Validators.required);
+        controls[control] = new FormControl("", Validators.required);
       });
 
-      formGroup.addControl(row.formGroup.name,this.fb.group(controls));
-      
+      formGroup.addControl(row.formGroup.name, this.fb.group(controls));
     });
   }
 
-  establecerTiposRiesgos(){
-
+  establecerTiposRiesgos() {
     let selectsAcciones = [
-      this.formParcialIdentificacionRiesgo.get('accionOmicion').value,
-      this.formParcialIdentificacionRiesgo.get('usoPoder').value,
-      this.formParcialIdentificacionRiesgo.get('desviarGestionPublico').value,
-      this.formParcialIdentificacionRiesgo.get('beneficioPrivado').value
+      this.formParcialIdentificacionRiesgo.get("accionOmicion").value,
+      this.formParcialIdentificacionRiesgo.get("usoPoder").value,
+      this.formParcialIdentificacionRiesgo.get("desviarGestionPublico").value,
+      this.formParcialIdentificacionRiesgo.get("beneficioPrivado").value
     ];
 
-    let flagShow = true
-    let flagCorrupcion = true
+    let flagShow = true;
+    let flagCorrupcion = true;
     for (let index = 0; index < selectsAcciones.length; index++) {
       const accion = selectsAcciones[index];
-      if(accion == "" || accion == null){
+      if (accion == "" || accion == null) {
         flagShow = false;
         break;
-      }else if(accion == "No"){
+      } else if (accion == "No") {
         flagCorrupcion = false;
       }
     }
 
     if (flagShow) {
       if (flagCorrupcion) {
-        this.resetTipoRiesgoActivate()
+        this.resetTipoRiesgoActivate();
         this.tipoRiesgoActivate.Corrupcion = true;
-        this.listaTiposRiesgos = ['Corrupcion'];
-        this.formParcialIdentificacionRiesgo.get('tipo').setValue('Corrupcion')
-      }else{
-        this.resetTipoRiesgoActivate()
-        this.listaTiposRiesgos = ['Gestion', 'Fisico', 'Seguridad digital']
+        this.listaTiposRiesgos = ["Corrupcion"];
+        this.formParcialIdentificacionRiesgo.get("tipo").setValue("Corrupcion");
+      } else {
+        this.resetTipoRiesgoActivate();
+        this.listaTiposRiesgos = ["Gestion", "Fisico", "Seguridad digital"];
       }
     }
-    
   }
 
-  agregarCausa(){
+  agregarCausa() {
     let causa = this.formCausa.value.causa;
     if (Array.isArray(causa)) {
-      this.listaCausas = this.listaCausas.concat(causa)
-      causa.forEach( c => {
-        this.listaCausasSeguridadDigital = this.listaCausasSeguridadDigital.filter( element => {return element != c})
+      this.listaCausas = this.listaCausas.concat(causa);
+      causa.forEach(c => {
+        this.listaCausasSeguridadDigital = this.listaCausasSeguridadDigital.filter(
+          element => {
+            return element != c;
+          }
+        );
       });
-    }else{
+    } else {
       this.listaCausas.push(causa);
     }
     this.formCausa.reset();
   }
-  eliminarCausa(causa){
-    this.listaCausas = this.listaCausas.filter( element => {return element != causa});
+  eliminarCausa(causa) {
+    this.listaCausas = this.listaCausas.filter(element => {
+      return element != causa;
+    });
   }
 
-  agregarConsecuencia(){
+  agregarConsecuencia() {
     this.listaConsecuencias.push(this.formConsecuencia.value.consecuencia);
     this.formConsecuencia.reset();
   }
-  eliminarConsecuencia(consecuencia){
-    this.listaConsecuencias = this.listaConsecuencias.filter( element => {return element != consecuencia});
+  eliminarConsecuencia(consecuencia) {
+    this.listaConsecuencias = this.listaConsecuencias.filter(element => {
+      return element != consecuencia;
+    });
   }
 
-  cambiarParametrosCausaConsecuencia(tipoRiesgo: string){
-    this.resetTipoRiesgoActivate()
-    console.log(this.tipoRiesgoActivate)
-    this.tipoRiesgoActivate[tipoRiesgo.replace(' ','')] = true;
-    console.log(this.tipoRiesgoActivate)
-    
+  cambiarParametrosCausaConsecuencia(tipoRiesgo: string) {
+    this.resetTipoRiesgoActivate();
+    this.tipoRiesgoActivate[tipoRiesgo.replace(" ", "")] = true;
+
     switch (tipoRiesgo) {
-      case 'Seguridad digital':
-        this.formParcialIdentificacionRiesgo.get('activo').enable();
-        this.formParcialIdentificacionRiesgo.get('amenaza').enable();
-        this.formParcialIdentificacionRiesgo.get('activo').setValue('');
-        this.formParcialIdentificacionRiesgo.get('amenaza').setValue('');
-        this.formParcialIdentificacionRiesgo.get('escenarioRiesgo').disable();
+      case "Seguridad digital":
+        this.formParcialIdentificacionRiesgo.get("activo").enable();
+        this.formParcialIdentificacionRiesgo.get("amenaza").enable();
+        this.formParcialIdentificacionRiesgo.get("activo").setValue("");
+        this.formParcialIdentificacionRiesgo.get("amenaza").setValue("");
+        this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").disable();
         break;
-    
-      case 'Fisico':
-        this.formParcialIdentificacionRiesgo.get('escenarioRiesgo').enable();
-        this.formParcialIdentificacionRiesgo.get('activo').disable();
-        this.formParcialIdentificacionRiesgo.get('amenaza').disable();
+
+      case "Fisico":
+        this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").enable();
+        this.formParcialIdentificacionRiesgo.get("activo").disable();
+        this.formParcialIdentificacionRiesgo.get("amenaza").disable();
         break;
 
       default:
-        this.formParcialIdentificacionRiesgo.get('activo').disable();
-        this.formParcialIdentificacionRiesgo.get('amenaza').disable();
-        this.formParcialIdentificacionRiesgo.get('escenarioRiesgo').disable();
+        this.formParcialIdentificacionRiesgo.get("activo").disable();
+        this.formParcialIdentificacionRiesgo.get("amenaza").disable();
+        this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").disable();
         break;
     }
-
   }
-  private resetTipoRiesgoActivate(){
-    for(let i in this.tipoRiesgoActivate)
-      this.tipoRiesgoActivate[i] = false;
-      this.listaCausas = [];
-      this.listaConsecuencias = [];
-      this.listaCausasSeguridadDigital = []
+  private resetTipoRiesgoActivate() {
+    for (let i in this.tipoRiesgoActivate) this.tipoRiesgoActivate[i] = false;
+    this.listaCausas = [];
+    this.listaConsecuencias = [];
+    this.listaCausasSeguridadDigital = [];
   }
 
-  cargarCausasRiesgoSeguridadDigital(activo: string){
+  cargarCausasRiesgoSeguridadDigital(activo: string) {
     this.listaCausas = [];
     this.listaCausasSeguridadDigital = this.causasPorActivo[activo];
   }
 
-  calcularImpactoCorrupcion(){
+  calcularImpactoCorrupcion() {
     let respuestas = this.formularioNivelesCalificarImpactoCorrupcion.value;
     let flagDone = true;
     let respuestasAfirmativas = 0;
-    this.nivelImpactoCorrupcion = ""
-    
-    console.log(flagDone)
+    this.nivelImpactoCorrupcion = "";
+
     for (let i in respuestas) {
       const respuesta = respuestas[i];
-      console.log(respuesta.respuesta)
       if (respuesta.respuesta == "") {
-        console.log("Pasa a falso flagdone")
         flagDone = false;
         this.preguntasTerminadasCorrupccion = false;
         break;
-      }else if(respuesta.respuesta == "si"){
-        respuestasAfirmativas += 1
+      } else if (respuesta.respuesta == "si") {
+        respuestasAfirmativas += 1;
       }
-      console.log(flagDone)
     }
-
-    console.log("Valor final de flagdone: "+flagDone)
 
     if (flagDone) {
-      this.preguntasTerminadasCorrupccion = true
-      if(respuestasAfirmativas > 11){
-        this.nivelImpactoCorrupcion = "Catastrofico"
-      }else if(respuestasAfirmativas > 5){
-        this.nivelImpactoCorrupcion = "Mayor"
-      }else{
-        this.nivelImpactoCorrupcion = "Moderado"
+      this.preguntasTerminadasCorrupccion = true;
+      if (respuestasAfirmativas > 11) {
+        this.nivelImpactoCorrupcion = "Catastrofico";
+      } else if (respuestasAfirmativas > 5) {
+        this.nivelImpactoCorrupcion = "Mayor";
+      } else {
+        this.nivelImpactoCorrupcion = "Moderado";
       }
     }
-
-    
   }
 
-  guardarRiesgo(){
+  guardarRiesgo() {
     let riesgo = this.formParcialIdentificacionRiesgo.value;
     riesgo.causas = this.listaCausas;
     riesgo.consecuencias = this.listaConsecuencias;
-    if(this.nivelImpactoCorrupcion != ""){
+    if (this.nivelImpactoCorrupcion != "") {
       riesgo.nivelImpacto = {
         preguntas: this.formularioNivelesCalificarImpactoCorrupcion.value,
         resultado: this.nivelImpactoCorrupcion
-      }
+      };
     }
     this.riesgosGuardados.push(riesgo);
     this.dataSourceRiesgos.data = this.riesgosGuardados;
@@ -293,14 +430,10 @@ export class IdentificacionRiesgoComponent implements OnInit {
     this.listaCausasSeguridadDigital = [];
     this.nivelImpactoCorrupcion = "";
     this.preguntasTerminadasCorrupccion = false;
-    for (let i in this.tipoRiesgoActivate){
-      this.tipoRiesgoActivate[i] = false
+    for (let i in this.tipoRiesgoActivate) {
+      this.tipoRiesgoActivate[i] = false;
     }
   }
 
-  guardarRiesgos(){
-    console.log("Esto es lo que guarda la vista identificacion del riesgo")
-    console.log(this.riesgosGuardados)
-  }
-  
+  guardarRiesgos() {}
 }

@@ -100,7 +100,6 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
       .subscribe((res: Res) => {
         this._notificacionService.mostrarNotificacion(res.message, "success");
         const sede = Object.assign(this.formSede.value, { _id: res.data });
-        console.log(sede);
         this.listaSedes.push(sede);
         this.formSede.reset();
       });
