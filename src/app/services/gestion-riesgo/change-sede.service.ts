@@ -23,4 +23,10 @@ export class ChangeSedeService {
     this._fuenteSedes.next(this.idSede);
     localStorage.setItem("idSede", idSede);
   }
+
+  logOut() {
+    this._fuenteSedes.next(undefined);
+    this.idSede = undefined;
+    localStorage.removeItem("idSede");
+  }
 }

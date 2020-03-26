@@ -1,33 +1,27 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "src/app/services/login/auth.service";
 
 @Component({
-  selector: 'app-header-gestionRiesgo',
-  templateUrl: './header-gestionRiesgo.component.html',
-  styleUrls: ['./header-gestionRiesgo.component.css']
+  selector: "app-header-gestionRiesgo",
+  templateUrl: "./header-gestionRiesgo.component.html",
+  styleUrls: ["./header-gestionRiesgo.component.css"]
 })
 export class HeaderGestionRiesgoComponent implements OnInit, OnDestroy {
-
   title: string;
 
-  constructor(private router : Router) {
-  }
+  constructor(private router: Router, private _authService: AuthService) {}
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
-  ngOnDestroy(){
-    
-  }
+  ngOnDestroy() {}
 
-  changeTitle(titleButton: string){
-    localStorage.setItem('title',titleButton);
+  changeTitle(titleButton: string) {
+    localStorage.setItem("title", titleButton);
     this.title = titleButton;
   }
 
+  cerrarSesion() {
+    this._authService.logOut();
+  }
 }

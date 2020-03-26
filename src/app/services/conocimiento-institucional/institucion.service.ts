@@ -54,4 +54,9 @@ export class InstitucionService {
       data
     );
   }
+
+  logOut() {
+    this.institucion = undefined;
+    this._fuenteInstitucion.next(defaultInstitucion);
+  }
 }

@@ -5,7 +5,16 @@
 
         <div class="row justify-content-between">
           <div class="col-auto">
-            <span>GRIE</span>
+            <div class="row justify-content-around">
+              <button class="font-weight-bold mr-3" mat-icon-button
+                [routerLink]="['/conocimientoInstitucional/identificacionSede']" routerLinkActive="router-link-active">
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <button class="font-weight-bold ml-3" mat-icon-button [routerLink]="['/home']"
+                routerLinkActive="router-link-active">
+                <span>GRIE</span>
+              </button>
+            </div>
           </div>
           <div class="col-auto">
             <div class="row justify-content-around">
@@ -41,9 +50,9 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
+              <button mat-menu-item (click)="cerrarSesion()">
                 <mat-icon>exit_to_app</mat-icon>
-                <span>Salir</span>
+                <span>Cerrar sesión</span>
               </button>
             </mat-menu>
           </div>
@@ -52,9 +61,9 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="container-fluid" class="container-toolbar-under">
-    <div class="row justify-content-around  mat-elevation-z4" >
-      <div class="col-3 text-center mt-2 p-0" >
-        
+    <div class="row justify-content-around  mat-elevation-z4">
+      <div class="col-3 text-center mt-2 p-0">
+
       </div>
       <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
         <mat-toolbar color="primary" class="toolbar-under">

@@ -75,4 +75,9 @@ export class SedeService {
       true
     );
   }
+
+  logOut() {
+    this.sedes = [];
+    this._fuenteSedes.next(this.sedes);
+  }
 }

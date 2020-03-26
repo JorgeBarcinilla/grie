@@ -75,7 +75,9 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.subscribeInstitucion.unsubscribe();
-    this.subscribeSede.unsubscribe();
+    if (this.subscribeSede) {
+      this.subscribeSede.unsubscribe();
+    }
     if (this.subscribeEliminarSede) {
       this.subscribeEliminarSede.unsubscribe();
     }

@@ -45,4 +45,9 @@ export class LineamientoPoliticaRiesgoService {
       data
     );
   }
+
+  logOut() {
+    this._fuenteLineamiento.next(undefined);
+    this.lineamiento = undefined;
+  }
 }
