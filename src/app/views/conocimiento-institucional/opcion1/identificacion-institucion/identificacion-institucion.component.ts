@@ -6,6 +6,7 @@ import { SedeService } from "src/app/services/conocimiento-institucional/sede.se
 import { InstitucionService } from "src/app/services/conocimiento-institucional/institucion.service";
 import { Institucion } from "src/app/models/institucion.model";
 import { Subscription } from "rxjs";
+import { NotificacionService } from "src/app/services/notification/notification.service";
 
 let ID_INSTITUCION: string;
 
@@ -47,7 +48,8 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
 
   constructor(
     private _sedeService: SedeService,
-    private _institucionService: InstitucionService
+    private _institucionService: InstitucionService,
+    private _notificacionService: NotificacionService
   ) {}
 
   ngOnInit() {
@@ -96,8 +98,9 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
     this.subscribeGuardarSede = this._sedeService
       .guardarSede(data)
       .subscribe((res: Res) => {
-        console.log(res);
-        const sede = Object.assign(this.formSede.value, { id: res.data });
+        this._notificacionService.mostrarNotificacion(res.message, "success");
+        const sede = Object.assign(this.formSede.value, { _id: res.data });
+        console.log(sede);
         this.listaSedes.push(sede);
         this.formSede.reset();
       });
@@ -105,9 +108,9 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
 
   eliminarSede(sede: Sede) {
     this.subscribeEliminarSede = this._sedeService
-      .eliminarSede(sede)
+      .eliminarSede(sede._id)
       .subscribe((res: Res) => {
-        console.log(res);
+        this._notificacionService.mostrarNotificacion(res.message, "danger");
         this.listaSedes = this.listaSedes.filter(element => {
           return element != sede;
         });
@@ -119,7 +122,7 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
     this.subscribeActualizarInstitucion = this._institucionService
       .actualizarInstitucion(ID_INSTITUCION, institucion)
       .subscribe((res: Res) => {
-        console.log(res);
+        this._notificacionService.mostrarNotificacion(res.message, "info");
       });
   }
 }

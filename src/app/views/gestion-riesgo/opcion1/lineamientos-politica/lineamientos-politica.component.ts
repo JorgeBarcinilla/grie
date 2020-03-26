@@ -7,6 +7,7 @@ import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.s
 import { LineamientoPoliticaRiesgoService } from "src/app/services/gestion-riesgo/lineamiento-politica-riesgo.service";
 import { Res } from "src/app/models/res.model";
 import { LineamientoPoliticaRiesgo } from "src/app/models/lineamientoPoliticaRiesgo.model";
+import { NotificacionService } from "src/app/services/notification/notification.service";
 
 export interface DataElementNivelesProbabilidad {
   descriptor: string;
@@ -282,7 +283,8 @@ export class LineamientosPoliticaComponent implements OnInit {
   constructor(
     private _operacionesTabla: OperacionesTablaService,
     private _changeSedeService: ChangeSedeService,
-    private _lineamientosPoliticaRiesgoService: LineamientoPoliticaRiesgoService
+    private _lineamientosPoliticaRiesgoService: LineamientoPoliticaRiesgoService,
+    private _notificacionService: NotificacionService
   ) {
     this._operacionesTabla.buildForm(
       this.formularioNivelesCalificarProbabilidad,
@@ -479,13 +481,13 @@ export class LineamientosPoliticaComponent implements OnInit {
       this._lineamientosPoliticaRiesgoService
         .actualizarLineamiento(this.idLineamiento, data)
         .subscribe((res: Res) => {
-          console.log(res);
+          this._notificacionService.mostrarNotificacion(res.message, "info");
         });
     } else {
       this._lineamientosPoliticaRiesgoService
         .guardarLineamiento(data)
         .subscribe((res: Res) => {
-          console.log(res);
+          this._notificacionService.mostrarNotificacion(res.message, "success");
         });
     }
   }

@@ -13,6 +13,7 @@ import { Res } from "src/app/models/res.model";
 import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { NotificacionService } from "src/app/services/notification/notification.service";
 
 @Component({
   selector: "app-identificacion-sede",
@@ -91,7 +92,8 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private _sedeService: SedeService,
     private _changeSedeService: ChangeSedeService,
-    private route: Router
+    private route: Router,
+    private _notificacionService: NotificacionService
   ) {}
 
   ngOnInit() {
@@ -196,12 +198,11 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     this.subcribeActualizarSedes = this._sedeService
       .actualizarSede(this.idSedeSeleccionada, sede)
       .subscribe((res: Res) => {
-        console.log(res);
+        this._notificacionService.mostrarNotificacion(res.message, "info");
       });
   }
 
   gestionRiesgoById(): void {
-    console.log(this.idSedeSeleccionada);
     this._changeSedeService.insertarSede(this.idSedeSeleccionada);
     this.route.navigate(["/gestionRiesgo/lineamientosPolitica"]);
   }

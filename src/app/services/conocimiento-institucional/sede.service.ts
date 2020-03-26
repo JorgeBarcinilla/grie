@@ -68,9 +68,9 @@ export class SedeService {
     );
   }
 
-  eliminarSede(data: Sede) {
+  eliminarSede(idSede: string) {
     return this._globalService.getQuery(
-      "/campus/delete/" + data._id,
+      "/campus/delete/" + idSede,
       "delete",
       true
     );

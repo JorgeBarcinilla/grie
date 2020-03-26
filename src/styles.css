@@ -1,29 +1,39 @@
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
 
-html, body { height: 100%; overflow-x: hidden; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 button:focus {
-    outline: none;
-  }
- 
+  outline: none;
+}
 
 
-/*SCROLL MODIFICADO*/  
+
+/*SCROLL MODIFICADO*/
 
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
 }
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #b3b3b3;
@@ -37,43 +47,66 @@ button:focus {
 
 
 /* COLORES PARA COMPONENTES */
-.color-success{
+.color-success {
   background: rgb(52, 158, 49) !important;
   color: white !important;
 }
 
-.color-danger{
+.color-danger {
   background: rgb(199, 42, 42) !important;
   color: white !important;
 }
 
-.color-warn{
+.color-warn {
   background: rgb(197, 158, 31) !important;
   color: white !important;
 }
 
-.color-info{
+.color-info {
   background: rgb(36, 147, 190) !important;
   color: white !important;
 }
 
 /* COLORES PARA ICONOS */
-.icon-color-success{
+.icon-color-success {
   color: rgb(52, 158, 49) !important;
 }
 
-.icon-color-danger{
+.icon-color-danger {
   color: rgb(199, 42, 42) !important;
 }
 
-.icon-color-warn{
+.icon-color-warn {
   color: rgb(197, 158, 31) !important;
 }
 
-.icon-color-info{
+.icon-color-info {
   color: rgb(36, 147, 190) !important;
 }
 
+.snack-bar-warn {
+  color: #ffffff;
+  background-color: #ffa600;
+}
+
+.snack-bar-danger {
+  color: #ffffff;
+  background-color: #ff3737;
+}
+
+.snack-bar-info {
+  color: #ffffff;
+  background-color: #3899f3;
+}
+
+.snack-bar-success {
+  color: #ffffff;
+  background-color: #40e471;
+}
+
+.mat-simple-snackbar-action {
+  color: #ffffff !important;
+}
 
 /*TOPIC CONTAINER*/
 .label-title-div {
@@ -92,22 +125,23 @@ button:focus {
   background-color: white;
   font-size: bold;
 }
+
 .div-list {
   border: 2px solid rgb(78, 78, 78);
   border-radius: 5px;
   border-color: rgb(78, 78, 78);
-  transition: 0.5s  ease all;
+  transition: 0.5s ease all;
   -moz-transition: 0.5s ease all;
-  -webkit-transition: 0.5s  ease all;
+  -webkit-transition: 0.5s ease all;
 }
 
-.container-chips{
-  height: 120px; 
-  max-height: 120px; 
+.container-chips {
+  height: 120px;
+  max-height: 120px;
   overflow-y: auto;
 }
 
-.input-disabled{
+.input-disabled {
   pointer-events: none;
-  
+
 }
