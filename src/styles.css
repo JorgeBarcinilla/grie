@@ -13,7 +13,15 @@ button:focus {
   outline: none;
 }
 
+td {
+  padding-top: 10px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
 
+th {
+  padding-right: 10px !important;
+}
 
 /*SCROLL MODIFICADO*/
 

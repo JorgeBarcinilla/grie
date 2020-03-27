@@ -1,8 +1,7 @@
 <div class="container-fluid">
-  <app-card-title
-    title="POLITICA DE ADMINISTRACIÓN DEL RIESGO"
-    info="Es la declaración de la dirección y las intenciones generales de una organización con respecto a la gestión del riesgo (NTC ISO31000 Numeral 2.4)."
-  ></app-card-title>
+  <app-card-title title="POLITICA DE ADMINISTRACIÓN DEL RIESGO"
+    info="Es la declaración de la dirección y las intenciones generales de una organización con respecto a la gestión del riesgo (NTC ISO31000 Numeral 2.4).">
+  </app-card-title>
   <form [formGroup]="formularioLineamientosPoliticaRiesgo" autocomplete="off">
     <div class="row justify-content-lg-around  mt-3">
       <div class="col-md-6 col-lg-4">
@@ -15,11 +14,8 @@
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
-                  <textarea
-                    formControlName="terminosDefiniciones"
-                    matInput
-                    placeholder="Aqui los terminos y definiciones"
-                  ></textarea>
+                  <textarea formControlName="terminosDefiniciones" matInput
+                    placeholder="Aqui los terminos y definiciones"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -40,11 +36,7 @@
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
-                  <textarea
-                    formControlName="objetivo"
-                    matInput
-                    placeholder="Aqui el objetivo"
-                  ></textarea>
+                  <textarea formControlName="objetivo" matInput placeholder="Aqui el objetivo"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -67,11 +59,7 @@
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
-                  <textarea
-                    formControlName="alcance"
-                    matInput
-                    placeholder="Aqui los alcances"
-                  ></textarea>
+                  <textarea formControlName="alcance" matInput placeholder="Aqui los alcances"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -156,14 +144,10 @@
               Niveles para calificar la probabilidad
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <table
-            mat-table
-            [dataSource]="nivelesProbabilidad"
-            class="mat-elevation-z8"
-          >
+          <table mat-table [dataSource]="nivelesProbabilidad" class="mat-elevation-z8">
             <ng-container matColumnDef="nivel">
-              <th mat-header-cell *matHeaderCellDef>Nivel</th>
-              <td mat-cell *matCellDef="let element">{{ element.nivel }}</td>
+              <th class="text-left" mat-header-cell *matHeaderCellDef>Nivel</th>
+              <td class="text-center font-weight-bold" mat-cell *matCellDef="let element">{{ element.nivel }}</td>
             </ng-container>
 
             <ng-container matColumnDef="descriptor">
@@ -182,11 +166,7 @@
 
             <ng-container matColumnDef="frecuencia">
               <th mat-header-cell *matHeaderCellDef>Frecuencia</th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                [formGroupName]="element.formGroup.name"
-              >
+              <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
                 <mat-form-field>
                   <mat-label>Cantidad</mat-label>
                   <mat-select formControlName="cantidad">
@@ -200,13 +180,7 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                  <input
-                    formControlName="numeroVeces"
-                    matInput
-                    type="number"
-                    placeholder="Numero de veces"
-                    min="1"
-                  />
+                  <input formControlName="numeroVeces" matInput type="number" placeholder="Numero de veces" min="1" />
                 </mat-form-field>
 
                 <mat-form-field>
@@ -221,9 +195,7 @@
                     <mat-option value="vez en los ultimos cinco años">
                       vez en los ultimos cinco años.
                     </mat-option>
-                    <mat-option
-                      value="No se ha presentado en los ultimos cinco años"
-                    >
+                    <mat-option value="No se ha presentado en los ultimos cinco años">
                       No se ha presentado en los ultimos cinco años
                     </mat-option>
                   </mat-select>
@@ -231,24 +203,17 @@
               </td>
             </ng-container>
 
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedColumnsProbabilidad"
-            ></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: displayedColumnsProbabilidad"
-            ></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsProbabilidad"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsProbabilidad"></tr>
           </table>
         </mat-expansion-panel>
       </div>
     </div>
   </form>
 
-  <app-card-title
-    title="NIVELES PARA CALIFICAR EL IMPACTO"
-    info="Se debe tener en cuenta que el riesgo se puede calificar según su nivel de impacto, clasificándose en alguno de los siguientes: insignificante, menor, moderado, mayor y catastrófico."
-  ></app-card-title>
+  <app-card-title title="NIVELES PARA CALIFICAR EL IMPACTO"
+    info="Se debe tener en cuenta que el riesgo se puede calificar según su nivel de impacto, clasificándose en alguno de los siguientes: insignificante, menor, moderado, mayor y catastrófico.">
+  </app-card-title>
 
   <div class="row justify-content-center mt-2">
     <mat-form-field appearance="outline">
@@ -272,11 +237,7 @@
             <th class="text-center" mat-header-cell *matHeaderCellDef>
               Impacto
             </th>
-            <td
-              class="text-center font-weight-bold"
-              mat-cell
-              *matCellDef="let element"
-            >
+            <td class="text-center font-weight-bold" mat-cell *matCellDef="let element">
               {{ element.impacto }}
             </td>
           </ng-container>
@@ -292,26 +253,14 @@
             <th class="w-25 text-center" mat-header-cell *matHeaderCellDef>
               Porcentaje de afectación
             </th>
-            <td
-              class="text-center"
-              mat-cell
-              *matCellDef="let element"
-              [formGroupName]="element.formGroup.name"
-            >
-              <ng5-slider
-                [value]="minValue"
-                [highValue]="maxValue"
-                formControlName="porcentajeAfectacion"
-                [options]="optionsSlider"
-              ></ng5-slider>
+            <td class="text-center" mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <ng5-slider [value]="minValue" [highValue]="maxValue" formControlName="porcentajeAfectacion"
+                [options]="optionsSlider"></ng5-slider>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumnsFisico"></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: displayedColumnsFisico"
-          ></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsFisico"></tr>
         </table>
       </div>
     </div>
@@ -324,11 +273,7 @@
             <th class="text-center" mat-header-cell *matHeaderCellDef>
               Impacto
             </th>
-            <td
-              class="text-center font-weight-bold"
-              mat-cell
-              *matCellDef="let element"
-            >
+            <td class="text-center font-weight-bold" mat-cell *matCellDef="let element">
               {{ element.impacto }}
             </td>
           </ng-container>
@@ -344,31 +289,17 @@
             <th class="w-25 text-center" mat-header-cell *matHeaderCellDef>
               Tiempo de interrupcion
             </th>
-            <td
-              class="text-center"
-              mat-cell
-              *matCellDef="let element"
-              [formGroupName]="element.formGroup.name"
-            >
+            <td class="text-center" mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               Por mas de
               <mat-form-field>
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Numero de veces"
-                  min="1"
-                  formControlName="numeroVeces"
-                />
+                <input matInput type="number" placeholder="Numero de veces" min="1" formControlName="numeroVeces" />
               </mat-form-field>
               horas
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumnsGestion"></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: displayedColumnsGestion"
-          ></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsGestion"></tr>
         </table>
       </div>
     </div>
@@ -430,18 +361,10 @@
 </form> -->
   <div class="row justify-content-center mb-3" *ngIf="isSeguridadDigital">
     <div class="col-lg-8">
-      <table
-        mat-table
-        [dataSource]="riesgosSeguridadDigital"
-        class="mat-elevation-z8"
-      >
+      <table mat-table [dataSource]="riesgosSeguridadDigital" class="mat-elevation-z8">
         <ng-container matColumnDef="impacto">
           <th class="text-center" mat-header-cell *matHeaderCellDef>Impacto</th>
-          <td
-            class="text-center  font-weight-bold"
-            mat-cell
-            *matCellDef="let element"
-          >
+          <td class="text-center  font-weight-bold" mat-cell *matCellDef="let element">
             {{ element.impacto }}
           </td>
         </ng-container>
@@ -453,23 +376,13 @@
           <td mat-cell *matCellDef="let element">{{ element.descriptor }}</td>
         </ng-container>
 
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displayedColumnsSeguridadDigital"
-        ></tr>
-        <tr
-          mat-row
-          *matRowDef="let row; columns: displayedColumnsSeguridadDigital"
-        ></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSeguridadDigital"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSeguridadDigital"></tr>
       </table>
     </div>
   </div>
   <div class="row justify-content-center mb-3">
-    <button
-      color="accent"
-      mat-raised-button
-      (click)="guardarLinemientosPolitica()"
-    >
+    <button color="accent" mat-raised-button (click)="guardarLinemientosPolitica()">
       Guardar
     </button>
   </div>
