@@ -7,17 +7,7 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./analisis-riesgo.component.css"]
 })
 export class AnalisisRiesgoComponent implements OnInit {
-  formularioAnalisisRiesgo = new FormGroup({
-    //DETERMINAR PROBABILIDAD
-    determinarProbabilidad: new FormControl(""),
-
-    //ESTIMAR RIESGO INICIAL
-    estimarRiesgoInicial: new FormGroup({})
-  });
-
   constructor() {}
 
   ngOnInit() {}
-
-  guardarAnalisisRiesgo() {}
 }

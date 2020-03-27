@@ -11,4 +11,5 @@ export interface Riesgo {
   causas: [string];
   concecuencias: [string];
   nivelImpacto?: string;
+  probabilidad?: string;
 }

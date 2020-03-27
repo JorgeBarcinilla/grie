@@ -1,27 +1,23 @@
 <div class="container-fluid h-100">
-  <app-card-title 
-    title="ANALISIS DEL RIESGO"
+  <app-card-title title="ANALISIS DEL RIESGO"
     info="Se determina la probabilidad de ocurrencia del riesgo bajo los criterios de frecuencia o factibilidad, y sus consecuencias o nivel de impacto para estimar el riesgo inicial o inherente.">
   </app-card-title>
-    <div class="row justify-content-around mb-1" style="height: 99%;">
-      <div class="col-11 mat-elevation-z4 p-0 pb-1 h-100">
-        <mat-tab-group mat-align-tabs="center"  class="h-100"> 
-          <mat-tab label="Determinar probabilidad"  class="h-100">
-            <ng-template matTabContent>
-              <app-determinar-probabilidad [formularioDeterminarProbabilidad]="formularioAnalisisRiesgo.controls.determinarProbabilidad"></app-determinar-probabilidad>
-            </ng-template>
-          </mat-tab>
-          <mat-tab label="Estimar el nivel de riesgo inicial"  class="h-100">
-            <ng-template matTabContent>
-              <app-estimar-riesgo-inicial [formularioEstimarRiesgoInicial]="formularioAnalisisRiesgo.controls.estimarRiesgoInicial"></app-estimar-riesgo-inicial>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
-      <div class="col-lg-1">
-        <div class="row justify-content-center mt-2 mb-3">
-          <button color="accent" mat-raised-button (click)="guardarAnalisisRiesgo()">Guardar</button>
-        </div>
-      </div>
+  <div class="row justify-content-center mb-1" style="height: 99%;">
+    <div class="col-11 mat-elevation-z4 p-0 pb-1 h-100">
+      <mat-tab-group mat-align-tabs="center" class="h-100">
+        <mat-tab label="Determinar probabilidad" class="h-100">
+          <ng-template matTabContent>
+            <app-determinar-probabilidad>
+            </app-determinar-probabilidad>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Estimar el nivel de riesgo inicial" class="h-100">
+          <ng-template matTabContent>
+            <app-estimar-riesgo-inicial>
+            </app-estimar-riesgo-inicial>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+  </div>
 </div>

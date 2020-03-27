@@ -7,8 +7,6 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./estimar-riesgo-inicial.component.css"]
 })
 export class EstimarRiesgoInicialComponent implements OnInit {
-  @Input() formularioEstimarRiesgoInicial: FormGroup;
-
   listaRiesgos = [
     { nombre: "Riesgo 1", probabilidad: "Probable", impacto: "Menor" },
     { nombre: "Riesgo 1", probabilidad: "Probable", impacto: "Menor" },
