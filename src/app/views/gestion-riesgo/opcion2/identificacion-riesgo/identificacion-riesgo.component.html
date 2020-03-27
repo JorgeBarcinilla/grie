@@ -1,14 +1,14 @@
 <div class="container-fluid">
   <div class="row justify-content-between">
     <div class="col-11">
-      <app-card-title title="IDENTIFICACIÓN DEL RIESGO" 
-      info="En esta sección se realiza la identificación del riesgo, a partir de las causas que contribuyen a su origen.Los tipos de riesgos que se manejarán serán los establecidos en la siguiente figura.">
+      <app-card-title title="IDENTIFICACIÓN DEL RIESGO"
+        info="En esta sección se realiza la identificación del riesgo, a partir de las causas que contribuyen a su origen.Los tipos de riesgos que se manejarán serán los establecidos en la siguiente figura.">
       </app-card-title>
     </div>
     <div class="col-1">
-      <app-button-example tooltip="Ver ejemplo de tipos de riesgos"
-      src="./assets/img/guia_identificacion_riesgo.png" label="Tipos de riesgos">
-    </app-button-example>
+      <app-button-example tooltip="Ver ejemplo de tipos de riesgos" src="./assets/img/guia_identificacion_riesgo.png"
+        label="Tipos de riesgos">
+      </app-button-example>
     </div>
   </div>
   <form [formGroup]="formParcialIdentificacionRiesgo" autocomplete="off">
@@ -92,31 +92,34 @@
                   <div class="col-md-6">
                     <mat-form-field class="w-100">
                       <mat-label>Tipo de riesgo</mat-label>
-                      <mat-select formControlName="tipo" (selectionChange)="cambiarParametrosCausaConsecuencia($event.value)">
-                        <mat-option  *ngFor="let tipo of listaTiposRiesgos" value="{{tipo}}">{{tipo}}</mat-option>
+                      <mat-select formControlName="tipo"
+                        (selectionChange)="cambiarParametrosCausaConsecuencia($event.value)">
+                        <mat-option *ngFor="let tipo of listaTiposRiesgos" value="{{tipo}}">{{tipo}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
                   <div class="col-md-6" *ngIf="tipoRiesgoActivate.Fisico">
                     <mat-form-field class="w-100">
-                        <ngx-mat-file-input formControlName="escenarioRiesgo" placeholder="Escenario del riesgo (Solo PDF)" [accept]="'.pdf'"></ngx-mat-file-input>
-                        <mat-icon matSuffix>folder</mat-icon>
+                      <ngx-mat-file-input formControlName="escenarioRiesgo"
+                        placeholder="Escenario del riesgo (Solo PDF)" [accept]="'.pdf'"></ngx-mat-file-input>
+                      <mat-icon matSuffix>folder</mat-icon>
                     </mat-form-field>
                   </div>
                 </div>
               </div>
               <div class="col-md-6" *ngIf="tipoRiesgoActivate.Seguridaddigital">
-                <mat-form-field class="w-100 "  >
+                <mat-form-field class="w-100 ">
                   <mat-label>Amenaza</mat-label>
                   <mat-select formControlName="amenaza">
                     <mat-option *ngFor="let amenaza of listaAmenazas" value="{{amenaza}}">{{amenaza}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-6"  *ngIf="tipoRiesgoActivate.Seguridaddigital">
+              <div class="col-md-6" *ngIf="tipoRiesgoActivate.Seguridaddigital">
                 <mat-form-field class="w-100 ">
                   <mat-label>Activo</mat-label>
-                  <mat-select formControlName="activo" (selectionChange)="cargarCausasRiesgoSeguridadDigital($event.value)">
+                  <mat-select formControlName="activo"
+                    (selectionChange)="cargarCausasRiesgoSeguridadDigital($event.value)">
                     <mat-option *ngFor="let activo of listaActivos" value="{{activo}}">{{activo}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -132,37 +135,41 @@
               <div class="col-md-6 mat-elevation-z1 div-list pt-3 h-100">
                 <div class="label-title-div">Causas</div>
                 <div class="container">
-                  <form [formGroup]="formCausa"  autocomplete="off">
-                  <div class="row justify-content-around">
-                    <div class="col-8">
-                      <mat-form-field class="w-100" *ngIf="tipoRiesgoActivate.Corrupcion || tipoRiesgoActivate.Gestion || tipoRiesgoActivate.Fisico">
-                        <mat-label>Causa</mat-label>
-                        <input formControlName="causa" matInput placeholder="Escriba una causa del riesgo">
-                      </mat-form-field>
-                      <mat-form-field class="w-100 "  *ngIf="tipoRiesgoActivate.Seguridaddigital">
-                        <mat-label>Causa</mat-label>
-                        <mat-select formControlName="causa" multiple>
-                          <mat-option *ngFor="let causa of listaCausasSeguridadDigital" value="{{causa}}">{{causa}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                      <div class="row justify-content-center mt-2" *ngIf="tipoRiesgoActivate.Corrupcion || tipoRiesgoActivate.Gestion || tipoRiesgoActivate.Fisico || tipoRiesgoActivate.Seguridaddigital">
-                        <button color="accent" mat-stroked-button (click)="agregarCausa()" [disabled]="formCausa.invalid">Agregar</button>
+                  <form [formGroup]="formCausa" autocomplete="off">
+                    <div class="row justify-content-around">
+                      <div class="col-8">
+                        <mat-form-field class="w-100"
+                          *ngIf="tipoRiesgoActivate.Corrupcion || tipoRiesgoActivate.Gestion || tipoRiesgoActivate.Fisico">
+                          <mat-label>Causa</mat-label>
+                          <input formControlName="causa" matInput placeholder="Escriba una causa del riesgo">
+                        </mat-form-field>
+                        <mat-form-field class="w-100 " *ngIf="tipoRiesgoActivate.Seguridaddigital">
+                          <mat-label>Causa</mat-label>
+                          <mat-select formControlName="causa" multiple>
+                            <mat-option *ngFor="let causa of listaCausasSeguridadDigital" value="{{causa}}">{{causa}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-4">
+                        <div class="row justify-content-center mt-2"
+                          *ngIf="tipoRiesgoActivate.Corrupcion || tipoRiesgoActivate.Gestion || tipoRiesgoActivate.Fisico || tipoRiesgoActivate.Seguridaddigital">
+                          <button color="accent" mat-stroked-button (click)="agregarCausa()"
+                            [disabled]="formCausa.invalid">Agregar</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
                   <div class="row justify-content-center container-chips">
-                    <mat-chip-list >
-                        <mat-chip color="primary" *ngFor="let chip of listaCausas" selected>
-                            {{chip}}
-                            <button mat-icon-button (click)="eliminarCausa(chip)">
-                                <mat-icon>cancel</mat-icon>
-                            </button>
-                        </mat-chip>
+                    <mat-chip-list>
+                      <mat-chip color="primary" *ngFor="let chip of listaCausas" selected>
+                        {{chip}}
+                        <button mat-icon-button (click)="eliminarCausa(chip)">
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
                     </mat-chip-list>
-                </div>
+                  </div>
                 </div>
               </div>
 
@@ -170,30 +177,33 @@
                 <div class="label-title-div">Concecuencias</div>
                 <div class="container">
                   <form [formGroup]="formConsecuencia" autocomplete="off">
-                  <div class="row justify-content-around"  *ngIf="tipoRiesgoActivate.Corrupcion || tipoRiesgoActivate.Gestion || tipoRiesgoActivate.Fisico || tipoRiesgoActivate.Seguridaddigital">
-                    <div class="col-8">
-                      <mat-form-field class="w-100">
-                        <mat-label>Concecuencia</mat-label>
-                        <input formControlName="consecuencia" matInput placeholder="Escriba una consecuencia del riesgo">
-                      </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                      <div class="row justify-content-center mt-2">
-                        <button color="accent" mat-stroked-button (click)="agregarConsecuencia()" [disabled]="formConsecuencia.invalid">Agregar</button>
+                    <div class="row justify-content-around"
+                      *ngIf="tipoRiesgoActivate.Corrupcion || tipoRiesgoActivate.Gestion || tipoRiesgoActivate.Fisico || tipoRiesgoActivate.Seguridaddigital">
+                      <div class="col-8">
+                        <mat-form-field class="w-100">
+                          <mat-label>Concecuencia</mat-label>
+                          <input formControlName="consecuencia" matInput
+                            placeholder="Escriba una consecuencia del riesgo">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-4">
+                        <div class="row justify-content-center mt-2">
+                          <button color="accent" mat-stroked-button (click)="agregarConsecuencia()"
+                            [disabled]="formConsecuencia.invalid">Agregar</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
                   <div class="row justify-content-center container-chips">
-                    <mat-chip-list >
-                        <mat-chip color="primary" *ngFor="let chip of listaConsecuencias" selected>
-                            {{chip}}
-                            <button mat-icon-button (click)="eliminarConsecuencia(chip)">
-                                <mat-icon>cancel</mat-icon>
-                            </button>
-                        </mat-chip>
+                    <mat-chip-list>
+                      <mat-chip color="primary" *ngFor="let chip of listaConsecuencias" selected>
+                        {{chip}}
+                        <button mat-icon-button (click)="eliminarConsecuencia(chip)">
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
                     </mat-chip-list>
-                </div>
+                  </div>
                 </div>
               </div>
 
@@ -206,33 +216,34 @@
       <div class="row justify-content-center mt-3 mb-3" *ngIf="tipoRiesgoActivate.Corrupcion">
         <div class="col-md-11 col-lg-9 col-xl-8 mat-elevation-z4" id="tableCorrupcion">
           <table mat-table [dataSource]="riesgosCorrupcion">
-    
+
             <ng-container matColumnDef="numero">
               <th mat-header-cell *matHeaderCellDef> N° </th>
               <td class="font-weight-bold" mat-cell *matCellDef="let element"> {{element.numero}} </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="pregunta">
-              <th class="text-center" mat-header-cell *matHeaderCellDef> Pregunta: Si el riesgo de corrupción se materializa podría… </th>
+              <th class="text-center" mat-header-cell *matHeaderCellDef> Pregunta: Si el riesgo de corrupción se
+                materializa podría… </th>
               <td mat-cell *matCellDef="let element"> {{element.pregunta}} </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="respuesta" class="w-25">
               <th mat-header-cell *matHeaderCellDef> Respuesta </th>
               <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-                  <mat-form-field>
-                    <mat-select formControlName="respuesta" (selectionChange)="calcularImpactoCorrupcion()">
-                      <mat-option value="si">
-                        Si
-                      </mat-option>
-                      <mat-option value="no">
-                        No
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                <mat-form-field>
+                  <mat-select formControlName="respuesta" (selectionChange)="calcularImpactoCorrupcion()">
+                    <mat-option value="si">
+                      Si
+                    </mat-option>
+                    <mat-option value="no">
+                      No
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </td>
             </ng-container>
-    
+
             <tr mat-header-row *matHeaderRowDef="displayedColumnsCorrupcion; sticky: true "></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsCorrupcion;"></tr>
           </table>
@@ -251,80 +262,79 @@
             </mat-card-header>
             <mat-card-content class="text-center">
               <h3 class="font-weight-bold" *ngIf="preguntasTerminadasCorrupccion">{{nivelImpactoCorrupcion}}</h3>
-              <small *ngIf="!preguntasTerminadasCorrupccion">Esperando que todas las preguntas sean contestadas...</small>
+              <small *ngIf="!preguntasTerminadasCorrupccion">Esperando que todas las preguntas sean
+                contestadas...</small>
             </mat-card-content>
           </mat-card>
         </div>
       </div>
     </form>
     <div class="row justify-content-center mt-2">
-      <button color="accent" mat-stroked-button (click)="guardarRiesgo()" [disabled]="formParcialIdentificacionRiesgo.invalid" >Agregar</button>
+      <button color="accent" mat-stroked-button (click)="guardarRiesgo()"
+        [disabled]="formParcialIdentificacionRiesgo.invalid">Agregar</button>
     </div>
   </form>
-  <div class="row justify-content-center mt-3">
+  <div class="row justify-content-center mt-3 mb-3">
     <div class="col-12">
-        <table mat-table [dataSource]="dataSourceRiesgos" class="mat-elevation-z8 w-100">
+      <table mat-table [dataSource]="dataSourceRiesgos" class="mat-elevation-z8 w-100">
 
-            <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Position Column -->
-            <ng-container matColumnDef="riesgo">
-              <th mat-header-cell *matHeaderCellDef> Riesgo </th>
-              <td mat-cell *matCellDef="let element"> {{element.riesgo}} </td>
-            </ng-container>
-          
-            <!-- Name Column -->
-            <ng-container matColumnDef="tipo">
-              <th mat-header-cell *matHeaderCellDef> Tipo de riesgo </th>
-              <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
-            </ng-container>
-          
-            <!-- Weight Column -->
-            <ng-container matColumnDef="descripcion">
-              <th mat-header-cell *matHeaderCellDef> Descripcion </th>
-              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-            </ng-container>
-          
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="causas">
-              <th mat-header-cell *matHeaderCellDef> Causas </th>
-                <td mat-cell *matCellDef="let element">
-                    <mat-chip-list >
-                        <mat-chip color="primary" *ngFor="let chip of element.causas" selected>
-                            {{chip}}
-                        </mat-chip>
-                    </mat-chip-list>
-                </td>
-            </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="consecuencias">
-              <th mat-header-cell *matHeaderCellDef> Consecuencias </th>
-                <td mat-cell *matCellDef="let element">
-                    <mat-chip-list >
-                        <mat-chip color="primary" *ngFor="let chip of element.consecuencias" selected>
-                            {{chip}}
-                        </mat-chip>
-                    </mat-chip-list>
-                </td>
-            </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="riesgo">
+          <th mat-header-cell *matHeaderCellDef> Riesgo </th>
+          <td mat-cell *matCellDef="let element"> {{element.riesgo}} </td>
+        </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="escenarioRiesgo">
-              <th mat-header-cell *matHeaderCellDef> Escenario del riesgo </th>
-                <td mat-cell *matCellDef="let element">
-                    <mat-icon></mat-icon>
-                </td>
-            </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumnsRiesgos"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumnsRiesgos;"></tr>
-          </table>
-          <mat-paginator [pageSizeOptions]="[8, 16,24]" showFirstLastButtons></mat-paginator>
+        <!-- Name Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef> Tipo de riesgo </th>
+          <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="causas">
+          <th mat-header-cell *matHeaderCellDef> Causas </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-chip-list>
+              <mat-chip color="primary" *ngFor="let chip of element.causas" selected>
+                {{chip}}
+              </mat-chip>
+            </mat-chip-list>
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="consecuencias">
+          <th mat-header-cell *matHeaderCellDef> Consecuencias </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-chip-list>
+              <mat-chip color="primary" *ngFor="let chip of element.consecuencias" selected>
+                {{chip}}
+              </mat-chip>
+            </mat-chip-list>
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="escenarioRiesgo">
+          <th mat-header-cell *matHeaderCellDef> Escenario del riesgo </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon></mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsRiesgos"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsRiesgos;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[8, 16,24]" showFirstLastButtons></mat-paginator>
     </div>
-</div>
-<div class="row justify-content-center mt-2 mb-3">
-  <button color="accent" mat-raised-button (click)="guardarRiesgos()">Guardar</button>
-</div>
+  </div>
 </div>

@@ -25,8 +25,8 @@ export class ChangeSedeService {
   }
 
   logOut() {
+    localStorage.removeItem("idSede");
     this._fuenteSedes.next(undefined);
     this.idSede = undefined;
-    localStorage.removeItem("idSede");
   }
 }

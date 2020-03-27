@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { ImageExampleComponent } from "src/app/components/utils/image-example/image-example.component";
 import { MatDialog, MatTableDataSource, MatPaginator } from "@angular/material";
 import { MostrarEjemplosService } from "src/app/helpers/mostrar-ejemplos.service";
@@ -8,6 +8,12 @@ import {
   Validators,
   FormBuilder
 } from "@angular/forms";
+import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
+import { NotificacionService } from "src/app/services/notification/notification.service";
+import { IdentificacionRiesgoService } from "src/app/services/gestion-riesgo/identificacion-riesgo.service";
+import { Subscription } from "rxjs";
+import { Riesgo } from "src/app/models/identificacionRiesgo.model";
+import { Res } from "src/app/models/res.model";
 
 export interface DataElementRiesgosCorrupcion {
   numero: string;
@@ -123,7 +129,11 @@ const ELEMENT_DATA_CORRUPCION: DataElementRiesgosCorrupcion[] = [
   templateUrl: "./identificacion-riesgo.component.html",
   styleUrls: ["./identificacion-riesgo.component.css"]
 })
-export class IdentificacionRiesgoComponent implements OnInit {
+export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
+  idSede: string;
+  //idRiesgo: string;
+  //esActualizar: boolean;
+
   riesgosGuardados = [];
   dataSourceRiesgos = new MatTableDataSource<[]>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -255,7 +265,15 @@ export class IdentificacionRiesgoComponent implements OnInit {
   nivelImpactoCorrupcion: string = "";
   preguntasTerminadasCorrupccion: boolean;
 
-  constructor(private fb: FormBuilder) {
+  subscribeIdSede: Subscription;
+  subscribeRiesgos: Subscription;
+
+  constructor(
+    private fb: FormBuilder,
+    private _changeSedeService: ChangeSedeService,
+    private _identificacionRiesgoRiesgoService: IdentificacionRiesgoService,
+    private _notificacionService: NotificacionService
+  ) {
     this.buildForm(
       this.formularioNivelesCalificarImpactoCorrupcion,
       ELEMENT_DATA_CORRUPCION
@@ -264,6 +282,30 @@ export class IdentificacionRiesgoComponent implements OnInit {
 
   ngOnInit() {
     this.dataSourceRiesgos.paginator = this.paginator;
+    this.subscribeIdSede = this._changeSedeService
+      .obtenerIdSede()
+      .subscribe((idSede: string) => {
+        this.idSede = idSede;
+        this.subscribeRiesgos = this._identificacionRiesgoRiesgoService
+          .obtenerRiesgos(this.idSede)
+          .subscribe((riesgos: Riesgo[]) => {
+            if (Array.isArray(riesgos)) {
+              this.riesgosGuardados = riesgos;
+            } else {
+              this.riesgosGuardados = [];
+            }
+            this.dataSourceRiesgos.data = this.riesgosGuardados;
+          });
+      });
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeIdSede.unsubscribe();
+    if (this.subscribeRiesgos) {
+      this.subscribeRiesgos.unsubscribe();
+    }
   }
 
   buildForm(formGroup: FormGroup, dataTable: any) {
@@ -303,9 +345,13 @@ export class IdentificacionRiesgoComponent implements OnInit {
         this.tipoRiesgoActivate.Corrupcion = true;
         this.listaTiposRiesgos = ["Corrupcion"];
         this.formParcialIdentificacionRiesgo.get("tipo").setValue("Corrupcion");
+        this.formParcialIdentificacionRiesgo.get("activo").disable();
+        this.formParcialIdentificacionRiesgo.get("amenaza").disable();
       } else {
         this.resetTipoRiesgoActivate();
         this.listaTiposRiesgos = ["Gestion", "Fisico", "Seguridad digital"];
+        this.formParcialIdentificacionRiesgo.get("activo").enable();
+        this.formParcialIdentificacionRiesgo.get("amenaza").enable();
       }
     }
   }
@@ -353,18 +399,21 @@ export class IdentificacionRiesgoComponent implements OnInit {
         this.formParcialIdentificacionRiesgo.get("activo").setValue("");
         this.formParcialIdentificacionRiesgo.get("amenaza").setValue("");
         this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").disable();
+        this.nivelImpactoCorrupcion = "";
         break;
 
       case "Fisico":
         this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").enable();
         this.formParcialIdentificacionRiesgo.get("activo").disable();
         this.formParcialIdentificacionRiesgo.get("amenaza").disable();
+        this.nivelImpactoCorrupcion = "";
         break;
 
       default:
         this.formParcialIdentificacionRiesgo.get("activo").disable();
         this.formParcialIdentificacionRiesgo.get("amenaza").disable();
         this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").disable();
+        this.nivelImpactoCorrupcion = "";
         break;
     }
   }
@@ -410,16 +459,30 @@ export class IdentificacionRiesgoComponent implements OnInit {
   }
 
   guardarRiesgo() {
+    this.formParcialIdentificacionRiesgo.get("accionOmicion").disable();
+    this.formParcialIdentificacionRiesgo.get("usoPoder").disable();
+    this.formParcialIdentificacionRiesgo.get("desviarGestionPublico").disable();
+    this.formParcialIdentificacionRiesgo.get("beneficioPrivado").disable();
     let riesgo = this.formParcialIdentificacionRiesgo.value;
     riesgo.causas = this.listaCausas;
     riesgo.consecuencias = this.listaConsecuencias;
-    if (this.nivelImpactoCorrupcion != "") {
-      riesgo.nivelImpacto = {
-        preguntas: this.formularioNivelesCalificarImpactoCorrupcion.value,
-        resultado: this.nivelImpactoCorrupcion
-      };
+    if (this.nivelImpactoCorrupcion != "" && riesgo.tipo == "Corrupcion") {
+      riesgo.nivelImpacto = this.nivelImpactoCorrupcion;
     }
+
+    riesgo.idCampus = this.idSede;
     this.riesgosGuardados.push(riesgo);
+
+    this._identificacionRiesgoRiesgoService
+      .guardarRiesgo(riesgo)
+      .subscribe((res: Res) => {
+        this._notificacionService.mostrarNotificacion(res.message, "success");
+      });
+
+    this.resetForms();
+  }
+
+  resetForms() {
     this.dataSourceRiesgos.data = this.riesgosGuardados;
     this.formParcialIdentificacionRiesgo.reset();
     this.formConsecuencia.reset();
@@ -433,7 +496,9 @@ export class IdentificacionRiesgoComponent implements OnInit {
     for (let i in this.tipoRiesgoActivate) {
       this.tipoRiesgoActivate[i] = false;
     }
+    this.formParcialIdentificacionRiesgo.get("accionOmicion").enable();
+    this.formParcialIdentificacionRiesgo.get("usoPoder").enable();
+    this.formParcialIdentificacionRiesgo.get("desviarGestionPublico").enable();
+    this.formParcialIdentificacionRiesgo.get("beneficioPrivado").enable();
   }
-
-  guardarRiesgos() {}
 }

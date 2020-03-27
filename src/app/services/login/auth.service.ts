@@ -6,6 +6,7 @@ import { SedeService } from "../conocimiento-institucional/sede.service";
 import { InstitucionService } from "../conocimiento-institucional/institucion.service";
 import { ChangeSedeService } from "../gestion-riesgo/change-sede.service";
 import { LineamientoPoliticaRiesgoService } from "../gestion-riesgo/lineamiento-politica-riesgo.service";
+import { IdentificacionRiesgoService } from "../gestion-riesgo/identificacion-riesgo.service";
 
 @Injectable({
   providedIn: "root"
@@ -16,6 +17,7 @@ export class AuthService {
     private _sedelService: SedeService,
     private _institucionService: InstitucionService,
     private _lineamientosService: LineamientoPoliticaRiesgoService,
+    private _identificacionRiesgoService: IdentificacionRiesgoService,
     private _changeSedeService: ChangeSedeService,
     private route: Router
   ) {}
@@ -50,6 +52,7 @@ export class AuthService {
     this._institucionService.logOut();
     this._lineamientosService.logOut();
     this._sedelService.logOut();
+    this._identificacionRiesgoService.logOut();
     localStorage.removeItem("token");
     this.route.navigate(["login"]);
   }
