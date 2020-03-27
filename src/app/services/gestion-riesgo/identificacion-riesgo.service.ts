@@ -12,9 +12,9 @@ export class IdentificacionRiesgoService {
 
   constructor(private _globalService: GlobalService) {}
 
-  obtenerRiesgos(idSede: string) {
+  obtenerRiesgos(idSede: string, keys?: string) {
     this._globalService
-      .getQuery("/identificacionRiesgo/get/" + idSede, "get", true)
+      .getQuery("/identificacionRiesgo/get/" + idSede + "/" + keys, "get", true)
       .subscribe((res: Riesgo[]) => {
         this.riesgos = res;
         this._fuenteRiesgos.next(this.riesgos);

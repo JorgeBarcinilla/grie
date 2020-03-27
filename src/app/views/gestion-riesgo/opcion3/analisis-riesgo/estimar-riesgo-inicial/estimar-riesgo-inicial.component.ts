@@ -1,5 +1,47 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
+import { IdentificacionRiesgoService } from "src/app/services/gestion-riesgo/identificacion-riesgo.service";
+import { Riesgo } from "src/app/models/identificacionRiesgo.model";
+
+const RIESGOS_MAP = {
+  casiseguro: {
+    insignificante: [],
+    menor: [],
+    moderado: [],
+    mayor: [],
+    catastrofico: []
+  },
+  probable: {
+    insignificante: [],
+    menor: [],
+    moderado: [],
+    mayor: [],
+    catastrofico: []
+  },
+  posible: {
+    insignificante: [],
+    menor: [],
+    moderado: [],
+    mayor: [],
+    catastrofico: []
+  },
+  improbable: {
+    insignificante: [],
+    menor: [],
+    moderado: [],
+    mayor: [],
+    catastrofico: []
+  },
+  raravez: {
+    insignificante: [],
+    menor: [],
+    moderado: [],
+    mayor: [],
+    catastrofico: []
+  }
+};
 
 @Component({
   selector: "app-estimar-riesgo-inicial",
@@ -7,71 +49,44 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./estimar-riesgo-inicial.component.css"]
 })
 export class EstimarRiesgoInicialComponent implements OnInit {
-  listaRiesgos = [
-    { nombre: "Riesgo 1", probabilidad: "Probable", impacto: "Menor" },
-    { nombre: "Riesgo 1", probabilidad: "Probable", impacto: "Menor" },
-    { nombre: "Riesgo 1", probabilidad: "Probable", impacto: "Menor" },
-    { nombre: "Riesgo 1", probabilidad: "Probable", impacto: "Menor" },
-    { nombre: "Riesgo 2", probabilidad: "Improbable", impacto: "Mayor" },
-    { nombre: "Riesgo 3", probabilidad: "Posible", impacto: "Insignificante" },
-    { nombre: "Riesgo 4", probabilidad: "Casi seguro", impacto: "Moderado" },
-    { nombre: "Riesgo 5", probabilidad: "Rara vez", impacto: "Catastrofico" },
-    { nombre: "Riesgo 5", probabilidad: "Rara vez", impacto: "Catastrofico" },
-    { nombre: "Riesgo 5", probabilidad: "Rara vez", impacto: "Catastrofico" }
-  ];
+  idSede: string;
+  riesgosMapeados;
 
-  riesgosMapeados = {
-    casiseguro: {
-      insignificante: [],
-      menor: [],
-      moderado: [],
-      mayor: [],
-      catastrofico: []
-    },
-    probable: {
-      insignificante: [],
-      menor: [],
-      moderado: [],
-      mayor: [],
-      catastrofico: []
-    },
-    posible: {
-      insignificante: [],
-      menor: [],
-      moderado: [],
-      mayor: [],
-      catastrofico: []
-    },
-    improbable: {
-      insignificante: [],
-      menor: [],
-      moderado: [],
-      mayor: [],
-      catastrofico: []
-    },
-    raravez: {
-      insignificante: [],
-      menor: [],
-      moderado: [],
-      mayor: [],
-      catastrofico: []
-    }
-  };
+  subscribeIdSede: Subscription;
+  subscribeRiesgos: Subscription;
 
-  constructor() {
-    this.mapearRiesgos();
+  constructor(
+    private _changeSedeService: ChangeSedeService,
+    private _identificacionRiesgoRiesgoService: IdentificacionRiesgoService
+  ) {}
+
+  ngOnInit() {
+    this.subscribeIdSede = this._changeSedeService
+      .obtenerIdSede()
+      .subscribe((idSede: string) => {
+        this.idSede = idSede;
+        this.subscribeRiesgos = this._identificacionRiesgoRiesgoService
+          .obtenerRiesgos(this.idSede, "probabilidad-nivelImpacto-riesgo")
+          .subscribe((riesgos: Riesgo[]) => {
+            if (riesgos) {
+              this.mapearRiesgos(riesgos);
+            }
+          });
+      });
   }
 
-  ngOnInit() {}
-
-  mapearRiesgos() {
-    this.listaRiesgos.forEach(riesgo => {
+  mapearRiesgos(riesgos) {
+    console.log(RIESGOS_MAP);
+    this.riesgosMapeados = JSON.parse(JSON.stringify(RIESGOS_MAP));
+    riesgos.forEach(riesgo => {
       const probabilidad = riesgo.probabilidad
         .toLocaleLowerCase()
         .replace(" ", "");
-      const impacto = riesgo.impacto.toLocaleLowerCase().replace(" ", "");
+      const nivelImpacto = riesgo.nivelImpacto
+        .toLocaleLowerCase()
+        .replace(" ", "");
 
-      this.riesgosMapeados[probabilidad][impacto].push(riesgo.nombre);
+      this.riesgosMapeados[probabilidad][nivelImpacto].push(riesgo.riesgo);
     });
   }
 }

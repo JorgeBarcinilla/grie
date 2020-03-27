@@ -73,7 +73,7 @@ export class DeterminarProbabilidadComponent implements OnInit {
       .subscribe((idSede: string) => {
         this.idSede = idSede;
         this.subscribeRiesgos = this._identificacionRiesgoRiesgoService
-          .obtenerRiesgos(this.idSede)
+          .obtenerRiesgos(this.idSede, "probabilidad-nivelImpacto-riesgo")
           .subscribe((riesgos: Riesgo[]) => {
             if (Array.isArray(riesgos)) {
               riesgos.forEach(riesgo => {
