@@ -14,6 +14,11 @@ const routes: Routes = [
       import(`./views/login/login.module`).then(m => m.LoginModule)
   },
   {
+    path: "register",
+    loadChildren: () =>
+      import(`./views/register/register.module`).then(m => m.RegisterModule)
+  },
+  {
     path: "gestionRiesgo",
     loadChildren: () =>
       import(`./views/gestion-riesgo/gestion-riesgo.module`).then(

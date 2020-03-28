@@ -121,6 +121,7 @@ export class IdentificacionInstitucionComponent implements OnInit, OnDestroy {
     this.subscribeActualizarInstitucion = this._institucionService
       .actualizarInstitucion(ID_INSTITUCION, institucion)
       .subscribe((res: Res) => {
+        localStorage.setItem("name",institucion.nombre);
         this._notificacionService.mostrarNotificacion(res.message, "info");
       });
   }

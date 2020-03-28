@@ -9,6 +9,7 @@ import { AppMaterialModule } from "./shared/angular-material.module";
 import { ModalAgregarEdificioComponent } from "./views/conocimiento-institucional/opcion1/identificacion-sede/modal-agregar-edificio/modal-agregar-edificio.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NotificacionService } from "./services/notification/notification.service";
+import { RegisterComponent } from './views/register/register.component';
 
 @NgModule({
   declarations: [

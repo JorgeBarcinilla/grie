@@ -36,6 +36,7 @@ export class InstitucionService {
     this._globalService
       .getQuery("/school", "get", true)
       .subscribe((res: Institucion) => {
+        localStorage.setItem("name",res.nombre);
         this.institucion = res;
         this._fuenteInstitucion.next(this.institucion);
       });

@@ -1,0 +1,35 @@
+<div class="container-main" role="main">
+    <div class="container-fluid h-100" ngxUiLoaderBlurred>
+    
+      <div class='row justify-content-center h-100'>
+        <div class="login-wrapper col-auto align-self-center" fxLayout="row" fxLayoutAlign="center center">
+          
+          <mat-card class="box">
+            <mat-card-header class="mb-2">
+              <mat-card-title class="color-danger" style="border-radius: 5px;">GRIE</mat-card-title>
+            </mat-card-header>
+        
+            <form [formGroup]="formRegister" autocomplete="off">
+              <mat-card-content>
+                <mat-form-field class="example-full-width">
+                  <input type="text" matInput placeholder="Nombre del colegio" formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <input type="text" matInput placeholder="Nombre de usuario" formControlName="username">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <input type="password" matInput placeholder="Contraseña" formControlName="password">
+                </mat-form-field>
+              </mat-card-content>
+              <button type="button"mat-stroked-button color="primary" class="btn-block" (click)="submit()" [disabled]="formRegister.invalid">Crear</button>
+            </form>
+          </mat-card>
+      
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
