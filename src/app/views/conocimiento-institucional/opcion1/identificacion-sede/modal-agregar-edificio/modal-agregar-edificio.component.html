@@ -41,7 +41,7 @@
                 <div class="col-sm-2">
                   <div class="row justify-content-center mt-1">
                     <button color="accent" mat-raised-button (click)="agregarSalon()"
-                      [disabled]="formTipoSalon.invalid">+</button>
+                      [disabled]="formTipoSalon.invalid" type="button">+</button>
                   </div>
                 </div>
               </div>
@@ -49,7 +49,7 @@
                 <mat-chip-list>
                   <mat-chip class="bg-info" *ngFor="let chip of listaSalones" selected>
                     {{chip.cantidad}} salones de {{chip.tipoSalon}}
-                    <button mat-icon-button (click)="eliminarSalon(chip)">
+                    <button mat-icon-button (click)="eliminarSalon(chip)" type="button">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip>
@@ -63,7 +63,7 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button color="primary" mat-dialog-close>Cancelar</button>
-  <button mat-button color="accent" (click)="guardarEdificio()" [disabled]="formEdificios.invalid"
+  <button mat-button color="primary" type="button" mat-dialog-close>Cancelar</button>
+  <button mat-button color="accent" type="button" (click)="guardarEdificio()" [disabled]="formEdificios.invalid"
     mat-dialog-close>Guardar</button>
 </mat-dialog-actions>

@@ -36,7 +36,7 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     barrio: new FormControl("", Validators.required),
     direccion: new FormControl("", Validators.required),
     telefono: new FormControl("", Validators.required),
-    correo: new FormControl("", Validators.required),
+    correo: new FormControl("", Validators.email),
     limiteNorte: new FormControl(""),
     limiteEste: new FormControl(""),
     limiteOeste: new FormControl(""),

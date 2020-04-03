@@ -22,10 +22,12 @@ export class OperacionesTablaService {
           formGroup.addControl(group.name,this.fb.group(controls));
         });
       }else{
-        groups.formControls.forEach(control => {
-          controls[control] = new FormControl('', Validators.required);
-        });
-        formGroup.addControl(groups.name,this.fb.group(controls));
+        if(Array.isArray(groups.formControls)){
+          groups.formControls.forEach(control => {
+            controls[control] = new FormControl('', Validators.required);
+          });
+          formGroup.addControl(groups.name,this.fb.group(controls));
+        }
       }
 
       

@@ -11,7 +11,7 @@ import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 export interface DataElementSingleAnswer {
   pregunta: string;
-  formGroup: { name: string; formControls: ["respuesta"] };
+  formGroup: { name: string; formControls: [String] };
 }
 const ELEMENT_DATA_FACTORES_EDUCATIVOS: DataElementSingleAnswer[] = [
   {
@@ -60,6 +60,26 @@ const ELEMENT_DATA_CRAE: DataElementSingleAnswer[] = [
   }
 ];
 
+const ELEMENT_DATA_FINANCIERO: DataElementSingleAnswer[] = [
+  {
+    pregunta: "Mecanismos para gestión externa de recursos",
+    formGroup: { name: "financiero1", formControls: ["rubro"] }
+  },
+  {
+    pregunta: "Presupuesto para respuesta a emergencia",
+    formGroup: { name: "financiero2", formControls: ["rubro"] }
+  },
+  {
+    pregunta: "Póliza todo riesgo para la institución",
+    formGroup: { name: "financiero3", formControls: ["rubro"] }
+  },
+  {
+    pregunta: "Póliza para muebles, enseres y equipos",
+    formGroup: { name: "financiero4", formControls: ["rubro"] }
+  }
+];
+
+
 @Component({
   selector: "app-contexto-interno",
   templateUrl: "./contexto-interno.component.html",
@@ -94,10 +114,7 @@ export class ContextoInternoComponent implements OnInit {
     calificacionParcial: new FormControl("", Validators.required)
   });
 
-  formParcialFinancieros = new FormGroup({
-    financieroParcial: new FormControl("", Validators.required),
-    rubroParcial: new FormControl("", Validators.required)
-  });
+  
 
   formParcialComunidadEducativa = new FormGroup({
     tipoPoblacion: new FormControl("", Validators.required),
@@ -113,6 +130,7 @@ export class ContextoInternoComponent implements OnInit {
   formParcialFactoresEducativos = new FormGroup({});
   formParcialCRAE = new FormGroup({});
   formParcialComunicacionInterna = new FormGroup({});
+  formParcialFinanciero = new FormGroup({});
 
   estructurasFisicas = [
     "Cimiento de las edificaciones",
@@ -139,14 +157,6 @@ export class ContextoInternoComponent implements OnInit {
     "Sistema de vigilancia"
   ];
   estructurasCalificadas = [];
-
-  financieros = [
-    "Mecanismos para gestión externa de recursos",
-    "Presupuesto para respuesta a emergencia",
-    "Póliza todo riesgo para la institución",
-    "Póliza para muebles, enseres y equipos"
-  ];
-  financierosRubros = [];
 
   tipoPoblacion = [
     "Menores de tres años",
@@ -181,6 +191,11 @@ export class ContextoInternoComponent implements OnInit {
   );
   displayedColumnsCRAE: string[] = ["pregunta", "respuesta"];
 
+  dataSourceFinanciero = new MatTableDataSource<DataElementSingleAnswer>(
+    ELEMENT_DATA_FINANCIERO
+  );
+  displayedColumnsFinanciero: string[] = ["aspectoFinanciero", "rubro"];
+
   dataSourceComunicacionInterna = new MatTableDataSource<
     DataElementSingleAnswer
   >(this.ELEMENT_DATA_COMUNICACION_INTERNA);
@@ -192,6 +207,7 @@ export class ContextoInternoComponent implements OnInit {
       ELEMENT_DATA_FACTORES_EDUCATIVOS
     );
     this.buildForm(this.formParcialCRAE, ELEMENT_DATA_CRAE);
+    this.buildForm(this.formParcialFinanciero, ELEMENT_DATA_FINANCIERO);
     this.buildForm(
       this.formParcialComunicacionInterna,
       this.ELEMENT_DATA_COMUNICACION_INTERNA
@@ -216,6 +232,11 @@ export class ContextoInternoComponent implements OnInit {
         this.formParcialCRAE.get(key).setValue(contextoInterno.CRAE[key]);
       }
     }
+    if (contextoInterno.financieros != null) {
+      for (let key in this.formParcialFinanciero.value) {
+        this.formParcialFinanciero.get(key).setValue(contextoInterno.financieros[key]);
+      }
+    }
     this.tipoPoblacionGuardada = Array.isArray(
       contextoInterno.comunidadEducativa
     )
@@ -226,9 +247,6 @@ export class ContextoInternoComponent implements OnInit {
       contextoInterno.estructuraFisica
     )
       ? contextoInterno.estructuraFisica
-      : [];
-    this.financierosRubros = Array.isArray(contextoInterno.financieros)
-      ? contextoInterno.financieros
       : [];
 
     if (Array.isArray(contextoInterno.comunicacionInterna)) {
@@ -334,31 +352,6 @@ export class ContextoInternoComponent implements OnInit {
       .setValue(this.estructurasCalificadas);
   }
 
-  guardarFinanciero() {
-    let fi = this.formParcialFinancieros.value.financieroParcial;
-    this.financieros = this.financieros.filter(est => {
-      return est != fi;
-    });
-    this.financierosRubros.push({
-      nombre: fi,
-      rubro: this.formParcialFinancieros.value.rubroParcial
-    });
-    this.formularioContextoInterno
-      .get("financieros")
-      .setValue(this.financierosRubros);
-    this.formParcialFinancieros.reset();
-  }
-
-  eliminarFinanciero(nombre: string) {
-    this.financierosRubros = this.financierosRubros.filter(fin => {
-      return fin.nombre != nombre;
-    });
-    this.financieros.unshift(nombre);
-    this.formularioContextoInterno
-      .get("financieros")
-      .setValue(this.financierosRubros);
-  }
-
   guardarComunidadEducativa() {
     let tipo = this.formParcialComunidadEducativa.value.tipoPoblacionParcial;
     this.tipoPoblacion = this.tipoPoblacion.filter(tip => {
@@ -382,6 +375,12 @@ export class ContextoInternoComponent implements OnInit {
     this.formularioContextoInterno
       .get("CRAE")
       .setValue(this.formParcialCRAE.value);
+  }
+
+  guardarFinanciero() {
+    this.formularioContextoInterno
+      .get("financieros")
+      .setValue(this.formParcialFinanciero.value);
   }
 
   guardarComunicacionInterna() {

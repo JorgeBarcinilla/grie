@@ -69,6 +69,7 @@ export class SedeService {
   }
 
   eliminarSede(idSede: string) {
+    this.sedes = this.sedes.filter(sede => {return sede._id != idSede});
     return this._globalService.getQuery(
       "/campus/delete/" + idSede,
       "delete",

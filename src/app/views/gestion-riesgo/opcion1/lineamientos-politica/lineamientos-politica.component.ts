@@ -31,7 +31,7 @@ export interface DataElementRiesgosFisicos {
 export interface DataElementRiesgosGestion {
   impacto: string;
   descriptor: string;
-  formGroup: { name: string; formControls: ["numeroVeces"] };
+  formGroup: { name?: string; formControls?: ["numeroVeces"] };
 }
 export interface DataElementRiesgosSeguridadDigital {
   impacto: string;
@@ -135,19 +135,19 @@ const ELEMENT_DATA_GESTION: DataElementRiesgosGestion[] = [
   {
     impacto: "Catastrófico",
     descriptor:
-      "Interrupción de las operaciones de la Institución Educativa por el numero de días definido en la siguiente columna, Incumplimiento en las metas y objetivos institucionales afectando de forma grave la ejecución presupuestal, Pérdida de información crítica para la Institución que no se puede recuperar, Imagen institucional afectada en el orden regional o nacional por actos o hechos de corrupción comprobadas.",
+      "Interrupción de las operaciones de la Institución Educativa por el numero de horas definido en la siguiente columna, Incumplimiento en las metas y objetivos institucionales afectando de forma grave la ejecución presupuestal, Pérdida de información crítica para la Institución que no se puede recuperar, Imagen institucional afectada en el orden regional o nacional por actos o hechos de corrupción comprobadas.",
     formGroup: { name: "impactoCatastrofico", formControls: ["numeroVeces"] }
   },
   {
     impacto: "Mayor",
     descriptor:
-      "Interrupción de las operaciones de la Institución Educativa por el numero de días definido en la siguiente columna, Sanción por parte del ente territorial, Pérdida de información crítica para la Institución que puede ser recuperada de forma parcial o incompleta, Imagen institucional afectada en el orden regional o nacional por incumplimiento en la prestación del servicio a la comunidad educativa.",
+      "Interrupción de las operaciones de la Institución Educativa por el numero de horas definido en la siguiente columna, Sanción por parte del ente territorial, Pérdida de información crítica para la Institución que puede ser recuperada de forma parcial o incompleta, Imagen institucional afectada en el orden regional o nacional por incumplimiento en la prestación del servicio a la comunidad educativa.",
     formGroup: { name: "impactoMayor", formControls: ["numeroVeces"] }
   },
   {
     impacto: "Moderado",
     descriptor:
-      "Interrupción de las operaciones de la Institución Educativa por el numero de días definido en la siguiente columna, Reclamaciones o quejas de la comunidad educativa que podrían implicar una denuncia o demanda ante el ente territorial, Inoportunidad en la información, ocasionando retrasos en la atención de la comunidad educativa, Imagen institucional afectada en el orden regional o nacional por retrasos en la prestación del servicio a la comunidad educativa.",
+      "Interrupción de las operaciones de la Institución Educativa por el numero de horas definido en la siguiente columna, Reclamaciones o quejas de la comunidad educativa que podrían implicar una denuncia o demanda ante el ente territorial, Inoportunidad en la información, ocasionando retrasos en la atención de la comunidad educativa, Imagen institucional afectada en el orden regional o nacional por retrasos en la prestación del servicio a la comunidad educativa.",
     formGroup: { name: "impactoModerado", formControls: ["numeroVeces"] }
   },
   {
@@ -160,7 +160,7 @@ const ELEMENT_DATA_GESTION: DataElementRiesgosGestion[] = [
     impacto: "Insignificante",
     descriptor:
       "No hay interrupción de las operaciones de la Institución Educativa, No se generan sanciones por parte de Ningún ente, No se afecta la imagen institucional de forma significativa.",
-    formGroup: { name: "impactoInsignificante", formControls: ["numeroVeces"] }
+    formGroup: { name: 'none' , formControls: ["numeroVeces"] }
   }
 ];
 
@@ -226,12 +226,12 @@ export class LineamientosPoliticaComponent implements OnInit {
   idLineamiento: string;
   esActualizar: boolean;
 
-  tiposRiesgos = [/*'Corrupción',*/ "Fisicos", "Gestión", "Seguridad digital"];
-  //isCorrupcion: boolean;
-  isGestion: boolean;
+  tiposRiesgos = ['Corrupción', "Fisicos", "Gestión", "Seguridad digital"];
+  isGestion: boolean = false;
   isFisico: boolean = false;
   isSeguridadDigital: boolean;
   isNone: boolean = true;
+  isCorrupcion: boolean = false;
 
   displayedColumnsProbabilidad: string[] = [
     "nivel",
@@ -384,36 +384,36 @@ export class LineamientosPoliticaComponent implements OnInit {
 
   viewTablaRiesgo(riesgo) {
     switch (riesgo) {
-      /*case 'Corrupción':
+      case 'Corrupción':
         this.isCorrupcion = true;
         this.isFisico = false;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = false;
-        break;*/
+        break;
       case "Fisicos":
-        //this.isCorrupcion = false;
         this.isFisico = true;
+        this.isCorrupcion = true;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = false;
         break;
       case "Gestión":
-        // this.isCorrupcion = false;
+        this.isCorrupcion = false;
         this.isFisico = false;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = true;
         break;
       case "Seguridad digital":
-        //this.isCorrupcion = false;
+        this.isCorrupcion = false;
         this.isFisico = false;
         this.isNone = false;
         this.isSeguridadDigital = true;
         this.isGestion = false;
         break;
       default:
-        //this.isCorrupcion = false;
+        this.isCorrupcion = false;
         this.isFisico = false;
         this.isNone = true;
         this.isSeguridadDigital = false;

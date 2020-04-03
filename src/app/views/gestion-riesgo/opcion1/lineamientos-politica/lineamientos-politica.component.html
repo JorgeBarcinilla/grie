@@ -141,7 +141,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Niveles para calificar la probabilidad
+              Niveles para calificar la probabilidad de riesgo
             </mat-panel-title>
           </mat-expansion-panel-header>
           <table mat-table [dataSource]="nivelesProbabilidad" class="mat-elevation-z8">
@@ -228,7 +228,9 @@
   <div class="row justify-content-center mb-3" *ngIf="isNone">
     <h4>Seleccione un tipo de riesgo ...</h4>
   </div>
-
+  <div class="row justify-content-center mb-3" *ngIf="isCorrupcion">
+    <h4>Este nivel de impacto se califica en la seccion identificacion de riesgo</h4>
+  </div>
   <form [formGroup]="formularioNivelesCalificarImpactoFisico">
     <div class="row justify-content-center mb-3" *ngIf="isFisico">
       <div class="col-lg-10">
@@ -267,7 +269,7 @@
   </form>
   <form [formGroup]="formularioNivelesCalificarImpactoGestion">
     <div class="row justify-content-center mb-3" *ngIf="isGestion">
-      <div class="col-lg-10">
+      <div class="col-lg-11">
         <table mat-table [dataSource]="riesgosGestion" class="mat-elevation-z8">
           <ng-container matColumnDef="impacto">
             <th class="text-center" mat-header-cell *matHeaderCellDef>
@@ -290,11 +292,13 @@
               Tiempo de interrupcion
             </th>
             <td class="text-center" mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              Por mas de
-              <mat-form-field>
-                <input matInput type="number" placeholder="Numero de veces" min="1" formControlName="numeroVeces" />
-              </mat-form-field>
-              horas
+              <span *ngIf="element.formGroup.name != 'none'">
+                Por mas de
+                <mat-form-field>
+                  <input matInput type="number" placeholder="Numero de veces" min="1" formControlName="numeroVeces" />
+                </mat-form-field>
+                horas
+              </span>
             </td>
           </ng-container>
 
@@ -382,7 +386,7 @@
     </div>
   </div>
   <div class="row justify-content-center mb-3">
-    <button color="accent" mat-raised-button (click)="guardarLinemientosPolitica()">
+    <button type="button" color="accent" mat-raised-button (click)="guardarLinemientosPolitica()">
       Guardar
     </button>
   </div>
