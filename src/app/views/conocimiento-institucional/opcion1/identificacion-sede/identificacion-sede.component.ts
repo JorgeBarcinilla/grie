@@ -46,7 +46,19 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     areaLibre: new FormControl(""),
     archivosSoporte: new FormControl(""),
     edificios: new FormControl(""),
-    jornadas: new FormControl("")
+    jornadas: new FormControl({
+      maniana: false,
+      tarde: false,
+      noche: false,
+      unica: false
+    })
+  });
+
+  formJornadas = new FormGroup({
+    maniana: new FormControl(false),
+    unica: new FormControl(false),
+    tarde: new FormControl(false),
+    noche: new FormControl(false)
   });
 
   formArchivosSoporte = new FormGroup({
@@ -142,7 +154,10 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
         this.formIdentificacionSede.get(key).setValue(sede[key]);
         //this.backFormValues[key] = sede[key];
       }
-      this.listaJornadas = sede.jornadas;
+      for (let key in this.formJornadas.value) {
+        this.formJornadas.get(key).setValue(sede.jornadas[key]);
+        //this.backFormValues[key] = sede[key];
+      }
       this.listaDirectivos = sede.datosNivelDirectivo;
       this.dataSourcesDirectivos.data = this.listaDirectivos;
       this.listaEdificios = sede.edificios;
@@ -181,8 +196,9 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     });
   }
 
-  actualizarJornada($event: MatCheckboxChange) {
-    const jornada = $event.source._elementRef.nativeElement.innerText;
+  actualizarJornada($event: MatCheckboxChange, element) {
+    element.setValue($event.checked);
+    /*const jornada = $event.source._elementRef.nativeElement.innerText;
     if ($event.checked) {
       this.listaJornadas.unshift(jornada);
     } else {
@@ -190,11 +206,12 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
         return jor != jornada;
       });
     }
-    this.formIdentificacionSede.get("jornadas").setValue(this.listaJornadas);
+    this.formIdentificacionSede.get("jornadas").setValue(this.listaJornadas);*/
   }
 
   actualizarIdentificacionSede() {
     const sede = <Sede>this.formIdentificacionSede.value;
+    sede.jornadas = this.formJornadas.value;
     this.subcribeActualizarSedes = this._sedeService
       .actualizarSede(this.idSedeSeleccionada, sede)
       .subscribe((res: Res) => {

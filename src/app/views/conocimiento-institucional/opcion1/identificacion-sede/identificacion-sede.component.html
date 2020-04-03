@@ -296,7 +296,8 @@
                     <div class="label-title-div">Edificios</div>
                     <div class="container-fluid p-2">
                       <div class="row justify-content-center">
-                        <button color="accent" mat-raised-button (click)="agregarEdificio()" type="button">Agregar</button>
+                        <button color="accent" mat-raised-button (click)="agregarEdificio()"
+                          type="button">Agregar</button>
                       </div>
                       <div class="row justify-content-center mt-2">
                         <div class="col-11 mat-elevation-z3">
@@ -352,12 +353,29 @@
                     <div class="row justify-content-center mt-2 mb-2">
                       <h6 class="font-weight-bold">Jornadas</h6>
                     </div>
-                    <div class="row justify-content-center">
-                      <mat-checkbox class="p-1 m-2" (change)="actualizarJornada($event)">Unica</mat-checkbox>
-                      <mat-checkbox class="p-1 m-2" (change)="actualizarJornada($event)">Mañana</mat-checkbox>
-                      <mat-checkbox class="p-1 m-2" (change)="actualizarJornada($event)">Tarde</mat-checkbox>
-                      <mat-checkbox class="p-1 m-2" (change)="actualizarJornada($event)">Noche</mat-checkbox>
-                    </div>
+                    <form [formGroup]="formJornadas">
+                      <div class="row justify-content-center">
+                        <mat-checkbox class="p-1 m-2" formControlName="unica"
+                          [checked]="formJornadas.controls.unica.value"
+                          (change)="actualizarJornada($event,formJornadas.controls.unica)">
+                          Unica
+                        </mat-checkbox>
+                        <mat-checkbox class="p-1 m-2" formControlName="maniana"
+                          [checked]="formJornadas.controls.maniana.value"
+                          (change)="actualizarJornada($event,formJornadas.controls.maniana)">
+                          Mañana</mat-checkbox>
+                        <mat-checkbox class="p-1 m-2" formControlName="tarde"
+                          [checked]="formJornadas.controls.tarde.value"
+                          (change)="actualizarJornada($event,formJornadas.controls.tarde)">
+                          Tarde
+                        </mat-checkbox>
+                        <mat-checkbox class="p-1 m-2" formControlName="noche"
+                          [checked]="formJornadas.controls.noche.value"
+                          (change)="actualizarJornada($event, formJornadas.controls.noche)">
+                          Noche
+                        </mat-checkbox>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

@@ -79,7 +79,6 @@ const ELEMENT_DATA_FINANCIERO: DataElementSingleAnswer[] = [
   }
 ];
 
-
 @Component({
   selector: "app-contexto-interno",
   templateUrl: "./contexto-interno.component.html",
@@ -113,8 +112,6 @@ export class ContextoInternoComponent implements OnInit {
     estructurasParcial: new FormControl("", Validators.required),
     calificacionParcial: new FormControl("", Validators.required)
   });
-
-  
 
   formParcialComunidadEducativa = new FormGroup({
     tipoPoblacion: new FormControl("", Validators.required),
@@ -234,7 +231,9 @@ export class ContextoInternoComponent implements OnInit {
     }
     if (contextoInterno.financieros != null) {
       for (let key in this.formParcialFinanciero.value) {
-        this.formParcialFinanciero.get(key).setValue(contextoInterno.financieros[key]);
+        this.formParcialFinanciero
+          .get(key)
+          .setValue(contextoInterno.financieros[key]);
       }
     }
     this.tipoPoblacionGuardada = Array.isArray(
@@ -410,7 +409,7 @@ export class ContextoInternoComponent implements OnInit {
     };
 
     let controls = {};
-    row.formGroup.formControls.forEach(control => {
+    row.formGroup.formControls.forEach((control: string) => {
       controls[control] = new FormControl("", Validators.required);
     });
 
