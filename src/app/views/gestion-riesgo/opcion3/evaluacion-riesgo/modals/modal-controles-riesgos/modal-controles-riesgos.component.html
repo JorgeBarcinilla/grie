@@ -1,0 +1,277 @@
+<h2 mat-dialog-title class="text-uppercase">{{causa.nombre}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container-fluid">
+    <form [formGroup]="formCriterioEvaluacion">
+      <div class="row justify-content-center">
+        <div class="col-12 p-0">
+
+          <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio1">
+
+              <div class="container-fluid">
+                <div class="row justify-content-start" [formGroup]="formCriterioEvaluacion.controls.criterio1">
+                  <div class="col-12">
+                    <h3>¿Existe un responsable asignado a la ejecución del control?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="a">
+                        <mat-option value="true">
+                          Asignado
+                        </mat-option>
+                        <mat-option value="false">
+                          No asignado
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <nz-divider></nz-divider>
+                  <div class="col-12">
+                    <h3>¿El responsable tiene la autoridad y adecuada segregación de funciones en la ejecución del
+                      control?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100 ">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="b">
+                        <mat-option value="true">
+                          Adecuado
+                        </mat-option>
+                        <mat-option value="false">
+                          Inadecuado
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" mat-stroked-button matStepperNext cdkFocusInitial>Siguiente</button>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio2">
+
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-12">
+                    <h3>
+                      ¿La oportunidad en que se ejecuta el control ayuda a prevenir la mitigación del riesgo o a
+                      detectar
+                      la materialización del riesgo de manera oportuna?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="criterio2">
+                        <mat-option value="true">
+                          Oportuna
+                        </mat-option>
+                        <mat-option value="false">
+                          No oportuna
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" mat-button matStepperPrevious class="mr-1">Anterior</button>
+                <button type="button" mat-stroked-button class="ml-1" matStepperNext>Siguiente</button>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio3">
+
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-12">
+                    <h3>
+                      ¿Las actividades que se desarrollan en el control realmente buscan por si sola prevenir o detectar
+                      las causas que pueden dar origen al riesgo, Ej.: verificar, validar, cotejar, comparar, revisar,
+                      etc.?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="criterio3">
+                        <mat-option value="true">
+                          Prevenir o detectar
+                        </mat-option>
+                        <mat-option value="false">
+                          No es un control
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" mat-button matStepperPrevious class="mr-1">Anterior</button>
+                <button type="button" mat-stroked-button class="ml-1" matStepperNext>Siguiente</button>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio4">
+
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-12">
+                    <h3>
+                      ¿La fuente de información que se utiliza en el desarrollo del control es información confiable que
+                      permita mitigar el riesgo?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="criterio4">
+                        <mat-option value="true">
+                          Confiable
+                        </mat-option>
+                        <mat-option value="false">
+                          No confiable
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" mat-button matStepperPrevious class="mr-1">Anterior</button>
+                <button type="button" mat-stroked-button class="ml-1" matStepperNext>Siguiente</button>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio5">
+
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-12">
+                    <h3>
+                      ¿Las observaciones, desviaciones o diferencias identificadas como resultados de la ejecución del
+                      control son investigadas y resueltas de manera oportuna?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="criterio5">
+                        <mat-option value="true">
+                          Si se investigan y resuelven oportunamente
+                        </mat-option>
+                        <mat-option value="false">
+                          No se investigan y resuelven oportunamente
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" mat-button matStepperPrevious class="mr-1">Anterior</button>
+                <button type="button" mat-stroked-button class="ml-1" matStepperNext>Siguiente</button>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio6">
+
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-12">
+                    <h3>
+                      ¿Se deja evidencia o rastro de la ejecución del control que permita a cualquier tercero con la
+                      evidencia llegar a la misma conclusión?</h3>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Respuesta</mat-label>
+                      <mat-select formControlName="criterio6">
+                        <mat-option value="true">
+                          Completa
+                        </mat-option>
+                        <mat-option value="false">
+                          Incompleta / No existe
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" mat-button matStepperPrevious class="mr-1">Anterior</button>
+                <button type="button" mat-stroked-button class="ml-1" (click)="calificarDisenio()"
+                  matStepperNext>Siguiente</button>
+              </div>
+            </mat-step>
+
+            <!-- done -->
+            <mat-step>
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-11">
+                    <h3>Ya casi terminamos, solo falta que que califiques la ejecución del control.</h3>
+                  </div>
+                  <div class="col-1">
+                    <div class="row mt-1 pr-2 justify-content-end">
+                      <app-button-example tooltip="Ver pasos de valoracion de riesgos"
+                        src="assets/img/info_calificacion_ejecucion.png" label="Rango de calificación de la ejecución">
+                      </app-button-example>
+                    </div>
+                  </div>
+                </div>
+                <div class="row justify-content-start">
+                  <div class="col-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Peso de la ejecución del control</mat-label>
+                      <mat-select formControlName="calificacionEjecucion">
+                        <mat-option value="fuerte" (click)="calificarSolidez()">
+                          Fuerte
+                        </mat-option>
+                        <mat-option value="moderado" (click)="calificarSolidez()">
+                          Moderado
+                        </mat-option>
+                        <mat-option value="debil" (click)="calificarSolidez()">
+                          Debil
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <nz-divider></nz-divider>
+                <div class="row justify-content-around">
+                  <div class="col-4">
+                    <h1>Calificacion del diseño</h1>
+                    <mat-card class="bg-info">
+                      <h3 class="font-weight-bold text-light text-center text-uppercase">
+                        {{formCriterioEvaluacion.value.calificacionDisenio ? formCriterioEvaluacion.value.calificacionDisenio : '?'}}
+                      </h3>
+                    </mat-card>
+                  </div>
+                  <div class="col-4">
+                    <h1>Calificacion de ejecución</h1>
+                    <mat-card class="bg-info">
+                      <h3 class="font-weight-bold text-light text-center text-uppercase">
+                        {{formCriterioEvaluacion.value.calificacionEjecucion ? formCriterioEvaluacion.value.calificacionEjecucion : '?'}}
+                      </h3>
+                    </mat-card>
+                  </div>
+                  <div class="col-4">
+                    <h1>Solidez</h1>
+                    <mat-card class="bg-info">
+                      <h3 class="font-weight-bold text-light text-center text-uppercase">
+                        {{formCriterioEvaluacion.value.solidez ? formCriterioEvaluacion.value.solidez : '?'}}
+                      </h3>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2">
+                <button type="button" mat-button matStepperPrevious>Anterior</button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" mat-button color="primary" mat-dialog-close>Cancelar</button>
+  <button type="button" mat-raised-button color="accent" [mat-dialog-close]="true" (click)="guardarControles()"
+    [disabled]="formCriterioEvaluacion.invalid">Guardar</button>
+</mat-dialog-actions>

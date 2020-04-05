@@ -1,18 +1,118 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import {
+  MatPaginator,
+  MatTableDataSource,
+  MatDialog,
+  MatDialogConfig,
+} from "@angular/material";
+import { Riesgo, Causa } from "src/app/models/identificacionRiesgo.model";
+import { NotificacionService } from "src/app/services/notification/notification.service";
+import { IdentificacionRiesgoService } from "src/app/services/gestion-riesgo/identificacion-riesgo.service";
+import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
+import { Subscription } from "rxjs";
+import { ModalControlesRiesgosComponent } from "../modals/modal-controles-riesgos/modal-controles-riesgos.component";
+import { EvaluacionRiesgosService } from "src/app/services/gestion-riesgo/evaluacion-riesgos.service";
+import { Res } from "src/app/models/res.model";
 
 @Component({
-  selector: 'app-valoracion-controles',
-  templateUrl: './valoracion-controles.component.html',
-  styleUrls: ['./valoracion-controles.component.css']
+  selector: "app-valoracion-controles",
+  templateUrl: "./valoracion-controles.component.html",
+  styleUrls: ["./valoracion-controles.component.css"],
 })
 export class ValoracionControlesComponent implements OnInit {
+  @Input() formularioValoracionControles: FormGroup;
 
-  @Input() formularioValoracionControles : FormGroup; s
+  idSede: string;
+  riesgosGuardados = [];
 
-  constructor() { }
+  dataSourceRiesgos = new MatTableDataSource<Riesgo>();
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  displayedColumnsRiesgos: string[] = ["riesgo", "tipo", "causas", "solidez"];
+
+  subscribeIdSede: Subscription;
+  subscribeRiesgos: Subscription;
+
+  constructor(
+    private _changeSedeService: ChangeSedeService,
+    private _identificacionRiesgoRiesgoService: IdentificacionRiesgoService,
+    private _evaluacionRiesgoRiesgoService: EvaluacionRiesgosService,
+    private _notificacionService: NotificacionService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
+    this.dataSourceRiesgos.paginator = this.paginator;
+    this.subscribeIdSede = this._changeSedeService
+      .obtenerIdSede()
+      .subscribe((idSede: string) => {
+        this.idSede = idSede;
+        this.subscribeRiesgos = this._identificacionRiesgoRiesgoService
+          .obtenerRiesgos(this.idSede, "riesgo-tipo-causas-solidez")
+          .subscribe((riesgos: Riesgo[]) => {
+            if (Array.isArray(riesgos)) {
+              this.riesgosGuardados = riesgos;
+            } else {
+              this.riesgosGuardados = [];
+            }
+            this.dataSourceRiesgos.data = this.riesgosGuardados;
+          });
+      });
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeIdSede.unsubscribe();
+    if (this.subscribeRiesgos) {
+      this.subscribeRiesgos.unsubscribe();
+    }
+  }
+
+  establecerControl(riesgo: Riesgo, causa): void {
+    const dialogRef = this.dialog.open(ModalControlesRiesgosComponent, {
+      data: causa,
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        causa.control = data;
+        this.establecerSolidezRiesgo(riesgo);
+        this._evaluacionRiesgoRiesgoService
+          .guardarCriteriosCausas(riesgo)
+          .subscribe((res: Res) => {
+            this._notificacionService.mostrarNotificacion(res.message, "info");
+          });
+      }
+    });
+  }
+
+  establecerSolidezRiesgo(riesgo: Riesgo) {
+    const causas = riesgo.causas;
+    let prom = 0;
+    causas.forEach((element) => {
+      if (element.control) {
+        switch (element.control.solidez) {
+          case "fuerte":
+            prom += 100;
+            break;
+          case "moderado":
+            prom += 50;
+            break;
+
+          default:
+            break;
+        }
+      }
+    });
+
+    prom = prom / causas.length;
+
+    if (prom > 99) {
+      riesgo.solidez = "Fuerte";
+    } else if (prom > 49) {
+      riesgo.solidez = "Moderado";
+    } else {
+      riesgo.solidez = "Debil";
+    }
+  }
 }

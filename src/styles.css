@@ -153,3 +153,7 @@ th {
   pointer-events: none;
 
 }
+
+.cursor-pointer {
+  cursor: pointer !important;
+}

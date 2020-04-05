@@ -55,10 +55,10 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
   });
 
   formJornadas = new FormGroup({
-    maniana: new FormControl(false),
-    unica: new FormControl(false),
-    tarde: new FormControl(false),
-    noche: new FormControl(false)
+    maniana: new FormControl(),
+    unica: new FormControl(),
+    tarde: new FormControl(),
+    noche: new FormControl()
   });
 
   formArchivosSoporte = new FormGroup({
@@ -148,15 +148,20 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
 
   seleccionarSede(sede: Sede) {
     if (sede) {
+      this.formIdentificacionSede.reset();
       this.idSedeSeleccionada = sede._id;
       const form = this.formIdentificacionSede.value;
       for (let key in form) {
         this.formIdentificacionSede.get(key).setValue(sede[key]);
         //this.backFormValues[key] = sede[key];
       }
-      for (let key in this.formJornadas.value) {
-        this.formJornadas.get(key).setValue(sede.jornadas[key]);
-        //this.backFormValues[key] = sede[key];
+      if (sede.jornadas) {
+        for (let key in this.formJornadas.value) {
+          this.formJornadas.get(key).setValue(sede.jornadas[key]);
+          //this.backFormValues[key] = sede[key];
+        }
+      } else {
+        this.formJornadas.reset();
       }
       this.listaDirectivos = sede.datosNivelDirectivo;
       this.dataSourcesDirectivos.data = this.listaDirectivos;

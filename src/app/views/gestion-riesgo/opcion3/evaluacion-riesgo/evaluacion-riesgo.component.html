@@ -1,24 +1,41 @@
 <div class="container-fluid h-100">
-  <app-card-title title="EVALUACIÓN DEL RIESGO" 
-  info="Una vez identificado el nivel de riesgo inherente y las causas que pueden dar origen a la materialización de dicho riesgo, se procede a identificar el o los controles que permiten mitigar la ocurrencia del riesgo (valoración de controles).Esta fase se da en los siguientes pasos:">
-  </app-card-title>
+  <div class="row justify-content-between">
+    <div class="col-11">
+      <app-card-title title="EVALUACIÓN DEL RIESGO"
+        info="Una vez identificado el nivel de riesgo inherente y las causas que pueden dar origen a la materialización de dicho riesgo, se procede a identificar el o los controles que permiten mitigar la ocurrencia del riesgo (valoración de controles).Esta fase se da en los siguientes pasos:">
+      </app-card-title>
+    </div>
+    <div class="col-1">
+      <div class="row mt-4 pr-2 justify-content-end">
+        <app-button-example tooltip="Ver pasos de valoracion de riesgos" src="assets/img/info_evaluacion_riesgo.png"
+          label="Valoracion de riesgos">
+        </app-button-example>
+      </div>
+    </div>
+  </div>
   <div class="row justify-content-center mb-1" style="height: 99%;">
     <div class="col-11 mat-elevation-z4 p-0 h-100">
       <mat-tab-group mat-align-tabs="center" class="h-100">
         <mat-tab label="Valoracion de los controles" class="h-100">
           <ng-template matTabContent>
-            <app-valoracion-controles [formularioValoracionControles]="formularioEvaluacionRiesgo.controls.valoracionControles"></app-valoracion-controles>
+            <app-valoracion-controles
+              [formularioValoracionControles]="formularioEvaluacionRiesgo.controls.valoracionControles">
+            </app-valoracion-controles>
           </ng-template>
         </mat-tab>
         <mat-tab label="Nivel de riesgo residual" class="h-100">
           <ng-template matTabContent>
 
-            <app-nivel-riesgo-residual [formularioNivelRiesgoResidual]="formularioEvaluacionRiesgo.controls.nivelRiesgoResidual"></app-nivel-riesgo-residual>
+            <app-nivel-riesgo-residual
+              [formularioNivelRiesgoResidual]="formularioEvaluacionRiesgo.controls.nivelRiesgoResidual">
+            </app-nivel-riesgo-residual>
           </ng-template>
         </mat-tab>
         <mat-tab label="Tratamiento del riesgo" class="h-100">
           <ng-template matTabContent>
-            <app-tratamiento-riesgo [formularioTratamientoRiesgo]="formularioEvaluacionRiesgo.controls.tratamientoRiesgo"></app-tratamiento-riesgo>
+            <app-tratamiento-riesgo
+              [formularioTratamientoRiesgo]="formularioEvaluacionRiesgo.controls.tratamientoRiesgo">
+            </app-tratamiento-riesgo>
           </ng-template>
         </mat-tab>
       </mat-tab-group>

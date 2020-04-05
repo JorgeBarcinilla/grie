@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ChangeSedeService {
   private idSede: string;
@@ -26,7 +26,6 @@ export class ChangeSedeService {
 
   logOut() {
     localStorage.removeItem("idSede");
-    this._fuenteSedes.next(undefined);
     this.idSede = undefined;
   }
 }

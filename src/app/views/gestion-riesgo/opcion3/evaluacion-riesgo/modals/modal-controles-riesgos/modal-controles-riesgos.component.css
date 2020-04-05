@@ -1,0 +1,3 @@
+::ng-deep .mat-step-label {
+  display: none !important;
+}
