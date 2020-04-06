@@ -1,3 +1,45 @@
 <div class="container-fluid">
-    <app-card-title info="Si una vez valorado el riesgo se obtiene un riesgo residual que supere los niveles aceptables para la I.E, se deberá responder a dicho riesgo. La respuesta o tratamiento dada al riesgo se enmarca en las siguientes categorías"></app-card-title>
+  <div class="row justify-content-between">
+    <div class="col-11">
+      <app-card-title
+        info="Si una vez valorado el riesgo se obtiene un riesgo residual que supere los niveles aceptables para la I.E, se deberá responder a dicho riesgo. La respuesta o tratamiento dada al riesgo se enmarca en las siguientes categorías">
+      </app-card-title>
+    </div>
+    <div class="col-1">
+      <div class="row mt-4 pr-2 justify-content-end">
+        <app-button-example tooltip="Ver guia de tratamiento de riesgos" src="assets/img/info_tratamiento_riesgos.png"
+          label="Tratamiento de riesgos">
+        </app-button-example>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-2">
+    <h2>Riesgos</h2>
+    <div class="col-11 mat-elevation-z3 pt-2 pb-2" style="border-radius: 4px;">
+      <div class="row justify-content-start">
+        <div class="col-auto" *ngFor="let riesgo of riesgos">
+          <mat-card (click)="tratarRiesgo(riesgo)">
+            <div class="container-fluid">
+              <div class="row justify-content-start">
+                <div class="col-12">
+                  <h5 class="mt-2">{{riesgo.riesgo}}</h5>
+                  <small><b>Tipo: </b>{{riesgo.tipo}}</small>
+                </div>
+                <div class="col-10">
+                  <small><b>Tratamiento: </b>{{riesgo.tipo}}</small>
+                </div>
+                <div class="col-10">
+                  <div class="row justify-content-center mb-2 mt-2">
+                    <nz-tag *ngIf="riesgo.tratamiento" [nzColor]="'#2db7f5'" class="text-capitalize">
+                      {{riesgo.tratamiento?.estado}}</nz-tag>
+                    <nz-tag *ngIf="!riesgo.tratamiento">No tratado</nz-tag>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

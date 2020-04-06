@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="text-uppercase">{{riesgo.riesgo}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container-fluid">
+    <form [formGroup]="formValorar">
+      <div class="row justify-content-start">
+        <div class="col-12">
+          <h2>Para generar el mapa de calor necesitamos que respondas las siguientes preguntas.</h2>
+        </div>
+      </div>
+      <div class="row justify-content-start">
+        <div class="col-6">
+          <h4>Los controles ayudan a disminuir la probabilidad?</h4>
+          <mat-form-field class="w-100">
+            <mat-label>Respuesta</mat-label>
+            <mat-select formControlName="disminuirProbabilidad">
+              <mat-option value="directamente">
+                Directamente
+              </mat-option>
+              <mat-option value="no disminuye">
+                No disminuye
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <h4>Los controles ayudan a disminuir impacto?</h4>
+          <mat-form-field class="w-100">
+            <mat-label>Respuesta</mat-label>
+            <mat-select formControlName="disminuirImpacto">
+              <mat-option value="directamente">
+                Directamente
+              </mat-option>
+              <mat-option value="no disminuye">
+                No disminuye
+              </mat-option>
+              <mat-option value="indirectamente">
+                Indirectamente
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" mat-button color="primary" mat-dialog-close>Cancelar</button>
+  <button type="button" mat-raised-button color="accent" [mat-dialog-close]="true" (click)="guardarValorar()"
+    [disabled]="formValorar.invalid">Guardar</button>
+</mat-dialog-actions>

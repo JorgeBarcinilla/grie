@@ -1,0 +1,17 @@
+::ng-deep .mat-card {
+  padding: 0px !important;
+  cursor: pointer;
+}
+
+::ng-deep .mat-card :hover {
+  background: whitesmoke;
+}
+
+::ng-deep .mat-card h5 {
+  white-space: nowrap;
+  margin-bottom: -3px !important;
+}
+
+.col-auto {
+  width: min-content !important;
+}

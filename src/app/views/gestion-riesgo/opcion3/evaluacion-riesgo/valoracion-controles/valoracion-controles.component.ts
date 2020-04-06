@@ -14,6 +14,7 @@ import { Subscription } from "rxjs";
 import { ModalControlesRiesgosComponent } from "../modals/modal-controles-riesgos/modal-controles-riesgos.component";
 import { EvaluacionRiesgosService } from "src/app/services/gestion-riesgo/evaluacion-riesgos.service";
 import { Res } from "src/app/models/res.model";
+import { ValorarRiesgoComponent } from "../modals/valorar-riesgo/valorar-riesgo.component";
 
 @Component({
   selector: "app-valoracion-controles",
@@ -28,14 +29,19 @@ export class ValoracionControlesComponent implements OnInit {
 
   dataSourceRiesgos = new MatTableDataSource<Riesgo>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumnsRiesgos: string[] = ["riesgo", "tipo", "causas", "solidez"];
+  displayedColumnsRiesgos: string[] = [
+    "riesgo",
+    "tipo",
+    "causas",
+    "solidez",
+    "valorar",
+  ];
 
   subscribeIdSede: Subscription;
   subscribeRiesgos: Subscription;
 
   constructor(
     private _changeSedeService: ChangeSedeService,
-    private _identificacionRiesgoRiesgoService: IdentificacionRiesgoService,
     private _evaluacionRiesgoRiesgoService: EvaluacionRiesgosService,
     private _notificacionService: NotificacionService,
     public dialog: MatDialog
@@ -47,8 +53,11 @@ export class ValoracionControlesComponent implements OnInit {
       .obtenerIdSede()
       .subscribe((idSede: string) => {
         this.idSede = idSede;
-        this.subscribeRiesgos = this._identificacionRiesgoRiesgoService
-          .obtenerRiesgos(this.idSede, "riesgo-tipo-causas-solidez")
+        this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
+          .obtenerRiesgos(
+            this.idSede,
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento"
+          )
           .subscribe((riesgos: Riesgo[]) => {
             if (Array.isArray(riesgos)) {
               this.riesgosGuardados = riesgos;
@@ -79,6 +88,22 @@ export class ValoracionControlesComponent implements OnInit {
         this.establecerSolidezRiesgo(riesgo);
         this._evaluacionRiesgoRiesgoService
           .guardarCriteriosCausas(riesgo)
+          .subscribe((res: Res) => {
+            this._notificacionService.mostrarNotificacion(res.message, "info");
+          });
+      }
+    });
+  }
+
+  valorarControles(riesgo: Riesgo): void {
+    const dialogRef = this.dialog.open(ValorarRiesgoComponent, {
+      data: riesgo,
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        riesgo = Object.assign(riesgo, data);
+        this._evaluacionRiesgoRiesgoService
+          .valorarControles(riesgo)
           .subscribe((res: Res) => {
             this._notificacionService.mostrarNotificacion(res.message, "info");
           });

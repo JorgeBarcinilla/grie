@@ -61,7 +61,6 @@ export class ModalControlesRiesgosComponent implements OnInit {
             ? (this.sumatoriaDisenio += 15)
             : (this.sumatoriaDisenio += 0);
         }
-        console.log(this.sumatoriaDisenio);
       }
     }
 

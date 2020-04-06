@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
 import { IdentificacionRiesgoService } from "src/app/services/gestion-riesgo/identificacion-riesgo.service";
 import { Riesgo } from "src/app/models/identificacionRiesgo.model";
+import { AnalisisRiesgoService } from "src/app/services/gestion-riesgo/analisis-riesgo.service";
 
 const RIESGOS_MAP = {
   casiseguro: {
@@ -11,42 +12,42 @@ const RIESGOS_MAP = {
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   probable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   posible: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   improbable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   raravez: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
-  }
+    catastrofico: [],
+  },
 };
 
 @Component({
   selector: "app-estimar-riesgo-inicial",
   templateUrl: "./estimar-riesgo-inicial.component.html",
-  styleUrls: ["./estimar-riesgo-inicial.component.css"]
+  styleUrls: ["./estimar-riesgo-inicial.component.css"],
 })
 export class EstimarRiesgoInicialComponent implements OnInit {
   idSede: string;
@@ -57,7 +58,7 @@ export class EstimarRiesgoInicialComponent implements OnInit {
 
   constructor(
     private _changeSedeService: ChangeSedeService,
-    private _identificacionRiesgoRiesgoService: IdentificacionRiesgoService
+    private _analisisRiesgoRiesgoService: AnalisisRiesgoService
   ) {}
 
   ngOnInit() {
@@ -65,7 +66,7 @@ export class EstimarRiesgoInicialComponent implements OnInit {
       .obtenerIdSede()
       .subscribe((idSede: string) => {
         this.idSede = idSede;
-        this.subscribeRiesgos = this._identificacionRiesgoRiesgoService
+        this.subscribeRiesgos = this._analisisRiesgoRiesgoService
           .obtenerRiesgos(this.idSede, "probabilidad-nivelImpacto-riesgo")
           .subscribe((riesgos: Riesgo[]) => {
             if (riesgos) {
@@ -78,7 +79,7 @@ export class EstimarRiesgoInicialComponent implements OnInit {
   mapearRiesgos(riesgos) {
     console.log(RIESGOS_MAP);
     this.riesgosMapeados = JSON.parse(JSON.stringify(RIESGOS_MAP));
-    riesgos.forEach(riesgo => {
+    riesgos.forEach((riesgo) => {
       const probabilidad = riesgo.probabilidad
         .toLocaleLowerCase()
         .replace(" ", "");

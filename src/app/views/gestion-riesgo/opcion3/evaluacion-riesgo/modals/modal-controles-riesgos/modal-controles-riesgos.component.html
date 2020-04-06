@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
         <div class="col-12 p-0">
 
-          <mat-horizontal-stepper [linear]="true" #stepper>
+          <mat-horizontal-stepper [linear]="false" #stepper>
             <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio1">
 
               <div class="container-fluid">
@@ -199,12 +199,12 @@
               </div>
             </mat-step>
 
-            <!-- done -->
-            <mat-step>
+            <!-- Done -->
+            <mat-step [stepControl]="formCriterioEvaluacion.controls.calificacionEjecucion">
               <div class="container-fluid">
                 <div class="row justify-content-start">
                   <div class="col-11">
-                    <h3>Ya casi terminamos, solo falta que que califiques la ejecución del control.</h3>
+                    <h3>Ya casi terminamos, necesitamos que califiques la ejecución del control.</h3>
                   </div>
                   <div class="col-1">
                     <div class="row mt-1 pr-2 justify-content-end">
@@ -264,6 +264,7 @@
                 <button type="button" mat-button matStepperPrevious>Anterior</button>
               </div>
             </mat-step>
+
           </mat-horizontal-stepper>
         </div>
       </div>
