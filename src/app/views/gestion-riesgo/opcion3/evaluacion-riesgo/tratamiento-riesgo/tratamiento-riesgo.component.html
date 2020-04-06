@@ -25,10 +25,7 @@
                   <h5 class="mt-2">{{riesgo.riesgo}}</h5>
                   <small><b>Tipo: </b>{{riesgo.tipo}}</small>
                 </div>
-                <div class="col-10">
-                  <small><b>Tratamiento: </b>{{riesgo.tipo}}</small>
-                </div>
-                <div class="col-10">
+                <div class="col-12">
                   <div class="row justify-content-center mb-2 mt-2">
                     <nz-tag *ngIf="riesgo.tratamiento" [nzColor]="'#2db7f5'" class="text-capitalize">
                       {{riesgo.tratamiento?.estado}}</nz-tag>
