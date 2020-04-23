@@ -3,7 +3,7 @@ import {
   FormGroup,
   FormControl,
   Validators,
-  FormBuilder,
+  FormBuilder
 } from "@angular/forms";
 import { OperacionesTablaService } from "src/app/helpers/operaciones-tabla.service";
 import { IdentificacionRiesgoService } from "src/app/services/gestion-riesgo/identificacion-riesgo.service";
@@ -26,7 +26,7 @@ export interface DataElementProbabilidadRiesgos {
 @Component({
   selector: "app-determinar-probabilidad",
   templateUrl: "./determinar-probabilidad.component.html",
-  styleUrls: ["./determinar-probabilidad.component.css"],
+  styleUrls: ["./determinar-probabilidad.component.css"]
 })
 export class DeterminarProbabilidadComponent implements OnInit {
   idSede: string;
@@ -37,7 +37,7 @@ export class DeterminarProbabilidadComponent implements OnInit {
     "riesgo",
     "tipo",
     "probabilidad",
-    "impacto",
+    "impacto"
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -48,14 +48,14 @@ export class DeterminarProbabilidadComponent implements OnInit {
     "Probable",
     "Posible",
     "Improbable",
-    "Rara vez",
+    "Rara vez"
   ];
   listaImpacto = [
     "Catastrofico",
     "Mayor",
     "Moderado",
     "Menor",
-    "Insignificante",
+    "Insignificante"
   ];
 
   formParcialDeterminarProbabilidad = new FormGroup({});
@@ -80,14 +80,16 @@ export class DeterminarProbabilidadComponent implements OnInit {
           .obtenerRiesgos(this.idSede, "probabilidad-nivelImpacto-riesgo-tipo")
           .subscribe((riesgos: Riesgo[]) => {
             if (Array.isArray(riesgos)) {
-              riesgos.forEach((riesgo) => {
+              this.listaRiesgos = [];
+              riesgos.forEach(riesgo => {
                 const row = {
                   id: riesgo._id,
                   riesgo: riesgo.riesgo,
+                  tipo: riesgo.tipo,
                   formGroup: {
                     name: riesgo.riesgo.replace(" ", "").toLowerCase(),
-                    formControls: ["probabilidad", "nivelImpacto"],
-                  },
+                    formControls: ["probabilidad", "nivelImpacto"]
+                  }
                 };
                 this.listaRiesgos.push(row);
               });
@@ -95,7 +97,7 @@ export class DeterminarProbabilidadComponent implements OnInit {
                 this.formParcialDeterminarProbabilidad,
                 this.listaRiesgos
               );
-              riesgos.forEach((riesgo) => {
+              riesgos.forEach(riesgo => {
                 if (riesgo.nivelImpacto) {
                   this.formParcialDeterminarProbabilidad
                     .get(riesgo.riesgo.replace(" ", "").toLowerCase())
@@ -123,13 +125,22 @@ export class DeterminarProbabilidadComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeIdSede.unsubscribe();
+    if (this.subscribeRiesgos) {
+      this.subscribeRiesgos.unsubscribe();
+    }
+  }
+
   guardarDeterminarProbabilidad() {
     for (let key in this.formParcialDeterminarProbabilidad.value) {
-      const id = this.listaRiesgos.find((riesgo) => {
+      const id = this.listaRiesgos.find(riesgo => {
         return riesgo.formGroup.name == key;
       }).id;
       console.log(id);
-      this.formParcialDeterminarProbabilidad.value[key]["id"] = id;
+      this.formParcialDeterminarProbabilidad.value[key]["idRiesgo"] = id;
       this.listaProbabilidades.push(
         this.formParcialDeterminarProbabilidad.value[key]
       );

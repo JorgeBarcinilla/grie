@@ -12,42 +12,42 @@ const RIESGOS_MAP = {
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   probable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   posible: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   improbable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   raravez: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
-  },
+    catastrofico: []
+  }
 };
 
 @Component({
   selector: "app-estimar-riesgo-inicial",
   templateUrl: "./estimar-riesgo-inicial.component.html",
-  styleUrls: ["./estimar-riesgo-inicial.component.css"],
+  styleUrls: ["./estimar-riesgo-inicial.component.css"]
 })
 export class EstimarRiesgoInicialComponent implements OnInit {
   idSede: string;
@@ -67,7 +67,7 @@ export class EstimarRiesgoInicialComponent implements OnInit {
       .subscribe((idSede: string) => {
         this.idSede = idSede;
         this.subscribeRiesgos = this._analisisRiesgoRiesgoService
-          .obtenerRiesgos(this.idSede, "probabilidad-nivelImpacto-riesgo")
+          .obtenerRiesgos(this.idSede, "probabilidad-nivelImpacto-riesgo-tipo")
           .subscribe((riesgos: Riesgo[]) => {
             if (riesgos) {
               this.mapearRiesgos(riesgos);
@@ -76,18 +76,26 @@ export class EstimarRiesgoInicialComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeIdSede.unsubscribe();
+    if (this.subscribeRiesgos) {
+      this.subscribeRiesgos.unsubscribe();
+    }
+  }
+
   mapearRiesgos(riesgos) {
     console.log(RIESGOS_MAP);
     this.riesgosMapeados = JSON.parse(JSON.stringify(RIESGOS_MAP));
-    riesgos.forEach((riesgo) => {
-      const probabilidad = riesgo.probabilidad
-        .toLocaleLowerCase()
-        .replace(" ", "");
-      const nivelImpacto = riesgo.nivelImpacto
-        .toLocaleLowerCase()
-        .replace(" ", "");
-
-      this.riesgosMapeados[probabilidad][nivelImpacto].push(riesgo.riesgo);
+    riesgos.forEach(riesgo => {
+      const probabilidad = riesgo.probabilidad;
+      const nivelImpacto = riesgo.nivelImpacto;
+      if (probabilidad && nivelImpacto) {
+        this.riesgosMapeados[probabilidad.toLocaleLowerCase().replace(" ", "")][
+          nivelImpacto.toLocaleLowerCase().replace(" ", "")
+        ].push(riesgo.riesgo);
+      }
     });
   }
 }

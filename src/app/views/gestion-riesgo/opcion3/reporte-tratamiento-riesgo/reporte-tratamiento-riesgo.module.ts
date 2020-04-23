@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CardTitleModule } from 'src/app/components/utils/card-title/card-title.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CardTitleModule } from "src/app/components/utils/card-title/card-title.module";
 
-import { ButtonExampleModule } from 'src/app/components/utils/button-example/button-example.module';
-import { AppMaterialModule } from 'src/app/shared/angular-material.module';
-import { ReporteTratamientoRiesgoRoutingModule } from './reporte-tratamiento-riesgo-routing.module';
-import { ReporteTratamientoRiesgoComponent } from './reporte-tratamiento-riesgo.component';
-
-
+import { ButtonExampleModule } from "src/app/components/utils/button-example/button-example.module";
+import { AppMaterialModule } from "src/app/shared/angular-material.module";
+import { ReporteTratamientoRiesgoRoutingModule } from "./reporte-tratamiento-riesgo-routing.module";
+import { ReporteTratamientoRiesgoComponent } from "./reporte-tratamiento-riesgo.component";
+import { NzDrawerModule } from "ng-zorro-antd/drawer";
+import { NzTagModule } from "ng-zorro-antd";
 
 @NgModule({
   declarations: [ReporteTratamientoRiesgoComponent],
@@ -19,7 +19,8 @@ import { ReporteTratamientoRiesgoComponent } from './reporte-tratamiento-riesgo.
     ReactiveFormsModule,
     FormsModule,
     CardTitleModule,
-    ButtonExampleModule
+    ButtonExampleModule,
+    NzDrawerModule
   ]
 })
-export class ReporteTratamientoRiesgoModule { }
+export class ReporteTratamientoRiesgoModule {}

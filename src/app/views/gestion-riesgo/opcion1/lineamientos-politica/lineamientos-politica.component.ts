@@ -160,7 +160,7 @@ const ELEMENT_DATA_GESTION: DataElementRiesgosGestion[] = [
     impacto: "Insignificante",
     descriptor:
       "No hay interrupción de las operaciones de la Institución Educativa, No se generan sanciones por parte de Ningún ente, No se afecta la imagen institucional de forma significativa.",
-    formGroup: { name: 'none' , formControls: ["numeroVeces"] }
+    formGroup: { name: "none", formControls: ["numeroVeces"] }
   }
 ];
 
@@ -226,7 +226,7 @@ export class LineamientosPoliticaComponent implements OnInit {
   idLineamiento: string;
   esActualizar: boolean;
 
-  tiposRiesgos = ['Corrupción', "Fisicos", "Gestión", "Seguridad digital"];
+  tiposRiesgos = ["Corrupción", "Fisicos", "Gestión", "Seguridad digital"];
   isGestion: boolean = false;
   isFisico: boolean = false;
   isSeguridadDigital: boolean;
@@ -331,8 +331,9 @@ export class LineamientosPoliticaComponent implements OnInit {
                   .get(key)
                   .setValue(lineamiento.nivelesCalificarImpactoFisico[key]);
               }
-              for (let key in this.formularioNivelesCalificarImpactoGestion
-                .value) {
+              console.log(lineamiento.nivelesCalificarImpactoGestion);
+              console.log(this.formularioNivelesCalificarImpactoGestion.value);
+              for (let key in lineamiento.nivelesCalificarImpactoGestion) {
                 this.formularioNivelesCalificarImpactoGestion
                   .get(key)
                   .setValue(lineamiento.nivelesCalificarImpactoGestion[key]);
@@ -384,7 +385,7 @@ export class LineamientosPoliticaComponent implements OnInit {
 
   viewTablaRiesgo(riesgo) {
     switch (riesgo) {
-      case 'Corrupción':
+      case "Corrupción":
         this.isCorrupcion = true;
         this.isFisico = false;
         this.isNone = false;
@@ -426,8 +427,8 @@ export class LineamientosPoliticaComponent implements OnInit {
     let respuestas = this.formularioNivelesCalificarImpactoCorrupcion.value;
     let flagDone = true;
     let respuestasAfirmativas = 0;
-    
-    
+
+
     for (let i in respuestas) {
       const respuesta = respuestas[i];
       if (respuesta.respuesta == "") {
@@ -438,7 +439,7 @@ export class LineamientosPoliticaComponent implements OnInit {
         console.log("se suma 1")
         respuestasAfirmativas += 1
       }
-      
+
     }
 
     console.log("estado: "+flagDone)
@@ -455,7 +456,7 @@ export class LineamientosPoliticaComponent implements OnInit {
       }
     }
 
-    
+
   }*/
 
   guardarLinemientosPolitica() {

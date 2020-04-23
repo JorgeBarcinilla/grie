@@ -53,9 +53,11 @@
                   {{causa.nombre}}
                 </nz-tag>
                 <ng-template #titleTemplate>
-                  <i *ngIf="causa.control?.solidez" nz-icon nzType="check-circle" nzTheme="fill"></i>
-                  <i *ngIf="!causa.control?.solidez" nz-icon nzType="close-circle" nzTheme="fill"></i>
-                  Estado del control
+                  <div>
+                    <i *ngIf="causa.control?.solidez" nz-icon nzType="check-circle" [nzTwotoneColor]="'#eb2f96'"></i>
+                    <i *ngIf="!causa.control?.solidez" nz-icon nzType="close-circle"></i>
+                    Estado del control
+                  </div>
                 </ng-template>
                 <ng-template #contentTemplate>
                   <div class="text-capitalize"><b>Diseño:
@@ -78,7 +80,7 @@
         <ng-container matColumnDef="solidez">
           <th mat-header-cell *matHeaderCellDef> Solidez de controles </th>
           <td mat-cell *matCellDef="let element">
-            {{element.solidez ? element.solidez : "No se ha hecho control alguno"}}
+            {{element.solidez ? element.solidez : "Sin definir"}}
           </td>
         </ng-container>
 

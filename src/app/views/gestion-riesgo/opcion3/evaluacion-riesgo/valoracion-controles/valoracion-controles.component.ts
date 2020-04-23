@@ -4,7 +4,7 @@ import {
   MatPaginator,
   MatTableDataSource,
   MatDialog,
-  MatDialogConfig,
+  MatDialogConfig
 } from "@angular/material";
 import { Riesgo, Causa } from "src/app/models/identificacionRiesgo.model";
 import { NotificacionService } from "src/app/services/notification/notification.service";
@@ -19,7 +19,7 @@ import { ValorarRiesgoComponent } from "../modals/valorar-riesgo/valorar-riesgo.
 @Component({
   selector: "app-valoracion-controles",
   templateUrl: "./valoracion-controles.component.html",
-  styleUrls: ["./valoracion-controles.component.css"],
+  styleUrls: ["./valoracion-controles.component.css"]
 })
 export class ValoracionControlesComponent implements OnInit {
   @Input() formularioValoracionControles: FormGroup;
@@ -34,7 +34,7 @@ export class ValoracionControlesComponent implements OnInit {
     "tipo",
     "causas",
     "solidez",
-    "valorar",
+    "valorar"
   ];
 
   subscribeIdSede: Subscription;
@@ -56,7 +56,7 @@ export class ValoracionControlesComponent implements OnInit {
         this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
           .obtenerRiesgos(
             this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento"
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso"
           )
           .subscribe((riesgos: Riesgo[]) => {
             if (Array.isArray(riesgos)) {
@@ -80,9 +80,9 @@ export class ValoracionControlesComponent implements OnInit {
 
   establecerControl(riesgo: Riesgo, causa): void {
     const dialogRef = this.dialog.open(ModalControlesRiesgosComponent, {
-      data: causa,
+      data: causa
     });
-    dialogRef.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe(data => {
       if (data) {
         causa.control = data;
         this.establecerSolidezRiesgo(riesgo);
@@ -97,9 +97,9 @@ export class ValoracionControlesComponent implements OnInit {
 
   valorarControles(riesgo: Riesgo): void {
     const dialogRef = this.dialog.open(ValorarRiesgoComponent, {
-      data: riesgo,
+      data: riesgo
     });
-    dialogRef.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe(data => {
       if (data) {
         riesgo = Object.assign(riesgo, data);
         this._evaluacionRiesgoRiesgoService
@@ -114,7 +114,8 @@ export class ValoracionControlesComponent implements OnInit {
   establecerSolidezRiesgo(riesgo: Riesgo) {
     const causas = riesgo.causas;
     let prom = 0;
-    causas.forEach((element) => {
+    for (let index = 0; index < causas.length; index++) {
+      const element = causas[index];
       if (element.control) {
         switch (element.control.solidez) {
           case "fuerte":
@@ -127,8 +128,10 @@ export class ValoracionControlesComponent implements OnInit {
           default:
             break;
         }
+      } else {
+        return;
       }
-    });
+    }
 
     prom = prom / causas.length;
 

@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NzDividerModule } from "ng-zorro-antd";
+import { NzDividerModule, NzIconModule } from "ng-zorro-antd";
 import { NzPopoverModule } from "ng-zorro-antd/popover";
 import { NzTagModule } from "ng-zorro-antd/tag";
 import { ButtonExampleModule } from "src/app/components/utils/button-example/button-example.module";
@@ -26,7 +26,7 @@ import { ModalAccionCausaComponent } from "./modals/modal-accion-causa/modal-acc
     ModalControlesRiesgosComponent,
     ValorarRiesgoComponent,
     ModalTratamientoRiesgoComponent,
-    ModalAccionCausaComponent,
+    ModalAccionCausaComponent
   ],
   imports: [
     CommonModule,
@@ -39,12 +39,13 @@ import { ModalAccionCausaComponent } from "./modals/modal-accion-causa/modal-acc
     NzTagModule,
     NzDividerModule,
     NzPopoverModule,
+    NzIconModule
   ],
   entryComponents: [
     ModalControlesRiesgosComponent,
     ValorarRiesgoComponent,
     ModalTratamientoRiesgoComponent,
-    ModalAccionCausaComponent,
-  ],
+    ModalAccionCausaComponent
+  ]
 })
 export class EvaluacionRiesgoModule {}

@@ -14,29 +14,37 @@
     </div>
   </div>
   <div class="row justify-content-center mt-2">
-    <h2>Riesgos</h2>
-    <div class="col-11 mat-elevation-z3 pt-2 pb-2" style="border-radius: 4px;">
-      <div class="row justify-content-start">
-        <div class="col-auto" *ngFor="let riesgo of riesgos">
-          <mat-card (click)="tratarRiesgo(riesgo)">
-            <div class="container-fluid">
-              <div class="row justify-content-start">
-                <div class="col-12">
-                  <h5 class="mt-2">{{riesgo.riesgo}}</h5>
-                  <small><b>Tipo: </b>{{riesgo.tipo}}</small>
-                </div>
-                <div class="col-12">
-                  <div class="row justify-content-center mb-2 mt-2">
-                    <nz-tag *ngIf="riesgo.tratamiento" [nzColor]="'#2db7f5'" class="text-capitalize">
-                      {{riesgo.tratamiento?.estado}}</nz-tag>
-                    <nz-tag *ngIf="!riesgo.tratamiento">No tratado</nz-tag>
+    <div class="col-12 text-center">
+      <h2>Riesgos</h2>
+    </div>
+    <span class="ml-3 w-100" *ngFor="let proceso of listaProcesos">
+      <div class="col-11 mat-elevation-z3 pt-2 pb-2 mt-1 mb-1" style="border-radius: 4px;"
+        *ngIf="proceso[1].length > 0">
+        <div class="row justify-content-start">
+          <div class="col-12">
+            <h6>{{proceso[0]}}</h6>
+          </div>
+          <div class="col-auto mt-1 mb-1" *ngFor="let riesgo of proceso[1]">
+            <mat-card (click)="tratarRiesgo(riesgo)">
+              <div class="container-fluid">
+                <div class="row justify-content-start">
+                  <div class="col-12">
+                    <h5 class="mt-2">{{riesgo.riesgo}}</h5>
+                    <small><b>Tipo: </b>{{riesgo.tipo}}</small>
+                  </div>
+                  <div class="col-12">
+                    <div class="row justify-content-center mb-2 mt-2">
+                      <nz-tag *ngIf="riesgo.tratamiento" [nzColor]="'#2db7f5'" class="text-capitalize">
+                        {{riesgo.tratamiento?.estado}}</nz-tag>
+                      <nz-tag *ngIf="!riesgo.tratamiento">No tratado</nz-tag>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </mat-card>
+            </mat-card>
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
 </div>

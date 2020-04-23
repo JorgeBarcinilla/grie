@@ -11,14 +11,14 @@ const PROBABILIDAD = [
   "probable",
   "posible",
   "improbable",
-  "raravez",
+  "raravez"
 ];
 const IMPACTO = [
   "catastrofico",
   "mayor",
   "moderado",
   "menor",
-  "insignificante",
+  "insignificante"
 ];
 
 const RIESGOS_MAP = {
@@ -27,42 +27,42 @@ const RIESGOS_MAP = {
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   probable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   posible: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   improbable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
+    catastrofico: []
   },
   raravez: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: [],
-  },
+    catastrofico: []
+  }
 };
 
 @Component({
   selector: "app-nivel-riesgo-residual",
   templateUrl: "./nivel-riesgo-residual.component.html",
-  styleUrls: ["./nivel-riesgo-residual.component.css"],
+  styleUrls: ["./nivel-riesgo-residual.component.css"]
 })
 export class NivelRiesgoResidualComponent implements OnInit {
   idSede: string;
@@ -86,7 +86,7 @@ export class NivelRiesgoResidualComponent implements OnInit {
         this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
           .obtenerRiesgos(
             this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento"
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso"
           )
           .subscribe((riesgos: Riesgo[]) => {
             if (riesgos) {
@@ -95,12 +95,22 @@ export class NivelRiesgoResidualComponent implements OnInit {
           });
       });
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeIdSede.unsubscribe();
+    if (this.subscribeRiesgos) {
+      this.subscribeRiesgos.unsubscribe();
+    }
+  }
+
   mapearRiesgos(riesgos: Riesgo[]) {
     console.log(RIESGOS_MAP);
     console.log(riesgos);
     this.riesgosMapeados = JSON.parse(JSON.stringify(RIESGOS_MAP));
 
-    riesgos.forEach((riesgo) => {
+    riesgos.forEach(riesgo => {
       let solidez = riesgo.solidez;
       let disminuirImpacto = riesgo.disminuirImpacto;
       let disminuirProbabilidad = riesgo.disminuirProbabilidad;
@@ -170,6 +180,7 @@ export class NivelRiesgoResidualComponent implements OnInit {
         this.riesgosMapeados[PROBABILIDAD[prob]][IMPACTO[imp]].push(
           riesgo.riesgo
         );
+        let riesgoResidual = "";
       } else {
         this.riesgosNoMapeados.push(riesgo);
       }

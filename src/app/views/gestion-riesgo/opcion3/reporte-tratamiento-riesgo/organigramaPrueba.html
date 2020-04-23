@@ -1,0 +1,106 @@
+<div class="col-12 p-0 mat-elevation-z2 h-100" style="border-radius: 5px; overflow-y: auto;">
+  <div class="container-fluid h-100">
+    <div class="row h-100 p-3">
+      <div class="col-2 p-0 h-100">
+        <div class="row justify-content-center " *ngFor="let row of data">
+          <div class="col-12 text-left font-weight-bold pt-2 pb-2">
+            {{ row.name }}
+          </div>
+        </div>
+      </div>
+      <div class="col-10 p-0 h-100">
+        <div class="row justify-content-around " *ngFor="let row of data">
+          <div class="col-{{ 12 / row.content.length }} text-center" *ngFor="let column of row.content">
+            <div class="row justify-content-center">
+              <div class="col-6" [ngStyle]="{
+                      'border-right': data.indexOf(row) == 0 ? '' : '1px solid',
+                      height: '10px',
+                      'border-top':
+                        row.content.indexOf(column) == 0 ? '' : '1px solid'
+                    }"></div>
+              <div class="col-6" [ngStyle]="{
+                      'border-left': data.indexOf(row) == 0 ? '' : '1px solid',
+                      height: '10px',
+                      'border-top':
+                        row.content.indexOf(column) == row.content.length - 1
+                          ? ''
+                          : '1px solid'
+                    }"></div>
+              <div class="col-12">
+                <div class="row justify-content-center">
+                  <div class="col-auto border-info" style="border: 1px solid; border-radius: 5px;">
+                    {{ row.content.indexOf(column) }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-6" [ngStyle]="{
+                      'border-right': data.indexOf(row) == 0 ? '' : '1px solid',
+                      height: '10px'
+                    }"></div>
+              <div class="col-6" [ngStyle]="{
+                      'border-left':
+                        data.indexOf(row) == data.length - 1 ? '' : '1px solid',
+                      height: '10px'
+                    }"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <table class="text-center w-100" align="center">
+        <tr>
+          <th colspan="4">1</th>
+        </tr>
+        <tr>
+          <th colspan="4">2</th>
+        </tr>
+        <tr>
+          <th>3</th>
+          <th>3</th>
+          <th>3</th>
+        </tr>
+        <tr>
+          <th colspan="4">4</th>
+        </tr>
+        <tr>
+          <th colspan="4">5</th>
+        </tr>
+        <tr>
+          <th colspan="4">6</th>
+        </tr>
+        <tr>
+          <th>7</th>
+          <th>7</th>
+          <th>7</th>
+          <th>7</th>
+        </tr>
+        <tr>
+          <th>8</th>
+          <th>8</th>
+          <th>8</th>
+          <th>8</th>
+        </tr>
+        <tr>
+          <th>9</th>
+          <th>9</th>
+          <th>9</th>
+          <th>9</th>
+        </tr>
+        <tr>
+          <th>9</th>
+          <th>9</th>
+          <th>9</th>
+          <th>9</th>
+        </tr>
+        <tr>
+          <th>10</th>
+          <th>10</th>
+          <th>10</th>
+          <th>10</th>
+        </tr>
+        <tr>
+          <th colspan="4">11</th>
+        </tr>
+      </table> -->
+</div>
