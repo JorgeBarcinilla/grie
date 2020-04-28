@@ -1,3 +1,85 @@
-<div class="container-fluid">
-    <app-card-title info="Esta acción de preparación para la respuesta permite que las personas desarrollen conocimientos y habilidades específicas para que cumplan de manera óptima los servicios de respuesta a emergencias definidas para la I.E"></app-card-title>
+<div class="container-fluid" style="height: 73vh;">
+  <app-card-title
+    info="Esta acción de preparación para la respuesta permite que las personas desarrollen conocimientos y habilidades específicas para que cumplan de manera óptima los servicios de respuesta a emergencias definidas para la I.E">
+  </app-card-title>
+  <form [formGroup]="formParcialCapacitacion" autocomplete="off">
+    <div class="row justify-content-center h-100">
+      <div class="col-12 mt-2 h-100">
+        <table mat-table [dataSource]="dataSourcecapacitacion" class="w-100 mat-elevation-z2">
+          <ng-container matColumnDef="servicio">
+            <th mat-header-cell *matHeaderCellDef>Servicio</th>
+            <td class="font-weight-bold" mat-cell *matCellDef="let element">
+              {{ element.servicio }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nPersonasCapacitadas">
+            <th mat-header-cell *matHeaderCellDef># de personas capacitadas</th>
+            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <mat-form-field class="w-50">
+                <mat-label>N° Personas</mat-label>
+                <input matInput placeholder="N° Personas" formControlName="{{ element.formGroup.formControls[0] }}" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nPersonasCapacitar">
+            <th mat-header-cell *matHeaderCellDef># de personas a capacitar</th>
+            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <mat-form-field class="w-50">
+                <mat-label>N° Personas</mat-label>
+                <input matInput placeholder="N° Personas" formControlName="{{ element.formGroup.formControls[1] }}" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="oferenteCapacitacion">
+            <th mat-header-cell *matHeaderCellDef>Oferente de capacitación</th>
+            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <mat-form-field class="w-75">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[2] }}" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="responsable">
+            <th mat-header-cell *matHeaderCellDef>Responsable</th>
+            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <mat-form-field class="w-75">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[3]}}" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fechaCapacitacion">
+            <th mat-header-cell *matHeaderCellDef>Fecha de capacitación </th>
+            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <mat-form-field class="w-50">
+                <mat-label>N° Dias</mat-label>
+                <input matInput placeholder="N° Dias" formControlName="{{ element.formGroup.formControls[4] }}" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recursos">
+            <th mat-header-cell *matHeaderCellDef>Recursos</th>
+            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
+              <mat-form-field>
+                <textarea matInput formControlName="{{ element.formGroup.formControls[5] }}"
+                  placeholder="Recursos"></textarea>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsCapacitacion"></tr>
+          <tr mat-row *matRowDef="
+              let row;
+              columns: displayedColumnsCapacitacion
+            "></tr>
+        </table>
+      </div>
+    </div>
+  </form>
 </div>
