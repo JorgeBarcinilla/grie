@@ -87,7 +87,11 @@ export class ReporteTratamientoRiesgoComponent implements OnInit {
       { name: "Causas", content: riesgo.causas.map(causa => causa.nombre) },
       {
         name: "Opción manejo",
-        content: [riesgo.tratamiento.estado]
+        content: [
+          riesgo.tratamiento
+            ? riesgo.tratamiento.estado
+            : "No se ha definido tratamiento"
+        ]
       },
       {
         name: "Actividad de control",
@@ -114,9 +118,7 @@ export class ReporteTratamientoRiesgoComponent implements OnInit {
         )
       },
 
-      { name: "Riesgo residual", content: ["6-1"] },
-
-      { name: "Indicador", content: ["12-1"] }
+      { name: "Riesgo residual", content: ["6-1"] }
     ];
   }
 }

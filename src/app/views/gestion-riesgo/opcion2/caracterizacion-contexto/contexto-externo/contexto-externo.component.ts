@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { MatCheckboxChange } from "@angular/material";
 
 @Component({
   selector: "app-contexto-externo",
@@ -7,6 +8,8 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./contexto-externo.component.css"]
 })
 export class ContextoExternoComponent implements OnInit {
+  enableSelectAmbiental: boolean = true;
+
   @Input() formularioContextoExterno: FormGroup;
 
   fenomenosAmbientales = [
@@ -51,4 +54,16 @@ export class ContextoExternoComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  changeAmbiental(value: MatCheckboxChange) {
+    if (value.checked) {
+      this.enableSelectAmbiental = false;
+      this.formularioContextoExterno
+        .get("contextoAmbiental")
+        .setValue(["Ninguno"]);
+    } else {
+      this.enableSelectAmbiental = true;
+      this.formularioContextoExterno.get("contextoAmbiental").setValue([]);
+    }
+  }
 }

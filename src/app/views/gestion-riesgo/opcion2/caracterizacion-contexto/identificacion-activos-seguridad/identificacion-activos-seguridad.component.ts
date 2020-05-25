@@ -142,7 +142,7 @@ export class IdentificacionActivosSeguridadComponent implements OnInit {
     }
 
     if (flagDone) {
-      if (puntaje > 19) {
+      if (puntaje > 20) {
         this.formParcialIdentificacionActivos
           .get("nivelCriticidad")
           .setValue("Alta");

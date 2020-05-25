@@ -86,7 +86,7 @@ export class NivelRiesgoResidualComponent implements OnInit {
         this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
           .obtenerRiesgos(
             this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso"
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto"
           )
           .subscribe((riesgos: Riesgo[]) => {
             if (riesgos) {
@@ -177,10 +177,25 @@ export class NivelRiesgoResidualComponent implements OnInit {
           prob += 0;
           imp += 1;
         }
-        this.riesgosMapeados[PROBABILIDAD[prob]][IMPACTO[imp]].push(
-          riesgo.riesgo
+        const posProbInit = PROBABILIDAD.indexOf(
+          riesgo.probabilidad.toLowerCase().replace(" ", "")
         );
-        let riesgoResidual = "";
+        const posProbFinal = posProbInit + prob;
+        const posImpInit = IMPACTO.indexOf(
+          riesgo.nivelImpacto.toLowerCase().replace(" ", "")
+        );
+        const posImpFinal = posImpInit + imp;
+        this.riesgosMapeados[
+          PROBABILIDAD[
+            posProbFinal > PROBABILIDAD.length - 1
+              ? PROBABILIDAD.length - 1
+              : posProbFinal
+          ]
+        ][
+          IMPACTO[
+            posImpFinal > IMPACTO.length - 1 ? IMPACTO.length - 1 : posImpFinal
+          ]
+        ].push(riesgo.riesgo);
       } else {
         this.riesgosNoMapeados.push(riesgo);
       }

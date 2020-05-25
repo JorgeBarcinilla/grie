@@ -87,14 +87,19 @@ export class EstimarRiesgoInicialComponent implements OnInit {
 
   mapearRiesgos(riesgos) {
     console.log(RIESGOS_MAP);
+
     this.riesgosMapeados = JSON.parse(JSON.stringify(RIESGOS_MAP));
     riesgos.forEach(riesgo => {
       const probabilidad = riesgo.probabilidad;
       const nivelImpacto = riesgo.nivelImpacto;
       if (probabilidad && nivelImpacto) {
-        this.riesgosMapeados[probabilidad.toLocaleLowerCase().replace(" ", "")][
-          nivelImpacto.toLocaleLowerCase().replace(" ", "")
-        ].push(riesgo.riesgo);
+        const probabilidadRiesgo = probabilidad
+          .toLocaleLowerCase()
+          .replace(" ", "");
+        const impactoRiesgo = nivelImpacto.toLocaleLowerCase().replace(" ", "");
+        this.riesgosMapeados[probabilidadRiesgo][impactoRiesgo].push(
+          riesgo.riesgo
+        );
       }
     });
   }

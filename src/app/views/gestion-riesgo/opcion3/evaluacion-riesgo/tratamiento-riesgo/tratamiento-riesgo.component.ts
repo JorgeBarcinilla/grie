@@ -8,6 +8,8 @@ import { MatDialog } from "@angular/material";
 import { ModalTratamientoRiesgoComponent } from "../modals/modal-tratamiento-riesgo/modal-tratamiento-riesgo.component";
 import { Res } from "src/app/models/res.model";
 import { NotificacionService } from "src/app/services/notification/notification.service";
+import { LineamientoPoliticaRiesgo } from "src/app/models/lineamientoPoliticaRiesgo.model";
+import { LineamientoPoliticaRiesgoService } from "src/app/services/gestion-riesgo/lineamiento-politica-riesgo.service";
 
 @Component({
   selector: "app-tratamiento-riesgo",
@@ -56,17 +58,18 @@ export class TratamientoRiesgoComponent implements OnInit {
       .obtenerIdSede()
       .subscribe((idSede: string) => {
         this.idSede = idSede;
+
         this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
           .obtenerRiesgos(
             this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso"
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto"
           )
           .subscribe((riesgos: Riesgo[]) => {
+            console.log(riesgos);
             if (riesgos) {
               this.riesgos = riesgos;
               this.riesgos.forEach(riesgo => {
                 this.listaProcesos.forEach(proceso => {
-                  console.log(proceso[0] + "-" + riesgo.proceso);
                   if (proceso[0] == riesgo.proceso) {
                     proceso[1].push(riesgo);
                   }
@@ -88,7 +91,10 @@ export class TratamientoRiesgoComponent implements OnInit {
 
   tratarRiesgo(riesgo: Riesgo) {
     const dialogRef = this.dialog.open(ModalTratamientoRiesgoComponent, {
-      data: riesgo
+      data: {
+        riesgo: riesgo,
+        idSede: this.idSede
+      }
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {

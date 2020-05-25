@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import {
-  FormGroup,
+  FormBuilder,
   FormControl,
-  Validators,
-  FormBuilder
+  FormGroup,
+  Validators
 } from "@angular/forms";
-import { MatTableDataSource, MatPaginator } from "@angular/material";
+import { MatPaginator, MatTableDataSource } from "@angular/material";
 import { ContextoInterno } from "src/app/models/caracterizacionContexto.model";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 export interface DataElementSingleAnswer {
   pregunta: string;
@@ -106,12 +105,12 @@ export class ContextoInternoComponent implements OnInit {
 
   @Input() formularioContextoInterno: FormGroup;
 
-  otraEstructura: boolean;
+  //otraEstructura: boolean;
 
-  formParcialEstructuras = new FormGroup({
+  /*formParcialEstructuras = new FormGroup({
     estructurasParcial: new FormControl("", Validators.required),
     calificacionParcial: new FormControl("", Validators.required)
-  });
+  });*/
 
   formParcialComunidadEducativa = new FormGroup({
     tipoPoblacion: new FormControl("", Validators.required),
@@ -130,29 +129,30 @@ export class ContextoInternoComponent implements OnInit {
   formParcialFinanciero = new FormGroup({});
 
   estructurasFisicas = [
-    "Cimiento de las edificaciones",
-    "Muros estructurales",
-    "Techos y cubiertas",
-    "Sismo resistencia",
-    "Escaleras y accesos",
-    "Puertas y muros cortafuegos",
-    "Salidas de emergencia",
-    "Rutas de evacuacion",
-    "Señalización de vías de evacuación",
-    "Sistemas de detección de incendios",
-    "Disponibilidad de tanque de reserva",
-    "Suministro de energía",
-    "Suministro de agua",
-    "Recolección de basura",
-    "Gas natural",
-    "Parqueaderos",
-    "Camillas",
-    "Botiquines",
-    "Extintores",
-    "Sistema de alarma",
-    "Planta de emergencia",
-    "Sistema de vigilancia"
+    { nombre: "Cimiento de las edificaciones", calificacion: null },
+    { nombre: "Muros estructurales", calificacion: null },
+    { nombre: "Techos y cubiertas", calificacion: null },
+    { nombre: "Sismo resistencia", calificacion: null },
+    { nombre: "Escaleras y accesos", calificacion: null },
+    { nombre: "Puertas y muros cortafuegos", calificacion: null },
+    { nombre: "Salidas de emergencia", calificacion: null },
+    { nombre: "Rutas de evacuacion", calificacion: null },
+    { nombre: "Señalización de vías de evacuación", calificacion: null },
+    { nombre: "Sistemas de detección de incendios", calificacion: null },
+    { nombre: "Disponibilidad de tanque de reserva", calificacion: null },
+    { nombre: "Suministro de energía", calificacion: null },
+    { nombre: "Suministro de agua", calificacion: null },
+    { nombre: "Recolección de basura", calificacion: null },
+    { nombre: "Gas natural", calificacion: null },
+    { nombre: "Parqueaderos", calificacion: null },
+    { nombre: "Camillas", calificacion: null },
+    { nombre: "Botiquines", calificacion: null },
+    { nombre: "Extintores", calificacion: null },
+    { nombre: "Sistema de alarma", calificacion: null },
+    { nombre: "Planta de emergencia", calificacion: null },
+    { nombre: "Sistema de vigilancia", calificacion: null }
   ];
+  displayedColumnsEstrucrurasFisicas: string[] = ["nombre", "calificacion"];
   estructurasCalificadas = [];
 
   tipoPoblacion = [
@@ -242,9 +242,7 @@ export class ContextoInternoComponent implements OnInit {
       ? contextoInterno.comunidadEducativa
       : [];
     this.dataSourceComunidadEducativa.data = this.tipoPoblacionGuardada;
-    this.estructurasCalificadas = Array.isArray(
-      contextoInterno.estructuraFisica
-    )
+    this.estructurasFisicas = Array.isArray(contextoInterno.estructuraFisica)
       ? contextoInterno.estructuraFisica
       : [];
 
@@ -285,7 +283,7 @@ export class ContextoInternoComponent implements OnInit {
     });
   }
 
-  cambiarCampo() {
+  /*cambiarCampo() {
     if (this.otraEstructura) {
       this.otraEstructura = false;
       this.formParcialEstructuras.get("estructurasParcial").setValue("");
@@ -293,10 +291,10 @@ export class ContextoInternoComponent implements OnInit {
       this.otraEstructura = true;
       this.formParcialEstructuras.get("estructurasParcial").setValue("");
     }
-  }
+  }*/
 
   calificarEstructuras() {
-    let estrcs = this.formParcialEstructuras.value.estructurasParcial;
+    /*let estrcs = this.formParcialEstructuras.value.estructurasParcial;
     let icon;
     switch (this.formParcialEstructuras.value.calificacionParcial) {
       case "Bueno":
@@ -333,15 +331,15 @@ export class ContextoInternoComponent implements OnInit {
         calificacion: this.formParcialEstructuras.value.calificacionParcial,
         icon: icon
       });
-    }
+    }*/
 
     this.formularioContextoInterno
       .get("estructuraFisica")
-      .setValue(this.estructurasCalificadas);
-    this.formParcialEstructuras.reset();
+      .setValue(this.estructurasFisicas);
+    //this.formParcialEstructuras.reset();
   }
 
-  eliminarEstructura(nombre: string) {
+  /*eliminarEstructura(nombre: string) {
     this.estructurasCalificadas = this.estructurasCalificadas.filter(est => {
       return est.nombre != nombre;
     });
@@ -349,7 +347,7 @@ export class ContextoInternoComponent implements OnInit {
     this.formularioContextoInterno
       .get("estructuraFisica")
       .setValue(this.estructurasCalificadas);
-  }
+  }*/
 
   guardarComunidadEducativa() {
     let tipo = this.formParcialComunidadEducativa.value.tipoPoblacionParcial;

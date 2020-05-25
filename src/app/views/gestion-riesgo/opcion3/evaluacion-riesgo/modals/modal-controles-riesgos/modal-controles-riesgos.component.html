@@ -5,44 +5,55 @@
       <div class="row justify-content-center">
         <div class="col-12 p-0">
 
-          <mat-horizontal-stepper [linear]="false" #stepper>
+          <mat-horizontal-stepper [linear]="true" #stepper>
             <mat-step [stepControl]="formCriterioEvaluacion.controls.criterio1">
 
               <div class="container-fluid">
                 <div class="row justify-content-start" [formGroup]="formCriterioEvaluacion.controls.criterio1">
-                  <div class="col-12">
-                    <h3>¿Existe un responsable asignado a la ejecución del control?</h3>
-                  </div>
-                  <div class="col-4">
-                    <mat-form-field class="w-100">
-                      <mat-label>Respuesta</mat-label>
-                      <mat-select formControlName="a">
-                        <mat-option value="true">
-                          Asignado
-                        </mat-option>
-                        <mat-option value="false">
-                          No asignado
-                        </mat-option>
-                      </mat-select>
+                  <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Control</mat-label>
+                      <textarea formControlName="descripcion" matInput rows="15"
+                        placeholder="Escriba el control a aplicar"></textarea>
                     </mat-form-field>
                   </div>
-                  <nz-divider></nz-divider>
-                  <div class="col-12">
-                    <h3>¿El responsable tiene la autoridad y adecuada segregación de funciones en la ejecución del
-                      control?</h3>
-                  </div>
-                  <div class="col-4">
-                    <mat-form-field class="w-100 ">
-                      <mat-label>Respuesta</mat-label>
-                      <mat-select formControlName="b">
-                        <mat-option value="true">
-                          Adecuado
-                        </mat-option>
-                        <mat-option value="false">
-                          Inadecuado
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="col-12">
+                        <h3>¿Existe un responsable asignado a la ejecución del control?</h3>
+                      </div>
+                      <div class="col-7">
+                        <mat-form-field class="w-100">
+                          <mat-label>Respuesta</mat-label>
+                          <mat-select formControlName="a">
+                            <mat-option value="true">
+                              Asignado
+                            </mat-option>
+                            <mat-option value="false">
+                              No asignado
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <nz-divider></nz-divider>
+                      <div class="col-12">
+                        <h3>¿El responsable tiene la autoridad y adecuada segregación de funciones en la ejecución del
+                          control?</h3>
+                      </div>
+                      <div class="col-7">
+                        <mat-form-field class="w-100 ">
+                          <mat-label>Respuesta</mat-label>
+                          <mat-select formControlName="b">
+                            <mat-option value="true">
+                              Adecuado
+                            </mat-option>
+                            <mat-option value="false">
+                              Inadecuado
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

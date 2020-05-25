@@ -5,13 +5,13 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl,
+  FormControl
 } from "@angular/forms";
 
 @Component({
   selector: "app-modal-controles-riesgos",
   templateUrl: "./modal-controles-riesgos.component.html",
-  styleUrls: ["./modal-controles-riesgos.component.css"],
+  styleUrls: ["./modal-controles-riesgos.component.css"]
 })
 export class ModalControlesRiesgosComponent implements OnInit {
   causa: Causa;
@@ -21,6 +21,7 @@ export class ModalControlesRiesgosComponent implements OnInit {
     criterio1: new FormGroup({
       a: new FormControl("", Validators.required),
       b: new FormControl("", Validators.required),
+      descripcion: new FormControl("", Validators.required)
     }),
     criterio2: new FormControl("", Validators.required),
     criterio3: new FormControl("", Validators.required),
@@ -30,7 +31,7 @@ export class ModalControlesRiesgosComponent implements OnInit {
     calificacionDisenio: new FormControl("", Validators.required),
     calificacionEjecucion: new FormControl("", Validators.required),
     solidez: new FormControl("", Validators.required),
-    fortalecer: new FormControl("", Validators.required),
+    fortalecer: new FormControl("", Validators.required)
   });
 
   constructor(

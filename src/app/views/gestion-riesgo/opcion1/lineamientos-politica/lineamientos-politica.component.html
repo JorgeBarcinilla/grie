@@ -8,7 +8,6 @@
         <mat-card class=" h-100">
           <mat-card-header>
             <mat-card-title>Terminos y definiciones</mat-card-title>
-            <mat-card-subtitle>Aqui va el subtitulo</mat-card-subtitle>
           </mat-card-header>
           <div class="container-fluid h-100">
             <div class="row justify-content-center h-100">
@@ -59,7 +58,7 @@
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
-                  <textarea formControlName="alcance" matInput placeholder="Aqui los alcances"></textarea>
+                  <textarea formControlName="alcance" matInput placeholder="Aqui el alcance"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -295,7 +294,7 @@
               <span *ngIf="element.formGroup.name != 'none'">
                 Por mas de
                 <mat-form-field>
-                  <input matInput type="number" placeholder="Numero de veces" min="1" formControlName="numeroVeces" />
+                  <input matInput type="number" placeholder="Numero de horas" min="1" formControlName="numeroVeces" />
                 </mat-form-field>
                 horas
               </span>

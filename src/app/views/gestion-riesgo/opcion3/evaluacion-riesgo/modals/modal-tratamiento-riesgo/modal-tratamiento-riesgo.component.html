@@ -12,7 +12,8 @@
           <mat-form-field class="w-100">
             <mat-label>Tratamiento</mat-label>
             <mat-select formControlName="estado" (selectionChange)="seleccionarEstado($event)">
-              <mat-option matTooltip="Si el nivel de riesgo cumple con los criterios de aceptación de riesgo no es necesario poner
+              <mat-option *ngIf="lineamientos?.nivelesAceptacionRiesgo['riesgo'+riesgo.nivelRiesgo] == 'aceptable'"
+                matTooltip="Si el nivel de riesgo cumple con los criterios de aceptación de riesgo no es necesario poner
                 controles y puede ser aceptado, es decir que no se adopta ninguna medida que afecte la probabilidad o el
                 impacto del riesgo" matTooltipPosition="before" value="aceptar">
                 Aceptar
@@ -64,7 +65,7 @@
         </div>
       </div>
       <div *ngIf="formTratamiento.value.estado == 'reducir'" class="row justify-content-start">
-        <div class="col-sm-6 col-md-3">
+        <!-- <div class="col-sm-6 col-md-3">
           <mat-form-field class="w-100">
             <mat-label>N° Actividades cumplidas</mat-label>
             <input formControlName="actividadesCumplidas" matInput type="number">
@@ -75,7 +76,7 @@
             <mat-label>N° de incidentes</mat-label>
             <input formControlName="incidentes" matInput type="number">
           </mat-form-field>
-        </div>
+        </div> -->
         <div class="col-12 mat-elevation-z1 div-list pt-3 h-100 pl-3 pr3 mt-2 mb-2" formGroupName="planContingencia">
           <div class="label-title-div">Plan de contingencia</div>
           <div class="container">

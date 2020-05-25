@@ -12,6 +12,7 @@ export interface Riesgo {
   concecuencias: [string];
   nivelImpacto?: string;
   probabilidad?: string;
+  nivelRiesgo?: string;
   solidez?: string;
   disminuirImpacto?: string;
   disminuirProbabilidad?: string;

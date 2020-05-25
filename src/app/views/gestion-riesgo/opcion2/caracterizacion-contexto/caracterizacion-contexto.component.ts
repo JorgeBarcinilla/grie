@@ -24,7 +24,7 @@ export class CaracterizacionContextoComponent implements OnInit, OnDestroy {
       contextoEconomicoFinanciero: new FormControl(""),
       contextoTecnologico: new FormControl(""),
       contextoLegalReglamentario: new FormControl(""),
-      contextoOtro: new FormControl(""),
+      //contextoOtro: new FormControl(""),
       contextoSocialCultural: new FormControl(""),
       contextoAmbiental: new FormControl("")
     }),

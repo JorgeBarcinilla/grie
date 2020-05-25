@@ -4,23 +4,42 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatSelectChange,
-  MatDialog,
+  MatDialog
 } from "@angular/material";
 import {
   Riesgo,
   Causa,
-  AccionCausa,
+  AccionCausa
 } from "src/app/models/identificacionRiesgo.model";
 import { ModalAccionCausaComponent } from "../modal-accion-causa/modal-accion-causa.component";
 import { ArrayLengthValidator } from "src/app/validators/arrayLengthValidator";
+import { LineamientoPoliticaRiesgoService } from "src/app/services/gestion-riesgo/lineamiento-politica-riesgo.service";
+import { Subscription } from "rxjs";
+import { LineamientoPoliticaRiesgo } from "src/app/models/lineamientoPoliticaRiesgo.model";
+
+const HASH_PROBABILIDAD = {
+  casiseguro: 4,
+  probable: 3,
+  posible: 2,
+  improbable: 1,
+  raravez: 0
+};
+const HASH_IMPACTO = {
+  insignificante: 0,
+  menor: 1,
+  moderado: 2,
+  mayor: 3,
+  catastrofico: 4
+};
 
 @Component({
   selector: "app-modal-tratamiento-riesgo",
   templateUrl: "./modal-tratamiento-riesgo.component.html",
-  styleUrls: ["./modal-tratamiento-riesgo.component.css"],
+  styleUrls: ["./modal-tratamiento-riesgo.component.css"]
 })
 export class ModalTratamientoRiesgoComponent implements OnInit {
   riesgo: Riesgo;
+  idSede: string;
   accionesCausas: AccionCausa[] = [];
 
   formTratamiento = new FormGroup({
@@ -32,17 +51,20 @@ export class ModalTratamientoRiesgoComponent implements OnInit {
       actividadControl: new FormControl("", Validators.required),
       responsable: new FormControl("", Validators.required),
       tiempoEjecucion: new FormControl("", Validators.required),
-      soporte: new FormControl("", Validators.required),
+      soporte: new FormControl("", Validators.required)
     }),
-    acciones: new FormControl([]),
+    acciones: new FormControl([])
   });
 
   constructor(
     public dialogRef: MatDialogRef<ModalTratamientoRiesgoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Riesgo,
-    public dialog: MatDialog
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog,
+    private _lineamientosPoliticaRiesgoService: LineamientoPoliticaRiesgoService
   ) {
-    this.riesgo = data;
+    this.riesgo = data.riesgo;
+    this.idSede = data.idSede;
+
     if (this.riesgo.tratamiento) {
       this.changeStatusFormControl(this.riesgo.tratamiento.estado);
       this.formTratamiento
@@ -63,7 +85,7 @@ export class ModalTratamientoRiesgoComponent implements OnInit {
           .setValue(this.riesgo.tratamiento.planContingencia);
       }
       if (this.riesgo.tratamiento.estado == "reducir") {
-        this.riesgo.causas.forEach((element) => {
+        this.riesgo.causas.forEach(element => {
           this.accionesCausas.push(element.accion);
         });
         this.formTratamiento.get("acciones").setValue(this.accionesCausas);
@@ -75,8 +97,71 @@ export class ModalTratamientoRiesgoComponent implements OnInit {
         ArrayLengthValidator.equalLength(this.riesgo.causas.length)
       );
   }
+  lineamientos: LineamientoPoliticaRiesgo;
+  subscribeLineamientos: Subscription;
+  ngOnInit() {
+    this.subscribeLineamientos = this._lineamientosPoliticaRiesgoService
+      .obtenerLineamiento(this.idSede)
+      .subscribe((res: LineamientoPoliticaRiesgo) => {
+        if (res && res != null) {
+          this.lineamientos = res;
+        } else {
+          this.lineamientos = undefined;
+        }
+      });
+    const nivelProb =
+      HASH_PROBABILIDAD[
+        this.riesgo.probabilidad.toLocaleLowerCase().replace(" ", "")
+      ];
+    const nivelImp =
+      HASH_IMPACTO[
+        this.riesgo.nivelImpacto.toLocaleLowerCase().replace(" ", "")
+      ];
+    switch (nivelProb) {
+      case 0:
+        nivelImp < 2
+          ? (this.riesgo.nivelRiesgo = "Bajo")
+          : nivelImp < 3
+          ? (this.riesgo.nivelRiesgo = "Moderado")
+          : nivelImp < 4
+          ? (this.riesgo.nivelRiesgo = "Alto")
+          : (this.riesgo.nivelRiesgo = "Extremo");
+        break;
+      case 1:
+        nivelImp < 2
+          ? (this.riesgo.nivelRiesgo = "Bajo")
+          : nivelImp < 3
+          ? (this.riesgo.nivelRiesgo = "Moderado")
+          : nivelImp < 4
+          ? (this.riesgo.nivelRiesgo = "Alto")
+          : (this.riesgo.nivelRiesgo = "Extremo");
+        break;
+      case 2:
+        nivelImp < 1
+          ? (this.riesgo.nivelRiesgo = "Bajo")
+          : nivelImp < 2
+          ? (this.riesgo.nivelRiesgo = "Moderado")
+          : nivelImp < 3
+          ? (this.riesgo.nivelRiesgo = "Alto")
+          : (this.riesgo.nivelRiesgo = "Extremo");
+        break;
+      case 3:
+        nivelImp < 1
+          ? (this.riesgo.nivelRiesgo = "Moderado")
+          : nivelImp < 3
+          ? (this.riesgo.nivelRiesgo = "Alto")
+          : (this.riesgo.nivelRiesgo = "Extremo");
+        break;
+      case 4:
+        nivelImp < 2
+          ? (this.riesgo.nivelRiesgo = "Alto")
+          : (this.riesgo.nivelRiesgo = "Extremo");
+        break;
 
-  ngOnInit() {}
+      default:
+        break;
+    }
+  }
 
   seleccionarEstado(select: MatSelectChange) {
     const estado = select.value;
@@ -124,11 +209,11 @@ export class ModalTratamientoRiesgoComponent implements OnInit {
 
   establecerAccion(causa: Causa) {
     const dialogRef = this.dialog.open(ModalAccionCausaComponent, {
-      data: causa,
+      data: causa
     });
     dialogRef.afterClosed().subscribe((data: AccionCausa) => {
       if (data) {
-        this.accionesCausas = this.accionesCausas.filter((element) => {
+        this.accionesCausas = this.accionesCausas.filter(element => {
           return element.idCausa != data.idCausa;
         });
         this.accionesCausas.push(data);

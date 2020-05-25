@@ -56,7 +56,7 @@ export class ValoracionControlesComponent implements OnInit {
         this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
           .obtenerRiesgos(
             this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso"
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto"
           )
           .subscribe((riesgos: Riesgo[]) => {
             if (Array.isArray(riesgos)) {
