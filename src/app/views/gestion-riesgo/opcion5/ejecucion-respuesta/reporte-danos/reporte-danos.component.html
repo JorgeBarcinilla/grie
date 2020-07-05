@@ -1,3 +1,254 @@
 <div class="container-fluid">
-    <app-card-title info="Para consolidar la información relacionada a los daños y/o pérdidas generadas por un evento y facilitar el reporte de manera ordenada, se sugiere registrar los siguientes datos:"></app-card-title>
+  <app-card-title
+    info="Para consolidar la información relacionada a los daños y/o pérdidas generadas por un evento y facilitar el reporte de manera ordenada, se sugiere registrar los siguientes datos:"
+  >
+  </app-card-title>
+  <div class="row justify-content-around mr-0 ml-0">
+    <div class="col-3">
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="pickerFechaEvento"
+          placeholder="Fecha del evento"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerFechaEvento"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerFechaEvento></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field class="w-100">
+        <input type="text" matInput placeholder="Diligenciado por" />
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field class="w-100">
+        <input type="number" matInput placeholder="Telefono" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row justify-content-center mr-0 ml-0">
+    <div class="col-6 ">
+      <div class="row mr-0 ml-0">
+        <div class="col-12 p-0 shadow-sm" style="border-radius: 5px;">
+          <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+            <h6>Fenómeno al que se asocia esta emergencia</h6>
+          </div>
+          <div class="row justify-content-center mr-0 ml-0 mt-1">
+            <div class="col-12 p-0">
+              <mat-radio-group class="w-100">
+                <mat-radio-button
+                  class="mr-2 ml-2"
+                  *ngFor="let fenomeno of fenomenos"
+                  [value]="fenomeno"
+                >
+                  {{ fenomeno }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row mr-0 ml-0">
+        <div class="col-12 p-0 shadow-sm" style="border-radius: 5px;">
+          <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+            <h6>Descripción general del proyecto</h6>
+          </div>
+          <div class="row justify-content-center mr-0 ml-0 mt-1">
+            <div class="col-12">
+              <mat-form-field class="w-100">
+                <textarea
+                  rows="8"
+                  matInput
+                  placeholder="Descripcion"
+                ></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mr-0 ml-0 mt-2">
+    <div class="col-8">
+      <div class="row mr-0 ml-0">
+        <div class="col-12 p-0 shadow-sm" style="border-radius: 5px;">
+          <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+            <h6>Tipo y numero de personas</h6>
+          </div>
+          <div class="row justify-content-start mr-0 ml-0 mt-1">
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input type="number" matInput placeholder="Estudiantes" />
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input type="number" matInput placeholder="Docentes" />
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input
+                  type="number"
+                  matInput
+                  placeholder="Personal administrativo"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input
+                  type="number"
+                  matInput
+                  placeholder="Personal de sevicios generales"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input type="number" matInput placeholder="Directivos" />
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input type="number" matInput placeholder="Visitantes" />
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field class="w-100">
+                <input type="number" matInput placeholder="Otro" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row mr-0 ml-0">
+        <div class="col-12 p-0 shadow-sm" style="border-radius: 5px;">
+          <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+            <h6>Tipo de servicios de respuesta solicitados</h6>
+          </div>
+          <div class="row justify-content-start mr-0 ml-0 mt-1">
+            <ul style="list-style-type: none;">
+              <li *ngFor="let respuesta of tiposRespuestas">
+                <mat-checkbox [(ngModel)]="respuesta.value" color="primary">
+                  {{ respuesta.nombre }}
+                </mat-checkbox>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mr-0 ml-0 mt-2">
+    <div class="col-12 shadow-sm" style="border-radius: 5px;">
+      <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+        <h6>Tipo y numero de edificaciones afectadas</h6>
+      </div>
+      <div class="row mr-0 ml-0">
+        <div class="col-6">
+          <div class="row justify-content-start mr-0 ml-0 mt-1">
+            <div class="col-12">
+              <div class="row justify-content-around mr-0 ml-0">
+                <div class="col-5">
+                  <mat-form-field class="w-100">
+                    <mat-label>Tipo de salon</mat-label>
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let edificacion of edificaciones"
+                        [value]="edificacion"
+                      >
+                        {{ edificacion }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-5">
+                  <mat-form-field class="w-100">
+                    <input type="number" matInput placeholder="Cantidad" />
+                  </mat-form-field>
+                </div>
+                <div class="col-2">
+                  <div class="row justify-content-center mr-0 ml-0">
+                    <button class="mt-2" mat-raised-button color="primary">
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <mat-form-field class="w-100">
+                <textarea
+                  rows="4"
+                  matInput
+                  placeholder="Descripcion de la afectacion"
+                ></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row mr-0 ml-0 justify-content-start"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mr-0 ml-0 mt-2">
+    <div class="col-12 shadow-sm" style="border-radius: 5px;">
+      <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+        <h6>Descripcion de necesidades</h6>
+      </div>
+      <div class="row mr-0 ml-0">
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <textarea rows="4" matInput placeholder="Necesidades"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center mr-0 ml-0 mt-2 mb-2">
+    <button class="mt-1" mat-raised-button color="accent">
+      Guardar
+    </button>
+  </div>
+  <div class="row ml-0 mr-0 mb-2 mt-2">
+    <div class="col-12 p-0">
+      <table
+        mat-table
+        [dataSource]="listaReportes"
+        class="w-100 mat-elevation-z3"
+      >
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
+        <ng-container matColumnDef="fenomeno">
+          <th mat-header-cell *matHeaderCellDef>Fenomeno</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
+        <ng-container matColumnDef="accion">
+          <th mat-header-cell *matHeaderCellDef>Accion</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsReportes"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsReportes"
+        ></tr>
+      </table>
+    </div>
+  </div>
 </div>

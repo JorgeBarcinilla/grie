@@ -1,3 +1,99 @@
 <div class="container-fluid">
-    <app-card-title info="Para ejecutar la recuperación, la I.E deberá llevar a cabo las actividades que le permitan garantizar la prestación del servicio educativo después de la emergencia. De igual manera, la I.E deberá realizar actividades de seguimiento, que permitan verificar si las acciones emprendidas contribuyen a satisfacer las necesidades identificadas, para posteriormente realizar las mejoras requeridas."></app-card-title>
+  <app-card-title
+    info="Para ejecutar la recuperación, la I.E deberá llevar a cabo las actividades que le permitan garantizar la prestación del servicio educativo después de la emergencia. De igual manera, la I.E deberá realizar actividades de seguimiento, que permitan verificar si las acciones emprendidas contribuyen a satisfacer las necesidades identificadas, para posteriormente realizar las mejoras requeridas.">
+  </app-card-title>
+  <div class="row justify-content-center mr-0 ml-0">
+    <div class="col-12 p-0 shadow-sm" style="border-radius: 5px;">
+      <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+        <h6>Ejecución de las acciones para la recuperación</h6>
+      </div>
+      <div class="row justify-content-around mr-0 ml-0">
+        <div class="col-5">
+          <mat-form-field class="w-100">
+            <input type="text" matInput placeholder="Necesidad" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="w-100">
+            <input type="text" matInput placeholder="Ejecutor (Interno / Externo)" />
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="w-100">
+            <input type="number" matInput placeholder="Días de ejecución" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-around mr-0 ml-0">
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <textarea rows="4" matInput placeholder="Acciones a desarrollar"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ml-0 mr-0 mb-2 mt-2">
+    <div class="col-12 p-0">
+      <table mat-table [dataSource]="listaAcciones" class="w-100 mat-elevation-z3">
+        <ng-container matColumnDef="necesidad">
+          <th mat-header-cell *matHeaderCellDef>Necesidad a satisfacer</th>
+          <td mat-cell *matCellDef="let element">{{ element.necesidad }}</td>
+        </ng-container>
+        <ng-container matColumnDef="ejecutor">
+          <th mat-header-cell *matHeaderCellDef>Ejecutor (Interno / Externo)</th>
+          <td mat-cell *matCellDef="let element">{{ element.ejecutor }}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones a desarrollar</th>
+          <td mat-cell *matCellDef="let element">{{ element.acciones }}</td>
+        </ng-container>
+        <ng-container matColumnDef="fechaEjecucion">
+          <th mat-header-cell *matHeaderCellDef>Fecha de ejecución</th>
+          <td mat-cell *matCellDef="let element">{{ element.fechaEjecucion }}</td>
+        </ng-container>
+        <ng-container matColumnDef="seguimiento">
+          <th mat-header-cell *matHeaderCellDef>Seguimiento</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="row justify-content-center mr-0 ml-0">
+              <button nz-button nzType="primary" nz-popover nzPopoverTitle="SEGUIMIENTO"
+                [(nzVisible)]="element.seguimiento.visible" nzPopoverTrigger="click"
+                [nzPopoverContent]="contentTemplateSeguimiento">
+                Ver
+              </button>
+              <ng-template #contentTemplateSeguimiento>
+                <div class="row justify-content-start mr-0 ml-0">
+                  <div class="col-12">
+                    <div class="row justify-content-start mr-0 ml-0 pt-2 pl-2">
+                      <h6>Se cumplió?</h6>
+                    </div>
+                    <div class="row justify-content-center mr-0 ml-0 mt-1">
+                      <div class="col-12 p-0">
+                        <mat-radio-group class="w-100" [(ngModel)]="element.seguimiento.respuesta">
+                          <mat-radio-button class="mr-2 ml-2" value="si">
+                            Si
+                          </mat-radio-button>
+                          <mat-radio-button class="mr-2 ml-2" value="no">
+                            No
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <mat-form-field class="w-100">
+                      <textarea rows="4" [(ngModel)]="element.seguimiento.accion" matInput
+                        placeholder="Acciones de mejoramiento"></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsAcciones"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsAcciones"></tr>
+      </table>
+    </div>
+  </div>
 </div>
