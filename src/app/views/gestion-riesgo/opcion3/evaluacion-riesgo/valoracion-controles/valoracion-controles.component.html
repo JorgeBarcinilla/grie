@@ -7,8 +7,8 @@
     </div>
     <div class="col-1">
       <div class="row mt-4 pr-2 justify-content-end">
-        <app-button-example tooltip="Ver pasos de valoracion de riesgos" src="assets/img/info_valoracion_riesgo.png"
-          label="Valoracion de riesgos">
+        <app-button-example tooltip="Ver pasos de valoración de riesgos" src="assets/img/info_valoracion_riesgo.png"
+          label="Valoración de riesgos">
         </app-button-example>
       </div>
     </div>
@@ -38,7 +38,7 @@
 
         <!-- Weight Column -->
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
           <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
         </ng-container>
 
@@ -63,7 +63,7 @@
                   <div class="text-capitalize"><b>Diseño:
                     </b>{{causa.control?.calificacionDisenio ? causa.control?.calificacionDisenio : 'Sin calificacion'}}
                   </div>
-                  <div class="text-capitalize"><b>Ejecucion:
+                  <div class="text-capitalize"><b>Ejecución:
                     </b>{{causa.control?.calificacionEjecucion ? causa.control?.calificacionEjecucion : 'Sin calificacion'}}
                   </div>
                   <div class="text-capitalize"><b>Solidez:

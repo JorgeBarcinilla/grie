@@ -4,7 +4,7 @@
       info="Un activo es cualquier elemento que tenga valor para la organización, para identificar los activos de seguridad digital de la I.E, se siguen los pasos mostrados en la figura.">
     </app-card-title>
     <div class="row justify-content-end">
-      <app-button-example tooltip="Ver ejemplo de identificacion de activos" src="assets/img/pasos_procesos.png"
+      <app-button-example tooltip="Ver ejemplo de identificación de activos" src="assets/img/pasos_procesos.png"
         label="Pasos para identificar un activo"></app-button-example>
     </div>
     <div class="row justify-content-center mr-0 ml-0">
@@ -26,7 +26,7 @@
       </div>
       <div class="col-12 col-lg-6 col-xl-8">
         <mat-form-field class="w-100">
-          <textarea formControlName="descripcion" matInput placeholder="Descripcion"></textarea>
+          <textarea formControlName="descripcion" matInput placeholder="Descripción"></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -58,7 +58,7 @@
       </div>
       <div class="col-sm-6 col-md-3">
         <mat-form-field class="w-100">
-          <mat-label>Tipo de informacion</mat-label>
+          <mat-label>Tipo de información</mat-label>
           <mat-select formControlName="tipoInformacion">
             <mat-option *ngFor="let tipo of listaTiposInformacion" [value]="tipo">
               {{ tipo }}
@@ -203,7 +203,7 @@
 
           <!-- Position Column -->
           <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+            <th mat-header-cell *matHeaderCellDef>Descripción</th>
             <td mat-cell *matCellDef="let element">
               {{ element.descripcion }}
             </td>
@@ -211,7 +211,7 @@
 
           <!-- Name Column -->
           <ng-container matColumnDef="tipoInformacion">
-            <th mat-header-cell *matHeaderCellDef>Tipo de informacion</th>
+            <th mat-header-cell *matHeaderCellDef>Tipo de información</th>
             <td mat-cell *matCellDef="let element">
               {{ element.tipoInformacion }}
             </td>

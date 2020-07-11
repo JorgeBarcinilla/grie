@@ -14,8 +14,8 @@
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
         <mat-form-field class="w-100">
-          <mat-label>Codigo DANE</mat-label>
-          <input formControlName="codDane" matInput placeholder="Escriba el codigo DANE">
+          <mat-label>Código DANE</mat-label>
+          <input formControlName="codDane" matInput placeholder="Escriba el código DANE">
         </mat-form-field>
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
@@ -130,7 +130,7 @@
                     <div class="row justify-content-around">
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
-                          <mat-label>Municipo</mat-label>
+                          <mat-label>Municipio</mat-label>
                           <input formControlName="municipio" matInput
                             placeholder="Escriba el municipio donde se encuentra la sede">
                         </mat-form-field>
@@ -139,13 +139,13 @@
                         <mat-form-field class="w-100">
                           <mat-label>Barrio</mat-label>
                           <input formControlName="barrio" matInput
-                            placeholder="Escriba barrio donde esta ubicado el municipo">
+                            placeholder="Escriba barrio donde esta ubicado el municipio">
                         </mat-form-field>
                       </div>
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
-                          <mat-label>Direccion</mat-label>
-                          <input formControlName="direccion" matInput placeholder="Escriba la direccion de la sede">
+                          <mat-label>Dirección</mat-label>
+                          <input formControlName="direccion" matInput placeholder="Escriba la dirección de la sede">
                         </mat-form-field>
                       </div>
                       <div class="col-md-6">
@@ -159,7 +159,7 @@
                         <mat-form-field class="w-100">
                           <mat-label>Correo</mat-label>
                           <input formControlName="correo" matInput
-                            placeholder="Escriba la direccion de correo de la sede">
+                            placeholder="Escriba la dirección de correo de la sede">
                         </mat-form-field>
                       </div>
                     </div>
@@ -171,7 +171,7 @@
                         <div class="col-4">
                           <mat-form-field class="w-100">
                             <mat-label>Norte</mat-label>
-                            <input formControlName="limiteNorte" matInput placeholder="Institucion">
+                            <input formControlName="limiteNorte" matInput placeholder="Institución">
                           </mat-form-field>
                         </div>
                       </div>
@@ -179,7 +179,7 @@
                         <div class="col-4">
                           <mat-form-field class="w-100">
                             <mat-label>Este</mat-label>
-                            <input formControlName="limiteEste" matInput placeholder="Institucion">
+                            <input formControlName="limiteEste" matInput placeholder="Institución">
                           </mat-form-field>
                         </div>
                         <div class="col-4 text-center">
@@ -188,7 +188,7 @@
                         <div class="col-4">
                           <mat-form-field class="w-100">
                             <mat-label>Oeste</mat-label>
-                            <input formControlName="limiteOeste" matInput placeholder="Institucion">
+                            <input formControlName="limiteOeste" matInput placeholder="Institución">
                           </mat-form-field>
                         </div>
                       </div>
@@ -196,7 +196,7 @@
                         <div class="col-md-4">
                           <mat-form-field class="w-100">
                             <mat-label>Sur</mat-label>
-                            <input formControlName="limiteSur" matInput placeholder="Institucion">
+                            <input formControlName="limiteSur" matInput placeholder="Institución">
                           </mat-form-field>
                         </div>
                       </div>
@@ -207,7 +207,7 @@
             </ng-template>
           </mat-tab>
 
-          <mat-tab label="Descripcion planta física">
+          <mat-tab label="Descripción planta física">
             <ng-template matTabContent>
               <div class="container-fluid">
 
@@ -248,7 +248,7 @@
                           <div class="col-md-6">
                             <mat-form-field class="w-100">
                               <ngx-mat-file-input (change)="agregarArchivo($event)"
-                                formControlName="licenciaConstruccion" placeholder="Licencia de construccion (Solo PDF)"
+                                formControlName="licenciaConstruccion" placeholder="Licencia de construcción (Solo PDF)"
                                 [accept]="'.pdf'"></ngx-mat-file-input>
                               <mat-icon matSuffix>folder</mat-icon>
                             </mat-form-field>
@@ -319,7 +319,7 @@
 
                             <!-- Weight Column -->
                             <ng-container matColumnDef="tiposSalon">
-                              <th mat-header-cell *matHeaderCellDef> Tipos de salon </th>
+                              <th mat-header-cell *matHeaderCellDef> Tipos de salón </th>
                               <td mat-cell *matCellDef="let element">
                                 <mat-chip-list>
                                   <mat-chip class="bg-info" *ngFor="let chip of element.salones" selected>
@@ -387,7 +387,7 @@
     <div class="row justify-content-center mt-2 mb-2">
       <button color="accent" class="mr-2 ml-2" mat-raised-button (click)="actualizarIdentificacionSede()"
         type="button">Actualizar</button>
-      <button color="warn" class="mr-2 ml-2" mat-raised-button (click)="gestionRiesgoById()" type="button">Gestion del
+      <button color="warn" class="mr-2 ml-2" mat-raised-button (click)="gestionRiesgoById()" type="button">Gestión del
         riesgo</button>
     </div>
   </form>

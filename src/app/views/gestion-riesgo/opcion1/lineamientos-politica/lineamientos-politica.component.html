@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <app-card-title title="POLITICA DE ADMINISTRACIÓN DEL RIESGO"
+  <app-card-title title="POLÍTICA DE ADMINISTRACIÓN DEL RIESGO"
     info="Es la declaración de la dirección y las intenciones generales de una organización con respecto a la gestión del riesgo (NTC ISO31000 Numeral 2.4).">
   </app-card-title>
   <form [formGroup]="formularioLineamientosPoliticaRiesgo" autocomplete="off">
@@ -7,14 +7,14 @@
       <div class="col-md-6 col-lg-4">
         <mat-card class=" h-100">
           <mat-card-header>
-            <mat-card-title>Terminos y definiciones</mat-card-title>
+            <mat-card-title>Términos y definiciones</mat-card-title>
           </mat-card-header>
           <div class="container-fluid h-100">
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
                   <textarea formControlName="terminosDefiniciones" matInput
-                    placeholder="Aqui los terminos y definiciones"></textarea>
+                    placeholder="Aquí los términos y definiciones"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
-                  <textarea formControlName="objetivo" matInput placeholder="Aqui el objetivo"></textarea>
+                  <textarea formControlName="objetivo" matInput placeholder="Aquí el objetivo"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -58,7 +58,7 @@
             <div class="row justify-content-center h-100">
               <div class="col-12 h-100">
                 <mat-form-field class="w-100 h-100">
-                  <textarea formControlName="alcance" matInput placeholder="Aqui el alcance"></textarea>
+                  <textarea formControlName="alcance" matInput placeholder="Aquí el alcance"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -72,7 +72,7 @@
       <div class="col-12">
         <mat-card>
           <mat-card-header>
-            <mat-card-title>Niveles de aceptacion de riesgo</mat-card-title>
+            <mat-card-title>Niveles de aceptación de riesgo</mat-card-title>
             <mat-card-subtitle>
               Teniendo en cuenta que hay 4 niveles de riesgo: bajo, moderado,
               alto y extremo, la I.E debe determinar el nivel de aceptación de
@@ -157,7 +157,7 @@
             </ng-container>
 
             <ng-container matColumnDef="descripcion">
-              <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+              <th mat-header-cell *matHeaderCellDef>Descripción</th>
               <td mat-cell *matCellDef="let element">
                 {{ element.descripcion }}
               </td>
@@ -188,14 +188,14 @@
                     <mat-option value="vez al año">
                       vez al año.
                     </mat-option>
-                    <mat-option value="vez en los ultimos dos años">
-                      vez en los ultimos dos años.
+                    <mat-option value="vez en los últimos dos años">
+                      vez en los últimos dos años.
                     </mat-option>
-                    <mat-option value="vez en los ultimos cinco años">
-                      vez en los ultimos cinco años.
+                    <mat-option value="vez en los últimos cinco años">
+                      vez en los últimos cinco años.
                     </mat-option>
-                    <mat-option value="No se ha presentado en los ultimos cinco años">
-                      No se ha presentado en los ultimos cinco años
+                    <mat-option value="No se ha presentado en los últimos cinco años">
+                      No se ha presentado en los últimos cinco años
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -228,7 +228,7 @@
     <h4>Seleccione un tipo de riesgo ...</h4>
   </div>
   <div class="row justify-content-center mb-3" *ngIf="isCorrupcion">
-    <h4>Este nivel de impacto se califica en la seccion identificacion de riesgo</h4>
+    <h4>Este nivel de impacto se califica en la sección identificación de riesgo</h4>
   </div>
   <form [formGroup]="formularioNivelesCalificarImpactoFisico">
     <div class="row justify-content-center mb-3" *ngIf="isFisico">
@@ -288,7 +288,7 @@
 
           <ng-container matColumnDef="tiempoInterrupcion">
             <th class="w-25 text-center" mat-header-cell *matHeaderCellDef>
-              Tiempo de interrupcion
+              Tiempo de interrupción
             </th>
             <td class="text-center" mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <span *ngIf="element.formGroup.name != 'none'">

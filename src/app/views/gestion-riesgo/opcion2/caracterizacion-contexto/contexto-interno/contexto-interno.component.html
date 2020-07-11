@@ -8,9 +8,9 @@
       <div class="col-12">
         <mat-card class="h-100">
           <mat-card-header>
-            <mat-card-title>Estructura fisica</mat-card-title>
-            <mat-card-subtitle>Estado fisico general de la institucion educativa. Puede escojer una o multiples
-              estructuras con las que cuente la institucion y calificar su condicion</mat-card-subtitle>
+            <mat-card-title>Estructura física</mat-card-title>
+            <mat-card-subtitle>Estado físico general de la institución educativa. Puede escoger una o múltiples
+              estructuras con las que cuente la institución y calificar su condición</mat-card-subtitle>
           </mat-card-header>
           <div class="container-fluid">
             <div class="row justify-content-center mr-0 ml-0">
@@ -28,10 +28,10 @@
 
                   <!-- Name Column -->
                   <ng-container matColumnDef="calificacion">
-                    <th mat-header-cell *matHeaderCellDef> Calificacion </th>
+                    <th mat-header-cell *matHeaderCellDef> Calificación </th>
                     <td mat-cell *matCellDef="let element">
                       <mat-form-field class="w-100">
-                        <mat-label>Calificacion</mat-label>
+                        <mat-label>Calificación</mat-label>
                         <mat-select [(ngModel)]="element.calificacion" [ngModelOptions]="{standalone: true}"
                           (ngModelChange)="calificarEstructuras()">
                           <mat-option value="Bueno">Bueno</mat-option>
@@ -230,7 +230,7 @@
                     <mat-select formControlName="tiposDiscapacidad" multiple>
                       <mat-option value="Sensorial">Sensorial</mat-option>
                       <mat-option value="Cognitiva">Cognitiva</mat-option>
-                      <mat-option value="Fisica">Fisica</mat-option>
+                      <mat-option value="Fisica">Física</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -252,7 +252,7 @@
 
                     <!-- Position Column -->
                     <ng-container matColumnDef="tipoPoblacion">
-                      <th mat-header-cell *matHeaderCellDef> Tipo de poblacion </th>
+                      <th mat-header-cell *matHeaderCellDef> Tipo de población </th>
                       <td mat-cell *matCellDef="let element"> {{element.tipoPoblacion}} </td>
                     </ng-container>
 
@@ -270,7 +270,7 @@
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="tiposDiscapacidad">
-                      <th mat-header-cell *matHeaderCellDef> Tipos de discpacidad </th>
+                      <th mat-header-cell *matHeaderCellDef> Tipos de discapacidad </th>
                       <td mat-cell *matCellDef="let element">
                         <mat-chip-list>
                           <mat-chip class="bg-info" *ngFor="let chip of element.tiposDiscapacidad" selected>
@@ -397,7 +397,7 @@
       <div class="col-md-6">
         <mat-card class="h-100">
           <mat-card-header>
-            <mat-card-title>Comunicacion interna</mat-card-title>
+            <mat-card-title>Comunicación interna</mat-card-title>
             <mat-card-subtitle>Este aspecto está relacionado con los canales de comunicación que utiliza la I.E y su
               efectividad para que el flujo de información circule por todos los procesos y miembros de la comunidad
               educativa.</mat-card-subtitle>
@@ -407,7 +407,7 @@
               <div class="row justify-content-around">
                 <div class="col-sm-9 col-md-7">
                   <mat-form-field class="w-100">
-                    <mat-label>Otra comunicacion</mat-label>
+                    <mat-label>Otra comunicación</mat-label>
                     <input formControlName="otraComunicacion" matInput placeholder="Escriba otra medio de comunicacion">
                   </mat-form-field>
                 </div>
@@ -429,7 +429,7 @@
 
                     <!-- Position Column -->
                     <ng-container matColumnDef="pregunta">
-                      <th mat-header-cell *matHeaderCellDef> Canal de comunicacion </th>
+                      <th mat-header-cell *matHeaderCellDef> Canal de comunicación </th>
                       <td mat-cell *matCellDef="let element"> {{element.pregunta}} </td>
                     </ng-container>
 
