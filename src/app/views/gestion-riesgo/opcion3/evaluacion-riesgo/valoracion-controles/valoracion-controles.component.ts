@@ -140,7 +140,7 @@ export class ValoracionControlesComponent implements OnInit {
     } else if (prom > 49) {
       riesgo.solidez = "Moderado";
     } else {
-      riesgo.solidez = "Debil";
+      riesgo.solidez = "Débil";
     }
   }
 }

@@ -90,7 +90,7 @@ export class ContextoInternoComponent implements OnInit {
       formGroup: { name: "paginaWeb", formControls: ["respuesta"] }
     },
     {
-      pregunta: "Periodico institucional",
+      pregunta: "Periódico institucional",
       formGroup: { name: "periodicoInstitucional", formControls: ["respuesta"] }
     },
     {
@@ -136,8 +136,8 @@ export class ContextoInternoComponent implements OnInit {
     { nombre: "Escaleras y accesos", calificacion: null },
     { nombre: "Puertas y muros cortafuegos", calificacion: null },
     { nombre: "Salidas de emergencia", calificacion: null },
-    { nombre: "Rutas de evacuacion", calificacion: null },
-    { nombre: "Señalización de vías de evacuación", calificacion: null },
+    { nombre: "Rutas de evacuación", calificacion: null },
+    { nombre: "Penalización de vías de evacuación", calificacion: null },
     { nombre: "Sistemas de detección de incendios", calificacion: null },
     { nombre: "Disponibilidad de tanque de reserva", calificacion: null },
     { nombre: "Suministro de energía", calificacion: null },
@@ -158,12 +158,12 @@ export class ContextoInternoComponent implements OnInit {
   tipoPoblacion = [
     "Menores de tres años",
     "Educación pre-escolar",
-    "Basica primaria",
-    "Basica secundaria",
+    "Básica primaria",
+    "Básica secundaria",
     "Docentes",
     "Docente orientador",
     "Administrativos",
-    "Cafeterias-Restaurantes",
+    "Cafeterías-Restaurantes",
     "Servicios generales",
     "Portero",
     "Seguridad privada"

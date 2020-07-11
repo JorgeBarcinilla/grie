@@ -37,15 +37,15 @@ export class ReporteDanosComponent implements OnInit {
       value: false
     },
     {
-      nombre: "Policia",
+      nombre: "Policía",
       value: false
     },
     {
-      nombre: "Policia de transito",
+      nombre: "Policía de transito",
       value: false
     },
     {
-      nombre: "Manejo de servicios publicos",
+      nombre: "Manejo de servicios públicos",
       value: false
     },
     {
@@ -55,7 +55,7 @@ export class ReporteDanosComponent implements OnInit {
   ];
 
   edificaciones = [
-    "Almacen",
+    "Almacén",
     "Auditorio",
     "Baño",
     "Biblioteca",
@@ -72,7 +72,7 @@ export class ReporteDanosComponent implements OnInit {
     "Punto de primeros auxilios",
     "Sala de informática",
     "Sala de profesores",
-    "Salon",
+    "Salón",
     "Salón de arte",
     "Garitas (vigilancia)"
   ];

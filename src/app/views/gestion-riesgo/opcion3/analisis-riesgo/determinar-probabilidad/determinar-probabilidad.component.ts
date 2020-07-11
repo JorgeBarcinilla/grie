@@ -51,7 +51,7 @@ export class DeterminarProbabilidadComponent implements OnInit {
     "Rara vez"
   ];
   listaImpacto = [
-    "Catastrofico",
+    "Catastrófico",
     "Mayor",
     "Moderado",
     "Menor",
@@ -103,7 +103,7 @@ export class DeterminarProbabilidadComponent implements OnInit {
                     .get(riesgo.riesgo.replace(" ", "").toLowerCase())
                     .get("nivelImpacto")
                     .setValue(riesgo.nivelImpacto);
-                  if (riesgo.tipo == "Corrupcion") {
+                  if (riesgo.tipo == "Corrupción") {
                     this.formParcialDeterminarProbabilidad
                       .get(riesgo.riesgo.replace(" ", "").toLowerCase())
                       .get("nivelImpacto")

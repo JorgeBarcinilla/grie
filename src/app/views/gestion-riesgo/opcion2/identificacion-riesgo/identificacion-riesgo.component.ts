@@ -501,7 +501,7 @@ export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
     if (flagDone) {
       this.preguntasTerminadasCorrupccion = true;
       if (respuestasAfirmativas > 11) {
-        this.nivelImpactoCorrupcion = "Catastrofico";
+        this.nivelImpactoCorrupcion = "Catastrófico";
       } else if (respuestasAfirmativas > 5) {
         this.nivelImpactoCorrupcion = "Mayor";
       } else {

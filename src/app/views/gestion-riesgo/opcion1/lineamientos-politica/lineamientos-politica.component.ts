@@ -226,7 +226,7 @@ export class LineamientosPoliticaComponent implements OnInit {
   idLineamiento: string;
   esActualizar: boolean;
 
-  tiposRiesgos = ["Corrupción", "Fisicos", "Gestión", "Seguridad digital"];
+  tiposRiesgos = ["Corrupción", "Físicos", "Gestión", "Seguridad digital"];
   isGestion: boolean = false;
   isFisico: boolean = false;
   isSeguridadDigital: boolean;

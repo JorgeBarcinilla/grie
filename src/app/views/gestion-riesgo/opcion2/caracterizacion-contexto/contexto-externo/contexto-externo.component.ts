@@ -14,22 +14,22 @@ export class ContextoExternoComponent implements OnInit {
 
   fenomenosAmbientales = [
     {
-      categoria: "ATMOSFERICOS",
+      categoria: "ATMOSFÉRICOS",
       items: [
         "Huracanes",
         "Vendavales",
         "Heladas",
-        "Sequias",
+        "Sequías",
         "Tornados",
         "Incendios forestales"
       ]
     },
     {
-      categoria: "HIDROLOGICOS",
+      categoria: "HIDROLÓGICOS",
       items: ["Desbordamientos", "Inundaciones", "Avenidas torrenciales"]
     },
     {
-      categoria: "GEOLOGICOS",
+      categoria: "GEOLÓGICOS",
       items: ["Sismos", "Vulcanismo", "Movimientos en masa"]
     },
     {
@@ -41,14 +41,14 @@ export class ContextoExternoComponent implements OnInit {
   serviciosPublicos: string[] = [
     "Acueducto y alcantarillado",
     "Linea telefonica e internet",
-    "Recoleccion de residuos solidos",
+    "Recolección de residuos solidos",
     "Gas natural",
-    "Energia electrica",
+    "Energía eléctrica",
     "Transportes",
-    "Recreacion y deporte",
+    "Recreación y deporte",
     "Servicios de salud",
-    "Estacion de policia",
-    "Estacion de bomberos"
+    "Estación de policía",
+    "Estación de bomberos"
   ];
 
   constructor() {}
