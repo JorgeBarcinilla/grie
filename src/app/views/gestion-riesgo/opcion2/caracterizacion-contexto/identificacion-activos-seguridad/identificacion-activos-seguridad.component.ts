@@ -81,7 +81,7 @@ export class IdentificacionActivosSeguridadComponent implements OnInit {
     "activo",
     "tipoActivo",
     "responsable",
-    "descripción",
+    "descripcion",
     "tipoInformacion",
     "tipoDato",
     "criticidadRespectoConfidencialidad",

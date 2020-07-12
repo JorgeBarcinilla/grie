@@ -152,6 +152,7 @@ export class ContextoInternoComponent implements OnInit {
     { nombre: "Planta de emergencia", calificacion: null },
     { nombre: "Sistema de vigilancia", calificacion: null }
   ];
+
   displayedColumnsEstrucrurasFisicas: string[] = ["nombre", "calificacion"];
   estructurasCalificadas = [];
 
@@ -244,7 +245,7 @@ export class ContextoInternoComponent implements OnInit {
     this.dataSourceComunidadEducativa.data = this.tipoPoblacionGuardada;
     this.estructurasFisicas = Array.isArray(contextoInterno.estructuraFisica)
       ? contextoInterno.estructuraFisica
-      : [];
+      : this.estructurasFisicas;
 
     if (Array.isArray(contextoInterno.comunicacionInterna)) {
       this.ELEMENT_DATA_COMUNICACION_INTERNA.forEach(element => {
