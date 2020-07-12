@@ -1,38 +1,41 @@
 <h2 mat-dialog-title class="text-uppercase">{{causa.nombre}}</h2>
 <mat-dialog-content class="mat-typography">
   <div class="container-fluid">
-    <form [formGroup]="formAcciones" autocomplete="off">
-      <div class="row justify-content-around">
-        <div class="col-sm-6 col-md-3">
-          <mat-form-field class="w-100">
-            <mat-label>Actividad de control</mat-label>
-            <input formControlName="actividadControl" matInput>
-          </mat-form-field>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <mat-form-field class="w-100">
-            <mat-label>Responsable</mat-label>
-            <input formControlName="responsable" matInput>
-          </mat-form-field>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <mat-form-field class="w-100">
-            <mat-label>Tiempo de ejecución</mat-label>
-            <input formControlName="tiempoEjecucion" matInput>
-          </mat-form-field>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <mat-form-field class="w-100">
-            <mat-label>Soporte</mat-label>
-            <input formControlName="soporte" matInput>
-          </mat-form-field>
-        </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <nz-alert *ngIf="mostrarAlerta" nzType="warning" nzMessage="No deben haber campos vacios" nzShowIcon>
+        </nz-alert>
       </div>
-    </form>
+    </div>
+    <div class="row justify-content-around mt-2">
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field class="w-100">
+          <mat-label>Actividad de control</mat-label>
+          <input [(ngModel)]="causa.accion.actividadControl" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field class="w-100">
+          <mat-label>Responsable</mat-label>
+          <input [(ngModel)]="causa.accion.responsable" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field class="w-100">
+          <mat-label>Tiempo de ejecución</mat-label>
+          <input type="number" [(ngModel)]="causa.accion.tiempoEjecucion" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field class="w-100">
+          <mat-label>Soporte</mat-label>
+          <input [(ngModel)]="causa.accion.soporte" matInput>
+        </mat-form-field>
+      </div>
+    </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button type="button" mat-button color="primary" mat-dialog-close>Cancelar</button>
-  <button type="button" mat-raised-button color="accent" [mat-dialog-close]="true" (click)="guardarAcciones()"
-    [disabled]="formAcciones.invalid">Guardar</button>
+  <button type="button" mat-raised-button color="accent" (click)="guardarAcciones()">Guardar</button>
 </mat-dialog-actions>

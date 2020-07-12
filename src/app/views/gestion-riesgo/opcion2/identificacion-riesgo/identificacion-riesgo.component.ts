@@ -431,7 +431,12 @@ export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
 
   cambiarParametrosCausaConsecuencia(tipoRiesgo: string) {
     this.resetTipoRiesgoActivate();
-    this.tipoRiesgoActivate[tipoRiesgo.replace(" ", "")] = true;
+    this.tipoRiesgoActivate[
+      tipoRiesgo
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(" ", "")
+    ] = true;
 
     switch (tipoRiesgo) {
       case "Seguridad digital":
@@ -445,7 +450,7 @@ export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
         this.nivelImpactoCorrupcion = "";
         break;
 
-      case "Fisico":
+      case "Físico":
         this.formParcialIdentificacionRiesgo.get("escenarioRiesgo").enable();
         this.formParcialIdentificacionRiesgo.get("activo").disable();
         this.formParcialIdentificacionRiesgo.get("tipoActivo").disable();

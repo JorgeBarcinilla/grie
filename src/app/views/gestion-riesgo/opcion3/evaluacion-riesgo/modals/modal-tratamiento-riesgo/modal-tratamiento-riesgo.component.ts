@@ -45,8 +45,8 @@ export class ModalTratamientoRiesgoComponent implements OnInit {
   formTratamiento = new FormGroup({
     estado: new FormControl("", Validators.required),
     tipoCompartir: new FormControl("", Validators.required),
-    actividadesCumplidas: new FormControl("", Validators.required),
-    incidentes: new FormControl("", Validators.required),
+    actividadesCumplidas: new FormControl(""),
+    incidentes: new FormControl(""),
     planContingencia: new FormGroup({
       actividadControl: new FormControl("", Validators.required),
       responsable: new FormControl("", Validators.required),
@@ -219,6 +219,7 @@ export class ModalTratamientoRiesgoComponent implements OnInit {
         this.accionesCausas.push(data);
         this.formTratamiento.get("acciones").setValue(this.accionesCausas);
       }
+      console.log(this.formTratamiento.value);
     });
   }
 

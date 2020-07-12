@@ -13,5 +13,5 @@
 }
 
 .col-auto {
-  width: min-content !important;
+  width: max-content !important;
 }

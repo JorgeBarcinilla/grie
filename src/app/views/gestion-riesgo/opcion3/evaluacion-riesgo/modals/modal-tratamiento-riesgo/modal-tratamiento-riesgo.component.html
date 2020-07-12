@@ -122,17 +122,14 @@
                     Acciones
                   </ng-template>
                   <ng-template #contentTemplate>
-                    <div class="text-capitalize"><b>Actividad de control:
-                      </b>
+                    <div class="text-capitalize"><b>Actividad de control: </b> {{causa.accion?.actividadControl}}
                     </div>
-                    <div class="text-capitalize"><b>Responsable:
-                      </b>
+                    <div class="text-capitalize"><b>Responsable: </b>{{causa.accion?.responsable}}
                     </div>
-                    <div class="text-capitalize"><b>Soporte:
-                      </b>
+                    <div class="text-capitalize"><b>Soporte: </b>{{causa.accion?.soporte}}
                     </div>
-                    <div class="text-capitalize"><b>Tiempo de ejecución:
-                      </b></div>
+                    <div class="text-capitalize"><b>Tiempo de ejecución: </b>{{causa.accion?.tiempoEjecucion}}
+                    </div>
                   </ng-template>
                 </span>
               </mat-chip-list>
@@ -145,6 +142,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button type="button" mat-button color="primary" mat-dialog-close>Cancelar</button>
-  <button type="button" mat-raised-button color="accent" [mat-dialog-close]="true" (click)="guardarTratamiento()"
+  <button type="button" mat-raised-button color="accent" (click)="guardarTratamiento()"
     [disabled]="formTratamiento.invalid">Guardar</button>
 </mat-dialog-actions>

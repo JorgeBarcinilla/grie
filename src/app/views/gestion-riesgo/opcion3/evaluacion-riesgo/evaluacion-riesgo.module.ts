@@ -16,6 +16,7 @@ import { TratamientoRiesgoComponent } from "./tratamiento-riesgo/tratamiento-rie
 import { ValoracionControlesComponent } from "./valoracion-controles/valoracion-controles.component";
 import { ModalTratamientoRiesgoComponent } from "./modals/modal-tratamiento-riesgo/modal-tratamiento-riesgo.component";
 import { ModalAccionCausaComponent } from "./modals/modal-accion-causa/modal-accion-causa.component";
+import { NzAlertModule } from "ng-zorro-antd/alert";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ModalAccionCausaComponent } from "./modals/modal-accion-causa/modal-acc
     NzTagModule,
     NzDividerModule,
     NzPopoverModule,
-    NzIconModule
+    NzIconModule,
+    NzAlertModule
   ],
   entryComponents: [
     ModalControlesRiesgosComponent,

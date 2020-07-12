@@ -62,8 +62,10 @@
             <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
             <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <mat-form-field class="w-100">
-                <mat-label>N° Días</mat-label>
-                <input matInput placeholder="N° Días" formControlName="{{ element.formGroup.formControls[3] }}" />
+                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
+                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaEvento></mat-datepicker>
               </mat-form-field>
             </td>
           </ng-container>
@@ -148,8 +150,10 @@
             <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
             <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <mat-form-field class="w-100">
-                <mat-label>N° Días</mat-label>
-                <input matInput placeholder="N° Días" formControlName="{{ element.formGroup.formControls[3] }}" />
+                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
+                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaEvento></mat-datepicker>
               </mat-form-field>
             </td>
           </ng-container>
@@ -220,8 +224,10 @@
             <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
             <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <mat-form-field class="w-100">
-                <mat-label>N° Días</mat-label>
-                <input matInput placeholder="N° Días" formControlName="{{ element.formGroup.formControls[3] }}" />
+                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
+                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaEvento></mat-datepicker>
               </mat-form-field>
             </td>
           </ng-container>
@@ -300,8 +306,10 @@
             <th mat-header-cell *matHeaderCellDef>fecha de acción de mejora</th>
             <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <mat-form-field class="w-100">
-                <mat-label>N° Días</mat-label>
-                <input matInput placeholder="N° Días" formControlName="{{ element.formGroup.formControls[3] }}" />
+                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
+                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaEvento></mat-datepicker>
               </mat-form-field>
             </td>
           </ng-container>
@@ -383,8 +391,10 @@
             <th mat-header-cell *matHeaderCellDef>fecha de adquisición</th>
             <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
               <mat-form-field class="w-100">
-                <mat-label>N° Días</mat-label>
-                <input matInput placeholder="N° Días" formControlName="{{ element.formGroup.formControls[3] }}" />
+                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
+                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaEvento></mat-datepicker>
               </mat-form-field>
             </td>
           </ng-container>

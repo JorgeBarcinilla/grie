@@ -392,9 +392,9 @@ export class LineamientosPoliticaComponent implements OnInit {
         this.isSeguridadDigital = false;
         this.isGestion = false;
         break;
-      case "Fisicos":
+      case "Físicos":
         this.isFisico = true;
-        this.isCorrupcion = true;
+        this.isCorrupcion = false;
         this.isNone = false;
         this.isSeguridadDigital = false;
         this.isGestion = false;

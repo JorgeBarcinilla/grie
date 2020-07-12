@@ -101,6 +101,9 @@ export class TratamientoRiesgoComponent implements OnInit {
         this._evaluacionRiesgoRiesgoService
           .guardarTratamientoRiesgo(riesgo._id, data)
           .subscribe((res: Res) => {
+            this.riesgos.find(r => {
+              return r._id == riesgo._id;
+            }).tratamiento = data;
             this._notificacionService.mostrarNotificacion(res.message, "info");
           });
       }
