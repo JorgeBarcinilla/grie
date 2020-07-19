@@ -290,15 +290,15 @@
     <button type="button" color="accent" mat-stroked-button (click)="guardarRiesgo()"
       [disabled]="formParcialIdentificacionRiesgo.invalid">Agregar</button>
   </div>
-  <div class="row justify-content-center mt-3 mb-3">
-    <div class="col-12">
-      <table mat-table [dataSource]="dataSourceRiesgos" class="mat-elevation-z8 w-100">
+  <div class="row justify-content-center mr-0 ml-0 mt-3 mb-3">
+    <div class="col-12 mat-elevation-z2 p-0" style="max-height: 65vh ; overflow: auto;">
+      <table mat-table [dataSource]="dataSourceRiesgos">
 
         <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
-        <ng-container matColumnDef="riesgo">
+        <ng-container matColumnDef="riesgo" sticky>
           <th mat-header-cell *matHeaderCellDef> Riesgo </th>
           <td mat-cell *matCellDef="let element"> {{element.riesgo}} </td>
         </ng-container>
@@ -319,11 +319,11 @@
         <ng-container matColumnDef="causas">
           <th mat-header-cell *matHeaderCellDef> Causas </th>
           <td mat-cell *matCellDef="let element">
-            <mat-chip-list>
-              <mat-chip color="primary" *ngFor="let causa of element.causas" selected>
+            <div class="row justify-content-start mr-0 ml-0">
+              <nz-tag class="m-1" [nzColor]="'#ff5252'" *ngFor="let causa of element.causas">
                 {{causa.nombre}}
-              </mat-chip>
-            </mat-chip-list>
+              </nz-tag>
+            </div>
           </td>
         </ng-container>
 
@@ -331,11 +331,11 @@
         <ng-container matColumnDef="consecuencias">
           <th mat-header-cell *matHeaderCellDef> Consecuencias </th>
           <td mat-cell *matCellDef="let element">
-            <mat-chip-list>
-              <mat-chip color="primary" *ngFor="let chip of element.consecuencias" selected>
-                {{chip}}
-              </mat-chip>
-            </mat-chip-list>
+            <div class="row justify-content-start mr-0 ml-0">
+              <nz-tag class="m-1" [nzColor]="'#ff5252'" *ngFor="let concecuencia of element.consecuencias">
+                {{concecuencia}}
+              </nz-tag>
+            </div>
           </td>
         </ng-container>
 
@@ -347,10 +347,21 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsRiesgos"></tr>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="accion" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" aria-label="Eliminar Riesgo" nz-popconfirm
+              nzPopconfirmTitle="Estas seguro de eliminar el riesgo?" nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="eliminarRiesgo(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsRiesgos; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsRiesgos;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[8, 16,24]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </div>

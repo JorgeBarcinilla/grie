@@ -141,14 +141,14 @@ export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
 
   riesgosGuardados = [];
   dataSourceRiesgos = new MatTableDataSource<[]>();
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumnsRiesgos: string[] = [
     "riesgo",
     "tipo",
     "descripcion",
     "causas",
     "consecuencias",
-    "escenarioRiesgo"
+    "escenarioRiesgo",
+    "accion"
   ];
 
   tipoRiesgoActivate = {
@@ -310,7 +310,6 @@ export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dataSourceRiesgos.paginator = this.paginator;
     this.subscribeIdSede = this._changeSedeService
       .obtenerIdSede()
       .subscribe((idSede: string) => {
@@ -537,6 +536,21 @@ export class IdentificacionRiesgoComponent implements OnInit, OnDestroy {
       });
 
     this.resetForms();
+  }
+
+  eliminarRiesgo(riesgo) {
+    this._identificacionRiesgoRiesgoService
+      .eliminarRiesgo(riesgo._id)
+      .subscribe(
+        (res: Res) => {
+          this.riesgosGuardados = this.riesgosGuardados.filter(r => {
+            return r._id != riesgo._id;
+          });
+          this.dataSourceRiesgos.data = this.riesgosGuardados;
+          this._notificacionService.mostrarNotificacion(res.message, "success");
+        },
+        error => {}
+      );
   }
 
   resetForms() {
