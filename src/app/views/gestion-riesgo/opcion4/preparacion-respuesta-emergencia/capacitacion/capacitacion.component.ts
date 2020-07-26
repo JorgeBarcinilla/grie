@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { FormGroup } from "@angular/forms";
 import { OperacionesTablaService } from "src/app/helpers/operaciones-tabla.service";
+import { Capacitacion } from "src/app/models/preparacioRespuestaEmergencia.model";
 
 export interface DataElementSixAnswer {
   servicio: string;
@@ -17,6 +18,8 @@ export interface DataElementSixAnswer {
   styleUrls: ["./capacitacion.component.css"]
 })
 export class CapacitacionComponent implements OnInit {
+  @Input() capacitacion: Capacitacion;
+
   ELEMENT_DATA_CAPACITACION: DataElementSixAnswer[] = [
     {
       servicio: "Coordinación de la respuesta escolar a emergencias",
@@ -35,7 +38,7 @@ export class CapacitacionComponent implements OnInit {
     {
       servicio: "Extinción de incendios",
       formGroup: {
-        name: "capacitacion1",
+        name: "capacitacion2",
         formControls: [
           "nPersonasCapacitadas",
           "nPersonasCapacitar",
@@ -49,7 +52,7 @@ export class CapacitacionComponent implements OnInit {
     {
       servicio: "Primeros auxilios",
       formGroup: {
-        name: "capacitacion1",
+        name: "capacitacion3",
         formControls: [
           "nPersonasCapacitadas",
           "nPersonasCapacitar",
@@ -63,7 +66,7 @@ export class CapacitacionComponent implements OnInit {
     {
       servicio: "Evacuación",
       formGroup: {
-        name: "capacitacion1",
+        name: "capacitacion4",
         formControls: [
           "nPersonasCapacitadas",
           "nPersonasCapacitar",
@@ -77,7 +80,7 @@ export class CapacitacionComponent implements OnInit {
     {
       servicio: "Tráfico vehicular",
       formGroup: {
-        name: "capacitacion1",
+        name: "capacitacion5",
         formControls: [
           "nPersonasCapacitadas",
           "nPersonasCapacitar",
@@ -110,5 +113,11 @@ export class CapacitacionComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.capacitacion);
+  }
+
+  guardarCapacitacion() {
+    console.log(this.formParcialCapacitacion.value);
+  }
 }

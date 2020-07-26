@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { FormGroup } from "@angular/forms";
 import { OperacionesTablaService } from "src/app/helpers/operaciones-tabla.service";
+import { EquipamientoRespuesta } from "src/app/models/preparacioRespuestaEmergencia.model";
 
 export interface DataElementFiveAnswer {
   descripcion: string;
@@ -17,6 +18,8 @@ export interface DataElementFiveAnswer {
   styleUrls: ["./equipamento-respuesta.component.css"]
 })
 export class EquipamentoRespuestaComponent implements OnInit {
+  @Input() equipamientoRespuesta: EquipamientoRespuesta;
+
   //INCENDIO
   ELEMENT_DATA_EQUIPAMIENTO_INCENDIO: DataElementFiveAnswer[] = [
     {
@@ -381,5 +384,11 @@ export class EquipamentoRespuestaComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.equipamientoRespuesta);
+  }
+
+  guardarEquipamiento() {
+    console.log(this.formParcialEquipamientoComunicaciones.value);
+  }
 }

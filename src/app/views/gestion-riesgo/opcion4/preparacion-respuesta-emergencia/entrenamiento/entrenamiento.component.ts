@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { FormGroup } from "@angular/forms";
 import { OperacionesTablaService } from "src/app/helpers/operaciones-tabla.service";
+import { Entrenamiento } from "src/app/models/preparacioRespuestaEmergencia.model";
 
 export interface DataElementSixAnswer {
   actividad: string;
@@ -17,6 +18,8 @@ export interface DataElementSixAnswer {
   styleUrls: ["./entrenamiento.component.css"]
 })
 export class EntrenamientoComponent implements OnInit {
+  @Input() entrenamiento: Entrenamiento;
+
   ELEMENT_DATA_ENTRENAMIENTO: DataElementSixAnswer[] = [
     {
       actividad: "Detección del peligro",
@@ -96,5 +99,11 @@ export class EntrenamientoComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.entrenamiento);
+  }
+
+  guardarEntrenamiento() {
+    console.log(this.formParcialEntrenamiento.value);
+  }
 }

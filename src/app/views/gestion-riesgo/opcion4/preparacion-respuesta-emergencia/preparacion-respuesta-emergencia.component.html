@@ -5,24 +5,28 @@
   <div class="row justify-content-center mb-1" style="height: 99%;">
     <div class="col-12 mat-elevation-z4 h-100">
       <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Servicios internos de respuesta a emergencias" class="h-100">
+        <mat-tab label="Servicios de respuesta a emergencias" class="h-100">
           <ng-template matTabContent class="h-100">
-            <app-servicios-respuesta-emergencias></app-servicios-respuesta-emergencias>
+            <app-servicios-respuesta-emergencias
+              [serviciosExternosRespuestaEmergencias]="preparacionRespuestaEmergencia?.servicioRespuestaEmergencia.serviciosExternosRespuestaEmergencias"
+              [serviciosInternosRespuestaEmergencias]="preparacionRespuestaEmergencia?.servicioRespuestaEmergencia.serviciosInternosRespuestaEmergencias">
+            </app-servicios-respuesta-emergencias>
           </ng-template>
         </mat-tab>
         <mat-tab label="Capacitación" class="h-100">
           <ng-template matTabContent>
-            <app-capacitacion></app-capacitacion>
+            <app-capacitacion [capacitacion]="preparacionRespuestaEmergencia?.capacitacion"></app-capacitacion>
           </ng-template>
         </mat-tab>
         <mat-tab label="Equipamiento para la respuesta" class="h-100">
           <ng-template matTabContent>
-            <app-equipamento-respuesta></app-equipamento-respuesta>
+            <app-equipamento-respuesta [equipamientoRespuesta]="preparacionRespuestaEmergencia?.equipamientoRespuesta">
+            </app-equipamento-respuesta>
           </ng-template>
         </mat-tab>
         <mat-tab label="Entrenamiento" class="h-100">
           <ng-template matTabContent>
-            <app-entrenamiento></app-entrenamiento>
+            <app-entrenamiento [entrenamiento]="preparacionRespuestaEmergencia?.entrenamiento"></app-entrenamiento>
           </ng-template>
         </mat-tab>
       </mat-tab-group>
