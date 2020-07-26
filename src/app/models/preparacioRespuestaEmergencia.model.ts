@@ -187,11 +187,177 @@ export class Servicio {
 
 //Equipamiento para la respuesta
 export class EquipamientoRespuesta {
-  equipamientoIncendios: EquipamientoIncendio[] = [];
-  equipamientoPrimerosAuxilios: EquipamientoPrimerAuxilio[] = [];
-  necesidadesPenalizacion: NecesidadPenalizacion[] = [];
-  necesidadesAlarmas: NecesidadAlarma[] = [];
-  necesidadesComunicacion: NecesidadComunicacion[] = [];
+  equipamientoIncendios: EquipamientoIncendio[] = [
+    {
+      descripcion: "Detectores de humo",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Sprinkles o rociadores",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Mangueras",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Hidratantes",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Extintores tipo ABC",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Extintores Solkaflam para equipos eléctricos",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    }
+  ];
+  equipamientoPrimerosAuxilios: EquipamientoPrimerAuxilio[] = [
+    {
+      descripcion: "Camillas",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Inmovilizadores cervicales",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Inmovilizadores para extremidades",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Botiquín",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    }
+  ];
+  necesidadesPenalizacion: NecesidadPenalizacion[] = [
+    {
+      descripcion: "Señales de prohibición",
+      senialesExistentes: null,
+      senialesRequeridas: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Señales de precaución o advertencia",
+      senialesExistentes: null,
+      senialesRequeridas: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Señales de obligación o reglamentarias",
+      senialesExistentes: null,
+      senialesRequeridas: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion:
+        "Señales de información de salidas de emergencia y primeros auxilios",
+      senialesExistentes: null,
+      senialesRequeridas: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    }
+  ];
+  necesidadesAlarmas: NecesidadAlarma[] = [
+    {
+      descripcion: "Cubre todas las zonas donde hay estudiantes y empleados",
+      verificacionCaracteristica: "",
+      modificaciones: "",
+      responsable: "",
+      fechaAccion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Es distinta al sonido de cambio de clases",
+      verificacionCaracteristica: "",
+      modificaciones: "",
+      responsable: "",
+      fechaAccion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Señales de obligación o reglamentarias",
+      verificacionCaracteristica: "",
+      modificaciones: "",
+      responsable: "",
+      fechaAccion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Es exclusiva para casos de emergencia",
+      verificacionCaracteristica: "",
+      modificaciones: "",
+      responsable: "",
+      fechaAccion: null,
+      recursos: ""
+    }
+  ];
+  necesidadesComunicacion: NecesidadComunicacion[] = [
+    {
+      descripcion: "Teléfono fijo",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    },
+    {
+      descripcion: "Teléfono celular",
+      verificacionExistenciaCondicion: "",
+      cantidadEquiposRequeridos: null,
+      responsable: "",
+      fechaAdquisicion: null,
+      recursos: ""
+    }
+  ];
 
   constructor(args?: EquipamientoRespuesta) {
     for (const key in args) {
@@ -200,6 +366,7 @@ export class EquipamientoRespuesta {
   }
 }
 export class EquipamientoIncendio {
+  descripcion: string = "";
   verificacionExistenciaCondicion: string = "";
   cantidadEquiposRequeridos: number = null;
   responsable: string = "";
@@ -213,6 +380,7 @@ export class EquipamientoIncendio {
   }
 }
 export class EquipamientoPrimerAuxilio {
+  descripcion: string = "";
   verificacionExistenciaCondicion: string = "";
   cantidadEquiposRequeridos: number = null;
   responsable: string = "";
@@ -226,6 +394,7 @@ export class EquipamientoPrimerAuxilio {
   }
 }
 export class NecesidadPenalizacion {
+  descripcion: string = "";
   senialesExistentes: number = null;
   senialesRequeridas: number = null;
   responsable: string = "";
@@ -239,6 +408,7 @@ export class NecesidadPenalizacion {
   }
 }
 export class NecesidadAlarma {
+  descripcion: string = "";
   verificacionCaracteristica: string = "";
   modificaciones: string = "";
   responsable: string = "";
@@ -252,6 +422,7 @@ export class NecesidadAlarma {
   }
 }
 export class NecesidadComunicacion {
+  descripcion: string = "";
   verificacionExistenciaCondicion: string = "";
   cantidadEquiposRequeridos: number = null;
   responsable: string = "";

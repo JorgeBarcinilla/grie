@@ -2,422 +2,407 @@
   <app-card-title
     info="El equipamiento para la respuesta a emergencia incluye todos aquellos recursos físicos y funcionales que puede requerir la I.E para ejecutar los servicios de respuesta">
   </app-card-title>
-  <form [formGroup]="formParcialEquipamientoIncendio" autocomplete="off">
-    <div class="row justify-content-center h-100">
-      <h5>Equipamiento contra incendios</h5>
-      <div class="col-12 mt-2 h-100">
-        <table mat-table [dataSource]="dataSourceEquipamientoIncendio" class="w-100 mat-elevation-z2">
+  <div class="row justify-content-center">
+    <h5>Equipamiento contra incendios</h5>
+    <div class="col-12 mt-2 h-100">
+      <table mat-table [dataSource]="equipamientoRespuesta?.equipamientoIncendios" class="w-100 mat-elevation-z2">
 
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef>Descripción del equipamiento</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              {{ element.descripcion }}
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Descripción del equipamiento</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.descripcion }}
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="verificacion">
-            <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="{{ element.formGroup.formControls[0] }}">
-                  <mat-option [value]="'No existe'">
-                    No existe
-                  </mat-option>
-                  <mat-option [value]="'Malo'">
-                    Malo
-                  </mat-option>
-                  <mat-option [value]="'Regular'">
-                    Regular
-                  </mat-option>
-                  <mat-option [value]="'Bueno'">
-                    Bueno
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="verificacion">
+          <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="element.verificacionExistenciaCondicion">
+                <mat-option [value]="'No existe'">
+                  No existe
+                </mat-option>
+                <mat-option [value]="'Malo'">
+                  Malo
+                </mat-option>
+                <mat-option [value]="'Regular'">
+                  Regular
+                </mat-option>
+                <mat-option [value]="'Bueno'">
+                  Bueno
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="equiposRequeridos">
-            <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>N° Equipos</mat-label>
-                <input matInput placeholder="N° Equipos" formControlName="{{ element.formGroup.formControls[1] }}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="equiposRequeridos">
+          <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>N° Equipos</mat-label>
+              <input matInput placeholder="N° Equipos" [(ngModel)]="element.cantidadEquiposRequeridos" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="responsable">
-            <th mat-header-cell *matHeaderCellDef>Responsable</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[2]}}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="responsable">
+          <th mat-header-cell *matHeaderCellDef>Responsable</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="fechaAdquicicion">
-            <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
-                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
-                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFechaEvento></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="fechaAdquicicion">
+          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFechaEvento></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="recursos">
-            <th mat-header-cell *matHeaderCellDef>Recursos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[4] }}"
-                  placeholder="Recursos"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="recursos">
+          <th mat-header-cell *matHeaderCellDef>Recursos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Recursos" [(ngModel)]="element.recursos"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoIncendio"></tr>
-          <tr mat-row *matRowDef="
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoIncendio"></tr>
+        <tr mat-row *matRowDef="
               let row;
               columns: displayedColumnsEquipamientoIncendio
             "></tr>
-        </table>
-      </div>
+      </table>
     </div>
-  </form>
+  </div>
 
-  <form [formGroup]="formParcialEquipamientoAuxilios" autocomplete="off">
-    <div class="row justify-content-center h-100 mt-3">
-      <h5>Equipamiento para primeros auxilios</h5>
-      <div class="col-12 mt-2 h-100">
-        <table mat-table [dataSource]="dataSourceEquipamientoAuxilios" class="w-100 mat-elevation-z2">
+  <div class="row justify-content-center mt-3">
+    <h5>Equipamiento para primeros auxilios</h5>
+    <div class="col-12 mt-2 h-100">
+      <table mat-table [dataSource]="equipamientoRespuesta?.equipamientoPrimerosAuxilios"
+        class="w-100 mat-elevation-z2">
 
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef>Equipo para primeros auxilios</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              {{ element.descripcion }}
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Equipo para primeros auxilios</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.descripcion }}
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="verificacion">
-            <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="{{ element.formGroup.formControls[0] }}">
-                  <mat-option [value]="'No existe'">
-                    No existe
-                  </mat-option>
-                  <mat-option [value]="'Malo'">
-                    Malo
-                  </mat-option>
-                  <mat-option [value]="'Regular'">
-                    Regular
-                  </mat-option>
-                  <mat-option [value]="'Bueno'">
-                    Bueno
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="verificacion">
+          <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="element.verificacionExistenciaCondicion">
+                <mat-option [value]="'No existe'">
+                  No existe
+                </mat-option>
+                <mat-option [value]="'Malo'">
+                  Malo
+                </mat-option>
+                <mat-option [value]="'Regular'">
+                  Regular
+                </mat-option>
+                <mat-option [value]="'Bueno'">
+                  Bueno
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="equiposRequeridos">
-            <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>N° Equipos</mat-label>
-                <input matInput placeholder="N° Equipos" formControlName="{{ element.formGroup.formControls[1] }}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="equiposRequeridos">
+          <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>N° Equipos</mat-label>
+              <input matInput placeholder="N° Equipos" [(ngModel)]="element.cantidadEquiposRequeridos" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="responsable">
-            <th mat-header-cell *matHeaderCellDef>Responsable</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[2]}}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="responsable">
+          <th mat-header-cell *matHeaderCellDef>Responsable</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="fechaAdquicicion">
-            <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
-                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
-                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFechaEvento></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="fechaAdquicicion">
+          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFechaEvento></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="recursos">
-            <th mat-header-cell *matHeaderCellDef>Recursos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[4] }}"
-                  placeholder="Recursos"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="recursos">
+          <th mat-header-cell *matHeaderCellDef>Recursos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoAuxilios"></tr>
-          <tr mat-row *matRowDef="
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoAuxilios"></tr>
+        <tr mat-row *matRowDef="
               let row;
               columns: displayedColumnsEquipamientoAuxilios
             "></tr>
-        </table>
-      </div>
+      </table>
     </div>
-  </form>
-  <form [formGroup]="formParcialEquipamientoSenalizacion" autocomplete="off">
-    <div class="row justify-content-center h-100 mt-3">
-      <h5>Necesidades de penalización</h5>
-      <div class="col-12 mt-2 h-100">
-        <table mat-table [dataSource]="dataSourceEquipamientoSenalizacion" class="w-100 mat-elevation-z2">
+  </div>
+  <div class="row justify-content-center mt-3">
+    <h5>Necesidades de penalización</h5>
+    <div class="col-12 mt-2 h-100">
+      <table mat-table [dataSource]="equipamientoRespuesta?.necesidadesPenalizacion" class="w-100 mat-elevation-z2">
 
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef>Tipo de señal</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              {{ element.descripcion }}
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Tipo de señal</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.descripcion }}
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="senalesExistentes">
-            <th mat-header-cell *matHeaderCellDef># de señales existentes</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>N° señales</mat-label>
-                <input matInput placeholder="N° señales" formControlName="{{ element.formGroup.formControls[0] }}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="senalesExistentes">
+          <th mat-header-cell *matHeaderCellDef># de señales existentes</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>N° señales</mat-label>
+              <input matInput placeholder="N° señales" [(ngModel)]="element.senialesExistentes" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="senalesRequeridas">
-            <th mat-header-cell *matHeaderCellDef># de señales requeridas</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>N° señales</mat-label>
-                <input matInput placeholder="N° señales" formControlName="{{ element.formGroup.formControls[1] }}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="senalesRequeridas">
+          <th mat-header-cell *matHeaderCellDef># de señales requeridas</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>N° señales</mat-label>
+              <input matInput placeholder="N° señales" [(ngModel)]="element.senialesRequeridas" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="responsable">
-            <th mat-header-cell *matHeaderCellDef>Responsable</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[2]}}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="responsable">
+          <th mat-header-cell *matHeaderCellDef>Responsable</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="fechaAdquicicion">
-            <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
-                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
-                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFechaEvento></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="fechaAdquicicion">
+          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFechaEvento></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="recursos">
-            <th mat-header-cell *matHeaderCellDef>Recursos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[4] }}"
-                  placeholder="Recursos"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="recursos">
+          <th mat-header-cell *matHeaderCellDef>Recursos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoSenalizacion"></tr>
-          <tr mat-row *matRowDef="
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoSenalizacion"></tr>
+        <tr mat-row *matRowDef="
               let row;
               columns: displayedColumnsEquipamientoSenalizacion
             "></tr>
-        </table>
-      </div>
+      </table>
     </div>
-  </form>
+  </div>
 
-  <form [formGroup]="formParcialEquipamientoAlarma" autocomplete="off">
-    <div class="row justify-content-center h-100 mt-3">
-      <h5>Necesidades del sistema de alarma</h5>
-      <div class="col-12 mt-2 h-100">
-        <table mat-table [dataSource]="dataSourceEquipamientoAlarma" class="w-100 mat-elevation-z2">
+  <div class="row justify-content-center mt-3">
+    <h5>Necesidades del sistema de alarma</h5>
+    <div class="col-12 mt-2 h-100">
+      <table mat-table [dataSource]="equipamientoRespuesta?.necesidadesAlarmas" class="w-100 mat-elevation-z2">
 
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef>Características del sistema de alarma</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              {{ element.descripcion }}
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Características del sistema de alarma</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.descripcion }}
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="verificacion">
-            <th mat-header-cell *matHeaderCellDef>Verificación de la característica (Cumple / No cumple)</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="{{ element.formGroup.formControls[0] }}">
-                  <mat-option [value]="'No cumple'">
-                    No cumple
-                  </mat-option>
-                  <mat-option [value]="'Cumple'">
-                    Cumple
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="verificacion">
+          <th mat-header-cell *matHeaderCellDef>Verificación de la característica (Cumple / No cumple)</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="element.verificacionCaracteristica">
+                <mat-option [value]="'No cumple'">
+                  No cumple
+                </mat-option>
+                <mat-option [value]="'Cumple'">
+                  Cumple
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="modificaciones">
-            <th mat-header-cell *matHeaderCellDef>Modificaciones requeridas </th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[1] }}"
-                  placeholder="Modificaciones"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="modificaciones">
+          <th mat-header-cell *matHeaderCellDef>Modificaciones requeridas </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Modificaciones" [(ngModel)]="element.modificaciones"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="responsable">
-            <th mat-header-cell *matHeaderCellDef>Responsable</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[2]}}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="responsable">
+          <th mat-header-cell *matHeaderCellDef>Responsable</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="fechaMejora">
-            <th mat-header-cell *matHeaderCellDef>fecha de acción de mejora</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
-                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
-                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFechaEvento></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="fechaMejora">
+          <th mat-header-cell *matHeaderCellDef>fecha de acción de mejora</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
+                [(ngModel)]="element.fechaAccion" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFechaEvento></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="recursos">
-            <th mat-header-cell *matHeaderCellDef>Recursos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[4] }}"
-                  placeholder="Recursos"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="recursos">
+          <th mat-header-cell *matHeaderCellDef>Recursos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoAlarma"></tr>
-          <tr mat-row *matRowDef="
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoAlarma"></tr>
+        <tr mat-row *matRowDef="
               let row;
               columns: displayedColumnsEquipamientoAlarma
             "></tr>
-        </table>
-      </div>
+      </table>
     </div>
-  </form>
+  </div>
 
-  <form [formGroup]="formParcialEquipamientoComunicaciones" autocomplete="off">
-    <div class="row justify-content-center h-100 mt-3">
-      <h5>Necesidades de equipos para comunicaciones</h5>
-      <div class="col-12 mt-2 h-100">
-        <table mat-table [dataSource]="dataSourceEquipamientoComunicaciones" class="w-100 mat-elevation-z2">
+  <div class="row justify-content-center mt-3">
+    <h5>Necesidades de equipos para comunicaciones</h5>
+    <div class="col-12 mt-2 h-100">
+      <table mat-table [dataSource]="equipamientoRespuesta?.necesidadesComunicacion" class="w-100 mat-elevation-z2">
 
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef>Equipos para comunicaciones</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              {{ element.descripcion }}
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Equipos para comunicaciones</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.descripcion }}
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="verificacion">
-            <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="{{ element.formGroup.formControls[0] }}">
-                  <mat-option [value]="'No existe'">
-                    No existe
-                  </mat-option>
-                  <mat-option [value]="'No operativo'">
-                    No operativo
-                  </mat-option>
-                  <mat-option [value]="'Operativo'">
-                    Operativo
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="verificacion">
+          <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="element.verificacionExistenciaCondicion">
+                <mat-option [value]="'No existe'">
+                  No existe
+                </mat-option>
+                <mat-option [value]="'No operativo'">
+                  No operativo
+                </mat-option>
+                <mat-option [value]="'Operativo'">
+                  Operativo
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="equiposRequeridos">
-            <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[1] }}"
-                  placeholder="Modificaciones"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="equiposRequeridos">
+          <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Modificaciones"
+                [(ngModel)]="element.cantidadEquiposRequeridos"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="responsable">
-            <th mat-header-cell *matHeaderCellDef>Responsable</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" formControlName="{{ element.formGroup.formControls[2]}}" />
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="responsable">
+          <th mat-header-cell *matHeaderCellDef>Responsable</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="fechaAdquisicion">
-            <th mat-header-cell *matHeaderCellDef>fecha de adquisición</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <input matInput formControlName="{{ element.formGroup.formControls[3] }}"
-                  [matDatepicker]="pickerFechaEvento" placeholder="Fecha" />
-                <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFechaEvento></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="fechaAdquisicion">
+          <th mat-header-cell *matHeaderCellDef>fecha de adquisición</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFechaEvento></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="recursos">
-            <th mat-header-cell *matHeaderCellDef>Recursos</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field class="w-100">
-                <textarea matInput formControlName="{{ element.formGroup.formControls[4] }}"
-                  placeholder="Recursos"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="recursos">
+          <th mat-header-cell *matHeaderCellDef>Recursos</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnComunicaciones"></tr>
-          <tr mat-row *matRowDef="
+        <tr mat-header-row *matHeaderRowDef="displayedColumnComunicaciones"></tr>
+        <tr mat-row *matRowDef="
               let row;
               columns: displayedColumnComunicaciones
             "></tr>
-        </table>
-      </div>
+      </table>
     </div>
-  </form>
+  </div>
   <div class="row justify-content-center mr-0 ml-0 mt-2">
     <button color="accent" mat-raised-button (click)="guardarEquipamiento()" type="button">Guardar</button>
   </div>
