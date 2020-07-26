@@ -3,14 +3,11 @@ import { MatTableDataSource } from "@angular/material";
 import { FormGroup } from "@angular/forms";
 import { OperacionesTablaService } from "src/app/helpers/operaciones-tabla.service";
 import { Entrenamiento } from "src/app/models/preparacioRespuestaEmergencia.model";
-
-export interface DataElementSixAnswer {
-  actividad: string;
-  formGroup: {
-    name: string;
-    formControls: [string, string, string, string, string, string];
-  };
-}
+import { NotificacionService } from "src/app/services/notification/notification.service";
+import { PreparacionRespuestaService } from "src/app/services/gestion-riesgo/preparacionRespuesta.service";
+import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
+import { Subscription } from "rxjs";
+import { Res } from "src/app/models/res.model";
 
 @Component({
   selector: "app-entrenamiento",
@@ -19,69 +16,7 @@ export interface DataElementSixAnswer {
 })
 export class EntrenamientoComponent implements OnInit {
   @Input() entrenamiento: Entrenamiento;
-
-  ELEMENT_DATA_ENTRENAMIENTO: DataElementSixAnswer[] = [
-    {
-      actividad: "Detección del peligro",
-      formGroup: {
-        name: "entrenamiento1",
-        formControls: [
-          "tiempo",
-          "dificultades",
-          "accionesMejoramiento",
-          "responsable",
-          "fechaMejora",
-          "recursos"
-        ]
-      }
-    },
-    {
-      actividad: "Alarma",
-      formGroup: {
-        name: "entrenamiento2",
-        formControls: [
-          "tiempo",
-          "dificultades",
-          "accionesMejoramiento",
-          "responsable",
-          "fechaMejora",
-          "recursos"
-        ]
-      }
-    },
-    {
-      actividad: "Alistamiento para la salida",
-      formGroup: {
-        name: "entrenamiento3",
-        formControls: [
-          "tiempo",
-          "dificultades",
-          "accionesMejoramiento",
-          "responsable",
-          "fechaMejora",
-          "recursos"
-        ]
-      }
-    },
-    {
-      actividad: "Salida",
-      formGroup: {
-        name: "entrenamiento4",
-        formControls: [
-          "tiempo",
-          "dificultades",
-          "accionesMejoramiento",
-          "responsable",
-          "fechaMejora",
-          "recursos"
-        ]
-      }
-    }
-  ];
-
-  dataSourceEntrenamiento = new MatTableDataSource<DataElementSixAnswer>(
-    this.ELEMENT_DATA_ENTRENAMIENTO
-  );
+  idSede: string;
   displayedColumnsEntrenamiento: string[] = [
     "actividad",
     "tiempo",
@@ -91,19 +26,27 @@ export class EntrenamientoComponent implements OnInit {
     "fechaMejora",
     "recursos"
   ];
-  formParcialEntrenamiento = new FormGroup({});
-  constructor(private _operacionesTabla: OperacionesTablaService) {
-    this._operacionesTabla.buildForm(
-      this.formParcialEntrenamiento,
-      this.ELEMENT_DATA_ENTRENAMIENTO
-    );
-  }
 
+  constructor(
+    private _notificacionService: NotificacionService,
+    private _preparacionRespuestaEmergenciaService: PreparacionRespuestaService,
+    private _changeSedeService: ChangeSedeService
+  ) {}
+  subscribeIdSede: Subscription;
   ngOnInit() {
     console.log(this.entrenamiento);
+    this.subscribeIdSede = this._changeSedeService
+      .obtenerIdSede()
+      .subscribe((idSede: string) => {
+        this.idSede = idSede;
+      });
   }
 
   guardarEntrenamiento() {
-    console.log(this.formParcialEntrenamiento.value);
+    this._preparacionRespuestaEmergenciaService
+      .guardarEntrenamiento(this.idSede, this.entrenamiento)
+      .subscribe((res: Res) => {
+        this._notificacionService.mostrarNotificacion(res.message, "success");
+      });
   }
 }

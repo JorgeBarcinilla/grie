@@ -267,9 +267,47 @@ export class NecesidadComunicacion {
 
 //Entrenamiento
 export class Entrenamiento {
-  actividades: Actividad[] = [];
+  actividades: Actividad[] = [
+    {
+      actividad: "Detección del peligro",
+      tiempo: null,
+      dificultades: "",
+      accionesMejoramiento: "",
+      responsable: "",
+      fechaAcciones: null,
+      recursos: ""
+    },
+    {
+      actividad: "Alarma",
+      tiempo: null,
+      dificultades: "",
+      accionesMejoramiento: "",
+      responsable: "",
+      fechaAcciones: null,
+      recursos: ""
+    },
+    {
+      actividad: "Alistamiento para la salida",
+      tiempo: null,
+      dificultades: "",
+      accionesMejoramiento: "",
+      responsable: "",
+      fechaAcciones: null,
+      recursos: ""
+    },
+    {
+      actividad: "Salida",
+      tiempo: null,
+      dificultades: "",
+      accionesMejoramiento: "",
+      responsable: "",
+      fechaAcciones: null,
+      recursos: ""
+    }
+  ];
 }
 export class Actividad {
+  actividad: string;
   tiempo: number = null;
   dificultades: string = "";
   accionesMejoramiento: string = "";
