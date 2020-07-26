@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
+  Capacitacion,
   PreparacionRespuestaEmergencia,
   ServicioExternoRespuestaEmergencia,
   ServicioInternoRespuestaEmergencia
@@ -56,6 +57,15 @@ export class PreparacionRespuestaService {
       "post",
       true,
       servicioExterno
+    );
+  }
+
+  guardarCapacitacion(idCampus: string, capacitacion: Capacitacion) {
+    return this._globalService.getQuery(
+      "/preparacionRespuesta/capacitacion/guardar/" + idCampus,
+      "put",
+      true,
+      capacitacion
     );
   }
 }

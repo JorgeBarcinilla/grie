@@ -115,7 +115,53 @@ export class ServicioInternoRespuestaEmergencia {
 
 //Capacitacion
 export class Capacitacion {
-  servicios: Servicio[] = [];
+  servicios: Servicio[] = [
+    {
+      servicio: "Coordinación de la respuesta escolar a emergencias",
+      numeroPersonasCapacitadas: null,
+      numeroPersonasCapacitar: null,
+      oferenteCapacitacion: "",
+      responsable: "",
+      fechaCapacitacion: null,
+      recursos: ""
+    },
+    {
+      servicio: "Extinción de incendios",
+      numeroPersonasCapacitadas: null,
+      numeroPersonasCapacitar: null,
+      oferenteCapacitacion: "",
+      responsable: "",
+      fechaCapacitacion: null,
+      recursos: ""
+    },
+    {
+      servicio: "Primeros auxilios",
+      numeroPersonasCapacitadas: null,
+      numeroPersonasCapacitar: null,
+      oferenteCapacitacion: "",
+      responsable: "",
+      fechaCapacitacion: null,
+      recursos: ""
+    },
+    {
+      servicio: "Evacuación",
+      numeroPersonasCapacitadas: null,
+      numeroPersonasCapacitar: null,
+      oferenteCapacitacion: "",
+      responsable: "",
+      fechaCapacitacion: null,
+      recursos: ""
+    },
+    {
+      servicio: "Tráfico vehicular",
+      numeroPersonasCapacitadas: null,
+      numeroPersonasCapacitar: null,
+      oferenteCapacitacion: "",
+      responsable: "",
+      fechaCapacitacion: null,
+      recursos: ""
+    }
+  ];
 
   constructor(args?: Capacitacion) {
     for (const key in args) {
@@ -124,6 +170,7 @@ export class Capacitacion {
   }
 }
 export class Servicio {
+  servicio: string = "";
   numeroPersonasCapacitadas: number = null;
   numeroPersonasCapacitar: number = null;
   oferenteCapacitacion: string = "";

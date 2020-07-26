@@ -1,16 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { MatTableDataSource } from "@angular/material";
-import { FormGroup } from "@angular/forms";
-import { OperacionesTablaService } from "src/app/helpers/operaciones-tabla.service";
+import { Subscription } from "rxjs";
 import { Capacitacion } from "src/app/models/preparacioRespuestaEmergencia.model";
-
-export interface DataElementSixAnswer {
-  servicio: string;
-  formGroup: {
-    name: string;
-    formControls: [string, string, string, string, string, string];
-  };
-}
+import { Res } from "src/app/models/res.model";
+import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
+import { PreparacionRespuestaService } from "src/app/services/gestion-riesgo/preparacionRespuesta.service";
+import { NotificacionService } from "src/app/services/notification/notification.service";
 
 @Component({
   selector: "app-capacitacion",
@@ -19,83 +13,8 @@ export interface DataElementSixAnswer {
 })
 export class CapacitacionComponent implements OnInit {
   @Input() capacitacion: Capacitacion;
+  idSede: string;
 
-  ELEMENT_DATA_CAPACITACION: DataElementSixAnswer[] = [
-    {
-      servicio: "Coordinación de la respuesta escolar a emergencias",
-      formGroup: {
-        name: "capacitacion1",
-        formControls: [
-          "nPersonasCapacitadas",
-          "nPersonasCapacitar",
-          "oferenteCapacitacion",
-          "responsable",
-          "fechaCapacitacion",
-          "recursos"
-        ]
-      }
-    },
-    {
-      servicio: "Extinción de incendios",
-      formGroup: {
-        name: "capacitacion2",
-        formControls: [
-          "nPersonasCapacitadas",
-          "nPersonasCapacitar",
-          "oferenteCapacitacion",
-          "responsable",
-          "fechaCapacitacion",
-          "recursos"
-        ]
-      }
-    },
-    {
-      servicio: "Primeros auxilios",
-      formGroup: {
-        name: "capacitacion3",
-        formControls: [
-          "nPersonasCapacitadas",
-          "nPersonasCapacitar",
-          "oferenteCapacitacion",
-          "responsable",
-          "fechaCapacitacion",
-          "recursos"
-        ]
-      }
-    },
-    {
-      servicio: "Evacuación",
-      formGroup: {
-        name: "capacitacion4",
-        formControls: [
-          "nPersonasCapacitadas",
-          "nPersonasCapacitar",
-          "oferenteCapacitacion",
-          "responsable",
-          "fechaCapacitacion",
-          "recursos"
-        ]
-      }
-    },
-    {
-      servicio: "Tráfico vehicular",
-      formGroup: {
-        name: "capacitacion5",
-        formControls: [
-          "nPersonasCapacitadas",
-          "nPersonasCapacitar",
-          "oferenteCapacitacion",
-          "responsable",
-          "fechaCapacitacion",
-          "recursos"
-        ]
-      }
-    }
-  ];
-
-  dataSourcecapacitacion = new MatTableDataSource<DataElementSixAnswer>(
-    this.ELEMENT_DATA_CAPACITACION
-  );
   displayedColumnsCapacitacion: string[] = [
     "servicio",
     "nPersonasCapacitadas",
@@ -105,19 +24,26 @@ export class CapacitacionComponent implements OnInit {
     "fechaCapacitacion",
     "recursos"
   ];
-  formParcialCapacitacion = new FormGroup({});
-  constructor(private _operacionesTabla: OperacionesTablaService) {
-    this._operacionesTabla.buildForm(
-      this.formParcialCapacitacion,
-      this.ELEMENT_DATA_CAPACITACION
-    );
-  }
+  constructor(
+    private _notificacionService: NotificacionService,
+    private _preparacionRespuestaEmergenciaService: PreparacionRespuestaService,
+    private _changeSedeService: ChangeSedeService
+  ) {}
 
+  subscribeIdSede: Subscription;
   ngOnInit() {
-    console.log(this.capacitacion);
+    this.subscribeIdSede = this._changeSedeService
+      .obtenerIdSede()
+      .subscribe((idSede: string) => {
+        this.idSede = idSede;
+      });
   }
 
   guardarCapacitacion() {
-    console.log(this.formParcialCapacitacion.value);
+    this._preparacionRespuestaEmergenciaService
+      .guardarCapacitacion(this.idSede, this.capacitacion)
+      .subscribe((res: Res) => {
+        this._notificacionService.mostrarNotificacion(res.message, "success");
+      });
   }
 }
