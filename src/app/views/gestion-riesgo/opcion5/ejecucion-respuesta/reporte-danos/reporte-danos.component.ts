@@ -1,4 +1,15 @@
 import { Component, OnInit } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
+import { Subscription } from "rxjs";
+import {
+  Edificacion,
+  Reporte,
+  ReporteDanio
+} from "src/app/models/reporteDanios.model";
+import { Res } from "src/app/models/res.model";
+import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
+import { ReporteDaniosService } from "src/app/services/gestion-riesgo/reporteDanios.service";
+import { NotificacionService } from "src/app/services/notification/notification.service";
 
 @Component({
   selector: "app-reporte-danos",
@@ -6,6 +17,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./reporte-danos.component.css"]
 })
 export class ReporteDanosComponent implements OnInit {
+  reporte = new Reporte();
+  edificacion = new Edificacion();
+  idSede: string;
+
   fenomenos = [
     "Sismo",
     "Inundación",
@@ -27,32 +42,7 @@ export class ReporteDanosComponent implements OnInit {
     "Otro"
   ];
 
-  tiposRespuestas = [
-    {
-      nombre: "Ambulancia",
-      value: false
-    },
-    {
-      nombre: "Bomberos",
-      value: false
-    },
-    {
-      nombre: "Policía",
-      value: false
-    },
-    {
-      nombre: "Policía de transito",
-      value: false
-    },
-    {
-      nombre: "Manejo de servicios públicos",
-      value: false
-    },
-    {
-      nombre: "Otro",
-      value: false
-    }
-  ];
+  tiposRespuestas = [];
 
   edificaciones = [
     "Almacén",
@@ -79,15 +69,69 @@ export class ReporteDanosComponent implements OnInit {
 
   listaEdidficacionesAfectadas = [];
 
-  listaReportes = [];
+  dataSourcesReportes = new MatTableDataSource<Reporte>();
   displayedColumnsReportes: string[] = [
     "fecha",
     "fenomeno",
-    "descripcion",
-    "accion"
+    "serviciosSolicitados",
+    "edificacionesAfectadas",
+    "descripcion"
   ];
 
-  constructor() {}
+  constructor(
+    private _changeSedeService: ChangeSedeService,
+    private _notificacionService: NotificacionService,
+    private _reporteDanioService: ReporteDaniosService
+  ) {}
 
-  ngOnInit() {}
+  subscribeIdSede: Subscription;
+  ngOnInit() {
+    this.subscribeIdSede = this._changeSedeService
+      .obtenerIdSede()
+      .subscribe((idSede: string) => {
+        this.idSede = idSede;
+        this._reporteDanioService
+          .obtenerReportesDanio(this.idSede)
+          .subscribe((res: ReporteDanio) => {
+            if (res == null) {
+              const reporteDanio = new ReporteDanio(this.idSede);
+              this._reporteDanioService
+                .crearReportesDanio(reporteDanio)
+                .subscribe((res: string) => {
+                  this.dataSourcesReportes.data = reporteDanio.reportes;
+                });
+            } else {
+              this.dataSourcesReportes.data = res.reportes;
+            }
+          });
+      });
+  }
+
+  agregarEdificacion() {
+    if (this.edificacion.valid()) {
+      this.reporte.edificacionesAfectadas.push(this.edificacion.getValue());
+      this.edificacion.reset();
+    }
+  }
+
+  eliminarEdificacion(edificacion: Edificacion) {
+    this.reporte.edificacionesAfectadas = this.reporte.edificacionesAfectadas.filter(
+      ed => {
+        return ed != edificacion;
+      }
+    );
+  }
+
+  agregarReporte() {
+    if (this.reporte.valid()) {
+      this._reporteDanioService
+        .guardarReporteDanio(this.idSede, this.reporte.getValue())
+        .subscribe((res: Res) => {
+          this.dataSourcesReportes.data.push(this.reporte.getValue());
+          this.dataSourcesReportes._updateChangeSubscription();
+          this.reporte.reset();
+          this._notificacionService.mostrarNotificacion(res.message, "success");
+        });
+    }
+  }
 }
