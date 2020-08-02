@@ -2,45 +2,47 @@
   <app-card-title
     info="Para definir su proceso de recuperación, la I.E deberá realizar las verificaciones a las que haya lugar para poder valorar su situación actual, identificando las necesidades que presenta e impiden su proceso de recuperación.">
   </app-card-title>
-  <form [formGroup]="formParcialValoracion" autocomplete="off">
-    <div class="row justify-content-center h-100">
-      <h5>Identificación general y valoración de necesidades de la I.E</h5>
-      <div class="col-12 mt-2 h-100">
-        <table mat-table [dataSource]="dataSourceValoracion" class="w-100 mat-elevation-z2">
-          <ng-container matColumnDef="informacion">
-            <th mat-header-cell *matHeaderCellDef>Información general</th>
-            <td class="font-weight-bold" mat-cell *matCellDef="let element">
-              {{ element.informacion }}
-            </td>
-          </ng-container>
+  <div class="row justify-content-center">
+    <h5>Identificación general y valoración de necesidades de la I.E</h5>
+    <div class="col-12 mt-2 h-100">
+      <table mat-table [dataSource]="valoraciones" class="w-100 mat-elevation-z2">
+        <ng-container matColumnDef="informacion">
+          <th mat-header-cell *matHeaderCellDef>Información general</th>
+          <td class="font-weight-bold" mat-cell *matCellDef="let element">
+            {{ element.informacion }}
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="estado">
-            <th mat-header-cell *matHeaderCellDef>Estado </th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-radio-group aria-label="Select an option" formControlName="{{ element.formGroup.formControls[0] }}">
-                <mat-radio-button class="mr-1" value="Si">Si</mat-radio-button>
-                <mat-radio-button class="ml-1" value="No">No</mat-radio-button>
-              </mat-radio-group>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="element.estado">
+              <mat-radio-button class="mr-1" value="Si">Si</mat-radio-button>
+              <mat-radio-button class="ml-1" value="No">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="detalle">
-            <th mat-header-cell *matHeaderCellDef>Detalle de necesidades</th>
-            <td mat-cell *matCellDef="let element" [formGroupName]="element.formGroup.name">
-              <mat-form-field>
-                <textarea matInput formControlName="{{ element.formGroup.formControls[1] }}"
-                  placeholder="Detalles"></textarea>
-              </mat-form-field>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="detalle">
+          <th mat-header-cell *matHeaderCellDef>Detalle de necesidades</th>
+          <td style="width: 40%;" mat-cell *matCellDef="let element">
+            <mat-form-field class="w-100">
+              <textarea matInput [(ngModel)]="element.detalle" placeholder="Detalles"></textarea>
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsValoracion"></tr>
-          <tr mat-row *matRowDef="
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsValoracion"></tr>
+        <tr mat-row *matRowDef="
               let row;
               columns: displayedColumnsValoracion
             "></tr>
-        </table>
-      </div>
+      </table>
     </div>
-  </form>
+  </div>
+  <div class="row justify-content-center mt-2 mb-2">
+    <button class="mt-1" mat-raised-button color="accent" (click)="actualizarValoraciones()">
+      Guardar
+    </button>
+  </div>
 </div>
