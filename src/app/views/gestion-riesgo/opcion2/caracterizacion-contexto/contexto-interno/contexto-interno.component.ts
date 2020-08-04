@@ -137,7 +137,7 @@ export class ContextoInternoComponent implements OnInit {
     { nombre: "Puertas y muros cortafuegos", calificacion: null },
     { nombre: "Salidas de emergencia", calificacion: null },
     { nombre: "Rutas de evacuación", calificacion: null },
-    { nombre: "Penalización de vías de evacuación", calificacion: null },
+    { nombre: "Señalización de vías de evacuación", calificacion: null },
     { nombre: "Sistemas de detección de incendios", calificacion: null },
     { nombre: "Disponibilidad de tanque de reserva", calificacion: null },
     { nombre: "Suministro de energía", calificacion: null },

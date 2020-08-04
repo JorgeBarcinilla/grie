@@ -53,19 +53,7 @@ export class ValoracionControlesComponent implements OnInit {
       .obtenerIdSede()
       .subscribe((idSede: string) => {
         this.idSede = idSede;
-        this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
-          .obtenerRiesgos(
-            this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto"
-          )
-          .subscribe((riesgos: Riesgo[]) => {
-            if (Array.isArray(riesgos)) {
-              this.riesgosGuardados = riesgos;
-            } else {
-              this.riesgosGuardados = [];
-            }
-            this.dataSourceRiesgos.data = this.riesgosGuardados;
-          });
+        this.obtenerRiesgos();
       });
   }
 
@@ -76,6 +64,22 @@ export class ValoracionControlesComponent implements OnInit {
     if (this.subscribeRiesgos) {
       this.subscribeRiesgos.unsubscribe();
     }
+  }
+
+  obtenerRiesgos() {
+    this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
+      .obtenerRiesgos(
+        this.idSede,
+        "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto"
+      )
+      .subscribe((riesgos: Riesgo[]) => {
+        if (Array.isArray(riesgos)) {
+          this.riesgosGuardados = riesgos;
+        } else {
+          this.riesgosGuardados = [];
+        }
+        this.dataSourceRiesgos.data = this.riesgosGuardados;
+      });
   }
 
   establecerControl(riesgo: Riesgo, causa): void {
@@ -90,6 +94,7 @@ export class ValoracionControlesComponent implements OnInit {
           .guardarCriteriosCausas(riesgo)
           .subscribe((res: Res) => {
             this._notificacionService.mostrarNotificacion(res.message, "info");
+            this.obtenerRiesgos();
           });
       }
     });

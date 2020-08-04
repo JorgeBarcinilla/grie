@@ -1,21 +1,29 @@
 <div class="container-fluid" style="height: 73vh;">
   <app-card-title
-    info="El equipamiento para la respuesta a emergencia incluye todos aquellos recursos físicos y funcionales que puede requerir la I.E para ejecutar los servicios de respuesta">
+    info="El equipamiento para la respuesta a emergencia incluye todos aquellos recursos físicos y funcionales que puede requerir la I.E para ejecutar los servicios de respuesta"
+  >
   </app-card-title>
   <div class="row justify-content-center">
     <h5>Equipamiento contra incendios</h5>
     <div class="col-12 mt-2 h-100">
-      <table mat-table [dataSource]="equipamientoRespuesta?.equipamientoIncendios" class="w-100 mat-elevation-z2">
-
+      <table
+        mat-table
+        [dataSource]="equipamientoRespuesta?.equipamientoIncendios"
+        class="w-100 mat-elevation-z2"
+      >
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef>Descripción del equipamiento</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Descripción del equipamiento
+          </th>
           <td mat-cell *matCellDef="let element">
             {{ element.descripcion }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="verificacion">
-          <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Verificación de existencia y condición
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Estado</mat-label>
@@ -38,11 +46,17 @@
         </ng-container>
 
         <ng-container matColumnDef="equiposRequeridos">
-          <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Cantidad de equipos requeridos
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>N° Equipos</mat-label>
-              <input matInput placeholder="N° Equipos" [(ngModel)]="element.cantidadEquiposRequeridos" />
+              <input
+                matInput
+                placeholder="N° Equipos"
+                [(ngModel)]="element.cantidadEquiposRequeridos"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -52,18 +66,29 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Nombre</mat-label>
-              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+              <input
+                matInput
+                placeholder="Nombre"
+                [(ngModel)]="element.responsable"
+              />
             </mat-form-field>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="fechaAdquicicion">
-          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
+          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
-                [(ngModel)]="element.fechaAdquisicion" />
-              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="pickerFechaEvento"
+                placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerFechaEvento"
+              ></mat-datepicker-toggle>
               <mat-datepicker #pickerFechaEvento></mat-datepicker>
             </mat-form-field>
           </td>
@@ -73,16 +98,23 @@
           <th mat-header-cell *matHeaderCellDef>Recursos</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Recursos" [(ngModel)]="element.recursos"></textarea>
+              <textarea
+                matInput
+                placeholder="Recursos"
+                [(ngModel)]="element.recursos"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoIncendio"></tr>
-        <tr mat-row *matRowDef="
-              let row;
-              columns: displayedColumnsEquipamientoIncendio
-            "></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumnsEquipamientoIncendio"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsEquipamientoIncendio"
+        ></tr>
       </table>
     </div>
   </div>
@@ -90,18 +122,24 @@
   <div class="row justify-content-center mt-3">
     <h5>Equipamiento para primeros auxilios</h5>
     <div class="col-12 mt-2 h-100">
-      <table mat-table [dataSource]="equipamientoRespuesta?.equipamientoPrimerosAuxilios"
-        class="w-100 mat-elevation-z2">
-
+      <table
+        mat-table
+        [dataSource]="equipamientoRespuesta?.equipamientoPrimerosAuxilios"
+        class="w-100 mat-elevation-z2"
+      >
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef>Equipo para primeros auxilios</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Equipo para primeros auxilios
+          </th>
           <td mat-cell *matCellDef="let element">
             {{ element.descripcion }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="verificacion">
-          <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Verificación de existencia y condición
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Estado</mat-label>
@@ -124,11 +162,17 @@
         </ng-container>
 
         <ng-container matColumnDef="equiposRequeridos">
-          <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Cantidad de equipos requeridos
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>N° Equipos</mat-label>
-              <input matInput placeholder="N° Equipos" [(ngModel)]="element.cantidadEquiposRequeridos" />
+              <input
+                matInput
+                placeholder="N° Equipos"
+                [(ngModel)]="element.cantidadEquiposRequeridos"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -138,18 +182,29 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Nombre</mat-label>
-              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+              <input
+                matInput
+                placeholder="Nombre"
+                [(ngModel)]="element.responsable"
+              />
             </mat-form-field>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="fechaAdquicicion">
-          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
+          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
-                [(ngModel)]="element.fechaAdquisicion" />
-              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="pickerFechaEvento"
+                placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerFechaEvento"
+              ></mat-datepicker-toggle>
               <mat-datepicker #pickerFechaEvento></mat-datepicker>
             </mat-form-field>
           </td>
@@ -159,24 +214,34 @@
           <th mat-header-cell *matHeaderCellDef>Recursos</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+              <textarea
+                matInput
+                [(ngModel)]="element.recursos"
+                placeholder="Recursos"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoAuxilios"></tr>
-        <tr mat-row *matRowDef="
-              let row;
-              columns: displayedColumnsEquipamientoAuxilios
-            "></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumnsEquipamientoAuxilios"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsEquipamientoAuxilios"
+        ></tr>
       </table>
     </div>
   </div>
   <div class="row justify-content-center mt-3">
     <h5>Necesidades de señalización</h5>
     <div class="col-12 mt-2 h-100">
-      <table mat-table [dataSource]="equipamientoRespuesta?.necesidadesPenalizacion" class="w-100 mat-elevation-z2">
-
+      <table
+        mat-table
+        [dataSource]="equipamientoRespuesta?.necesidadesSenializacion"
+        class="w-100 mat-elevation-z2"
+      >
         <ng-container matColumnDef="descripcion">
           <th mat-header-cell *matHeaderCellDef>Tipo de señal</th>
           <td mat-cell *matCellDef="let element">
@@ -189,7 +254,11 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>N° señales</mat-label>
-              <input matInput placeholder="N° señales" [(ngModel)]="element.senialesExistentes" />
+              <input
+                matInput
+                placeholder="N° señales"
+                [(ngModel)]="element.senialesExistentes"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -199,7 +268,11 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>N° señales</mat-label>
-              <input matInput placeholder="N° señales" [(ngModel)]="element.senialesRequeridas" />
+              <input
+                matInput
+                placeholder="N° señales"
+                [(ngModel)]="element.senialesRequeridas"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -209,18 +282,29 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Nombre</mat-label>
-              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+              <input
+                matInput
+                placeholder="Nombre"
+                [(ngModel)]="element.responsable"
+              />
             </mat-form-field>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="fechaAdquicicion">
-          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición </th>
+          <th mat-header-cell *matHeaderCellDef>Fecha de adquisición</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
-                [(ngModel)]="element.fechaAdquisicion" />
-              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="pickerFechaEvento"
+                placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerFechaEvento"
+              ></mat-datepicker-toggle>
               <mat-datepicker #pickerFechaEvento></mat-datepicker>
             </mat-form-field>
           </td>
@@ -230,16 +314,26 @@
           <th mat-header-cell *matHeaderCellDef>Recursos</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+              <textarea
+                matInput
+                [(ngModel)]="element.recursos"
+                placeholder="Recursos"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoSenalizacion"></tr>
-        <tr mat-row *matRowDef="
-              let row;
-              columns: displayedColumnsEquipamientoSenalizacion
-            "></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumnsEquipamientoSenalizacion"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: displayedColumnsEquipamientoSenalizacion
+          "
+        ></tr>
       </table>
     </div>
   </div>
@@ -247,17 +341,24 @@
   <div class="row justify-content-center mt-3">
     <h5>Necesidades del sistema de alarma</h5>
     <div class="col-12 mt-2 h-100">
-      <table mat-table [dataSource]="equipamientoRespuesta?.necesidadesAlarmas" class="w-100 mat-elevation-z2">
-
+      <table
+        mat-table
+        [dataSource]="equipamientoRespuesta?.necesidadesAlarmas"
+        class="w-100 mat-elevation-z2"
+      >
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef>Características del sistema de alarma</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Características del sistema de alarma
+          </th>
           <td mat-cell *matCellDef="let element">
             {{ element.descripcion }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="verificacion">
-          <th mat-header-cell *matHeaderCellDef>Verificación de la característica (Cumple / No cumple)</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Verificación de la característica (Cumple / No cumple)
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Estado</mat-label>
@@ -274,10 +375,14 @@
         </ng-container>
 
         <ng-container matColumnDef="modificaciones">
-          <th mat-header-cell *matHeaderCellDef>Modificaciones requeridas </th>
+          <th mat-header-cell *matHeaderCellDef>Modificaciones requeridas</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Modificaciones" [(ngModel)]="element.modificaciones"></textarea>
+              <textarea
+                matInput
+                placeholder="Modificaciones"
+                [(ngModel)]="element.modificaciones"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
@@ -287,7 +392,11 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Nombre</mat-label>
-              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+              <input
+                matInput
+                placeholder="Nombre"
+                [(ngModel)]="element.responsable"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -296,9 +405,16 @@
           <th mat-header-cell *matHeaderCellDef>fecha de acción de mejora</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
-                [(ngModel)]="element.fechaAccion" />
-              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="pickerFechaEvento"
+                placeholder="Fecha"
+                [(ngModel)]="element.fechaAccion"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerFechaEvento"
+              ></mat-datepicker-toggle>
               <mat-datepicker #pickerFechaEvento></mat-datepicker>
             </mat-form-field>
           </td>
@@ -308,16 +424,23 @@
           <th mat-header-cell *matHeaderCellDef>Recursos</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+              <textarea
+                matInput
+                [(ngModel)]="element.recursos"
+                placeholder="Recursos"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipamientoAlarma"></tr>
-        <tr mat-row *matRowDef="
-              let row;
-              columns: displayedColumnsEquipamientoAlarma
-            "></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumnsEquipamientoAlarma"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsEquipamientoAlarma"
+        ></tr>
       </table>
     </div>
   </div>
@@ -325,8 +448,11 @@
   <div class="row justify-content-center mt-3">
     <h5>Necesidades de equipos para comunicaciones</h5>
     <div class="col-12 mt-2 h-100">
-      <table mat-table [dataSource]="equipamientoRespuesta?.necesidadesComunicacion" class="w-100 mat-elevation-z2">
-
+      <table
+        mat-table
+        [dataSource]="equipamientoRespuesta?.necesidadesComunicacion"
+        class="w-100 mat-elevation-z2"
+      >
         <ng-container matColumnDef="descripcion">
           <th mat-header-cell *matHeaderCellDef>Equipos para comunicaciones</th>
           <td mat-cell *matCellDef="let element">
@@ -335,7 +461,9 @@
         </ng-container>
 
         <ng-container matColumnDef="verificacion">
-          <th mat-header-cell *matHeaderCellDef>Verificación de existencia y condición</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Verificación de existencia y condición
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Estado</mat-label>
@@ -355,11 +483,16 @@
         </ng-container>
 
         <ng-container matColumnDef="equiposRequeridos">
-          <th mat-header-cell *matHeaderCellDef>Cantidad de equipos requeridos</th>
+          <th mat-header-cell *matHeaderCellDef>
+            Cantidad de equipos requeridos
+          </th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Modificaciones"
-                [(ngModel)]="element.cantidadEquiposRequeridos"></textarea>
+              <textarea
+                matInput
+                placeholder="Modificaciones"
+                [(ngModel)]="element.cantidadEquiposRequeridos"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
@@ -369,7 +502,11 @@
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
               <mat-label>Nombre</mat-label>
-              <input matInput placeholder="Nombre" [(ngModel)]="element.responsable" />
+              <input
+                matInput
+                placeholder="Nombre"
+                [(ngModel)]="element.responsable"
+              />
             </mat-form-field>
           </td>
         </ng-container>
@@ -378,9 +515,16 @@
           <th mat-header-cell *matHeaderCellDef>fecha de adquisición</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <input matInput [matDatepicker]="pickerFechaEvento" placeholder="Fecha"
-                [(ngModel)]="element.fechaAdquisicion" />
-              <mat-datepicker-toggle matSuffix [for]="pickerFechaEvento"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="pickerFechaEvento"
+                placeholder="Fecha"
+                [(ngModel)]="element.fechaAdquisicion"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerFechaEvento"
+              ></mat-datepicker-toggle>
               <mat-datepicker #pickerFechaEvento></mat-datepicker>
             </mat-form-field>
           </td>
@@ -390,20 +534,34 @@
           <th mat-header-cell *matHeaderCellDef>Recursos</th>
           <td mat-cell *matCellDef="let element">
             <mat-form-field class="w-100">
-              <textarea matInput [(ngModel)]="element.recursos" placeholder="Recursos"></textarea>
+              <textarea
+                matInput
+                [(ngModel)]="element.recursos"
+                placeholder="Recursos"
+              ></textarea>
             </mat-form-field>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnComunicaciones"></tr>
-        <tr mat-row *matRowDef="
-              let row;
-              columns: displayedColumnComunicaciones
-            "></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumnComunicaciones"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnComunicaciones"
+        ></tr>
       </table>
     </div>
   </div>
   <div class="row justify-content-center mr-0 ml-0 mt-2">
-    <button color="accent" mat-raised-button (click)="guardarEquipamiento()" type="button">Guardar</button>
+    <button
+      color="accent"
+      mat-raised-button
+      (click)="guardarEquipamiento()"
+      type="button"
+    >
+      Guardar
+    </button>
   </div>
 </div>

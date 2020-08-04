@@ -271,7 +271,7 @@ export class EquipamientoRespuesta {
       recursos: ""
     }
   ];
-  necesidadesPenalizacion: NecesidadPenalizacion[] = [
+  necesidadesSenializacion: NecesidadSenializacion[] = [
     {
       descripcion: "Señales de prohibición",
       senialesExistentes: null,
@@ -393,7 +393,7 @@ export class EquipamientoPrimerAuxilio {
     }
   }
 }
-export class NecesidadPenalizacion {
+export class NecesidadSenializacion {
   descripcion: string = "";
   senialesExistentes: number = null;
   senialesRequeridas: number = null;
@@ -401,7 +401,7 @@ export class NecesidadPenalizacion {
   fechaAdquisicion: Date = null;
   recursos: string = "";
 
-  constructor(args?: NecesidadPenalizacion) {
+  constructor(args?: NecesidadSenializacion) {
     for (const key in args) {
       this[key] = args[key];
     }
