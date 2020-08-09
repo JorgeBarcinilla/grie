@@ -1,50 +1,84 @@
-<h2 mat-dialog-title class="text-uppercase">{{riesgo.riesgo}}</h2>
+<h2 mat-dialog-title class="text-uppercase">{{ riesgo.riesgo }}</h2>
 <mat-dialog-content class="mat-typography">
   <div class="container-fluid">
     <form [formGroup]="formTratamiento" autocomplete="off">
       <div class="row justify-content-start">
         <div class="col-12">
           <h3>
-            En este punto se debe escoger el tratamiento que se le dará al riesgo.
+            En este punto se debe escoger el tratamiento que se le dará al
+            riesgo.
           </h3>
         </div>
         <div class="col-4">
           <mat-form-field class="w-100">
             <mat-label>Tratamiento</mat-label>
-            <mat-select formControlName="estado" (selectionChange)="seleccionarEstado($event)">
-              <mat-option *ngIf="lineamientos?.nivelesAceptacionRiesgo['riesgo'+riesgo.nivelRiesgo] == 'aceptable'"
+            <mat-select
+              formControlName="estado"
+              (selectionChange)="seleccionarEstado($event)"
+            >
+              <!-- <mat-option *ngIf="lineamientos?.nivelesAceptacionRiesgo['riesgo'+riesgo.nivelRiesgo] == 'aceptable'"
                 matTooltip="Si el nivel de riesgo cumple con los criterios de aceptación de riesgo no es necesario poner
                 controles y puede ser aceptado, es decir que no se adopta ninguna medida que afecte la probabilidad o el
                 impacto del riesgo" matTooltipPosition="before" value="aceptar">
                 Aceptar
+              </mat-option> -->
+              <mat-option
+                matTooltip="Si el nivel de riesgo cumple con los criterios de aceptación de riesgo no es necesario poner
+                controles y puede ser aceptado, es decir que no se adopta ninguna medida que afecte la probabilidad o el
+                impacto del riesgo"
+                matTooltipPosition="before"
+                value="aceptar"
+              >
+                Aceptar
               </mat-option>
-              <mat-option matTooltip="Cuando el nivel de riesgo se considera demasiado extremo se puede tomar la decisión de abandonar las
+              <mat-option
+                matTooltip="Cuando el nivel de riesgo se considera demasiado extremo se puede tomar la decisión de abandonar las
         actividades que dan lugar al riesgo y se decide no iniciar o no continuar con las actividades que lo causan"
-                matTooltipPosition="before" value="evitar">
+                matTooltipPosition="before"
+                value="evitar"
+              >
                 Evitar
               </mat-option>
-              <mat-option matTooltip="Cuando es muy difícil para la entidad reducir el riesgo a un nivel aceptable o se carece de
+              <mat-option
+                matTooltip="Cuando es muy difícil para la entidad reducir el riesgo a un nivel aceptable o se carece de
                 conocimientos necesarios para gestionarlo, este puede ser compartido con otra parte interesada que pueda
                 gestionarlo con más eficacia, por ejemplo, a través de seguros o tercerización."
-                matTooltipPosition="before" value="compartir">
+                matTooltipPosition="before"
+                value="compartir"
+              >
                 Compartir
               </mat-option>
-              <mat-option matTooltip="Mediante esta opción de tratamiento se busca que el riesgo residual pueda ser reevaluado
+              <mat-option
+                matTooltip="Mediante esta opción de tratamiento se busca que el riesgo residual pueda ser reevaluado
                 como algo aceptable para la I.E, para esto se adoptan medidas que permitan reducir la probabilidad y/o
                 el impacto del riesgo a través de la implementación de actividades de control."
-                matTooltipPosition="before" value="reducir">
+                matTooltipPosition="before"
+                value="reducir"
+              >
                 Reducir
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
       </div>
-      <nz-divider class="mt-2 mb-2" nzText="Acciones" nzOrientation="left"></nz-divider>
-      <div *ngIf="formTratamiento.value.estado == 'aceptar' || formTratamiento.value.estado == 'evitar'"
-        class="row justify-content-around text-center">
+      <nz-divider
+        class="mt-2 mb-2"
+        nzText="Acciones"
+        nzOrientation="left"
+      ></nz-divider>
+      <div
+        *ngIf="
+          formTratamiento.value.estado == 'aceptar' ||
+          formTratamiento.value.estado == 'evitar'
+        "
+        class="row justify-content-around text-center"
+      >
         <h3>No se requiere nada adicional</h3>
       </div>
-      <div *ngIf="formTratamiento.value.estado == 'compartir'" class="row justify-content-start">
+      <div
+        *ngIf="formTratamiento.value.estado == 'compartir'"
+        class="row justify-content-start"
+      >
         <div class="col-12">
           <h3>
             Como compartirá el riesgo?
@@ -64,7 +98,10 @@
           </mat-form-field>
         </div>
       </div>
-      <div *ngIf="formTratamiento.value.estado == 'reducir'" class="row justify-content-start">
+      <div
+        *ngIf="formTratamiento.value.estado == 'reducir'"
+        class="row justify-content-start"
+      >
         <!-- <div class="col-sm-6 col-md-3">
           <mat-form-field class="w-100">
             <mat-label>N° Actividades cumplidas</mat-label>
@@ -77,32 +114,35 @@
             <input formControlName="incidentes" matInput type="number">
           </mat-form-field>
         </div> -->
-        <div class="col-12 mat-elevation-z1 div-list pt-3 h-100 pl-3 pr3 mt-2 mb-2" formGroupName="planContingencia">
+        <div
+          class="col-12 mat-elevation-z1 div-list pt-3 h-100 pl-3 pr3 mt-2 mb-2"
+          formGroupName="planContingencia"
+        >
           <div class="label-title-div">Plan de contingencia</div>
           <div class="container">
             <div class="row justify-content-around">
               <div class="col-sm-6 col-md-3">
                 <mat-form-field class="w-100">
                   <mat-label>Actividad de control</mat-label>
-                  <input formControlName="actividadControl" matInput>
+                  <input formControlName="actividadControl" matInput />
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-3">
                 <mat-form-field class="w-100">
                   <mat-label>Responsable</mat-label>
-                  <input formControlName="responsable" matInput>
+                  <input formControlName="responsable" matInput />
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-3">
                 <mat-form-field class="w-100">
                   <mat-label>Tiempo de ejecución</mat-label>
-                  <input formControlName="tiempoEjecucion" matInput>
+                  <input formControlName="tiempoEjecucion" matInput />
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-3">
                 <mat-form-field class="w-100">
                   <mat-label>Soporte</mat-label>
-                  <input formControlName="soporte" matInput>
+                  <input formControlName="soporte" matInput />
                 </mat-form-field>
               </div>
             </div>
@@ -114,21 +154,33 @@
             <div class="row justify-content-around">
               <mat-chip-list>
                 <span class="mb-3" *ngFor="let causa of riesgo.causas">
-                  <nz-tag nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate"
-                    class="cursor-pointer" [nzColor]="'#2db7f5'" (click)="establecerAccion(causa)">
-                    {{causa.nombre}}
+                  <nz-tag
+                    nz-popover
+                    [nzPopoverTitle]="titleTemplate"
+                    [nzPopoverContent]="contentTemplate"
+                    class="cursor-pointer"
+                    [nzColor]="'#2db7f5'"
+                    (click)="establecerAccion(causa)"
+                  >
+                    {{ causa.nombre }}
                   </nz-tag>
                   <ng-template #titleTemplate>
                     Acciones
                   </ng-template>
                   <ng-template #contentTemplate>
-                    <div class="text-capitalize"><b>Actividad de control: </b> {{causa.accion?.actividadControl}}
+                    <div class="text-capitalize">
+                      <b>Actividad de control: </b>
+                      {{ causa.accion?.actividadControl }}
                     </div>
-                    <div class="text-capitalize"><b>Responsable: </b>{{causa.accion?.responsable}}
+                    <div class="text-capitalize">
+                      <b>Responsable: </b>{{ causa.accion?.responsable }}
                     </div>
-                    <div class="text-capitalize"><b>Soporte: </b>{{causa.accion?.soporte}}
+                    <div class="text-capitalize">
+                      <b>Soporte: </b>{{ causa.accion?.soporte }}
                     </div>
-                    <div class="text-capitalize"><b>Tiempo de ejecución: </b>{{causa.accion?.tiempoEjecucion}}
+                    <div class="text-capitalize">
+                      <b>Tiempo de ejecución: </b
+                      >{{ causa.accion?.tiempoEjecucion }}
                     </div>
                   </ng-template>
                 </span>
@@ -141,7 +193,16 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button type="button" mat-button color="primary" mat-dialog-close>Cancelar</button>
-  <button type="button" mat-raised-button color="accent" (click)="guardarTratamiento()"
-    [disabled]="formTratamiento.invalid">Guardar</button>
+  <button type="button" mat-button color="primary" mat-dialog-close>
+    Cancelar
+  </button>
+  <button
+    type="button"
+    mat-raised-button
+    color="accent"
+    (click)="guardarTratamiento()"
+    [disabled]="formTratamiento.invalid"
+  >
+    Guardar
+  </button>
 </mat-dialog-actions>
