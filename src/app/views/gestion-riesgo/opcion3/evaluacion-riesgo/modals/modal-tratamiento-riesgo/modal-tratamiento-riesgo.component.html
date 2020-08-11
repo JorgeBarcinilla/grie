@@ -16,13 +16,11 @@
               formControlName="estado"
               (selectionChange)="seleccionarEstado($event)"
             >
-              <!-- <mat-option *ngIf="lineamientos?.nivelesAceptacionRiesgo['riesgo'+riesgo.nivelRiesgo] == 'aceptable'"
-                matTooltip="Si el nivel de riesgo cumple con los criterios de aceptación de riesgo no es necesario poner
-                controles y puede ser aceptado, es decir que no se adopta ninguna medida que afecte la probabilidad o el
-                impacto del riesgo" matTooltipPosition="before" value="aceptar">
-                Aceptar
-              </mat-option> -->
               <mat-option
+                *ngIf="
+                  (lineamientos?.nivelesAceptacionRiesgo)[riesgo.nivelRiesgo] ==
+                  'aceptable'
+                "
                 matTooltip="Si el nivel de riesgo cumple con los criterios de aceptación de riesgo no es necesario poner
                 controles y puede ser aceptado, es decir que no se adopta ninguna medida que afecte la probabilidad o el
                 impacto del riesgo"

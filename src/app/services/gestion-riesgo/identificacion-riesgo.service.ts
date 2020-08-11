@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs";
 import { GlobalService } from "../global.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class IdentificacionRiesgoService {
   private riesgos: Riesgo[] = [];
@@ -40,9 +40,9 @@ export class IdentificacionRiesgoService {
     );
   }
 
-  actualizarRiesgo(idLineamiento: string, data: Riesgo) {
+  actualizarRiesgo(idRiesgo: string, data: any) {
     return this._globalService.getQuery(
-      "/identificacionRiesgo/update/" + idLineamiento,
+      "/identificacionRiesgo/update/" + idRiesgo,
       "put",
       true,
       data

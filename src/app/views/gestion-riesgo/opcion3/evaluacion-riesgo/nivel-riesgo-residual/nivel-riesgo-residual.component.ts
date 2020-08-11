@@ -6,19 +6,47 @@ import { IdentificacionRiesgoService } from "src/app/services/gestion-riesgo/ide
 import { Riesgo } from "src/app/models/identificacionRiesgo.model";
 import { EvaluacionRiesgosService } from "src/app/services/gestion-riesgo/evaluacion-riesgos.service";
 
+const HASH_NIVEL_RIESGO = {
+  "casiseguro-catastrofico": "riesgoExtremo",
+  "casiseguro-mayor": "riesgoExtremo",
+  "casiseguro-moderado": "riesgoExtremo",
+  "casiseguro-menor": "riesgoAlto",
+  "casiseguro-insignificante": "riesgoAlto",
+  "probable-catastrofico": "riesgoExtremo",
+  "probable-mayor": "riesgoExtremo",
+  "probable-moderado": "riesgoAlto",
+  "probable-menor": "riesgoAlto",
+  "probable-insignificante": "riesgoModerado",
+  "posible-catastrofico": "riesgoExtremo",
+  "posible-mayor": "riesgoExtremo",
+  "posible-moderado": "riesgoAlto",
+  "posible-menor": "riesgoModerado",
+  "posible-insignificante": "riesgoBajo",
+  "improbable-catastrofico": "riesgoExtremo",
+  "improbable-mayor": "riesgoAlto",
+  "improbable-moderado": "riesgoModerado",
+  "improbable-menor": "riesgoBajo",
+  "improbable-insignificante": "riesgoBajo",
+  "raravez-catastrofico": "riesgoExtremo",
+  "raravez-mayor": "riesgoAlto",
+  "raravez-moderado": "riesgoModerado",
+  "raravez-menor": "riesgoBajo",
+  "raravez-insignificante": "riesgoBajo",
+};
+
 const PROBABILIDAD = [
   "casiseguro",
   "probable",
   "posible",
   "improbable",
-  "raravez"
+  "raravez",
 ];
 const IMPACTO = [
   "catastrofico",
   "mayor",
   "moderado",
   "menor",
-  "insignificante"
+  "insignificante",
 ];
 
 const RIESGOS_MAP = {
@@ -27,42 +55,42 @@ const RIESGOS_MAP = {
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   probable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   posible: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   improbable: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
+    catastrofico: [],
   },
   raravez: {
     insignificante: [],
     menor: [],
     moderado: [],
     mayor: [],
-    catastrofico: []
-  }
+    catastrofico: [],
+  },
 };
 
 @Component({
   selector: "app-nivel-riesgo-residual",
   templateUrl: "./nivel-riesgo-residual.component.html",
-  styleUrls: ["./nivel-riesgo-residual.component.css"]
+  styleUrls: ["./nivel-riesgo-residual.component.css"],
 })
 export class NivelRiesgoResidualComponent implements OnInit {
   idSede: string;
@@ -75,7 +103,8 @@ export class NivelRiesgoResidualComponent implements OnInit {
 
   constructor(
     private _changeSedeService: ChangeSedeService,
-    private _evaluacionRiesgoRiesgoService: EvaluacionRiesgosService
+    private _evaluacionRiesgoRiesgoService: EvaluacionRiesgosService,
+    private _identificacionRiesgoService: IdentificacionRiesgoService
   ) {}
 
   ngOnInit() {
@@ -110,7 +139,7 @@ export class NivelRiesgoResidualComponent implements OnInit {
     console.log(riesgos);
     this.riesgosMapeados = JSON.parse(JSON.stringify(RIESGOS_MAP));
 
-    riesgos.forEach(riesgo => {
+    riesgos.forEach((riesgo) => {
       let solidez = riesgo.solidez;
       let disminuirImpacto = riesgo.disminuirImpacto;
       let disminuirProbabilidad = riesgo.disminuirProbabilidad;
@@ -196,9 +225,29 @@ export class NivelRiesgoResidualComponent implements OnInit {
             posImpFinal > IMPACTO.length - 1 ? IMPACTO.length - 1 : posImpFinal
           ]
         ].push(riesgo.riesgo);
+        riesgo.nivelRiesgo =
+          HASH_NIVEL_RIESGO[
+            PROBABILIDAD[
+              posProbFinal > PROBABILIDAD.length - 1
+                ? PROBABILIDAD.length - 1
+                : posProbFinal
+            ] +
+              "-" +
+              IMPACTO[
+                posImpFinal > IMPACTO.length - 1
+                  ? IMPACTO.length - 1
+                  : posImpFinal
+              ]
+          ];
+        this._identificacionRiesgoService
+          .actualizarRiesgo(riesgo._id, { nivelRiesgo: riesgo.nivelRiesgo })
+          .subscribe((res) => {
+            console.log("actuyalizado");
+          });
       } else {
         this.riesgosNoMapeados.push(riesgo);
       }
     });
+    console.log(riesgos);
   }
 }

@@ -7,10 +7,17 @@ import { EvaluacionRiesgosService } from "src/app/services/gestion-riesgo/evalua
 import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.service";
 import { ReporteTratamientoRiesgoService } from "src/app/services/gestion-riesgo/reporte-tratamiento-riesgo.service";
 
+const PARSER_NIVEL_RIESGO = {
+  riesgoAlto: "Alto",
+  riesgoBajo: "Bajo",
+  riesgoModerado: "Moderado",
+  riesgoExtremo: "Extremo",
+};
+
 @Component({
   selector: "app-reporte-tratamiento-riesgo",
   templateUrl: "./reporte-tratamiento-riesgo.component.html",
-  styleUrls: ["./reporte-tratamiento-riesgo.component.css"]
+  styleUrls: ["./reporte-tratamiento-riesgo.component.css"],
 })
 export class ReporteTratamientoRiesgoComponent implements OnInit {
   visible: boolean;
@@ -27,7 +34,7 @@ export class ReporteTratamientoRiesgoComponent implements OnInit {
     "proceso",
     "descripcion",
     "solidez",
-    "ver"
+    "ver",
   ];
 
   subscribeIdSede: Subscription;
@@ -84,41 +91,44 @@ export class ReporteTratamientoRiesgoComponent implements OnInit {
       { name: "Clasificación", content: [riesgo.tipo] },
       { name: "Probabilidad", content: [riesgo.probabilidad] },
       { name: "Impacto", content: [riesgo.nivelImpacto] },
-      { name: "Causas", content: riesgo.causas.map(causa => causa.nombre) },
+      { name: "Causas", content: riesgo.causas.map((causa) => causa.nombre) },
       {
         name: "Opción manejo",
         content: [
           riesgo.tratamiento
             ? riesgo.tratamiento.estado
-            : "No se ha definido tratamiento"
-        ]
+            : "No se ha definido tratamiento",
+        ],
       },
       {
         name: "Actividad de control",
-        content: riesgo.causas.map(causa =>
+        content: riesgo.causas.map((causa) =>
           causa.accion ? causa.accion.actividadControl : "No aplica"
-        )
+        ),
       },
       {
         name: "Soporte",
-        content: riesgo.causas.map(causa =>
+        content: riesgo.causas.map((causa) =>
           causa.accion ? causa.accion.soporte : "No aplica"
-        )
+        ),
       },
       {
         name: "Responsable",
-        content: riesgo.causas.map(causa =>
+        content: riesgo.causas.map((causa) =>
           causa.accion ? causa.accion.responsable : "No aplica"
-        )
+        ),
       },
       {
         name: "Tiempo",
-        content: riesgo.causas.map(causa =>
+        content: riesgo.causas.map((causa) =>
           causa.accion ? causa.accion.tiempoEjecucion : "No aplica"
-        )
+        ),
       },
 
-      { name: "Riesgo residual", content: ["6-1"] }
+      {
+        name: "Riesgo residual",
+        content: [PARSER_NIVEL_RIESGO[riesgo.nivelRiesgo]],
+      },
     ];
   }
 }

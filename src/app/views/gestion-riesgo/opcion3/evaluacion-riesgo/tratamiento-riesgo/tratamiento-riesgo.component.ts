@@ -14,7 +14,7 @@ import { LineamientoPoliticaRiesgoService } from "src/app/services/gestion-riesg
 @Component({
   selector: "app-tratamiento-riesgo",
   templateUrl: "./tratamiento-riesgo.component.html",
-  styleUrls: ["./tratamiento-riesgo.component.css"]
+  styleUrls: ["./tratamiento-riesgo.component.css"],
 })
 export class TratamientoRiesgoComponent implements OnInit {
   listaProcesos: any = [
@@ -36,7 +36,7 @@ export class TratamientoRiesgoComponent implements OnInit {
     ["Inclusión", []],
     ["Proyección a la comunidad", []],
     ["Participación y convivencia", []],
-    ["Prevención de riesgos", []]
+    ["Prevención de riesgos", []],
   ];
 
   idSede: string;
@@ -62,14 +62,14 @@ export class TratamientoRiesgoComponent implements OnInit {
         this.subscribeRiesgos = this._evaluacionRiesgoRiesgoService
           .obtenerRiesgos(
             this.idSede,
-            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto"
+            "riesgo-tipo-causas-solidez-disminuirImpacto-disminuirProbabilidad-tratamiento-proceso-probabilidad-nivelImpacto-nivelRiesgo"
           )
           .subscribe((riesgos: Riesgo[]) => {
             console.log(riesgos);
             if (riesgos) {
               this.riesgos = riesgos;
-              this.riesgos.forEach(riesgo => {
-                this.listaProcesos.forEach(proceso => {
+              this.riesgos.forEach((riesgo) => {
+                this.listaProcesos.forEach((proceso) => {
                   if (proceso[0] == riesgo.proceso) {
                     proceso[1].push(riesgo);
                   }
@@ -93,15 +93,15 @@ export class TratamientoRiesgoComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalTratamientoRiesgoComponent, {
       data: {
         riesgo: riesgo,
-        idSede: this.idSede
-      }
+        idSede: this.idSede,
+      },
     });
-    dialogRef.afterClosed().subscribe(data => {
+    dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this._evaluacionRiesgoRiesgoService
           .guardarTratamientoRiesgo(riesgo._id, data)
           .subscribe((res: Res) => {
-            this.riesgos.find(r => {
+            this.riesgos.find((r) => {
               return r._id == riesgo._id;
             }).tratamiento = data;
             this._notificacionService.mostrarNotificacion(res.message, "info");
