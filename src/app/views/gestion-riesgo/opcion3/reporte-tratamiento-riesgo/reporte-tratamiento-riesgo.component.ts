@@ -93,6 +93,10 @@ export class ReporteTratamientoRiesgoComponent implements OnInit {
       { name: "Impacto", content: [riesgo.nivelImpacto] },
       { name: "Causas", content: riesgo.causas.map((causa) => causa.nombre) },
       {
+        name: "Riesgo residual",
+        content: [PARSER_NIVEL_RIESGO[riesgo.nivelRiesgo]],
+      },
+      {
         name: "Opción manejo",
         content: [
           riesgo.tratamiento
@@ -123,11 +127,6 @@ export class ReporteTratamientoRiesgoComponent implements OnInit {
         content: riesgo.causas.map((causa) =>
           causa.accion ? causa.accion.tiempoEjecucion : "No aplica"
         ),
-      },
-
-      {
-        name: "Riesgo residual",
-        content: [PARSER_NIVEL_RIESGO[riesgo.nivelRiesgo]],
       },
     ];
   }

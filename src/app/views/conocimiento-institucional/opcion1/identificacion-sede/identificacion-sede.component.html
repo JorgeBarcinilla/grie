@@ -1,48 +1,70 @@
 <div class="container-fluid">
-  <app-card-title title="IDENTIFICACIÓN DE LA SEDE">
-  </app-card-title>
+  <app-card-title title="IDENTIFICACIÓN DE LA SEDE"> </app-card-title>
   <form [formGroup]="formIdentificacionSede" autocomplete="off">
     <div class="row justify-content-around">
       <div class="col-sm-6 col-md-4 col-lg-3">
         <mat-form-field class="w-100">
           <mat-label>Sede</mat-label>
           <mat-select [formControl]="nombreSede">
-            <mat-option *ngFor="let sede of listaSedes" [value]="sede._id" (click)="seleccionarSede(sede)">
-              {{sede.nombre}}</mat-option>
+            <mat-option
+              *ngFor="let sede of listaSedes"
+              [value]="sede._id"
+              (click)="seleccionarSede(sede)"
+            >
+              {{ sede.nombre }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
         <mat-form-field class="w-100">
           <mat-label>Código DANE</mat-label>
-          <input formControlName="codDane" matInput placeholder="Escriba el código DANE">
+          <input
+            formControlName="codDane"
+            matInput
+            placeholder="Escriba el código DANE"
+          />
         </mat-form-field>
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
         <mat-form-field class="w-100">
           <mat-label>N° Coordinadores</mat-label>
-          <input formControlName="coordinador" type="number" matInput placeholder="Escriba el nombre del coordinador">
+          <input
+            formControlName="coordinador"
+            type="number"
+            matInput
+            placeholder="Escriba el nombre del coordinador"
+          />
         </mat-form-field>
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
         <mat-form-field class="w-100">
           <mat-label>N° Estudiantes</mat-label>
-          <input formControlName="cantEstudiantes" matInput placeholder="Escriba la cantidad de estudiantes"
-            type="number" min="1">
+          <input
+            formControlName="cantEstudiantes"
+            matInput
+            placeholder="Escriba la cantidad de estudiantes"
+            type="number"
+            min="1"
+          />
         </mat-form-field>
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
         <mat-form-field class="w-100">
           <mat-label>N° Docentes</mat-label>
-          <input formControlName="cantDocentes" matInput placeholder="Escriba la cantidad de docentes" type="number"
-            min="1">
+          <input
+            formControlName="cantDocentes"
+            matInput
+            placeholder="Escriba la cantidad de docentes"
+            type="number"
+            min="1"
+          />
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-11 mat-elevation-z3 p-0">
         <mat-tab-group mat-align-tabs="center">
-
           <mat-tab label="Datos de nivel directivo">
             <ng-template matTabContent>
               <div class="container-fluid">
@@ -51,71 +73,120 @@
                     <div class="col-sm-6 col-md-4 col-lg-3">
                       <mat-form-field class="w-100">
                         <mat-label>Nombre</mat-label>
-                        <input formControlName="nombre" matInput placeholder="Escriba el nombre de la persona">
+                        <input
+                          formControlName="nombre"
+                          matInput
+                          placeholder="Escriba el nombre de la persona"
+                        />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-3">
                       <mat-form-field class="w-100">
                         <mat-label>Cargo</mat-label>
-                        <input formControlName="cargo" matInput placeholder="Escriba el cargo de la persona">
+                        <input
+                          formControlName="cargo"
+                          matInput
+                          placeholder="Escriba el cargo de la persona"
+                        />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2">
                       <mat-form-field class="w-100">
                         <mat-label>Correo</mat-label>
-                        <input formControlName="correo" matInput placeholder="Escriba el correo" type="email">
+                        <input
+                          formControlName="correo"
+                          matInput
+                          placeholder="Escriba el correo"
+                          type="email"
+                        />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2">
                       <mat-form-field class="w-100">
                         <mat-label>Telefono</mat-label>
-                        <input formControlName="telefono" matInput placeholder="Escriba el telefono" type="number"
-                          minlength="6" maxlength="11">
+                        <input
+                          formControlName="telefono"
+                          matInput
+                          placeholder="Escriba el telefono"
+                          type="number"
+                          minlength="6"
+                          maxlength="11"
+                        />
                       </mat-form-field>
                     </div>
                     <div class="col-2">
                       <div class="row justify-content-center mt-3">
-                        <button color="accent" mat-stroked-button (click)="agregarDirectivo()"
-                          [disabled]="formDatosNivelDirectivo.invalid" type="button">Agregar</button>
+                        <button
+                          color="accent"
+                          mat-stroked-button
+                          (click)="agregarDirectivo()"
+                          [disabled]="formDatosNivelDirectivo.invalid"
+                          type="button"
+                        >
+                          Agregar
+                        </button>
                       </div>
                     </div>
                   </div>
                 </form>
                 <div class="row justify-content-center mb-2">
                   <div class="col-md-10 col-lg-8 p mat-elevation-z3">
-                    <table mat-table [dataSource]="dataSourcesDirectivos" class="w-100">
-
+                    <table
+                      mat-table
+                      [dataSource]="dataSourcesDirectivos"
+                      class="w-100"
+                    >
                       <!--- Note that these columns can be defined in any order.
                                   The actual rendered columns are set as a property on the row definition" -->
 
                       <!-- Position Column -->
                       <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.nombre }}
+                        </td>
                       </ng-container>
 
                       <!-- Name Column -->
                       <ng-container matColumnDef="cargo">
-                        <th mat-header-cell *matHeaderCellDef> Cargo </th>
-                        <td mat-cell *matCellDef="let element"> {{element.cargo}} </td>
+                        <th mat-header-cell *matHeaderCellDef>Cargo</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.cargo }}
+                        </td>
                       </ng-container>
 
                       <!-- Weight Column -->
                       <ng-container matColumnDef="correo">
-                        <th mat-header-cell *matHeaderCellDef> Correo </th>
-                        <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+                        <th mat-header-cell *matHeaderCellDef>Correo</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.correo }}
+                        </td>
                       </ng-container>
 
                       <!-- Symbol Column -->
                       <ng-container matColumnDef="telefono">
-                        <th mat-header-cell *matHeaderCellDef> Telefono </th>
-                        <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                        <th mat-header-cell *matHeaderCellDef>Telefono</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.telefono }}
+                        </td>
                       </ng-container>
 
-                      <tr mat-header-row *matHeaderRowDef="displayedColumnsDirectivos"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumnsDirectivos;"></tr>
+                      <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumnsDirectivos"
+                      ></tr>
+                      <tr
+                        mat-row
+                        *matRowDef="
+                          let row;
+                          columns: displayedColumnsDirectivos
+                        "
+                      ></tr>
                     </table>
-                    <mat-paginator [pageSizeOptions]="[3, 6, 9]" showFirstLastButtons></mat-paginator>
+                    <mat-paginator
+                      [pageSizeOptions]="[3, 6, 9]"
+                      showFirstLastButtons
+                    ></mat-paginator>
                   </div>
                 </div>
               </div>
@@ -131,35 +202,54 @@
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
                           <mat-label>Municipio</mat-label>
-                          <input formControlName="municipio" matInput
-                            placeholder="Escriba el municipio donde se encuentra la sede">
+                          <input
+                            formControlName="municipio"
+                            matInput
+                            placeholder="Escriba el municipio donde se encuentra la sede"
+                          />
                         </mat-form-field>
                       </div>
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
                           <mat-label>Barrio</mat-label>
-                          <input formControlName="barrio" matInput
-                            placeholder="Escriba barrio donde esta ubicado el municipio">
+                          <input
+                            formControlName="barrio"
+                            matInput
+                            placeholder="Escriba barrio donde esta ubicado el municipio"
+                          />
                         </mat-form-field>
                       </div>
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
                           <mat-label>Dirección</mat-label>
-                          <input formControlName="direccion" matInput placeholder="Escriba la dirección de la sede">
+                          <input
+                            formControlName="direccion"
+                            matInput
+                            placeholder="Escriba la dirección de la sede"
+                          />
                         </mat-form-field>
                       </div>
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
                           <mat-label>Telefono</mat-label>
-                          <input formControlName="telefono" matInput placeholder="Escriba el telefono" type="number"
-                            minlength="6" maxlength="11">
+                          <input
+                            formControlName="telefono"
+                            matInput
+                            placeholder="Escriba el telefono"
+                            type="number"
+                            minlength="6"
+                            maxlength="11"
+                          />
                         </mat-form-field>
                       </div>
                       <div class="col-md-6">
                         <mat-form-field class="w-100">
                           <mat-label>Correo</mat-label>
-                          <input formControlName="correo" matInput
-                            placeholder="Escriba la dirección de correo de la sede">
+                          <input
+                            formControlName="correo"
+                            matInput
+                            placeholder="Escriba la dirección de correo de la sede"
+                          />
                         </mat-form-field>
                       </div>
                     </div>
@@ -171,7 +261,11 @@
                         <div class="col-4">
                           <mat-form-field class="w-100">
                             <mat-label>Norte</mat-label>
-                            <input formControlName="limiteNorte" matInput placeholder="Institución">
+                            <input
+                              formControlName="limiteNorte"
+                              matInput
+                              placeholder="Institución"
+                            />
                           </mat-form-field>
                         </div>
                       </div>
@@ -179,16 +273,28 @@
                         <div class="col-4">
                           <mat-form-field class="w-100">
                             <mat-label>Este</mat-label>
-                            <input formControlName="limiteEste" matInput placeholder="Institución">
+                            <input
+                              formControlName="limiteEste"
+                              matInput
+                              placeholder="Institución"
+                            />
                           </mat-form-field>
                         </div>
                         <div class="col-4 text-center">
-                          <img style="height: 90px; width: 90px;" src="assets/img/puntos_cardinales.png" alt="">
+                          <img
+                            style="height: 90px; width: 90px"
+                            src="assets/img/puntos_cardinales.png"
+                            alt=""
+                          />
                         </div>
                         <div class="col-4">
                           <mat-form-field class="w-100">
                             <mat-label>Oeste</mat-label>
-                            <input formControlName="limiteOeste" matInput placeholder="Institución">
+                            <input
+                              formControlName="limiteOeste"
+                              matInput
+                              placeholder="Institución"
+                            />
                           </mat-form-field>
                         </div>
                       </div>
@@ -196,7 +302,11 @@
                         <div class="col-md-4">
                           <mat-form-field class="w-100">
                             <mat-label>Sur</mat-label>
-                            <input formControlName="limiteSur" matInput placeholder="Institución">
+                            <input
+                              formControlName="limiteSur"
+                              matInput
+                              placeholder="Institución"
+                            />
                           </mat-form-field>
                         </div>
                       </div>
@@ -210,32 +320,49 @@
           <mat-tab label="Descripción planta física">
             <ng-template matTabContent>
               <div class="container-fluid">
-
                 <div class="row justify-content-center mt-3">
                   <div class="col-sm-4 col-md-3">
                     <div class="row justify-content-around">
                       <div class="col-12">
                         <mat-form-field class="w-100">
                           <mat-label>Año de construcción</mat-label>
-                          <input formControlName="anioConstruccion" matInput
-                            placeholder="Escriba el año en que se construyó la sede" type="number" min="1900"
-                            minlength="4" maxlength="4">
+                          <input
+                            formControlName="anioConstruccion"
+                            matInput
+                            placeholder="Escriba el año en que se construyó la sede"
+                            type="number"
+                            min="1900"
+                            minlength="4"
+                            maxlength="4"
+                          />
                         </mat-form-field>
                       </div>
                       <div class="col-12">
                         <mat-form-field class="w-100">
                           <mat-label>Area construida (m2)</mat-label>
-                          <input formControlName="areaConstruida" matInput
-                            placeholder="Escriba el area total construida de de la sede" type="number" min="1"
-                            minlength="6" maxlength="11">
+                          <input
+                            formControlName="areaConstruida"
+                            matInput
+                            placeholder="Escriba el area total construida de de la sede"
+                            type="number"
+                            min="1"
+                            minlength="6"
+                            maxlength="11"
+                          />
                         </mat-form-field>
                       </div>
                       <div class="col-12">
                         <mat-form-field class="w-100">
                           <mat-label>Area libre(m2)</mat-label>
-                          <input formControlName="areaLibre" matInput
-                            placeholder="Escriba el area total libre de la sede" type="number" min="1" minlength="6"
-                            maxlength="11">
+                          <input
+                            formControlName="areaLibre"
+                            matInput
+                            placeholder="Escriba el area total libre de la sede"
+                            type="number"
+                            min="1"
+                            minlength="6"
+                            maxlength="11"
+                          />
                         </mat-form-field>
                       </div>
                     </div>
@@ -246,42 +373,127 @@
                       <form [formGroup]="formArchivosSoporte">
                         <div class="row justify-content-center mt-3">
                           <div class="col-md-6">
-                            <mat-form-field class="w-100">
-                              <ngx-mat-file-input (change)="agregarArchivo($event)"
-                                formControlName="licenciaConstruccion" placeholder="Licencia de construcción (Solo PDF)"
-                                [accept]="'.pdf'"></ngx-mat-file-input>
-                              <mat-icon matSuffix>folder</mat-icon>
-                            </mat-form-field>
+                            <ng-container
+                              *ngIf="
+                                sedeSeleccionada.archivosSoporte
+                                  ?.licenciaConstruccion;
+                                else sinLicenciaConstruccion
+                              "
+                            >
+                              <p class="m-0 font-weight-bold">
+                                Licencia de construccion
+                              </p>
+                              <div class="row justify-content-start mr-0 ml-0">
+                                <small class="mt-2 mr-1">
+                                  {{
+                                    sedeSeleccionada.archivosSoporte
+                                      .licenciaConstruccion.nombreArchivo
+                                  }}
+                                </small>
+                                <button
+                                  mat-icon-button
+                                  matTooltip="Descargar licencia de construccion"
+                                  aria-label="Descargar Licencia de construccion"
+                                  (click)="
+                                    descargarPdf(
+                                      sedeSeleccionada.archivosSoporte
+                                        .licenciaConstruccion
+                                    )
+                                  "
+                                >
+                                  <mat-icon class="text-success"
+                                    >get_app</mat-icon
+                                  >
+                                </button>
+                                <button
+                                  mat-icon-button
+                                  matTooltip="Eliminar licencia de construccion"
+                                  aria-label="Eliminar Licencia de construccion"
+                                  (click)="
+                                    sedeSeleccionada.archivosSoporte.licenciaConstruccion = null
+                                  "
+                                >
+                                  <mat-icon class="text-danger"
+                                    >delete</mat-icon
+                                  >
+                                </button>
+                              </div>
+                            </ng-container>
+                            <ng-template #sinLicenciaConstruccion>
+                              <mat-form-field class="w-100">
+                                <ngx-mat-file-input
+                                  (change)="
+                                    agregarArchivo(
+                                      $event.target.files,
+                                      'licenciaConstruccion'
+                                    )
+                                  "
+                                  placeholder="Licencia de construcción (Solo PDF)"
+                                  [accept]="'.pdf'"
+                                ></ngx-mat-file-input>
+                                <mat-icon matSuffix>folder</mat-icon>
+                              </mat-form-field>
+                            </ng-template>
                           </div>
                           <div class="col-sm-6">
                             <mat-form-field class="w-100">
-                              <ngx-mat-file-input (change)="agregarArchivo($event)"
-                                formControlName="conceptoUsoConstruccion"
-                                placeholder="Concepto uso de construcción (Solo PDF)" [accept]="'.pdf'">
+                              <ngx-mat-file-input
+                                (change)="
+                                  agregarArchivo(
+                                    $event.target.files,
+                                    'conceptoUsoConstruccion'
+                                  )
+                                "
+                                placeholder="Concepto uso de construcción (Solo PDF)"
+                                [accept]="'.pdf'"
+                              >
                               </ngx-mat-file-input>
                               <mat-icon matSuffix>folder</mat-icon>
                             </mat-form-field>
                           </div>
                           <div class="col-sm-6">
                             <mat-form-field class="w-100">
-                              <ngx-mat-file-input (change)="agregarArchivo($event)"
-                                formControlName="conceptoHigienicoSanitario"
-                                placeholder="Concepto higienico-sanitario (Solo PDF)" [accept]="'.pdf'">
+                              <ngx-mat-file-input
+                                (change)="
+                                  agregarArchivo(
+                                    $event.target.files,
+                                    'conceptoHigienicoSanitario'
+                                  )
+                                "
+                                placeholder="Concepto higienico-sanitario (Solo PDF)"
+                                [accept]="'.pdf'"
+                              >
                               </ngx-mat-file-input>
                               <mat-icon matSuffix>folder</mat-icon>
                             </mat-form-field>
                           </div>
                           <div class="col-sm-6">
                             <mat-form-field class="w-100">
-                              <ngx-mat-file-input (change)="agregarArchivo($event)" formControlName="permisoAmbiental"
-                                placeholder="Permiso ambiental (Solo PDF)" [accept]="'.pdf'"></ngx-mat-file-input>
+                              <ngx-mat-file-input
+                                (change)="
+                                  agregarArchivo(
+                                    $event.target.files,
+                                    'permisoAmbiental'
+                                  )
+                                "
+                                placeholder="Permiso ambiental (Solo PDF)"
+                                [accept]="'.pdf'"
+                              ></ngx-mat-file-input>
                               <mat-icon matSuffix>folder</mat-icon>
                             </mat-form-field>
                           </div>
                           <div class="col-sm-6">
                             <mat-form-field class="w-100">
-                              <ngx-mat-file-input (change)="agregarArchivo($event)" formControlName="conceptoBomberos"
-                                placeholder="Concepto de bomberos (Solo PDF)" [accept]="'.pdf'"></ngx-mat-file-input>
+                              <ngx-mat-file-input
+                                (change)="
+                                  agregarArchivo(
+                                    $event.target.files,
+                                    'conceptoBomberos'
+                                  )
+                                "
+                                placeholder="Concepto de bomberos (Solo PDF)"
+                                [accept]="'.pdf'"
+                              ></ngx-mat-file-input>
                               <mat-icon matSuffix>folder</mat-icon>
                             </mat-form-field>
                           </div>
@@ -295,45 +507,79 @@
                     <div class="label-title-div">Edificios</div>
                     <div class="container-fluid p-2">
                       <div class="row justify-content-center">
-                        <button color="accent" mat-raised-button (click)="agregarEdificio()"
-                          type="button">Agregar</button>
+                        <button
+                          color="accent"
+                          mat-raised-button
+                          (click)="agregarEdificio()"
+                          type="button"
+                        >
+                          Agregar
+                        </button>
                       </div>
                       <div class="row justify-content-center mt-2">
                         <div class="col-11 mat-elevation-z3">
-                          <table mat-table [dataSource]="dataSourcesEdificios" class="w-100">
-
+                          <table
+                            mat-table
+                            [dataSource]="dataSourcesEdificios"
+                            class="w-100"
+                          >
                             <!--- Note that these columns can be defined in any order.
                                   The actual rendered columns are set as a property on the row definition" -->
 
                             <!-- Position Column -->
                             <ng-container matColumnDef="numero">
-                              <th mat-header-cell *matHeaderCellDef> Edificio # </th>
-                              <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+                              <th mat-header-cell *matHeaderCellDef>
+                                Edificio #
+                              </th>
+                              <td mat-cell *matCellDef="let element">
+                                {{ element.numero }}
+                              </td>
                             </ng-container>
 
                             <!-- Name Column -->
                             <ng-container matColumnDef="pisos">
-                              <th mat-header-cell *matHeaderCellDef> Pisos </th>
-                              <td mat-cell *matCellDef="let element"> {{element.pisos}} </td>
+                              <th mat-header-cell *matHeaderCellDef>Pisos</th>
+                              <td mat-cell *matCellDef="let element">
+                                {{ element.pisos }}
+                              </td>
                             </ng-container>
 
                             <!-- Weight Column -->
                             <ng-container matColumnDef="tiposSalon">
-                              <th mat-header-cell *matHeaderCellDef> Tipos de salón </th>
+                              <th mat-header-cell *matHeaderCellDef>
+                                Tipos de salón
+                              </th>
                               <td mat-cell *matCellDef="let element">
                                 <mat-chip-list>
-                                  <mat-chip class="bg-info" *ngFor="let chip of element.salones" selected>
-                                    {{chip.cantidad}} salones de {{chip.tipoSalon}}
+                                  <mat-chip
+                                    class="bg-info"
+                                    *ngFor="let chip of element.salones"
+                                    selected
+                                  >
+                                    {{ chip.cantidad }} salones de
+                                    {{ chip.tipoSalon }}
                                   </mat-chip>
                                 </mat-chip-list>
                               </td>
                             </ng-container>
 
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsEdificios"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsEdificios;"></tr>
+                            <tr
+                              mat-header-row
+                              *matHeaderRowDef="displayedColumnsEdificios"
+                            ></tr>
+                            <tr
+                              mat-row
+                              *matRowDef="
+                                let row;
+                                columns: displayedColumnsEdificios
+                              "
+                            ></tr>
                           </table>
-                          <mat-paginator #paginatorEdificios [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons>
+                          <mat-paginator
+                            #paginatorEdificios
+                            [pageSizeOptions]="[4, 8, 12]"
+                            showFirstLastButtons
+                          >
                           </mat-paginator>
                         </div>
                       </div>
@@ -354,23 +600,56 @@
                     </div>
                     <form [formGroup]="formJornadas">
                       <div class="row justify-content-center">
-                        <mat-checkbox class="p-1 m-2" formControlName="unica"
+                        <mat-checkbox
+                          class="p-1 m-2"
+                          formControlName="unica"
                           [checked]="formJornadas.controls.unica.value"
-                          (change)="actualizarJornada($event,formJornadas.controls.unica)">
+                          (change)="
+                            actualizarJornada(
+                              $event,
+                              formJornadas.controls.unica
+                            )
+                          "
+                        >
                           Unica
                         </mat-checkbox>
-                        <mat-checkbox class="p-1 m-2" formControlName="maniana"
+                        <mat-checkbox
+                          class="p-1 m-2"
+                          formControlName="maniana"
                           [checked]="formJornadas.controls.maniana.value"
-                          (change)="actualizarJornada($event,formJornadas.controls.maniana)">
-                          Mañana</mat-checkbox>
-                        <mat-checkbox class="p-1 m-2" formControlName="tarde"
+                          (change)="
+                            actualizarJornada(
+                              $event,
+                              formJornadas.controls.maniana
+                            )
+                          "
+                        >
+                          Mañana</mat-checkbox
+                        >
+                        <mat-checkbox
+                          class="p-1 m-2"
+                          formControlName="tarde"
                           [checked]="formJornadas.controls.tarde.value"
-                          (change)="actualizarJornada($event,formJornadas.controls.tarde)">
+                          (change)="
+                            actualizarJornada(
+                              $event,
+                              formJornadas.controls.tarde
+                            )
+                          "
+                        >
                           Tarde
                         </mat-checkbox>
-                        <mat-checkbox class="p-1 m-2" formControlName="noche"
+                        <mat-checkbox
+                          class="p-1 m-2"
+                          formControlName="noche"
                           [checked]="formJornadas.controls.noche.value"
-                          (change)="actualizarJornada($event, formJornadas.controls.noche)">
+                          (change)="
+                            actualizarJornada(
+                              $event,
+                              formJornadas.controls.noche
+                            )
+                          "
+                        >
                           Noche
                         </mat-checkbox>
                       </div>
@@ -380,15 +659,28 @@
               </div>
             </ng-template>
           </mat-tab>
-
         </mat-tab-group>
       </div>
     </div>
     <div class="row justify-content-center mt-2 mb-2">
-      <button color="accent" class="mr-2 ml-2" mat-raised-button (click)="actualizarIdentificacionSede()"
-        type="button">Actualizar</button>
-      <button color="warn" class="mr-2 ml-2" mat-raised-button (click)="gestionRiesgoById()" type="button">Gestión del
-        riesgo</button>
+      <button
+        color="accent"
+        class="mr-2 ml-2"
+        mat-raised-button
+        (click)="actualizarIdentificacionSede()"
+        type="button"
+      >
+        Actualizar
+      </button>
+      <button
+        color="warn"
+        class="mr-2 ml-2"
+        mat-raised-button
+        (click)="gestionRiesgoById()"
+        type="button"
+      >
+        Gestión del riesgo
+      </button>
     </div>
   </form>
 </div>

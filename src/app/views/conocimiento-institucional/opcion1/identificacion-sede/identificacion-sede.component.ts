@@ -4,7 +4,7 @@ import {
   MatTableDataSource,
   MatPaginator,
   MatDialog,
-  MatCheckboxChange
+  MatCheckboxChange,
 } from "@angular/material";
 import { ModalAgregarEdificioComponent } from "./modal-agregar-edificio/modal-agregar-edificio.component";
 import { SedeService } from "src/app/services/conocimiento-institucional/sede.service";
@@ -14,17 +14,20 @@ import { ChangeSedeService } from "src/app/services/gestion-riesgo/change-sede.s
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { NotificacionService } from "src/app/services/notification/notification.service";
+import { ValidadorArchivosService } from "src/app/validators/validador-archivos.service";
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: "app-identificacion-sede",
   templateUrl: "./identificacion-sede.component.html",
-  styleUrls: ["./identificacion-sede.component.css"]
+  styleUrls: ["./identificacion-sede.component.css"],
 })
 export class IdentificacionSedeComponent implements OnInit, OnDestroy {
   //backFormValues = {};
 
   listaSedes: Sede[] = [];
   idSedeSeleccionada: string;
+  sedeSeleccionada: Sede;
 
   formIdentificacionSede = new FormGroup({
     codDane: new FormControl("", Validators.required),
@@ -50,30 +53,30 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
       maniana: false,
       tarde: false,
       noche: false,
-      unica: false
-    })
+      unica: false,
+    }),
   });
 
   formJornadas = new FormGroup({
     maniana: new FormControl(),
     unica: new FormControl(),
     tarde: new FormControl(),
-    noche: new FormControl()
+    noche: new FormControl(),
   });
 
   formArchivosSoporte = new FormGroup({
-    licenciaConstruccion: new FormControl(""),
-    conceptoUsoConstruccion: new FormControl(""),
-    conceptoHigienicoSanitario: new FormControl(""),
-    permisoAmbiental: new FormControl(""),
-    conceptoBomberos: new FormControl("")
+    licenciaConstruccion: new FormControl(null),
+    conceptoUsoConstruccion: new FormControl(null),
+    conceptoHigienicoSanitario: new FormControl(null),
+    permisoAmbiental: new FormControl(null),
+    conceptoBomberos: new FormControl(null),
   });
 
   formDatosNivelDirectivo = new FormGroup({
     nombre: new FormControl("", Validators.required),
     cargo: new FormControl("", Validators.required),
     telefono: new FormControl(""),
-    correo: new FormControl("", Validators.email)
+    correo: new FormControl("", Validators.email),
   });
 
   nombreSede = new FormControl("");
@@ -86,7 +89,7 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     "nombre",
     "cargo",
     "telefono",
-    "correo"
+    "correo",
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -105,7 +108,8 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     private _sedeService: SedeService,
     private _changeSedeService: ChangeSedeService,
     private route: Router,
-    private _notificacionService: NotificacionService
+    private _notificacionService: NotificacionService,
+    private _validadorArchivosService: ValidadorArchivosService
   ) {}
 
   ngOnInit() {
@@ -150,6 +154,8 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     if (sede) {
       this.formIdentificacionSede.reset();
       this.idSedeSeleccionada = sede._id;
+      this.sedeSeleccionada = sede;
+
       const form = this.formIdentificacionSede.value;
       for (let key in form) {
         this.formIdentificacionSede.get(key).setValue(sede[key]);
@@ -179,18 +185,41 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
     this.formDatosNivelDirectivo.reset();
   }
 
-  agregarArchivo($event) {
-    /*const archivo = $event.target.value;
-    console.log(this.formArchivosSoporte.value)*/
-    this.formIdentificacionSede
-      .get("archivosSoporte")
-      .setValue(this.formArchivosSoporte.value);
+  agregarArchivo(file: FileList, formControlName: string) {
+    const archivo = file.item(0);
+    console.log(archivo);
+    const estadoArchivo = this._validadorArchivosService.validarArchivo(
+      archivo
+    );
+    if (estadoArchivo == 200) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.formArchivosSoporte.get(formControlName).setValue({
+          nombreArchivo: archivo.name,
+          tipo: archivo.type,
+          base: event.target.result,
+        });
+        console.log(this.formArchivosSoporte.value);
+        this.formIdentificacionSede
+          .get("archivosSoporte")
+          .setValue(this.formArchivosSoporte.value);
+      };
+      reader.readAsDataURL(archivo);
+    } else {
+      file = undefined;
+    }
+  }
+
+  private getBase64(img: any, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
   }
 
   agregarEdificio(): void {
     const dialogRef = this.dialog.open(ModalAgregarEdificioComponent, {});
 
-    this.subcribeAddEdificio = dialogRef.afterClosed().subscribe(data => {
+    this.subcribeAddEdificio = dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.listaEdificios.unshift(data);
         this.dataSourcesEdificios.data = this.listaEdificios;
@@ -227,5 +256,13 @@ export class IdentificacionSedeComponent implements OnInit, OnDestroy {
   gestionRiesgoById(): void {
     this._changeSedeService.insertarSede(this.idSedeSeleccionada);
     this.route.navigate(["/gestionRiesgo/lineamientosPolitica"]);
+  }
+
+  descargarPdf(file) {
+    const arrBuffer = atob(file.base.split(",")[1]);
+    const blob = new Blob([arrBuffer], {
+      type: "application/pdf",
+    });
+    FileSaver.saveAs(blob, file.nombreArchivo);
   }
 }
