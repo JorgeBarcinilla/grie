@@ -23,7 +23,7 @@
     "@angular/router": "~8.2.14",
     "@fullcalendar/core": "^4.3.1",
     "bootstrap": "^4.4.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
     "ng-zorro-antd": "^8.5.2",
